@@ -15,7 +15,6 @@ $class = ($i%2 == 0) ? 'post-list-thumb-left' : ''; // 如果为偶数
 if(has_post_thumbnail()){
 	$large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
 	$post_img = $large_image_url[0];
-	//$post_img = str_replace("//cdn.2heng.xin","//2heng.xin",$post_img); //强制使用又拍云
 }else{
 	$post_img = get_bloginfo('template_url') . '/images/temp.png';
 }

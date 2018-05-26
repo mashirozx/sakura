@@ -26,8 +26,6 @@
 				'after'  => '</div>',
 			) );
 		?>
-		<p class="head-copyright">「樱花庄的白猫」原创文章：<a href="<?php the_permalink(); ?>">《<?php the_title(); ?>》</a>，转载请保留出处！<?php the_permalink(); ?></p>
-		<p>Q.E.D. <i class="fa fa-meetup" aria-hidden="true" style="color:#d34836"></i></p>
 		<!--<div class="oshimai"></div>-->
 		<h2 style="opacity:0;max-height:0;margin:0">Comments</h2><!-- 评论跳转标记 -->
 	</div><!-- .entry-content -->
