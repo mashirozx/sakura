@@ -177,7 +177,7 @@ function sakura_scripts() {
     wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
     // If you do not like the CDN, uncomment this line, and comment the next line
     //wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
-	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.0/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
+	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.1/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -885,8 +885,8 @@ function comment_mail_notify($comment_id){
     </div>
 ';
     $message = convert_smilies($message);
-    $message = str_replace("f(x)=∫(",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$message);
-    $message = str_replace(")sec²xdx",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$message);
+    $message = str_replace("{{",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$message);
+    $message = str_replace("}}",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$message);
     
     $message =  str_replace('{UPLOAD}', 'https://i.loli.net/', $message); 
     $message =  str_replace('[/img][img]', '[/img^img]', $message);  
@@ -1097,22 +1097,7 @@ function push_bili_smilies(){
         height: ' .$img_height. 'px;
         "></div></span>';
     // 正文转换
-    // Type 1: ' f(x)=∫(xxx)sec²xdx '
-    $bilismiliestrans[' f(x)=∫(' . $name[$i] . ')sec²xdx '] = '<span class="emotion-inline emotion-item" style="margin-left: 0px;margin-right: 0px;"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
-        animation-duration: ' .($img_height / 32 * 40). 'ms;
-        animation-timing-function: steps(' .($img_height / 32). ');
-        transform: translateY(-' .($img_height - 32). 'px);
-        height: ' .$img_height. 'px;
-        "></span>';
-    // Type 2: 'f(x)=∫(xxx)sec²xdx'
-    $bilismiliestrans['f(x)=∫(' . $name[$i] . ')sec²xdx'] = '<span class="emotion-inline emotion-item" style="margin-left: 0px;margin-right: 0px;"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
-        animation-duration: ' .($img_height / 32 * 40). 'ms;
-        animation-timing-function: steps(' .($img_height / 32). ');
-        transform: translateY(-' .($img_height - 32). 'px);
-        height: ' .$img_height. 'px;
-        "></span>';
-    // Type 3: '{xxx}'
-    $bilismiliestrans['{' . $name[$i] . '}'] = '<span class="emotion-inline emotion-item"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
+    $bilismiliestrans['{{' . $name[$i] . '}}'] = '<span class="emotion-inline emotion-item"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
         animation-duration: ' .($img_height / 32 * 40). 'ms;
         animation-timing-function: steps(' .($img_height / 32). ');
         transform: translateY(-' .($img_height - 32). 'px);
@@ -1143,8 +1128,8 @@ add_filter('the_content_feed', 'featuredtoRSS');
 
 //
 function bili_smile_filter_rss($content) {
-    $content = str_replace("f(x)=∫(",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$content);
-    $content = str_replace(")sec²xdx",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$content);
+    $content = str_replace("{{",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$content);
+    $content = str_replace("}}",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$content);
     $content =  str_replace('[img]', '<img src="', $content); 
     $content =  str_replace('[/img]', '" style="display: block;margin-left: auto;margin-right: auto;">', $content); 
     return $content;

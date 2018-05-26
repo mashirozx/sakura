@@ -79,7 +79,7 @@ $(ele+'-bar').addClass("on-hover");$(ele+'-container').css("display","block");}
 $('.comt-addsmilies').click(function(){$('.comt-smilies').toggle();})
 $('.comt-smilies a').click(function(){$(this).parent().hide();})
 function smileBoxToggle(){$(document).ready(function(){$("#emotion-toggle").click(function(){$(".emotion-toggle-off").toggle(0);$(".emotion-toggle-on").toggle(0);$(".emotion-box").toggle(160);});});}
-smileBoxToggle();function grin(tag,type,before,after){var myField;if(type=="custom"){tag=before+tag+after;}else if(type=="Img"){tag='[img]'+tag+'[/img]';}else if(type=="Math"){tag=' f(x)=∫('+tag+')sec²xdx ';}else{tag=' :'+tag+': ';}
+smileBoxToggle();function grin(tag,type,before,after){var myField;if(type=="custom"){tag=before+tag+after;}else if(type=="Img"){tag='[img]'+tag+'[/img]';}else if(type=="Math"){tag=' {{'+tag+'}} ';}else{tag=' :'+tag+': ';}
 if(document.getElementById('comment')&&document.getElementById('comment').type=='textarea'){myField=document.getElementById('comment');}else{return false;}
 if(document.selection){myField.focus();sel=document.selection.createRange();sel.text=tag;myField.focus();}else if(myField.selectionStart||myField.selectionStart=='0'){var startPos=myField.selectionStart;var endPos=myField.selectionEnd;var cursorPos=endPos;myField.value=myField.value.substring(0,startPos)+tag+myField.value.substring(endPos,myField.value.length);cursorPos+=tag.length;myField.focus();myField.selectionStart=cursorPos;myField.selectionEnd=cursorPos;}else{myField.value+=tag;myField.focus();}}
 if($("div").hasClass("popcontainer")){loadBotui();}
