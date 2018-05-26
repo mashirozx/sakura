@@ -15,6 +15,7 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 	<?php } ?>
+    <?php get_template_part('layouts/sidebox'); ?>
 	<div class="entry-content">
 		<?php
 			the_content();
