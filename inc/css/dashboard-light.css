@@ -1,0 +1,155 @@
+body {
+    background-image: url(https://view.moezx.cc/images/2018/01/29/FLOWER.jpg) !important;
+}
+
+#adminmenu, #adminmenuback, #adminmenuwrap {
+    background: #e5e5e590 !important;
+}
+
+#wpadminbar {
+    background: #e5e5e5 !important;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu, #adminmenu .wp-has-current-submenu.opensub .wp-submenu, #adminmenu .wp-submenu, #adminmenu a.wp-has-current-submenu:focus + .wp-submenu, .folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    background: #ffffff90 !important;
+}
+
+.wp-submenu-wrap {
+	background: #ffffff99 !important;
+}
+
+.postbox {
+    min-width: 255px;
+    border: 1px solid #e5e5e5;
+    background: #ffffff90 !important;
+}
+
+#contextual-help-link-wrap, #screen-options-link-wrap {
+    background: #e5e5e5 !important;
+}
+
+table {
+	background: #ffffff90 !important;
+}
+
+tr {
+	background-color: #ffffff00 !important;
+}
+
+#screen-meta {
+	background-color: #ffffff90 !important;
+}
+
+.notice, div.error, div.updated {
+    background: #ffffff90;
+}
+
+#dolly {
+	background: rgba(255,255,255,.7);
+	border-left: 4px solid #fff;
+    border-left-color: rgb(255, 255, 255);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	border-left-color: #888;
+	font-size: 13px;
+	padding: 6px;
+	padding-right: 15px;
+	padding-top: 5px;
+	float: none !important;
+	width: calc(100% - 46px);
+}
+
+#adminmenu a, #adminmenu .wp-submenu .wp-submenu-head, #adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head, #adminmenu .wp-menu-arrow, #adminmenu .wp-menu-arrow div, #adminmenu li.current a.menu-top, #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu, .folded #adminmenu li.current.menu-top, .folded #adminmenu li.wp-has-current-submenu {
+    color: #333;
+}
+
+.gadwp-pline a {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	position: absolute;
+	width: 80%;
+}
+
+.wp-submenu .wp-submenu-wrap {
+	background: #ffffff !important;
+}
+
+// emotion不和具修正
+/*bilibili表情*/
+.emotion-box {
+    padding-left: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: none;
+}
+.emotion-inline {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.emotion-item {
+    margin: 6px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: -8px;
+}
+.emotion-secter {
+    margin: 12px 12px 0 0;
+}
+@media (max-width: 860px) {
+    .emotion-box {
+        padding-left: 0;
+    }
+   .emotion-item {
+        transform: scale(0.6);
+        margin-bottom: -10px;
+    } 
+    .emotion-secter {
+        margin: 0;
+    }
+}
+
+.emotion-item .img {
+    -webkit-animation: im-emotion-step 1.08s steps(27) infinite;
+    animation: im-emotion-step 1.08s steps(27) infinite;
+        animation-duration: 1.08s;
+        animation-timing-function: steps(27);
+}
+
+.emotion-item .img {
+    width: 32px;
+    height: 864px;
+    max-width: 32px;
+    background: top/32px no-repeat;
+    background-image: none;
+}
+
+@-webkit-keyframes im-emotion-step {
+ 0% {
+  -webkit-transform:translateY(0);
+  transform:translateY(0)
+ }
+ to {
+  -webkit-transform:translateY(-100%);
+  transform:translateY(-100%)
+ }
+}
+@keyframes im-emotion-step {
+ 0% {
+  -webkit-transform:translateY(0);
+  transform:translateY(0)
+ }
+ to {
+  -webkit-transform:translateY(-100%);
+  transform:translateY(-100%)
+ }
+}

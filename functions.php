@@ -1,0 +1,1448 @@
+<?php
+/**
+ * Sakura functions and definitions.
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Sakura
+ */
+ 
+define( 'SAKURA_VERSION', '3.0.3.1805025' );
+
+//ini_set('display_errors', true);
+//error_reporting(E_ALL);   
+
+if ( !function_exists( 'akina_setup' ) ) :
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
+ 
+if ( !function_exists( 'optionsframework_init' ) ) {
+	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
+	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
+}
+ 
+
+
+function akina_setup() {
+	/*
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on Akina, use a find and replace
+	 * to change 'akina' to the name of your theme in all the template files.
+	 */
+	load_theme_textdomain( 'akina', get_template_directory() . '/languages' );
+
+
+	/*
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 150, 150, true );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'primary' => esc_html__( '导航菜单', 'akina' ),
+	) );
+
+	/*
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
+	add_theme_support( 'html5', array(
+		'search-form',
+		'comment-form',
+		'comment-list',
+		'gallery',
+		'caption',
+	) );
+
+	/*
+	 * Enable support for Post Formats.
+	 * See https://developer.wordpress.org/themes/functionality/post-formats/
+	 */
+	add_theme_support( 'post-formats', array(
+		'aside',
+		'image',
+		'status',
+	) );
+
+	// Set up the WordPress core custom background feature.
+	add_theme_support( 'custom-background', apply_filters( 'akina_custom_background_args', array(
+		'default-color' => 'ffffff',
+		'default-image' => '',
+	) ) );
+	
+	add_filter('pre_option_link_manager_enabled','__return_true');
+	
+	// 优化代码
+	//去除头部冗余代码
+    remove_action('wp_head', 'feed_links_extra', 3);
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'index_rel_link');
+    remove_action('wp_head', 'start_post_rel_link', 10, 0);
+    remove_action('wp_head', 'wp_generator');
+	remove_action( 'wp_head', 'wp_generator' ); //隐藏wordpress版本
+    remove_filter('the_content', 'wptexturize'); //取消标点符号转义
+    
+	remove_action('rest_api_init', 'wp_oembed_register_route');
+	remove_filter('rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
+	remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10);
+	remove_filter('oembed_response_data', 'get_oembed_response_data_rich', 10, 4);
+	remove_action('wp_head', 'wp_oembed_add_discovery_links');
+	remove_action('wp_head', 'wp_oembed_add_host_js');
+	remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 );
+	
+	function coolwp_remove_open_sans_from_wp_core() {
+		wp_deregister_style( 'open-sans' );
+		wp_register_style( 'open-sans', false );
+		wp_enqueue_style('open-sans','');
+	}
+	add_action( 'init', 'coolwp_remove_open_sans_from_wp_core' );
+	
+	/**
+	* Disable the emoji's
+	*/
+	function disable_emojis() {
+	 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	 remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	 remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+	 remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	 remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+	 remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	 add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+	}
+	add_action( 'init', 'disable_emojis' );
+	 
+	/**
+	 * Filter function used to remove the tinymce emoji plugin.
+	 * 
+	 * @param    array  $plugins  
+	 * @return   array             Difference betwen the two arrays
+	 */
+	function disable_emojis_tinymce( $plugins ) {
+	 if ( is_array( $plugins ) ) {
+	 return array_diff( $plugins, array( 'wpemoji' ) );
+	 } else {
+	 return array();
+	 }
+	}
+	
+	// 移除菜单冗余代码
+	add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1);
+	add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1);
+	add_filter('page_css_class', 'my_css_attributes_filter', 100, 1);
+	function my_css_attributes_filter($var) {
+	return is_array($var) ? array_intersect($var, array('current-menu-item','current-post-ancestor','current-menu-ancestor','current-menu-parent')) : '';
+	}
+		
+}
+endif;
+add_action( 'after_setup_theme', 'akina_setup' );
+
+function admin_lettering(){
+    echo'<style type="text/css">body{font-family: Microsoft YaHei;}</style>';
+}
+add_action('admin_head', 'admin_lettering');
+
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function akina_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'akina_content_width', 640 );
+}
+add_action( 'after_setup_theme', 'akina_content_width', 0 );
+
+/**
+ * Enqueue scripts and styles.
+ */
+function sakura_scripts() {
+    if(akina_option('jsdelivr_cdn_test')){ 
+        wp_enqueue_script( 'js_lab', 'https://pages.shino.cc/cdn/js/lib.js', array(), SAKURA_VERSION, true );
+    } else { 
+        wp_enqueue_script( 'js_lab', 'https://cdn.jsdelivr.net/gh/moezx/cdn@' . akina_option('jsdelivr_cdn_version', 'latest') . '/js/lib.min.js', array(), SAKURA_VERSION, true );
+    }
+    wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
+    // If you do not like the CDN, uncomment this line, and comment the next line
+    //wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
+	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.0/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+
+	// 20161116 @Louie
+	$mv_live = akina_option('focus_mvlive') ? 'open' : 'close';
+	$movies = akina_option('focus_amv') ? array('url' => akina_option('amv_url'), 'name' => akina_option('amv_title'), 'live' => $mv_live) : 'close';
+	$auto_height = akina_option('focus_height') ? 'fixed' : 'auto';
+	$code_lamp = 'close';
+	if(wp_is_mobile()) $auto_height = 'fixed'; //拦截移动端
+	wp_localize_script( 'app', 'Poi' , array(
+		'pjax' => akina_option('poi_pjax'),
+		'movies' => $movies,
+		'windowheight' => $auto_height,
+		'codelamp' => $code_lamp,
+		'ajaxurl' => admin_url('admin-ajax.php'),
+		'order' => get_option('comment_order'), // ajax comments
+		'formpostion' => 'bottom' // ajax comments 默认为bottom，如果你的表单在顶部则设置为top。
+	));
+}
+add_action( 'wp_enqueue_scripts', 'sakura_scripts' );
+
+/**
+ * load .php.
+ */
+require get_template_directory() .'/inc/decorate.php';
+require get_template_directory() .'/inc/swicher.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * function update
+ */
+require get_template_directory() . '/inc/theme_plus.php';
+require get_template_directory() . '/inc/categories-images.php';
+
+//Comment Location Start
+function convertip($ip) {
+	$dat_path = dirname(__FILE__).'/QQWry.Dat'; 
+    if(!$fd = @fopen($dat_path, 'rb')){
+        return 'IP date file not exists or access denied';
+    }
+    $ip = explode('.', $ip);
+    $ipNum = $ip[0] * 16777216 + $ip[1] * 65536 + $ip[2] * 256 + $ip[3];
+    $DataBegin = fread($fd, 4);
+    $DataEnd = fread($fd, 4);
+    $ipbegin = implode('', unpack('L', $DataBegin));
+    if($ipbegin < 0) $ipbegin += pow(2, 32);
+    $ipend = implode('', unpack('L', $DataEnd));
+    if($ipend < 0) $ipend += pow(2, 32);
+    $ipAllNum = ($ipend - $ipbegin) / 7 + 1;
+    $BeginNum = 0;
+    $EndNum = $ipAllNum;
+    while($ip1num>$ipNum || $ip2num<$ipNum) {
+        $Middle= intval(($EndNum + $BeginNum) / 2);
+        fseek($fd, $ipbegin + 7 * $Middle);
+        $ipData1 = fread($fd, 4);
+        if(strlen($ipData1) < 4) {
+            fclose($fd);
+            return 'System Error';
+        }
+        $ip1num = implode('', unpack('L', $ipData1));
+        if($ip1num < 0) $ip1num += pow(2, 32);
+        if($ip1num > $ipNum) {
+            $EndNum = $Middle;
+            continue;
+        }
+        $DataSeek = fread($fd, 3);
+        if(strlen($DataSeek) < 3) {
+            fclose($fd);
+            return 'System Error';
+        }
+        $DataSeek = implode('', unpack('L', $DataSeek.chr(0)));
+        fseek($fd, $DataSeek);
+        $ipData2 = fread($fd, 4);
+        if(strlen($ipData2) < 4) {
+            fclose($fd);
+            return 'System Error';
+        }
+        $ip2num = implode('', unpack('L', $ipData2));
+        if($ip2num < 0) $ip2num += pow(2, 32);
+        if($ip2num < $ipNum) {
+            if($Middle == $BeginNum) {
+                fclose($fd);
+                return 'Unknown';
+            }
+            $BeginNum = $Middle;
+        }
+    }
+    $ipFlag = fread($fd, 1);
+    if($ipFlag == chr(1)) {
+        $ipSeek = fread($fd, 3);
+        if(strlen($ipSeek) < 3) {
+            fclose($fd);
+            return 'System Error';
+        }
+        $ipSeek = implode('', unpack('L', $ipSeek.chr(0)));
+        fseek($fd, $ipSeek);
+        $ipFlag = fread($fd, 1);
+    }
+    if($ipFlag == chr(2)) {
+        $AddrSeek = fread($fd, 3);
+        if(strlen($AddrSeek) < 3) {
+            fclose($fd);
+            return 'System Error';
+        }
+        $ipFlag = fread($fd, 1);
+        if($ipFlag == chr(2)) {
+            $AddrSeek2 = fread($fd, 3);
+            if(strlen($AddrSeek2) < 3) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $AddrSeek2 = implode('', unpack('L', $AddrSeek2.chr(0)));
+            fseek($fd, $AddrSeek2);
+        } else {
+            fseek($fd, -1, SEEK_CUR);
+        }
+        while(($char = fread($fd, 1)) != chr(0))
+        $ipAddr2 .= $char;
+        $AddrSeek = implode('', unpack('L', $AddrSeek.chr(0)));
+        fseek($fd, $AddrSeek);
+        while(($char = fread($fd, 1)) != chr(0))
+        $ipAddr1 .= $char;
+    } else {
+        fseek($fd, -1, SEEK_CUR);
+        while(($char = fread($fd, 1)) != chr(0))
+        $ipAddr1 .= $char;
+
+        $ipFlag = fread($fd, 1);
+        if($ipFlag == chr(2)) {
+            $AddrSeek2 = fread($fd, 3);
+            if(strlen($AddrSeek2) < 3) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $AddrSeek2 = implode('', unpack('L', $AddrSeek2.chr(0)));
+            fseek($fd, $AddrSeek2);
+        } else {
+            fseek($fd, -1, SEEK_CUR);
+        }
+        while(($char = fread($fd, 1)) != chr(0)){
+            $ipAddr2 .= $char;
+        }
+    }
+    fclose($fd);
+    if(preg_match('/http/i', $ipAddr2)) {
+        $ipAddr2 = '';
+    }
+    $ipaddr = "$ipAddr1 $ipAddr2";
+    $ipaddr = preg_replace('/CZ88.Net/is', '', $ipaddr);
+    $ipaddr = preg_replace('/^s*/is', '', $ipaddr);
+    $ipaddr = preg_replace('/s*$/is', '', $ipaddr);
+    if(preg_match('/http/i', $ipaddr) || $ipaddr == '') {
+        $ipaddr = 'Unknown';
+    }
+    $ipaddr = iconv('gbk', 'utf-8//IGNORE', $ipaddr);
+    if( $ipaddr != '  ' )
+        return $ipaddr;
+    else
+        $ipaddr = '火星来客';
+        return $ipaddr;
+}
+//Comment Location End
+
+/**
+ * COMMENT FORMATTING
+ *
+ * 标准的 lazyload 输出头像
+ * <?php echo str_replace( 'src=', 'src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/index.ajax-spinner-preloader.svg" onerror="imgError(this,1)" data-src=', get_avatar( $comment->comment_author_email, '80', '', get_comment_author(), array( 'class' => array( 'lazyload' ) ) ) ); ?>
+ *
+ * 如果不延时是这样的
+ * <?php echo get_avatar( $comment->comment_author_email, '80', '', get_comment_author() ); ?>
+ *
+ */
+if(!function_exists('akina_comment_format')){
+	function akina_comment_format($comment, $args, $depth){
+		$GLOBALS['comment'] = $comment;
+		?>
+		<li <?php comment_class(); ?> id="comment-<?php echo esc_attr(comment_ID()); ?>">
+			<div class="contents">
+				<div class="comment-arrow">
+					<div class="main shadow">
+						<div class="profile">
+							<a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo str_replace( 'src=', 'src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" onerror="imgError(this,1)" data-src=', get_avatar( $comment->comment_author_email, '80', '', get_comment_author(), array( 'class' => array( 'lazyload' ) ) ) ); ?></a>
+						</div>
+						<div class="commentinfo">
+							<section class="commeta">
+								<div class="left">
+									<h4 class="author"><a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo get_avatar( $comment->comment_author_email, '24', '', get_comment_author() ); ?><span class="bb-comment isauthor" title="中央钦定的<?php #esc_attr_e('Author', 'akina'); ?>">博主</span> <?php comment_author(); ?> <?php echo get_author_class($comment->comment_author_email,$comment->user_id); ?></a></h4>
+								</div>
+								<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+								<div class="right">
+									<div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date), true );//comment_date(get_option('date_format')); ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;来自: <?php echo convertip(get_comment_author_ip()); ?>
+    									<?php if (current_user_can('manage_options') and (wp_is_mobile() == false) ) {
+                                            $comment_ID = $comment->comment_ID;
+                                            $i_private = get_comment_meta($comment_ID, '_private', true);
+                                            $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> 状态: <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">私密(<span class="has_set_private">';
+                                            if (!empty($i_private)) {
+                                                $flag .= '是 <i class="fa fa-lock" aria-hidden="true"></i>';
+                                            } else {
+                                                $flag .= '否 <i class="fa fa-unlock" aria-hidden="true"></i>';
+                                            }
+                                            $flag .= '</span>)</a>';
+                                            echo $flag;
+                                        } ?></div>
+								</div>
+							</section>
+						</div>
+						<div class="body">
+							<?php comment_text(); ?>
+						</div>
+					</div>
+					<div class="arrow-left"></div>
+				</div>
+			</div>
+			<hr>
+		<?php
+	}
+}
+
+/**
+ * 获取访客VIP样式
+ */
+    function get_author_class($comment_author_email, $user_id){
+        global $wpdb;
+        $author_count = count($wpdb->get_results(
+        "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "));
+        if($author_count>=1 && $author_count< 5 )//数字可自行修改，代表评论次数。
+            echo '<span class="showGrade0" title="萌萌哒新人~"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=6 && $author_count< 10)
+            echo '<span class="showGrade1" title="巴拉巴拉小魔仙"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=11 && $author_count< 20)
+            echo '<span class="showGrade2" title="初露头角"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=21 && $author_count< 40)
+            echo '<span class="showGrade3" title="大水笔"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=41 && $author_count< 80)
+            echo '<span class="showGrade4" title="大佬 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=81 && $author_count< 160)
+            echo '<span class="showGrade5" title="日暮里大魔王"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        else if($author_count>=161)
+            echo '<span class="showGrade6" title="德国骨科"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+    }
+
+/**
+ * post views.
+ * @bigfa
+ */
+function restyle_text($number) {
+    if($number >= 1000) {
+        return round($number/1000,2) . 'k';
+    }else{
+        return $number;
+    }
+}
+
+function set_post_views() {
+    global $post;
+    $post_id = intval($post->ID);
+    $count_key = 'views';
+    $views = get_post_custom($post_id);
+    $views = intval($views['views'][0]);
+    if(is_single() || is_page()) {
+        if(!update_post_meta($post_id, 'views', ($views + 1))) {
+            add_post_meta($post_id, 'views', 1, true);
+        }
+    }
+}
+add_action('get_header', 'set_post_views');
+
+function get_post_views($post_id) {
+    /* 修改需配合统计插件
+	 * $count_key = 'views';
+     * $views = get_post_custom($post_id);
+     * $views = intval($views['views'][0]);
+     * $post_views = intval(post_custom('views'));
+     * if($views == '') {
+     *     return 0;
+     * }else{
+     *     return restyle_text($views);
+     * }
+	 */
+	return wp_statistics_pages(total,uri,$post_id);
+} 
+
+
+/*
+ * Ajax点赞
+ */
+add_action('wp_ajax_nopriv_specs_zan', 'specs_zan');
+add_action('wp_ajax_specs_zan', 'specs_zan');
+function specs_zan(){
+    global $wpdb,$post;
+    $id = $_POST["um_id"];
+    $action = $_POST["um_action"];
+    if ( $action == 'ding'){
+        $specs_raters = get_post_meta($id,'specs_zan',true);
+        $expire = time() + 99999999;
+        $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false; // make cookies work with localhost
+        setcookie('specs_zan_'.$id,$id,$expire,'/',$domain,false);
+        if (!$specs_raters || !is_numeric($specs_raters)) {
+            update_post_meta($id, 'specs_zan', 1);
+        } 
+        else {
+            update_post_meta($id, 'specs_zan', ($specs_raters + 1));
+        }
+        echo get_post_meta($id,'specs_zan',true);
+    } 
+    die;
+}
+
+
+/*
+ * 友情链接
+ */
+function get_the_link_items($id = null){
+  $bookmarks = get_bookmarks('orderby=date&category=' .$id );
+  $output = '';
+  if ( !empty($bookmarks) ) {
+      $output .= '<ul class="link-items fontSmooth">';
+      foreach ($bookmarks as $bookmark) {
+		if (empty($bookmark->link_description)) $bookmark->link_description = '这家伙好懒╮(╯▽╰)╭';
+		if (empty($bookmark->link_image)) $bookmark->link_image = 'https://view.moezx.cc/images/2017/12/30/Transparent_Akkarin.th.jpg';
+        $output .=  '<li class="link-item"><a class="link-item-inner effect-apollo" href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" rel="friend"><img class="lazyload" onerror="imgError(this,1)" data-src="' . $bookmark->link_image . '" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg"><span class="sitename">'. $bookmark->link_name .'</span><div class="linkdes">'. $bookmark->link_description .'</div></a></li>';
+      }
+      $output .= '</ul>';
+  }
+  return $output;
+}
+
+function get_link_items(){
+  $linkcats = get_terms( 'link_category' );
+  	if ( !empty($linkcats) ) {
+      	foreach( $linkcats as $linkcat){            
+        	$result .=  '<h3 class="link-title">'.$linkcat->name.'</h3>';
+        	if( $linkcat->description ) $result .= '<div class="link-description">' . $linkcat->description . '</div>';
+        	$result .=  get_the_link_items($linkcat->term_id);
+      	}
+  	} else {
+    	$result = get_the_link_items();
+  	}
+  return $result;
+}
+
+
+/*
+ * Gravatar头像使用中国服务器
+ */
+function gravatar_cn( $url ){ 
+	$gravatar_url = array('0.gravatar.com','1.gravatar.com','2.gravatar.com','secure.gravatar.com');
+	return str_replace( $gravatar_url, 'gravatar.shino.cc', $url );
+}
+add_filter( 'get_avatar_url', 'gravatar_cn', 4 );
+
+/*
+ * 自定义默认头像
+ */
+add_filter( 'avatar_defaults', 'mytheme_default_avatar' );
+
+function mytheme_default_avatar ( $avatar_defaults ) {
+    //$new_avatar_url = get_template_directory_uri() . '/images/default_avatar.png';
+	$new_avatar_url = 'https://cn.gravatar.com/avatar/b745710ae6b0ce9dfb13f5b7c0956be1';
+    $avatar_defaults[$new_avatar_url] = 'Default Avatar';
+    return $avatar_defaults;
+}
+
+/*
+ * 阻止站内文章互相Pingback 
+ */
+function theme_noself_ping( &$links ) { 
+	$home = get_option( 'home' );
+	foreach ( $links as $l => $link )
+	if ( 0 === strpos( $link, $home ) )
+	unset($links[$l]); 
+}
+add_action('pre_ping','theme_noself_ping');
+
+
+/*
+ * 订制body类
+*/
+function akina_body_classes( $classes ) {
+  // Adds a class of group-blog to blogs with more than 1 published author.
+  if ( is_multi_author() ) {
+    $classes[] = 'group-blog';
+  }
+  // Adds a class of hfeed to non-singular pages.
+  if ( ! is_singular() ) {
+    $classes[] = 'hfeed';
+  }
+  // 定制中文字体class
+  $classes[] = 'chinese-font';
+  /*if(!wp_is_mobile()) {
+      $classes[] = 'serif';
+  }*/
+  return $classes;
+}
+add_filter( 'body_class', 'akina_body_classes' );
+
+
+/*
+ * 图片CDN
+ */
+add_filter( 'upload_dir', 'wpjam_custom_upload_dir' );
+function wpjam_custom_upload_dir( $uploads ) {
+	$upload_path = '';
+	$upload_url_path = akina_option('qiniu_cdn');
+
+	if ( empty( $upload_path ) || 'wp-content/uploads' == $upload_path ) {
+		$uploads['basedir']  = WP_CONTENT_DIR . '/uploads';
+	} elseif ( 0 !== strpos( $upload_path, ABSPATH ) ) {
+		$uploads['basedir'] = path_join( ABSPATH, $upload_path );
+	} else {
+		$uploads['basedir'] = $upload_path;
+	}
+
+	$uploads['path'] = $uploads['basedir'].$uploads['subdir'];
+
+	if ( $upload_url_path ) {
+		$uploads['baseurl'] = $upload_url_path;
+		$uploads['url'] = $uploads['baseurl'].$uploads['subdir'];
+	}
+	return $uploads;
+}
+
+
+/*
+ * 删除自带小工具
+*/
+function unregister_default_widgets() {
+	unregister_widget("WP_Widget_Pages");
+	unregister_widget("WP_Widget_Calendar");
+	unregister_widget("WP_Widget_Archives");
+	unregister_widget("WP_Widget_Links");
+	unregister_widget("WP_Widget_Meta");
+	unregister_widget("WP_Widget_Search");
+	unregister_widget("WP_Widget_Text");
+	unregister_widget("WP_Widget_Categories");
+	unregister_widget("WP_Widget_Recent_Posts");
+	unregister_widget("WP_Widget_Recent_Comments");
+	unregister_widget("WP_Widget_RSS");
+	unregister_widget("WP_Widget_Tag_Cloud");
+	unregister_widget("WP_Nav_Menu_Widget");
+}
+add_action("widgets_init", "unregister_default_widgets", 11);
+
+
+/**
+ * Jetpack setup function.
+ *
+ * See: https://jetpack.com/support/infinite-scroll/
+ * See: https://jetpack.com/support/responsive-videos/
+ */
+function akina_jetpack_setup() {
+  // Add theme support for Infinite Scroll.
+  add_theme_support( 'infinite-scroll', array(
+    'container' => 'main',
+    'render'    => 'akina_infinite_scroll_render',
+    'footer'    => 'page',
+  ) );
+
+  // Add theme support for Responsive Videos.
+  add_theme_support( 'jetpack-responsive-videos' );
+}
+add_action( 'after_setup_theme', 'akina_jetpack_setup' );
+
+/**
+ * Custom render function for Infinite Scroll.
+ */
+function akina_infinite_scroll_render() {
+  while ( have_posts() ) {
+    the_post();
+    if ( is_search() ) :
+        get_template_part( 'tpl/content', 'search' );
+    else :
+        get_template_part( 'tpl/content', get_post_format() );
+    endif;
+  }
+}
+
+
+/*
+ * 编辑器增强
+ */
+function enable_more_buttons($buttons) { 
+	$buttons[] = 'hr'; 
+	$buttons[] = 'del'; 
+	$buttons[] = 'sub'; 
+	$buttons[] = 'sup';
+	$buttons[] = 'fontselect';
+	$buttons[] = 'fontsizeselect';
+	$buttons[] = 'cleanup';
+	$buttons[] = 'styleselect';
+	$buttons[] = 'wp_page';
+	$buttons[] = 'anchor'; 
+	$buttons[] = 'backcolor'; 
+	return $buttons;
+} 
+add_filter("mce_buttons_3", "enable_more_buttons");
+// 下载按钮
+function download($atts, $content = null) {  
+return '<a class="download" href="'.$content.'" rel="external"  
+target="_blank" title="下载地址">  
+<span><i class="iconfont down icon-pulldown"></i>Download</span></a>';}  
+add_shortcode("download", "download"); 
+
+add_action('after_wp_tiny_mce', 'bolo_after_wp_tiny_mce');  
+function bolo_after_wp_tiny_mce($mce_settings) {  
+?>  
+<script type="text/javascript">  
+QTags.addButton( 'download', '下载按钮', "[download]下载地址[/download]" );
+function bolo_QTnextpage_arg1() {
+}  
+</script>  
+<?php } 
+
+
+/*
+ * 后台登录页
+ * @M.J
+ */	
+//Login Page style
+function custom_login() {
+	//echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css" />'."\n";
+	//echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
+	echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>'."\n";
+}
+
+add_action('login_head', 'custom_login');
+
+//Login Page Title
+function custom_headertitle ( $title ) {
+	return get_bloginfo('name');
+}
+add_filter('login_headertitle','custom_headertitle');
+
+//Login Page Link
+function custom_loginlogo_url($url) {
+	return esc_url( home_url('/') );
+}
+add_filter( 'login_headerurl', 'custom_loginlogo_url' );
+
+//Login Page Footer
+function custom_html() {
+	if ( akina_option('login_bg') ) {
+		$loginbg = akina_option('login_bg'); 
+	}else{
+		$loginbg = get_bloginfo('template_directory').'/images/hd.png';
+	}
+	echo '<script type="text/javascript" src="'.get_site_url().'/wp-content/themes/Sakura/js/login.js"></script>'."\n";
+	echo '<script type="text/javascript">'."\n";
+	echo 'jQuery("body").prepend("<div class=\"loading\"><img src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/login_loading.gif\" width=\"58\" height=\"10\"></div><div id=\"bg\"><img /></div>");'."\n";
+	echo 'jQuery(\'#bg\').children(\'img\').attr(\'src\', \''.$loginbg.'\').load(function(){'."\n";
+	echo '	resizeImage(\'bg\');'."\n";
+	echo '	jQuery(window).bind("resize", function() { resizeImage(\'bg\'); });'."\n";
+	echo '	jQuery(\'.loading\').fadeOut();'."\n";
+	echo '});';
+	echo '</script>'."\n";
+	echo '<script>
+	function verificationOK(){
+		var x, y, z = "verification";
+		var x=$(\'#loginform\').find(\'input[name="verification"]\').val();
+		//var x=document.forms["loginform"]["verification"].value; //原生js实现
+		var y=$(\'#registerform\').find(\'input[name="verification"]\').val();
+		var z=$(\'#lostpasswordform\').find(\'input[name="verification"]\').val();
+		if (x=="verification" || y=="verification" || z=="verification"){
+		  alert("Please slide the block to verificate!");
+		  return false;
+	  }
+	}
+	$(document).ready(function(){
+		$( \'<p><div id="verification-slider"><div id="slider"><div id="slider_bg"></div><span id="label">»</span><span id="labelTip">Slide to Verificate</span></div><input type="hidden" name="verification" value="verification" /></div><p>\' ).insertBefore( $( ".submit" ) );
+		$(\'form\').attr(\'onsubmit\',\'return verificationOK();\');
+		$(".forgetmenot").replaceWith(\'<p class="forgetmenot">Remember Me<input name="rememberme" id="rememberme" value="forever" type="checkbox"><label for="rememberme" style="float: right;margin-top: 5px;transform: scale(2);margin-right: -10px;"></label></p>\');
+	});
+	</script>';
+	echo '<script type="text/javascript">
+		var startTime = 0;
+		var endTime = 0;
+		var numTime = 0;
+		$(function () {
+			var slider = new SliderUnlock("#slider",{
+			successLabelTip : "OK"
+		},function(){
+			var sli_width = $("#slider_bg").width();
+			$(\'#verification-slider\').html(\'\').append(\'<input id="verification-ok" class="input" type="text" size="25" value="OK!" name="verification" disabled="true" />\');
+			
+			endTime = nowTime();
+			numTime = endTime-startTime;
+			endTime = 0;
+			startTime = 0;
+			// 获取到滑动使用的时间 滑动的宽度
+			// alert( numTime );
+			// alert( sli_width );
+		});
+			slider.init();
+		})
+
+		/**
+		* 获取时间精确到毫秒
+		* @type
+		*/
+		function nowTime(){
+			var myDate = new Date();
+			var H = myDate.getHours();//获取小时
+			var M = myDate.getMinutes(); //获取分钟
+			var S = myDate.getSeconds();//获取秒
+			var MS = myDate.getMilliseconds();//获取毫秒
+			var milliSeconds = H * 3600 * 1000 + M * 60 * 1000 + S * 1000 + MS;
+			return milliSeconds;
+		}
+	</script>
+	<script type="text/javascript" src="'.get_template_directory_uri().'/user/verification.js"></script>';
+}
+add_action('login_footer', 'custom_html');
+
+//Login message
+//* Add custom message to WordPress login page
+function smallenvelop_login_message( $message ) {
+    if ( empty($message) ){
+        return '<p class="message"><strong>You may try 3 times for every 5 minutes!</strong></p>';
+    } else {
+        return $message;
+    }
+}
+//add_filter( 'login_message', 'smallenvelop_login_message' );
+
+//Fix password reset bug </>
+function resetpassword_message_fix( $message ) {
+    $message = str_replace("<", "", $message);
+	$message = str_replace(">", "", $message);
+	return $message;
+}
+add_filter( 'retrieve_password_message', 'resetpassword_message_fix' );
+
+/*
+ * 评论邮件回复
+ */
+function comment_mail_notify($comment_id){
+	$mail_user_name = akina_option('mail_user_name') ? akina_option('mail_user_name') : 'poi';
+    $comment = get_comment($comment_id);
+    $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
+    $spam_confirmed = $comment->comment_approved;
+    if(($parent_id != '') && ($spam_confirmed != 'spam')){
+    $wp_email = $mail_user_name . '@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME']));
+    $to = trim(get_comment($parent_id)->comment_author_email);
+    $subject = '你在 [' . get_option("blogname") . '] 的留言有了回应';
+    $message = '
+      <div style="background: white;
+      width: 95%;
+      max-width: 800px;
+      margin: auto auto;
+      border-radius: 5px;
+      border:orange 1px solid;
+      overflow: hidden;
+      -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.18);">
+        <header style="overflow: hidden;">
+            <img style="width:100%;z-index: 666;" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.4/img/other/head.jpg">
+        </header>
+        <div style="padding: 5px 20px;">
+        <p style="position: relative;
+        color: white;
+        float: left;
+        z-index: 999;
+        background: orange;
+        padding: 5px 30px;
+        margin: -25px auto 0 ;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.30)">Dear&nbsp;' . trim(get_comment($parent_id)->comment_author) . '</p>
+        <br>
+        <h3>您有一条来自<a style="text-decoration: none;color: orange " target="_blank" href="' .home_url(). '/">'. get_option("blogname") .'</a>的回复</h3>
+        <br>
+        <p style="font-size: 14px;">您在文章《' . get_the_title($comment->comment_post_ID) . '》上发表的评论：</p>
+        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim(get_comment($parent_id)->comment_content) . '</p>
+        <p style="font-size: 14px;">' . trim($comment->comment_author) . ' 给您的回复如下：</p>
+        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim($comment->comment_content) . '</p>
+
+      <div style="text-align: center;">
+          <img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.4/img/other/hr.png" alt="hr" style="width:100%;
+                                                                                                  margin:5px auto 5px auto;
+                                                                                                  display: block;">
+          <a style="text-transform: uppercase;
+                      text-decoration: none;
+                      font-size: 14px;
+                      border: 2px solid #6c7575;
+                      color: #2f3333;
+                      padding: 10px;
+                      display: inline-block;
+                      margin: 10px auto 0; " target="_blank" href="' . htmlspecialchars(get_comment_link($parent_id)) . '">点击查看回复的完整內容</a>
+      </div>
+        <p style="font-size: 12px;text-align: center;color: #999;">本邮件为系统自动发出，请勿直接回复<br>
+        &copy; '.date(Y).' '.get_option("blogname").'</p>
+      </div>       
+    </div>
+';
+    $message = convert_smilies($message);
+    $message = str_replace("f(x)=∫(",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$message);
+    $message = str_replace(")sec²xdx",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$message);
+    
+    $message =  str_replace('{UPLOAD}', 'https://i.loli.net/', $message); 
+    $message =  str_replace('[/img][img]', '[/img^img]', $message);  
+    
+    $message =  str_replace('[img]', '<img src="', $message); 
+    $message =  str_replace('[/img]', '" style="width:80%;display: block;margin-left: auto;margin-right: auto;">', $message); 
+    
+    $message =  str_replace('[/img^img]', '" style="width:80%;display: block;margin-left: auto;margin-right: auto;"><img src="', $message);
+    $from = "From: \"" . get_option('blogname') . "\" <$wp_email>";
+    $headers = "$from\nContent-Type: text/html; charset=" . get_option('blog_charset') . "\n";
+    wp_mail( $to, $subject, $message, $headers );
+  }
+}
+add_action('comment_post', 'comment_mail_notify');
+
+/*
+ * 链接新窗口打开
+ */
+function rt_add_link_target( $content ){
+    $content =  str_replace('<a', '<a rel="nofollow"', $content); 
+	// use the <a> tag to split into segments
+	$bits = explode( '<a ', $content );
+	// loop though the segments
+	foreach( $bits as $key=>$bit ){
+	    // fix the target="_blank" bug after the link
+	    if ( strpos( $bit, 'href' ) === false ) continue;
+		// find the end of each link
+		$pos = strpos( $bit, '>' );
+		// check if there is an end (only fails with malformed markup)
+		if( $pos !== false ){
+			// get a string with just the link's attibutes
+			$part = substr( $bit, 0, $pos );
+			// for comparison, get the current site/network url
+			$siteurl = network_site_url();
+			// if the site url is in the attributes, assume it's in the href and skip, also if a target is present
+			if( strpos( $part, $siteurl ) === false && strpos( $part, 'target=' ) === false ){
+				// add the target attribute
+				$bits[$key] = 'target="_blank" ' . $bits[$key];
+			}
+		}
+	}
+	// re-assemble the content, and return it
+	return implode( '<a ', $bits );
+}
+add_filter( 'comment_text', 'rt_add_link_target' );
+
+// 评论通过BBCode插入图片
+function comment_picture_support($content) {
+    $content =  str_replace('http://', 'https://', $content); // 干掉任何可能的 http
+    $content =  str_replace('{UPLOAD}', 'https://i.loli.net/', $content); 
+    $content =  str_replace('[/img][img]', '[/img^img]', $content); 
+    $content =  str_replace('[img]', '<br><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content); 
+    $content =  str_replace('[/img]', '" class="lazyload comment_inline_img" onerror="imgError(this)"><br>', $content); 
+    $content =  str_replace('[/img^img]', '" class="lazyload comment_inline_img" onerror="imgError(this)"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content); 
+    return $content;
+}
+add_filter( 'comment_text', 'comment_picture_support' );
+
+/*
+ * 修改评论表情调用路径
+ */
+add_filter('smilies_src','custom_smilies_src',1,10);
+function custom_smilies_src ($img_src,$img,$siteurl){
+    return 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/smilies/'.$img;
+}
+// 简单遍历系统表情库，今后应考虑标识表情包名——使用增加的扩展名，同时保留原有拓展名
+// 还有一个思路是根据表情调用路径来判定<-- 此法最好！
+// 贴吧
+function push_smilies(){
+    global $wpsmiliestrans;
+    foreach ($wpsmiliestrans as $k => $v) {
+        $Sname = str_replace(":","",$k);
+        $Svalue = $v;
+        $return_smiles = $return_smiles . '<span title="'.$Sname.'" onclick="grin('."'".$Sname."'".')"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/smilies/'.$Svalue.'" /></span>';
+    }
+  return $return_smiles;
+}
+
+function smilies_reset() {
+global $wpsmiliestrans;
+// don't bother setting up smilies if they are disabled
+if ( !get_option( 'use_smilies' ) )
+    return;
+
+    $wpsmiliestrans = [
+        ':good:' => 'icon_good.gif',
+        ':han:' => 'icon_han.gif',
+        ':spray:' => 'icon_spray.gif',
+        ':Grievance:' => 'icon_Grievance.gif',
+        ':shui:' => 'icon_shui.gif',
+        ':reluctantly:' => 'icon_reluctantly.gif',
+        ':anger:' => 'icon_anger.gif',
+        ':tongue:' => 'icon_tongue.gif',
+        ':se:' => 'icon_se.gif',
+        ':haha:' => 'icon_haha.gif',
+        ':rmb:' => 'icon_rmb.gif',
+        ':doubt:' => 'icon_doubt.gif',
+        ':tear:' => 'icon_tear.gif',
+        ':surprised2:' => 'icon_surprised2.gif',
+        ':Happy:' => 'icon_Happy.gif',
+        ':ku:' => 'icon_ku.gif',
+        ':surprised:' => 'icon_surprised.gif',
+        ':theblackline:' => 'icon_theblackline.gif',
+        ':smilingeyes:' => 'icon_smilingeyes.gif',
+        ':spit:' => 'icon_spit.gif',
+        ':huaji:' => 'icon_huaji.gif',
+        ':bbd:' => 'icon_bbd.gif',
+        ':hu:' => 'icon_hu.gif',
+        ':shame:' => 'icon_shame.gif',
+        ':naive:' => 'icon_naive.gif',
+        ':rbq:' => 'icon_rbq.gif',
+        ':britan:' => 'icon_britan.gif',
+        ':aa:' => 'icon_aa.gif',
+        ':niconiconi:' => 'icon_niconiconi.gif',
+        ':niconiconi-t:' => 'icon_niconiconi_t.gif',
+        ':niconiconit:' => 'icon_niconiconit.gif',
+        ':awesome:' => 'icon_awesome.gif',
+    ];
+}
+smilies_reset();
+
+function push_emoji_panel() {
+    return '
+        <a class="emoji-item">(⌒▽⌒)</a>
+        <a class="emoji-item">（￣▽￣）</a>
+        <a class="emoji-item">(=・ω・=)</a>
+        <a class="emoji-item">(｀・ω・´)</a>
+        <a class="emoji-item">(〜￣△￣)〜</a>
+        <a class="emoji-item">(･∀･)</a>
+        <a class="emoji-item">(°∀°)ﾉ</a>
+        <a class="emoji-item">(￣3￣)</a>
+        <a class="emoji-item">╮(￣▽￣)╭</a>
+        <a class="emoji-item">(´_ゝ｀)</a>
+        <a class="emoji-item">←_←</a>
+        <a class="emoji-item">→_→</a>
+        <a class="emoji-item">(&lt;_&lt;)</a>
+        <a class="emoji-item">(&gt;_&gt;)</a>
+        <a class="emoji-item">(;¬_¬)</a>
+        <a class="emoji-item">("▔□▔)/</a>
+        <a class="emoji-item">(ﾟДﾟ≡ﾟдﾟ)!?</a>
+        <a class="emoji-item">Σ(ﾟдﾟ;)</a>
+        <a class="emoji-item">Σ(￣□￣||)</a>
+        <a class="emoji-item">(’；ω；‘)</a>
+        <a class="emoji-item">（/TДT)/</a>
+        <a class="emoji-item">(^・ω・^ )</a>
+        <a class="emoji-item">(｡･ω･｡)</a>
+        <a class="emoji-item">(●￣(ｴ)￣●)</a>
+        <a class="emoji-item">ε=ε=(ノ≧∇≦)ノ</a>
+        <a class="emoji-item">(’･_･‘)</a>
+        <a class="emoji-item">(-_-#)</a>
+        <a class="emoji-item">（￣へ￣）</a>
+        <a class="emoji-item">(￣ε(#￣)Σ</a>
+        <a class="emoji-item">ヽ(‘Д’)ﾉ</a>
+        <a class="emoji-item">（#-_-)┯━┯</a>
+        <a class="emoji-item">(╯°口°)╯(┴—┴</a>
+        <a class="emoji-item">←◡←</a>
+        <a class="emoji-item">( ♥д♥)</a>
+        <a class="emoji-item">_(:3」∠)_</a>
+        <a class="emoji-item">Σ&gt;―(〃°ω°〃)♡→</a>
+        <a class="emoji-item">⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄</a>
+        <a class="emoji-item">(╬ﾟдﾟ)▄︻┻┳═一</a>
+        <a class="emoji-item">･*･:≡(　ε:)</a>
+        <a class="emoji-item">(笑)</a>
+        <a class="emoji-item">(汗)</a>
+        <a class="emoji-item">(泣)</a>
+        <a class="emoji-item">(苦笑)</a>
+    ';
+}
+
+function get_wp_root_path() {
+    $base = dirname(__FILE__);
+    $path = false;
+
+    if (@file_exists(dirname(dirname($base))))
+    {
+        $path = dirname(dirname($base));
+    }
+    else
+    if (@file_exists(dirname(dirname(dirname($base)))))
+    {
+        $path = dirname(dirname(dirname($base)));
+    }
+    else
+    $path = false;
+
+    if ($path != false)
+    {
+        $path = str_replace("\\", "/", $path);
+    }
+    return $path;
+}
+
+// bilibili smiles
+$bilismiliestrans = array();
+function push_bili_smilies(){
+  global $bilismiliestrans;
+  $smiles_path = get_wp_root_path(). "/themes/Sakura/images/smilies/bili/";
+  $name = array( 'baiyan','fadai','koubi','qinqin','weiqu','bishi','fanu','kun','se','weixiao','bizui','ganga','lengmo','shengbing','wunai','chan','guilian','liubixue','shengqi','xiaoku','daku','guzhang','liuhan','shuizhao','xieyanxiao','dalao','haixiu','liulei','sikao','yiwen','dalian','heirenwenhao','miantian','tiaokan','yun','dianzan','huaixiao','mudengkoudai','tiaopi','zaijian','doge','jingxia','nanguo','touxiao','zhoumei','facai','keai','outu','tuxue','zhuakuang' );
+  $return_smiles = '';
+  for( $i=0;$i<count($name);$i++ ){ 
+    $img_size = getimagesize($smiles_path . $name[$i] . ".png");
+    $img_height = $img_size["1"];
+    // 选择面版
+    $return_smiles = $return_smiles . '<span class="emotion-secter emotion-item emotion-select-parent" onclick="grin('."'".$name[$i]."'".',type = \'Math\')" style="background-image: url(https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_' .$name[$i]. '.png);"><div class="img emotion-select-child" style="background-image: url(https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png);
+        animation-duration: ' .($img_height / 32 * 40). 'ms;
+        animation-timing-function: steps(' .($img_height / 32). ');
+        transform: translateY(-' .($img_height - 32). 'px);
+        height: ' .$img_height. 'px;
+        "></div></span>';
+    // 正文转换
+    // Type 1: ' f(x)=∫(xxx)sec²xdx '
+    $bilismiliestrans[' f(x)=∫(' . $name[$i] . ')sec²xdx '] = '<span class="emotion-inline emotion-item" style="margin-left: 0px;margin-right: 0px;"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
+        animation-duration: ' .($img_height / 32 * 40). 'ms;
+        animation-timing-function: steps(' .($img_height / 32). ');
+        transform: translateY(-' .($img_height - 32). 'px);
+        height: ' .$img_height. 'px;
+        "></span>';
+    // Type 2: 'f(x)=∫(xxx)sec²xdx'
+    $bilismiliestrans['f(x)=∫(' . $name[$i] . ')sec²xdx'] = '<span class="emotion-inline emotion-item" style="margin-left: 0px;margin-right: 0px;"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
+        animation-duration: ' .($img_height / 32 * 40). 'ms;
+        animation-timing-function: steps(' .($img_height / 32). ');
+        transform: translateY(-' .($img_height - 32). 'px);
+        height: ' .$img_height. 'px;
+        "></span>';
+    // Type 3: '{xxx}'
+    $bilismiliestrans['{' . $name[$i] . '}'] = '<span class="emotion-inline emotion-item"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/' .$name[$i]. '.png" class="img" style="/*background-image: url();*/
+        animation-duration: ' .($img_height / 32 * 40). 'ms;
+        animation-timing-function: steps(' .($img_height / 32). ');
+        transform: translateY(-' .($img_height - 32). 'px);
+        height: ' .$img_height. 'px;
+        "></span>';
+    }
+    return $return_smiles;
+}
+push_bili_smilies();
+
+function bili_smile_filter($content) {
+    global $bilismiliestrans;
+    $content =  str_replace(array_keys($bilismiliestrans), $bilismiliestrans, $content); 
+    return $content;
+}
+add_filter('the_content', 'bili_smile_filter'); //替换文章关键词
+add_filter( 'comment_text', 'bili_smile_filter' );//替换评论关键词
+
+function featuredtoRSS($content) {
+    global $post;
+    if ( has_post_thumbnail( $post->ID ) ){
+        $content = '<div>' . get_the_post_thumbnail( $post->ID, 'medium', array( 'style' => 'margin-bottom: 15px;' ) ) . '</div>' . $content;
+    }
+    return $content;
+}
+add_filter('the_excerpt_rss', 'featuredtoRSS');
+add_filter('the_content_feed', 'featuredtoRSS');
+
+//
+function bili_smile_filter_rss($content) {
+    $content = str_replace("f(x)=∫(",'<img src="https://cdn.jsdelivr.net/gh/moezx/cdn@2.9.4/img/bili/hd/ic_emoji_',$content);
+    $content = str_replace(")sec²xdx",'.png" alt="emoji" style="height: 2em; max-height: 2em;">',$content);
+    $content =  str_replace('[img]', '<img src="', $content); 
+    $content =  str_replace('[/img]', '" style="display: block;margin-left: auto;margin-right: auto;">', $content); 
+    return $content;
+}
+add_filter( 'comment_text_rss', 'bili_smile_filter_rss' );//替换评论rss关键词
+
+function toc_support($content) {
+    $content =  str_replace('[toc]', '<div class="has-toc have-toc"></div>', $content); // TOC 支持
+    $content =  str_replace('[begin]', '<span class="begin">', $content); // 首字格式支持
+    $content =  str_replace('[/begin]', '</span>', $content); // 首字格式支持
+    return $content;
+}
+add_filter('the_content', 'toc_support');
+add_filter('the_excerpt_rss', 'toc_support');
+add_filter('the_content_feed', 'toc_support');
+
+// Markdown parser
+/* 处理超时？？
+function markdown_parser($content) {
+    include 'inc/Parsedown.php';
+    $Parsedown = new Parsedown();
+    $content = $Parsedown->text($content);
+    return $content;
+}
+add_filter( 'comment_text', 'markdown_parser' );
+*/
+
+// 显示访客当前 IP
+function get_the_user_ip() {
+if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+//check ip from share internet
+$ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+//to check ip is pass from proxy
+$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+$ip = $_SERVER['REMOTE_ADDR'];
+}
+return apply_filters( 'wpb_get_ip', $ip );
+}
+ 
+add_shortcode('show_ip', 'get_the_user_ip');
+
+
+/*歌词*/
+function hero_get_lyric() {
+	/** These are the lyrics to Hero */
+	$lyrics = "";
+
+	// Here we split it into lines
+	$lyrics = explode( "\n", $lyrics );
+
+	// And then randomly choose a line
+	return wptexturize( $lyrics[ mt_rand( 0, count( $lyrics ) - 1 ) ] );
+}
+
+// This just echoes the chosen line, we'll position it later
+function hello_hero() {
+	$chosen = hero_get_lyric();
+	echo $chosen;
+}
+
+/*私密评论*/
+add_action('wp_ajax_nopriv_siren_private', 'siren_private');
+add_action('wp_ajax_siren_private', 'siren_private');
+function siren_private(){
+    $comment_id = $_POST["p_id"];
+    $action = $_POST["p_action"];
+    if ($action == 'set_private') {
+        update_comment_meta($comment_id, '_private', 'true');
+        $i_private = get_comment_meta($comment_ID, '_private', true);
+        if (!empty($i_private)) {
+            echo '否';
+        } else {
+            echo '是';
+        }
+    }
+    die;
+}
+
+//时间序列
+function memory_archives_list() {
+	if( true ){
+		$output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">全部展开/收缩</span>]<!-- (注: 点击月份可以展开)--></p>';
+		$the_query = new WP_Query( 'posts_per_page=-1&ignore_sticky_posts=1&post_type=post' ); //update: 加上忽略置顶文章
+		$year=0; $mon=0; $i=0; $j=0;
+		while ( $the_query->have_posts() ) : $the_query->the_post();
+			$year_tmp = get_the_time('Y');
+            $mon_tmp = get_the_time('m');
+            $y=$year; $m=$mon;
+            if ($mon != $mon_tmp && $mon > 0) $output .= '</ul></li>';
+            if ($year != $year_tmp && $year > 0) $output .= '</ul>';
+            if ($year != $year_tmp) {
+                $year = $year_tmp;
+                $output .= '<h3 class="al_year">'. $year .' 年</h3><ul class="al_mon_list">'; //输出年份
+            }
+            if ($mon != $mon_tmp) {
+                $mon = $mon_tmp;
+                $output .= '<li class="al_li"><span class="al_mon">'.$mon.'月 (<span id="post-num"></span>篇文章)</span><ul class="al_post_list">'; //输出月份
+            }
+            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d日  ') .'</span>'. get_the_title() .' <span>('.wp_statistics_pages(total,get_permalink(),get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
+        endwhile;
+        wp_reset_postdata();
+        $output .= '</ul></li></ul> <!--<ul class="al_mon_list"><li><ul class="al_post_list" style="display: block;"><li>博客已经萌萌哒运行了<span id="monitorday"></span>天</li></ul></li></ul>--></div>';
+        #update_option('memory_archives_list', $output);
+	}
+    echo $output;
+}
+
+/*
+ * 隐藏 Dashboard
+ */
+/* Remove the "Dashboard" from the admin menu for non-admin users */
+function remove_dashboard () {
+    global $current_user, $menu, $submenu;
+    get_currentuserinfo();
+
+    if( ! in_array( 'administrator', $current_user->roles ) ) {
+        reset( $menu );
+        $page = key( $menu );
+        while( ( __( 'Dashboard' ) != $menu[$page][0] ) && next( $menu ) ) {
+            $page = key( $menu );
+        }
+        if( __( 'Dashboard' ) == $menu[$page][0] ) {
+            unset( $menu[$page] );
+        }
+        reset($menu);
+        $page = key($menu);
+        while ( ! $current_user->has_cap( $menu[$page][1] ) && next( $menu ) ) {
+            $page = key( $menu );
+        }
+        if ( preg_match( '#wp-admin/?(index.php)?$#', $_SERVER['REQUEST_URI'] ) &&
+            ( 'index.php' != $menu[$page][2] ) ) {
+                wp_redirect( get_option( 'siteurl' ) . '/wp-admin/profile.php');
+        }
+    }
+}
+add_action('admin_menu', 'remove_dashboard');
+
+/**
+ * Filter the except length to 20 words. 限制摘要长度（似乎无效）
+ *
+ * @param int $length Excerpt length.
+ * @return int (Maybe) modified excerpt length.
+ */
+function wpdocs_custom_excerpt_length( $length ) {
+    return 50;
+}
+add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+
+
+/*
+ * 后台路径
+ */
+/*
+add_filter('site_url',  'wpadmin_filter', 10, 3);
+ function wpadmin_filter( $url, $path, $orig_scheme ) {
+  $old  = array( "/(wp-admin)/");
+  $admin_dir = WP_ADMIN_DIR;
+  $new  = array($admin_dir);
+  return preg_replace( $old, $new, $url, 1);
+ }
+*/
+
+function admin_style() {
+  wp_enqueue_style('admin-styles-fix-icon', get_site_url() . '/wp-includes/css/dashicons.css');
+  if ( get_user_option( 'admin_color' ) == "light" ) {
+	wp_enqueue_style('cus-styles-light', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-light.css');  
+  }
+}
+add_action('admin_enqueue_scripts', 'admin_style');
+
+function custom_register_admin_scripts() {
+	 wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
+}
+add_action( 'admin_enqueue_scripts', 'custom_register_admin_scripts' );
+
+
+
+/*
+ * 后台通知
+ */
+function notice_welcome() {
+    ?>
+    <div class="notice notice-success is-dismissible">
+        <p><?php _e( 'Welcome!', 'sample-text-domain' ); ?></p>
+    </div>
+    <?php
+}
+
+// 首次登陆欢迎
+function shapeSpace_register_add_meta($user_id) { 
+	add_user_meta($user_id, '_new_user', '1');
+}
+add_action('user_register', 'shapeSpace_register_add_meta');
+
+function shapeSpace_first_user_login($user_login, $user) {
+	$new_user = get_user_meta($user->ID, '_new_user', true);
+	if ($new_user) {
+		update_user_meta($user->ID, '_new_user', '0');
+		
+		// do something for first login.. e.g., send a custom email
+		add_action( 'admin_notices', 'notice_welcome' );
+	}
+}
+add_action('wp_login', 'shapeSpace_first_user_login', 10, 2);
+
+function recommend_light() {
+	$msg = '<b>Strongly recommend "Light" Scheme.</b>';
+	if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
+		$msg = '<b>管理界面配色方案建议使用“明亮”。</b>';
+	}
+	if ( get_user_locale( get_current_user_id() ) == "zh_TW") {
+		$msg = '<b>管理色彩配置建議使用“明亮”。</b>';
+	}
+	if ( get_user_locale( get_current_user_id() ) == "ja") {
+		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+	}
+	if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
+		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+	}
+    ?>
+    <div class="notice notice-success is-dismissible">
+        <p><?php _e( $msg, 'sample-text-domain' ); ?></p>
+    </div>
+    <?php
+}
+if ( get_user_option( 'admin_color' ) != "light" ) {
+	add_action( 'admin_notices', 'recommend_light' );
+}
+
+
+// 阻止垃圾注册
+add_action( 'register_post', 'codecheese_register_post', 10, 3 );
+     
+function codecheese_register_post( $sanitized_user_login, $user_email, $errors ) {
+        
+	// Blocked domains  
+	$domains = array(   'net.buzzcluby.com', 
+                        'buzzcluby.com',
+                        'mail.ru',
+                        'h.captchaeu.info',
+                        'edge.codyting.com');
+        
+	// Get visitor email domain
+        $email = explode( '@', $user_email );
+        
+	// Check and display error message for the registration form if exists
+	if( in_array( $email[1], $domains ) )
+		$errors->add('invalid_email', __('<b>ERROR</b>: This email domain (<b>@'.$email[1].'</b>) has been blocked. Please use another email.'));
+}
+
+// lazyload images in atricles
+function lazyload_img($content) {  
+    if(!is_feed()) {   
+        $content=preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',"<img\$1class=\"lazyload\" data-src=\"\$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\"\$3 >\n<noscript>\$0</noscript>",$content);  
+    }  
+    return $content; 
+}
+add_filter('the_content', 'lazyload_img'); //替换文章关键词
+//add_filter( 'comment_text', 'lazyload_img' );//替换评论关键词
+
+/*
+ * QQ 评论
+ */
+// 数据库插入评论表单的qq字段 
+add_action('wp_insert_comment','inlojv_sql_insert_qq_field',10,2);
+function inlojv_sql_insert_qq_field($comment_ID,$commmentdata) {
+	$qq = isset($_POST['new_field_qq']) ? $_POST['new_field_qq'] : false;  
+	update_comment_meta($comment_ID,'new_field_qq',$qq); // new_field_qq 是表单name值，也是存储在数据库里的字段名字
+}
+// 后台评论中显示qq字段
+add_filter( 'manage_edit-comments_columns', 'add_comments_columns' );
+add_action( 'manage_comments_custom_column', 'output_comments_qq_columns', 10, 2 );
+function add_comments_columns( $columns ){
+    $columns[ 'new_field_qq' ] = __( 'QQ' );        // 新增列名称
+    return $columns;
+}
+function output_comments_qq_columns( $column_name, $comment_id ){
+    switch( $column_name ) {
+		case "new_field_qq" :
+		 // 这是输出值，可以拿来在前端输出，这里已经在钩子manage_comments_custom_column上输出了
+		echo get_comment_meta( $comment_id, 'new_field_qq', true );
+		break;
+	}
+}
+/**
+ * 头像调用路径 
+ */
+add_filter( 'get_avatar', 'inlojv_change_avatar', 10, 3 );
+function inlojv_change_avatar($avatar){
+	global $comment;
+	if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true ) ){
+		$qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
+        return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+	}else{
+		return $avatar ;
+	}	
+}
+
+//code end 
