@@ -17,3 +17,14 @@
 主题使用说明见：<https://2heng.xin/theme-sakura/>
 
 希望你喜欢！
+
+### 要饭码
+
+微信支付：
+![WeChanQR.png](https://view.moezx.cc/images/2018/05/28/WeChanQR.png)
+
+支付宝：
+![AliPayQR.jpg](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg)
+
+PayPal：
+https://paypal.me/mashirozx
