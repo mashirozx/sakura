@@ -18,13 +18,13 @@
 
 希望你喜欢！
 
-### 要饭码
+### 要饭
 
-微信支付：
-![WeChanQR.png](https://view.moezx.cc/images/2018/05/28/WeChanQR.png)
+微信支付：  
+<img src="https://view.moezx.cc/images/2018/05/28/WeChanQR.png" width="200"/>
 
-支付宝：
-![AliPayQR.jpg](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg)
+支付宝：  
+<img src="https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg" width="200"/>
 
 PayPal：
 https://paypal.me/mashirozx
