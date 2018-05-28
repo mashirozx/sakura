@@ -23,8 +23,9 @@ function optionsframework_option_name() {
  * When creating the 'id' fields, make sure to use all lowercase and no spaces.
  *
  * If you are making your theme translatable, you should replace 'options_framework_theme'
- * with the actual text domain for your theme.  请阅读:
- * http://codex.wordpress.org/Function_Reference/load_theme_textdomain
+ * with the actual text domain for your theme.  
+ *
+ * Frame from: https://github.com/devinsays/options-framework-plugin/
  */
 
 function optionsframework_options() {
@@ -44,9 +45,9 @@ function optionsframework_options() {
 	$multicheck_array = array(
 		'one' => __('椎名真白', 'options_framework_theme'),
 		'two' => __('时崎狂三', 'options_framework_theme'),
-		'three' => __('', 'options_framework_theme'),
-		'four' => __('绉绸', 'options_framework_theme'),
-		'five' => __('感化饼干', 'options_framework_theme')
+		'three' => __('西木野真姬', 'options_framework_theme'),
+		'four' => __('黑泽露比', 'options_framework_theme'),
+		'five' => __('渡边曜', 'options_framework_theme')
 	);
 
 	// 复选框默认值
@@ -271,13 +272,6 @@ function optionsframework_options() {
 		'id' => 'site_statistics',
 		'std' => '',
 		'type' => 'textarea');
-
-	$options[] = array(
-		'name' => __('网站地图地址', 'options_framework_theme'),
-		'desc' => __('Sitemap生成的地图链接', 'options_framework_theme'),
-		'id' => 'site_map_link',
-		'std' => '',
-		'type' => 'text');
 
 	$options[] = array(
 		'name' => __('自定义CSS样式', 'options_framework_theme'),
@@ -662,10 +656,104 @@ function optionsframework_options() {
 		'std' => '',
 		'type' => 'text');	
 
-	//其他
+	//前台登录
+	$options[] = array(
+		'name' => __('前台登录', 'options_framework_theme'),
+		'type' => 'heading' );
+
+	$options[] = array(
+		'name' => __('指定登录地址', 'options_framework_theme'),
+		'desc' => __('强制不使用后台地址登陆，填写新建的登陆页面地址，比如 http://www.xxx.com/login【注意】填写前先测试下你新建的页面是可以正常打开的，以免造成无法进入后台等情况', 'options_framework_theme'),
+		'id' => 'exlogin_url',
+		'std' => '',
+		'type' => 'text');
+
+	$options[] = array(
+		'name' => __('指定注册地址', 'options_framework_theme'),
+		'desc' => __('该链接使用在登录页面作为注册入口，建议填写', 'options_framework_theme'),
+		'id' => 'exregister_url',
+		'std' => '',
+		'type' => 'text');
+
+	$options[] = array(
+		'name' => __('允许用户注册', 'options_framework_theme'),
+		'desc' => __('勾选开启，允许用户在前台注册', 'options_framework_theme'),
+		'id' => 'ex_register_open',
+		'std' => '0',
+		'type' => 'checkbox');	
+
+	$options[] = array(
+		'name' => __('登录后自动跳转', 'options_framework_theme'),
+		'desc' => __('勾选开启，管理员跳转至后台，用户跳转至主页', 'options_framework_theme'),
+		'id' => 'login_urlskip',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('注册验证（仅前端，后端强制开启）', 'options_framework_theme'),
+		'desc' => __('勾选开启滑动验证', 'options_framework_theme'),
+		'id' => 'login_validate',
+		'std' => '0',
+		'type' => 'checkbox');	
+
+    //CDN 优化
+	$options[] = array(
+		'name' => __('CDN', 'options_framework_theme'),
+		'type' => 'heading' );
+        
+	$options[] = array(
+		'name' => __('图片库 CDN', 'options_framework_theme'),
+		'desc' => __('注意：填写格式为 http://你的CDN域名/20xx/xx/xx.png。<br>也就是说，原路径为 http://your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域名/2018/05/xx.png 加载', 'options_framework_theme'),
+		'id' => 'qiniu_cdn',
+		'std' => '',
+		'type' => 'text');  
+
+    $options[] = array(
+		'name' => __('Adobe Typekit ID 1', 'options_framework_theme'),
+		'desc' => __('加载 Adobe 字体，填写的是 js 文件名，请把<a href="https://typekit.com/fonts/source-han-serif-simplified-chinese">这页</a>七个字体都加入到你的 kit。免费账号有每月 2,5000 PV 的使用限制，可注册多个ID，每次随机选择一个调用，如果访问量没那么高，那么填这里第一个就OK了', 'options_framework_theme'),
+		'id' => 'adobe_id_1',
+		'std' => '',
+		'type' => 'text'); 
+
+	$options[] = array(
+		'name' => __('Adobe Typekit ID 2', 'options_framework_theme'),
+		'desc' => __('可留空，如果仅填前两个ID，那么随机到此 ID 的概率是1/3，随机到 ID 1 的概率是2/3', 'options_framework_theme'),
+		'id' => 'adobe_id_2',
+		'std' => '',
+		'type' => 'text'); 
+
+	$options[] = array(
+		'name' => __('Adobe Typekit ID 3', 'options_framework_theme'),
+		'desc' => __('可留空，如果三个都填写，那么三个 ID 随机调用，概率各为 1/3', 'options_framework_theme'),
+		'id' => 'adobe_id_3',
+		'std' => '',
+		'type' => 'text'); 
+        
+    $options[] = array(
+		'name' => __('开启 jsDelivr 测试？', 'options_framework_theme'),
+		'desc' => __('如不清楚什么意思切勿勾选！', 'options_framework_theme'),
+		'id' => 'jsdelivr_cdn_test',
+		'std' => '0',
+		'type' => 'checkbox');
+
+    $options[] = array(
+		'name' => __('jsDelivr 版本号', 'options_framework_theme'),
+		'desc' => __('如不清楚是什么意思切勿修改默认值！（默认值为latest）', 'options_framework_theme'),
+		'id' => 'jsdelivr_cdn_version',
+		'std' => 'latest',
+		'type' => 'text');  
+        
+    	//其他
 	$options[] = array(
 		'name' => __('其他', 'options_framework_theme'),
 		'type' => 'heading' );
+        
+    $options[] = array(
+    'name' => __('关于', 'options_framework_theme'),
+    'desc' => __('Theme Sakura v3.0.3.180528  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
+    'id' => 'theme_intro',
+    'std' => '',
+    'type' => 'typography ');
 
 	$options[] = array(
 		'name' => __('Cookie 版本控制', 'options_framework_theme'),
@@ -675,7 +763,7 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
-		'name' => __('开启PJAX局部刷新', 'options_framework_theme'),
+		'name' => __('开启PJAX局部刷新（建议开启）', 'options_framework_theme'),
 		'desc' => __('原理与Ajax相同', 'options_framework_theme'),
 		'id' => 'poi_pjax',
 		'std' => '0',
@@ -756,94 +844,6 @@ function optionsframework_options() {
 		'desc' => __('该地址为空则使用默认图片', 'options_framework_theme'),
 		'id' => 'login_bg',
 		'type' => 'upload');
-
-
-	//前台登录
-	$options[] = array(
-		'name' => __('前台登录', 'options_framework_theme'),
-		'type' => 'heading' );
-
-	$options[] = array(
-		'name' => __('指定登录地址', 'options_framework_theme'),
-		'desc' => __('强制不使用后台地址登陆，填写新建的登陆页面地址，比如 http://www.xxx.com/login【注意】填写前先测试下你新建的页面是可以正常打开的，以免造成无法进入后台等情况', 'options_framework_theme'),
-		'id' => 'exlogin_url',
-		'std' => '',
-		'type' => 'text');
-
-	$options[] = array(
-		'name' => __('指定注册地址', 'options_framework_theme'),
-		'desc' => __('该链接使用在登录页面作为注册入口，建议填写', 'options_framework_theme'),
-		'id' => 'exregister_url',
-		'std' => '',
-		'type' => 'text');
-
-	$options[] = array(
-		'name' => __('允许用户注册', 'options_framework_theme'),
-		'desc' => __('勾选开启，允许用户在前台注册', 'options_framework_theme'),
-		'id' => 'ex_register_open',
-		'std' => '0',
-		'type' => 'checkbox');	
-
-	$options[] = array(
-		'name' => __('登录后自动跳转', 'options_framework_theme'),
-		'desc' => __('勾选开启，管理员跳转至后台，用户跳转至主页', 'options_framework_theme'),
-		'id' => 'login_urlskip',
-		'std' => '0',
-		'type' => 'checkbox');
-
-	$options[] = array(
-		'name' => __('注册验证', 'options_framework_theme'),
-		'desc' => __('勾选开启滑动验证', 'options_framework_theme'),
-		'id' => 'login_validate',
-		'std' => '0',
-		'type' => 'checkbox');	
-
-    //CDN 优化
-	$options[] = array(
-		'name' => __('CDN', 'options_framework_theme'),
-		'type' => 'heading' );
-        
-	$options[] = array(
-		'name' => __('图片库 CDN', 'options_framework_theme'),
-		'desc' => __('注意：填写格式为 http://你的CDN域名/20xx/xx/xx.png。<br>也就是说，原路径为 http://your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域名/2018/05/xx.png 加载', 'options_framework_theme'),
-		'id' => 'qiniu_cdn',
-		'std' => '',
-		'type' => 'text');  
-
-    $options[] = array(
-		'name' => __('Adobe Typekit ID 1', 'options_framework_theme'),
-		'desc' => __('加载 Adobe 字体，请把<a href="https://typekit.com/fonts/source-han-serif-simplified-chinese">这页</a>七个字体都加入到你的 kit。免费账号有每月 2,5000 PV 的使用限制，可注册多个ID，每次随机选择一个调用，如果访问量没那么高，那么填这里第一个就OK了', 'options_framework_theme'),
-		'id' => 'adobe_id_1',
-		'std' => '',
-		'type' => 'text'); 
-
-	$options[] = array(
-		'name' => __('Adobe Typekit ID 2', 'options_framework_theme'),
-		'desc' => __('可留空，如果仅填前两个ID，那么随机到此 ID 的概率是1/3，随机到 ID 1 的概率是2/3', 'options_framework_theme'),
-		'id' => 'adobe_id_2',
-		'std' => '',
-		'type' => 'text'); 
-
-	$options[] = array(
-		'name' => __('Adobe Typekit ID 3', 'options_framework_theme'),
-		'desc' => __('可留空，如果三个都填写，那么三个 ID 随机调用，概率各为 1/3', 'options_framework_theme'),
-		'id' => 'adobe_id_3',
-		'std' => '',
-		'type' => 'text'); 
-        
-    $options[] = array(
-		'name' => __('开启 jsDelivr 测试？', 'options_framework_theme'),
-		'desc' => __('如不清楚什么意思切勿勾选！', 'options_framework_theme'),
-		'id' => 'jsdelivr_cdn_test',
-		'std' => '0',
-		'type' => 'checkbox');
-
-    $options[] = array(
-		'name' => __('jsDelivr 版本号', 'options_framework_theme'),
-		'desc' => __('如不清楚是什么意思切勿修改默认值！（默认值为latest）', 'options_framework_theme'),
-		'id' => 'jsdelivr_cdn_version',
-		'std' => 'latest',
-		'type' => 'text');  
         
 	return $options;
 }

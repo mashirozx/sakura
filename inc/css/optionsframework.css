@@ -74,29 +74,17 @@ a#options-group-4-tab:before {
 
 a#options-group-5-tab:before {
     font-family: "dashicons";
-    content: "\f227";
+    content: "\f110";
     float: left;
 }
 
 a#options-group-6-tab:before {
     font-family: "dashicons";
-    content: "\f105";
-    float: left;
-}
-
-a#options-group-7-tab:before { /*前台登陆*/
-    font-family: "dashicons";
-    content: "\f110";
-    float: left;
-}
-
-a#options-group-8-tab:before { /*CDN*/
-    font-family: "dashicons";
     content: "\f325";
     float: left;
 }
 
-a#options-group-9-tab:before { /*Mashiro*/
+a#options-group-7-tab:before { 
     font-family: "dashicons";
     content: "\f487";
     float: left;

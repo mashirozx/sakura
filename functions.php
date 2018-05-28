@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.0.3.1805025' );
+define( 'SAKURA_VERSION', '3.0.3.180528' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
@@ -418,15 +418,15 @@ if(!function_exists('akina_comment_format')){
             echo '<span class="showGrade0" title="萌萌哒新人~"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=6 && $author_count< 10)
             echo '<span class="showGrade1" title="巴拉巴拉小魔仙"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
-        else if($author_count>=11 && $author_count< 20)
+        else if($author_count>=10 && $author_count< 20)
             echo '<span class="showGrade2" title="初露头角"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
-        else if($author_count>=21 && $author_count< 40)
+        else if($author_count>=20 && $author_count< 40)
             echo '<span class="showGrade3" title="大水笔"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
-        else if($author_count>=41 && $author_count< 80)
+        else if($author_count>=40 && $author_count< 80)
             echo '<span class="showGrade4" title="大佬 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
-        else if($author_count>=81 && $author_count< 160)
+        else if($author_count>=80 && $author_count< 160)
             echo '<span class="showGrade5" title="日暮里大魔王"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
-        else if($author_count>=161)
+        else if($author_count>=160)
             echo '<span class="showGrade6" title="德国骨科"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     }
 
