@@ -546,7 +546,7 @@ function optionsframework_options() {
 		
 	$options[] = array(
 		'name' => __('腾讯QQ', 'options_framework_theme'),
-		'desc' => __('QQ号码', 'options_framework_theme'),
+		'desc' => __('tencent://message/?uin={{QQ号码}}，如tencent://message/?uin=123456', 'options_framework_theme'),
 		'id' => 'qq',
 		'std' => '',
 		'type' => 'text');
