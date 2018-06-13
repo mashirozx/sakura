@@ -738,9 +738,9 @@ function optionsframework_options() {
 
     $options[] = array(
 		'name' => __('jsDelivr 版本号', 'options_framework_theme'),
-		'desc' => __('如不清楚是什么意思切勿修改默认值！（默认值为latest）', 'options_framework_theme'),
+		'desc' => __('默认值为3.4.5', 'options_framework_theme'),
 		'id' => 'jsdelivr_cdn_version',
-		'std' => 'latest',
+		'std' => '3.4.5',
 		'type' => 'text');  
         
     	//其他
@@ -750,7 +750,7 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('关于', 'options_framework_theme'),
-    'desc' => __('Theme Sakura v3.0.3.180528  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
+    'desc' => __('Theme Sakura v3.0.5  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');

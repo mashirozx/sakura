@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.0.3.180528' );
+define( 'SAKURA_VERSION', '3.0.5' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
@@ -177,7 +177,7 @@ function sakura_scripts() {
     wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
     // If you do not like the CDN, uncomment this line, and comment the next line
     //wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
-	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@latest/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
+	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
