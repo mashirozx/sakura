@@ -59,7 +59,7 @@ function get_random_bg_url(){
  * 订制时间样式
  * poi_time_since(strtotime($post->post_date_gmt));
  * poi_time_since(strtotime($comment->comment_date_gmt), true );
- * 不可使用GMT!!
+ * 如果中途修改过Linux系统时间则继续使用GMT可能出现时差问题!!
  * poi_time_since(strtotime($post->post_date));
  * poi_time_since(strtotime($comment->comment_date), true );
  */

@@ -30,7 +30,7 @@ $the_cat = get_the_category();
 		<div class="post-content-wrap">
 			<div class="post-content">
 				<div class="post-date">
-					<i class="iconfont icon-time"></i><?php echo poi_time_since(strtotime($post->post_date)); ?>
+					<i class="iconfont icon-time"></i><?php echo poi_time_since(strtotime($post->post_date_gmt)); ?>
 					<?php if(is_sticky()) : ?>
 					&nbsp;<i class="iconfont hotpost icon-hot"></i>
 			 		<?php endif ?>
