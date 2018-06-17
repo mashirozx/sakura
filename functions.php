@@ -229,7 +229,7 @@ function convertip($ip) {
         return 'IP date file not exists or access denied';
     }
     $ip = explode('.', $ip);
-    $ipNum = $ip[0] * 16777216 + $ip[1] * 65536 + $ip[2] * 256 + $ip[3];
+    $ipNum = intval($ip[0]) * 16777216 + intval($ip[1]) * 65536 + intval($ip[2]) * 256 + intval($ip[3]);
     $DataBegin = fread($fd, 4);
     $DataEnd = fread($fd, 4);
     $ipbegin = implode('', unpack('L', $DataBegin));
