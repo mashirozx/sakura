@@ -128,6 +128,18 @@
     </div>
 </div>
 <canvas id="night-mode-cover"></canvas>
+<?php if (akina_option('playlist_id', '')): ?>
+<div id="aplayer-float" style="z-index: 100;"
+	class="aplayer"
+    data-id="<?php echo akina_option('playlist_id', ''); ?>"
+    data-server="netease"
+    data-type="playlist"
+    data-fixed="true"
+    data-theme="orange">
+</div>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+<style>.skin-menu{left:auto;right:10px;}.changeSkin-gear{left:auto;right:5px;}</style>
+<?php endif; ?>
 <?php 
 if (akina_option('adobe_id_1', '')) {
 	$adobe = rand(0,2);

@@ -43,6 +43,14 @@ $bg_style = akina_option('focus_height') ? 'background-position: center center;b
     -o-animation: rotating 6s linear infinite;
     animation: rotating 6s linear infinite;
 }
+<?php if(akina_option('comment_info_box_width', '')): ?>
+.cmt-popup {
+    --widthA: <?php echo akina_option('comment_info_box_width', ''); ?>%;
+    --widthB: calc(var(--widthA) - 71px);
+    --widthC: calc(var(--widthB) / 3);
+    width: var(--widthC);
+}
+<?php endif;?>
 </style>
 <?php }
 add_action('wp_head', 'customizer_css');

@@ -229,6 +229,13 @@ function optionsframework_options() {
 		));	
 
     $options[] = array(
+		'name' => __('评论信息栏宽度调整', 'options_framework_theme'),
+		'desc' => __('不知道为什么有人老会搞出问题，求你们不要用那些莫名其妙的插件。。如果出问题了在这里调整，输入一个介于0到100的数字以调整宽度，以免出现框框换行的情况，正常情况下97左右比较正常吧。。如果本来就显示正常的请务必留空！', 'options_framework_theme'),
+		'id' => 'comment_info_box_width',
+		'std' => '',
+		'type' => 'text');	
+        
+    $options[] = array(
 		'name' => __('文章末尾显示作者信息？', 'options_framework_theme'),
 		'desc' => __('勾选启用', 'options_framework_theme'),
 		'id' => 'show_authorprofile',
@@ -750,11 +757,18 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('关于', 'options_framework_theme'),
-    'desc' => __('Theme Sakura v3.0.5  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
+    'desc' => __('Theme Sakura v3.0.6  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
 
+	$options[] = array(
+		'name' => __('页脚悬浮播放器', 'options_framework_theme'),
+		'desc' => __('如果不需要播放器留空即可。填写网易云音乐的「歌单」ID，eg：https://music.163.com/#/playlist?id=2288037900的ID是2288037900', 'options_framework_theme'),
+		'id' => 'playlist_id',
+		'std' => '2288037900',
+		'type' => 'text');
+        
 	$options[] = array(
 		'name' => __('Cookie 版本控制', 'options_framework_theme'),
 		'desc' => __('用于更新前端 cookie，可使用任意字符串，比如日期：---2018/5/16', 'options_framework_theme'),
