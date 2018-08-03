@@ -397,7 +397,7 @@ function nextBG() {
 
 function preBG() {
     bgn = bgn - 1;
-    $(".centerbg").css("background-image", "url(https://api.shino.cc/cover/?" + bgn + ")");
+    $(".centerbg").css("background-image", "url(" + mashiro_option.cover_api + "?" + bgn + ")");
 }
 $(document).ready(function () {
     $("#bg-next").click(function () {

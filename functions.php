@@ -175,9 +175,7 @@ function sakura_scripts() {
         wp_enqueue_script( 'js_lab', 'https://cdn.jsdelivr.net/gh/moezx/cdn@' . akina_option('jsdelivr_cdn_version', 'latest') . '/js/lib.min.js', array(), SAKURA_VERSION, true );
     }
     wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
-    // If you do not like the CDN, uncomment this line, and comment the next line
-    //wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
-	wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/js/other/sakura-app.js', array(), SAKURA_VERSION, true );
+    wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
