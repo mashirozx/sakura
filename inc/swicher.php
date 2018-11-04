@@ -22,6 +22,9 @@ mashiro_option.jsdelivr_css_src = "https://pages.shino.cc/cdn/css/lib.css";
 <?php } else { ?>
 mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@<?php echo akina_option('jsdelivr_cdn_version', 'latest'); ?>/css/lib.min.css";
 <?php } ?>
+<?php if (akina_option('playlist_id', '')): ?>
+mashiro_option.float_player_on = true;
+<?php endif; ?>
 
 /*End of Initial Variables*/
 </script>

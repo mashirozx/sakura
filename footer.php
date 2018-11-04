@@ -137,7 +137,6 @@
     data-fixed="true"
     data-theme="orange">
 </div>
-<script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
 <style>.skin-menu{left:auto;right:10px;}.changeSkin-gear{left:auto;right:5px;}</style>
 <?php endif; ?>
 <?php 
