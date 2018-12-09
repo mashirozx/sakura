@@ -1,4 +1,4 @@
-﻿Sakura🌸: A Wonderful WordPress Theme
+Sakura🌸: A Wonderful WordPress Theme
 ===
 
 ![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
