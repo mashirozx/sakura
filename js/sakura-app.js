@@ -544,7 +544,9 @@ var pjaxInit = function () {
         $("div").remove(".load-aplayer");
     });
     if ($("div").hasClass("aplayer")) {
-        reloadHermit();
+        try {
+            reloadHermit();
+        } catch (e) {};
     }
     if ($("div").hasClass("popcontainer")) {
         loadBotui();
