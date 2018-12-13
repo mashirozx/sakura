@@ -1421,11 +1421,13 @@ var home = location.href,
             $('.focusinfo').css({
                 "top": "-999px"
             });
-            for (var i = 0; i < ap.length; i++) {
-                try {
-                    ap[i].destroy()
-                } catch (e) {}
-            }
+            try {
+                for (var i = 0; i < ap.length; i++) {
+                    try {
+                        ap[i].destroy()
+                    } catch (e) {}
+                }
+            } catch (e) {}
             try {
                 hermitInit()
             } catch (e) {}
