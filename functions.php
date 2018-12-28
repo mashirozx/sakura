@@ -169,6 +169,7 @@ add_action( 'after_setup_theme', 'akina_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function sakura_scripts() {
+    wp_enqueue_script( 'share-js', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.5.7/js/src/13.social-share.min.js', array(), SAKURA_VERSION, true );
     if(akina_option('jsdelivr_cdn_test')){ 
         wp_enqueue_script( 'js_lab', 'https://pages.shino.cc/cdn/js/lib.js', array(), SAKURA_VERSION, true );
     } else { 

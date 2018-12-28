@@ -2072,7 +2072,7 @@ h1.page-title.mb- {
 .post-share {
     float: right;
     list-style: none;
-    margin-right: 20px
+    margin-right: 20px;
 }
 
 .post-share img:hover {
@@ -2093,15 +2093,20 @@ h1.page-title.mb- {
     transition: opacity .4s ease-out
 }
 
+.post-share .social-share {
+    opacity: 0;
+    display: none;
+}
+
 .post-share li {
     float: left;
-    margin-right: 20px
+    margin-right: 20px;
 }
 
 .post-share li img {
     width: 32px;
     height: 32px;
-    padding: 7px
+    padding: 7px;
 }
 
 .post-share ul li i {
@@ -2110,7 +2115,7 @@ h1.page-title.mb- {
 
 .post-share span {
     float: left;
-    margin-right: 10px
+    margin-right: 10px;
 }
 
 .post-share ul li a:hover {
@@ -2128,10 +2133,10 @@ h1.page-title.mb- {
     transition: opacity .1s ease-out
 }
 
-.post-share:hover .sharehidden,
-.post-share:hover .show-share {
+.post-share:hover .show-share,
+.post-share:hover .sharehidden {
     opacity: 1;
-    display: inline-block
+    display: inline-block;
 }
 
 .post-squares {
@@ -8228,7 +8233,7 @@ td.hljs-ln-numbers {
 }
 
 .serif {
-    font-family: 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia, serif
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia, serif
 }
 
 @media (max-width:860px) {

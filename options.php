@@ -714,7 +714,7 @@ function optionsframework_options() {
 		'id' => 'qiniu_cdn',
 		'std' => '',
 		'type' => 'text');  
-
+    /*
     $options[] = array(
 		'name' => __('Adobe Typekit ID 1', 'options_framework_theme'),
 		'desc' => __('加载 Adobe 字体，填写的是 js 文件名，请把<a href="https://typekit.com/fonts/source-han-serif-simplified-chinese">这页</a>七个字体都加入到你的 kit。免费账号有每月 2,5000 PV 的使用限制，可注册多个ID，每次随机选择一个调用，如果访问量没那么高，那么填这里第一个就OK了', 'options_framework_theme'),
@@ -735,7 +735,7 @@ function optionsframework_options() {
 		'id' => 'adobe_id_3',
 		'std' => '',
 		'type' => 'text'); 
-        
+    */    
     $options[] = array(
 		'name' => __('开启 jsDelivr 测试？', 'options_framework_theme'),
 		'desc' => __('如不清楚什么意思切勿勾选！', 'options_framework_theme'),

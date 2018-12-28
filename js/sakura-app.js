@@ -12,10 +12,12 @@ mashiro_global.variables = new function () {
 mashiro_global.ini = new function () {
     this.normalize = function () {
         lazyload();
+        social_share();
         mashiro_global.post_list_show_animation.ini();
     }
     this.pjax = function () {
         pjaxInit();
+        social_share();
         mashiro_global.post_list_show_animation.ini();
     }
 }
@@ -985,7 +987,8 @@ mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
 loadCSS("https://at.alicdn.com/t/font_679578_qyt5qzzavdo39pb9.css");
 loadCSS("https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css");
-loadCSS("https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700");
+loadCSS("https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC");
+loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.9/css/sharejs.css");
 (function webpackUniversalModuleDefinition(b, a) {
     if (typeof exports === "object" && typeof module === "object") {
         module.exports = a()

@@ -139,33 +139,5 @@
 </div>
 <style>.skin-menu{left:auto;right:10px;}.changeSkin-gear{left:auto;right:5px;}</style>
 <?php endif; ?>
-<?php 
-if (akina_option('adobe_id_1', '')) {
-	$adobe = rand(0,2);
-	switch ($adobe) {
-		case 0:
-			$adobe_id = akina_option('adobe_id_1', '');
-			break;
-		case 1:
-			if (akina_option('adobe_id_2', '')) {
-				$adobe_id = akina_option('adobe_id_2', '');
-			} else {
-				$adobe_id = akina_option('adobe_id_1', '');
-			}
-			break;
-		default:
-			if (akina_option('adobe_id_3', '')) {
-				$adobe_id = akina_option('adobe_id_3', '');
-			} else {
-				$adobe_id = akina_option('adobe_id_1', '');
-			}
-	}
-	if(!wp_is_mobile()): 
-	?>
-	<script src="https://use.typekit.net/<?php echo $adobe_id; ?>.js"></script>
-	<script>try{Typekit.load({ async: true });}catch(e){}</script>
-	<?php 
-	endif;
-} ?>
 </body>
 </html>
