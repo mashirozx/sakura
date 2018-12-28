@@ -2,7 +2,7 @@
  * Sakura application bundle
  * @author Mashiro
  * @url https://2heng.xin
- * @date 2018.5.25
+ * @date 2018.12.28
  */
 mashiro_global.variables = new function () {
     this.has_bot_ui = false;

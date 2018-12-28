@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.0.8' );
+define( 'SAKURA_VERSION', '3.0.9' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
