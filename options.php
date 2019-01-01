@@ -668,6 +668,13 @@ function optionsframework_options() {
 		'name' => __('前台登录', 'options_framework_theme'),
 		'type' => 'heading' );
 
+		$options[] = array(
+			'name' => __('登录logo', 'options_framework_theme'),
+			'desc' => __('用于登录界面显示', 'options_framework_theme'),
+			'id' => 'logo_img',
+			'std' => $imagepath.'mashiro-logo-s.png',
+			'type' => 'upload');
+
 	$options[] = array(
 		'name' => __('指定登录地址', 'options_framework_theme'),
 		'desc' => __('强制不使用后台地址登陆，填写新建的登陆页面地址，比如 http://www.xxx.com/login【注意】填写前先测试下你新建的页面是可以正常打开的，以免造成无法进入后台等情况', 'options_framework_theme'),
