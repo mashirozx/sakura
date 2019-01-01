@@ -71,7 +71,7 @@ function poi_time_since( $older_date, $comment_date = false, $text = false ) {
     array( 1, __( ' 秒前', 'akina' ) )
   );
 
-  $newer_date = time() - (8*60*60);
+  $newer_date = time();
   $since = abs( $newer_date - $older_date );
   if($text){
     $output = '';
