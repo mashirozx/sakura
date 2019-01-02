@@ -759,10 +759,15 @@ function custom_html() {
 	$(document).ready(function(){
 		$( \'<p><div id="verification-slider"><div id="slider"><div id="slider_bg"></div><span id="label">»</span><span id="labelTip">Slide to Verificate</span></div><input type="hidden" name="verification" value="verification" /></div><p>\' ).insertBefore( $( ".submit" ) );
 		$(\'form\').attr(\'onsubmit\',\'return verificationOK();\');
-		$(\'a\').attr(\'style\',\'background-image: url('.akina_option('logo_img').'); width: 130px; height: 130px;\');
 		$(".forgetmenot").replaceWith(\'<p class="forgetmenot">Remember Me<input name="rememberme" id="rememberme" value="forever" type="checkbox"><label for="rememberme" style="float: right;margin-top: 5px;transform: scale(2);margin-right: -10px;"></label></p>\');
-	});
+	});';
+	if ( empty( akina_option('logo_img') ) ){
+		echo '$(\'#login\').children(\'h1\').children(\'a\').attr(\'style\',\'height: 130px; background-position: center center !important;\');
 	</script>';
+	} else {
+		echo '$(\'#login\').children(\'h1\').children(\'a\').attr(\'style\',\'background-image: url('.akina_option('logo_img').'); height: 130px; background-position: center center !important;\');
+	</script>';
+	};
 	echo '<script type="text/javascript">
 		var startTime = 0;
 		var endTime = 0;
