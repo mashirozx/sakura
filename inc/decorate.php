@@ -60,7 +60,7 @@ if ( akina_option('toggle-menu') == 'no') { ?>
 if (akina_option('cover_img')) {
     $imgurl = akina_option('cover_img');
 } else {
-    $imgurl = get_site_url()."/wp-content/themes/Sakura/cover/";
+    $imgurl = get_site_url()."/wp-content/themes/Sakura/cover/index.php";
 }
 
 
