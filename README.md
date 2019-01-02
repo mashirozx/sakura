@@ -18,13 +18,8 @@ Sakura🌸: A Wonderful WordPress Theme
 
 希望你喜欢！
 
-### 要饭
+### 打赏支持~
+[微信支付](https://view.moezx.cc/images/2018/05/28/WeChanQR.png) | [支付宝](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg) | [PayPal](https://paypal.me/mashirozx)
 
-微信支付：  
-<img src="https://view.moezx.cc/images/2018/05/28/WeChanQR.png" width="200"/>
-
-支付宝：  
-<img src="https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg" width="200"/>
-
-PayPal：
-https://paypal.me/mashirozx
+### 需要服务器吗？
+<a href="https://www.vultr.com/?ref=7674346"><img src="https://www.vultr.com/media/banner_3.png" width="300" height="250"></a>
