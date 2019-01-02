@@ -72,8 +72,8 @@ if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <?php if(akina_option('google_analytics_id', '')):?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo akina_option('google_analytics_id', ''); ?>"></script>
-<script>
 <?php endif; ?>
+<script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','<?php echo akina_option('google_analytics_id', ''); ?>');
 </script>
 </head>
