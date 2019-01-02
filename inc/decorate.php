@@ -26,7 +26,7 @@ if ( akina_option('theme_skin') ) { ?>
         background-color: <?php echo akina_option('theme_skin'); ?>
 }
 
-.scrollbar {
+.scrollbar,.butterBar-message {
     background: <?php echo akina_option('theme_skin'); ?>
 }
 

@@ -851,6 +851,13 @@ function optionsframework_options() {
  		'id' => 'logo_img',
  		'std' => $imagepath.'mashiro-logo-s.png',
  		'type' => 'upload');
+        
+    $options[] = array(
+		'name' => __('时区调整', 'options_framework_theme'),
+		'desc' => __('如果评论出现时差问题在这里调整，填入一个整数，计算方法：实际时间=显示错误的时间-你输入的整数（单位：小时）', 'options_framework_theme'),
+		'id' => 'time_zone_fix',
+		'std' => '0',
+		'type' => 'text');
  
 	return $options;
 }
