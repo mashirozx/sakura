@@ -33,8 +33,9 @@ body { background:none !important; overflow:hidden;}
 	top:50%;
 	left:50%;
 	width:350px;
+	height: 600px;
 	padding:0px !important;
-	margin:-290px 0px 0px -175px !important; 
+	margin:-300px 0px 0px -175px !important; 
     background-position: center 48%;
 }
 
