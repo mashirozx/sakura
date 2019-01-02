@@ -838,5 +838,12 @@ function optionsframework_options() {
 		'id' => 'login_bg',
 		'type' => 'upload');
         
+    $options[] = array(
+ 		'name' => __('后台登陆界面logo', 'options_framework_theme'),
+ 		'desc' => __('用于登录界面显示', 'options_framework_theme'),
+ 		'id' => 'logo_img',
+ 		'std' => $imagepath.'mashiro-logo-s.png',
+ 		'type' => 'upload');
+ 
 	return $options;
 }
