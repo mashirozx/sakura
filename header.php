@@ -69,13 +69,13 @@ if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
   alert('朋友，IE浏览器未适配哦~');
 }
 </script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <?php if(akina_option('google_analytics_id', '')):?>
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo akina_option('google_analytics_id', ''); ?>"></script>
-<?php endif; ?>
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','<?php echo akina_option('google_analytics_id', ''); ?>');
 </script>
+<?php endif; ?>
 </head>
 <body <?php body_class(); ?>>
     <div class="scrollbar" id="bar"></div>
