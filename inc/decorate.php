@@ -30,7 +30,12 @@ if ( akina_option('toggle-menu') == 'no') { ?>
 <?php } // comments ?>
 <?php 
 
-$imgurl = akina_option('cover_img');
+if (akina_option('cover_img')) {
+    $imgurl = akina_option('cover_img');
+} else {
+    $imgurl = 'https://sakura.2heng.xin/wp-content/themes/Sakura/cover/index.php';
+}
+
 
 $image_api = 'background-image: url("'.$imgurl.'");';
 $bg_style = akina_option('focus_height') ? 'background-position: center center;background-attachment: inherit;' : '';

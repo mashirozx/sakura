@@ -356,7 +356,7 @@ function optionsframework_options() {
  		'name' => __('封面图', 'options_framework_theme'),
  		'desc' => __('此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）', 'options_framework_theme'),
  		'id' => 'cover_img',
- 		'std' => get_site_url()."/wp-content/themes/Sakura/cover/index.php",
+ 		'std' => '',
  		'type' => 'upload');
         
 	$options[] = array(
