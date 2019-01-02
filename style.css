@@ -7605,7 +7605,7 @@ a.toc-link {
     position: fixed;
     top: 0;
     height: 3px;
-    background: #BEBEBE;
+    background: orange;
     transiton-property: width, background;
     transition-duration: 1s, 1s;
     z-index: 99999

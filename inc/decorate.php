@@ -11,20 +11,32 @@ if ( akina_option('theme_skin') ) { ?>
 .feature i , /*.feature-title span ,*/ .download , .navigator i:hover , .links ul li:before , .ar-time i , span.ar-circle , .object , .comment .comment-reply-link , .siren-checkbox-radio:checked + .siren-checkbox-radioInput:after { background: <?php echo akina_option('theme_skin'); ?> }
 ::-webkit-scrollbar-thumb { background: <?php echo akina_option('theme_skin'); ?> }
 .download , .navigator i:hover , .link-title , .links ul li:hover , #pagination a:hover , .comment-respond input[type='submit']:hover { border-color: <?php echo akina_option('theme_skin'); ?> }
-.entry-content a:hover , .site-info a:hover , .comment h4 a , #comments-navi a.prev , #comments-navi a.next , .comment h4 a:hover , .site-top ul li a:hover , .entry-title a:hover , #archives-temp h3 , span.page-numbers.current , .sorry li a:hover , .site-title a:hover , i.iconfont.js-toggle-search.iconsearch:hover , .comment-respond input[type='submit']:hover { color: <?php echo akina_option('theme_skin'); ?> }
+.entry-content a:hover , .site-info a:hover , .comment h4 a , #comments-navi a.prev , #comments-navi a.next , .comment h4 a:hover , .site-top ul li a:hover , .entry-title a:hover , #archives-temp h3 , span.page-numbers.current , .sorry li a:hover , .site-title a:hover , i.iconfont.js-toggle-search.iconsearch:hover , .comment-respond input[type='submit']:hover, blockquote:before, blockquote:after,#aplayer-float .aplayer-lrc-current { color: <?php echo akina_option('theme_skin'); ?> }
 
 .is-active-link::before {
     background-color: <?php echo akina_option('theme_skin'); ?> !important
 }
 
-.insert-image-tips:hover{ 
+.insert-image-tips:hover, .insert-image-tips-hover{ 
     color: <?php echo akina_option('theme_skin'); ?>;
     border: 1px solid <?php echo akina_option('theme_skin'); ?>
+}
+
+.site-top ul li a:after {
+        background-color: <?php echo akina_option('theme_skin'); ?>
+}
+
+.scrollbar {
+    background: <?php echo akina_option('theme_skin'); ?>
 }
 
 #nprogress .spinner-icon{ 
     border-top-color: <?php echo akina_option('theme_skin'); ?>; 
     border-left-color: <?php echo akina_option('theme_skin'); ?>
+}
+
+#nprogress .bar {
+    background: <?php echo akina_option('theme_skin'); ?>
 }
 
 <?php } // theme-skin ?>
