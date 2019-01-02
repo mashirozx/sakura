@@ -30,7 +30,7 @@ if ( akina_option('toggle-menu') == 'no') { ?>
 <?php } // comments ?>
 <?php 
 
-$imgurl = get_site_url()."/wp-content/themes/Sakura/cover/";
+$imgurl = akina_option('cover_img');
 
 $image_api = 'background-image: url("'.$imgurl.'");';
 $bg_style = akina_option('focus_height') ? 'background-position: center center;background-attachment: inherit;' : '';

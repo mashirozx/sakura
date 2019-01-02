@@ -345,13 +345,20 @@ function optionsframework_options() {
 		'std' => '',
 		'type' => 'text');
 
-	 $options[] = array(
+	$options[] = array(
 		'name' => __('视频名称', 'options_framework_theme'),
 		'desc' => __('abc.mp4 ，只需要填写视频文件名 abc 即可，多个用英文逗号隔开如 abc,efg ，无需在意顺序，因为加载是随机的抽取的 ', 'options_framework_theme'),
 		'id' => 'amv_title',
 		'std' => '',
 		'type' => 'text');
 
+    $options[] = array(
+ 		'name' => __('封面图', 'options_framework_theme'),
+ 		'desc' => __('此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）', 'options_framework_theme'),
+ 		'id' => 'cover_img',
+ 		'std' => get_site_url()."/wp-content/themes/Sakura/cover/index.php",
+ 		'type' => 'upload');
+        
 	$options[] = array(
 		'name' => __('背景图滤镜', 'akina'),
 		'id' => 'focus_img_filter',
@@ -736,7 +743,7 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('关于', 'options_framework_theme'),
-    'desc' => __('Theme Sakura v3.0.7  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
+    'desc' => __('Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
