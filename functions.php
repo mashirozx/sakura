@@ -8,7 +8,7 @@
  */
  
 define( 'SAKURA_VERSION', '3.1.1' );
-define( 'JSDELIVR_VERSION', '3.6.3' );
+define( 'JSDELIVR_VERSION', '3.6.6' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   

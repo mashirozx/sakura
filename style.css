@@ -501,7 +501,7 @@ input[type=submit] {
     border-color: #ccc #ccc #bbb;
     border-radius: 3px;
     background: #e6e6e6;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 15px 17px rgba(255, 255, 255, .5), inset 0 -5px 12px rgba(0, 0, 0, .05);
+    box-shadow: none;
     color: rgba(0, 0, 0, .8);
     font-size: 12px;
     font-size: .75rem;
@@ -526,7 +526,7 @@ input[type=reset]:focus,
 input[type=submit]:active,
 input[type=submit]:focus {
     border-color: #aaa #bbb #bbb;
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .5), inset 0 2px 5px rgba(0, 0, 0, .15)
+    box-shadow: none
 }
 
 input[type=color],
