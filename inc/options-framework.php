@@ -25,6 +25,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* If the user can't edit theme options, no use running this plugin */
 
+if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
+    define( 'SAKURA_OPTIONS', 'Sakura主题设置' );
+}
+if ( get_user_locale( get_current_user_id() ) == "zh_TW") {
+    define( 'SAKURA_OPTIONS', 'Sakura主題設置' );
+}
+if ( get_user_locale( get_current_user_id() ) == "ja") {
+    define( 'SAKURA_OPTIONS', 'さくらテーマの設定' );
+}
+if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
+    define( 'SAKURA_OPTIONS', 'さくらテーマの設定' );
+} else {
+    define( 'SAKURA_OPTIONS', 'Sakura Options' );
+}
+
 add_action( 'init', 'optionsframework_rolescheck' );
 
 function optionsframework_rolescheck () {
@@ -179,8 +194,8 @@ function optionsframework_setdefaults() {
 function optionsframework_menu_settings() {
 
 	$menu = array(
-		'page_title' => __( 'Sakura Options', 'optionsframework'),
-		'menu_title' => __('Sakura Options', 'optionsframework'),
+		'page_title' => __( SAKURA_OPTIONS, 'optionsframework'),
+		'menu_title' => __( SAKURA_OPTIONS, 'optionsframework'),
 		'capability' => 'edit_theme_options',
 		'menu_slug' => 'options-framework',
 		'callback' => 'optionsframework_page'
@@ -410,7 +425,7 @@ function optionsframework_adminbar() {
 	$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id' => 'of_theme_options',
-			'title' => __( 'Sakura Options', 'options_framework_theme' ),
+			'title' => __( SAKURA_OPTIONS, 'options_framework_theme' ),
 			'href' => admin_url( 'themes.php?page=options-framework' )
 		));
 }

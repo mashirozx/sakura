@@ -320,6 +320,143 @@ function the_headPattern(){
   endif;
 }
 
+/*视频封面*/
+function the_video_headPattern_hls(){
+  $t = ''; // 标题
+  $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'full');
+  $thubm_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'thumbnail');
+  
+    $video_cover = get_post_meta(get_the_ID(), 'video_cover', true);
+    $video_cover_thumb = get_post_meta(get_the_ID(), 'video_cover_thumb', true);
+    // 检查这个字段是否有值
+    if (empty ( $video_cover_thumb )) { //如果值为空，输出默认值
+        $video_poster_attr = "";
+    } else {
+        $video_poster_attr = ' poster="' . $video_cover_thumb . '" ';
+    }
+
+  if(is_single()){
+    $full_image_url = $full_image_url[0];
+    $thubm_image_url = $thubm_image_url[0];
+    if (have_posts()) : while (have_posts()) : the_post();
+    $center = 'single-center';
+    $header = 'single-header';
+    $ava = akina_option('focus_logo', '') ? akina_option('focus_logo', '') : get_avatar_url(get_the_author_meta('user_email'));
+    global $user_ID; 
+    if($user_ID && current_user_can('level_10')) {
+        $edit_this_post_link = '<span class="bull">·</span><a href="'.get_edit_post_link().'">EDIT</a>';
+    } else {
+        $edit_this_post_link = '';
+    }
+    $t .= the_title( '<h1 class="entry-title">', '<button id="coverVideo-btn" class=".constant-width-to-height-ratio" onclick="coverVideo()"><i class="fa fa-pause" aria-hidden="true"></i></button></h1>', false);
+    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' 次阅读'.$edit_this_post_link.'</p>';
+    endwhile; endif;
+  }elseif(is_page()){
+    $full_image_url = $full_image_url[0];
+    $thubm_image_url = $thubm_image_url[0];
+    $t .= the_title( '<h1 class="entry-title">', '</h1>', false);
+  }elseif(is_archive()){
+    $full_image_url = z_taxonomy_image_url();
+    $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
+    $des = category_description() ? category_description() : ''; // 描述
+    $t .= '<h1 class="cat-title">'.single_cat_title('', false).'</h1>';
+    $t .= ' <span class="cat-des">'.$des.'</span>';
+  }elseif(is_search()){
+    $full_image_url = get_random_bg_url();
+    $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
+    $t .= '<h1 class="entry-title search-title"> 关于“ '.get_search_query().' ”的搜索结果</h1>';
+  }
+  $thubm_image_url = $thubm_image_url . "#lazyload-blur";
+	$thubm_image_url = str_replace(akina_option('qiniu_cdn'),'https://cdn.2heng.xin/',$thubm_image_url);
+  if(akina_option('patternimg')) $full_image_url = false;
+  if(!is_home() && $full_image_url) : ?>
+  <div class="pattern-center-blank"></div>
+  <div class="pattern-center <?php if(is_single()){echo $center;} ?>">
+    <div class="pattern-attachment-img" style="height: auto;"> 
+      <video loop id="coverVideo" class='hls' 
+             style="width: 100%; height: 100%"
+             <?php echo $video_poster_attr; ?>
+             data-src="<?php echo $video_cover; ?>">
+        
+      </video>
+    </div>
+    
+    <style>.pattern-center::before,.pattern-center-sakura::before{display:none}</style>
+    <header class="pattern-header <?php if(is_single()){echo $header;} ?>"><?php echo $t; ?></header>
+  </div>
+  <?php else :
+    echo '<div class="blank"></div>';
+  endif;
+}
+//普通视频
+function the_video_headPattern_normal(){
+  $t = ''; // 标题
+  $full_image_url = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'full');
+  $thubm_image_url = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'thumbnail');
+  
+    $video_cover = get_post_meta(get_the_ID(), 'video_cover', true);
+    $video_cover_thumb = get_post_meta(get_the_ID(), 'video_cover_thumb', true);
+    // 检查这个字段是否有值
+    if (empty ( $video_cover_thumb )) { //如果值为空，输出默认值
+        $video_poster_attr = "";
+    } else {
+        $video_poster_attr = ' poster="' . $video_cover_thumb . '" ';
+    }
+
+  if(is_single()){
+    $full_image_url = $full_image_url[0];
+    $thubm_image_url = $thubm_image_url[0];
+    if (have_posts()) : while (have_posts()) : the_post();
+    $center = 'single-center';
+    $header = 'single-header';
+    $ava = akina_option('focus_logo', '') ? akina_option('focus_logo', '') : get_avatar_url(get_the_author_meta('user_email'));
+    global $user_ID; 
+    if($user_ID && current_user_can('level_10')) {
+        $edit_this_post_link = '<span class="bull">·</span><a href="'.get_edit_post_link().'">EDIT</a>';
+    } else {
+        $edit_this_post_link = '';
+    }
+    $t .= the_title( '<h1 class="entry-title">', '<button id="coverVideo-btn" class=".constant-width-to-height-ratio" onclick="coverVideo()"><i class="fa fa-pause" aria-hidden="true"></i></button></h1>', false);
+    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' 次阅读'.$edit_this_post_link.'</p>';
+    endwhile; endif;
+  }elseif(is_page()){
+    $full_image_url = $full_image_url[0];
+    $thubm_image_url = $thubm_image_url[0];
+    $t .= the_title( '<h1 class="entry-title">', '</h1>', false);
+  }elseif(is_archive()){
+    $full_image_url = z_taxonomy_image_url();
+    $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
+    $des = category_description() ? category_description() : ''; // 描述
+    $t .= '<h1 class="cat-title">'.single_cat_title('', false).'</h1>';
+    $t .= ' <span class="cat-des">'.$des.'</span>';
+  }elseif(is_search()){
+    $full_image_url = get_random_bg_url();
+    $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
+    $t .= '<h1 class="entry-title search-title"> 关于“ '.get_search_query().' ”的搜索结果</h1>';
+  }
+  $thubm_image_url = $thubm_image_url . "#lazyload-blur";
+	$thubm_image_url = str_replace(akina_option('qiniu_cdn'),'https://cdn.2heng.xin/',$thubm_image_url);
+  if(akina_option('patternimg')) $full_image_url = false;
+  if(!is_home() && $full_image_url) : ?>
+  <div class="pattern-center-blank"></div>
+  <div class="pattern-center <?php if(is_single()){echo $center;} ?>">
+    <div class="pattern-attachment-img" style="height: auto;">
+        <video autoplay loop id="coverVideo" class="normal-cover-video"
+               style="width: 100%; height: 100%"
+               <?php echo $video_poster_attr; ?>>
+            <source src="<?php echo $video_cover; ?>" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+    
+    <style>.pattern-center::before,.pattern-center-sakura::before{display:none}</style>
+    <header class="pattern-header <?php if(is_single()){echo $header;} ?>"><?php echo $t; ?></header>
+  </div>
+  <?php else :
+    echo '<div class="blank"></div>';
+  endif;
+}
+
 
 /*
  * 导航栏用户菜单

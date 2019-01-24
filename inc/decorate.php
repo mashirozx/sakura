@@ -27,7 +27,7 @@ if ( akina_option('theme_skin') ) { ?>
 }
 
 .scrollbar,.butterBar-message {
-    background: <?php echo akina_option('theme_skin'); ?>
+    background: <?php echo akina_option('theme_skin'); ?> !important
 }
 
 #nprogress .spinner-icon{ 

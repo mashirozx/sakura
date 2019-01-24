@@ -275,7 +275,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('站长统计（不建议使用）', 'options_framework_theme'),
-		'desc' => __('填写统计代码，将被隐藏，如需要在下方填写链接地址', 'options_framework_theme'),
+		'desc' => __('填写统计代码，将被隐藏', 'options_framework_theme'),
 		'id' => 'site_statistics',
 		'std' => '',
 		'type' => 'textarea');
@@ -357,7 +357,7 @@ function optionsframework_options() {
  		'desc' => __('此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）', 'options_framework_theme'),
  		'id' => 'cover_img',
  		'std' => '',
- 		'type' => 'upload');
+ 		'type' => 'text');
         
 	$options[] = array(
 		'name' => __('背景图滤镜', 'akina'),
@@ -372,7 +372,7 @@ function optionsframework_options() {
 			'filter-dot' => __('点点', '')
 		));
 
-		$options[] = array(
+    $options[] = array(
 		'name' => __('是否开启聚焦', 'options_framework_theme'),
 		'desc' => __('默认开启', 'options_framework_theme'),
 		'id' => 'top_feature',
@@ -723,18 +723,11 @@ function optionsframework_options() {
 		'type' => 'text');  
         
     $options[] = array(
-		'name' => __('开启 jsDelivr 测试？', 'options_framework_theme'),
-		'desc' => __('如不清楚什么意思切勿勾选！', 'options_framework_theme'),
+		'name' => __('CDN 本地调试', 'options_framework_theme'),
+		'desc' => __('前端库不走 jsDelivr，不建议启用', 'options_framework_theme'),
 		'id' => 'jsdelivr_cdn_test',
 		'std' => '0',
-		'type' => 'checkbox');
-
-    $options[] = array(
-		'name' => __('jsDelivr 版本号', 'options_framework_theme'),
-		'desc' => __('默认值为3.4.5', 'options_framework_theme'),
-		'id' => 'jsdelivr_cdn_version',
-		'std' => '3.4.5',
-		'type' => 'text');  
+		'type' => 'checkbox'); 
         
     	//其他
 	$options[] = array(
@@ -756,8 +749,8 @@ function optionsframework_options() {
 		'type' => 'text');
         
 	$options[] = array(
-		'name' => __('Cookie 版本控制', 'options_framework_theme'),
-		'desc' => __('用于更新前端 cookie，可使用任意字符串，比如日期：---2018/5/16', 'options_framework_theme'),
+		'name' => __('版本控制', 'options_framework_theme'),
+		'desc' => __('用于更新前端 cookie 及浏览器缓存，可使用任意字符串', 'options_framework_theme'),
 		'id' => 'cookie_version',
 		'std' => '',
 		'type' => 'text');
@@ -803,12 +796,26 @@ function optionsframework_options() {
 		'id' => 'image_category',
 		'std' => '',
 		'type' => 'text');
-
+        
+    $options[] = array(
+		'name' => __('启用 baguetteBox', 'options_framework_theme'),
+		'desc' => __('默认禁用，<a href="https://github.com/mashirozx/Sakura/wiki/Fancybox">请阅读说明</a>', 'options_framework_theme'),
+		'id' => 'image_viewer',
+		'std' => '0',
+		'type' => 'checkbox');	
+        
+    $options[] = array(
+		'name' => __('是否开启剪贴板版权标识', 'options_framework_theme'),
+		'desc' => __('复制超过30个字节时自动向剪贴板添加版权标识，默认开启', 'options_framework_theme'),
+		'id' => 'clipboard_copyright',
+		'std' => '1',
+		'type' => 'checkbox');	
+        
 	$options[] = array(
 		'name' => __('发件地址前缀', 'options_framework_theme'),
-		'desc' => __('用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮件地址为 poi@你的域名.com', 'options_framework_theme'),
+		'desc' => __('用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮件地址为 bibi@你的域名', 'options_framework_theme'),
 		'id' => 'mail_user_name',
-		'std' => 'poi',
+		'std' => 'bibi',
 		'type' => 'text');
 
 	$options[] = array(
@@ -834,7 +841,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('开启多说插件支持', 'options_framework_theme'),
-		'desc' => __('如果使用多说插件，请勾选此项', 'options_framework_theme'),
+		'desc' => __('多说已经凉了', 'options_framework_theme'),
 		'id' => 'general_disqus_plugin_support',
 		'std' => '0',
 		'type' => 'checkbox');

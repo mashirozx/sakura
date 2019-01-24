@@ -5,7 +5,7 @@ Theme URI: https://2heng.xin/theme-sakura/
 Author: Mashiro, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: Akina主题分支（原版地址 http://www.akina.pw/themeakina）
-Version: 3.1.0
+Version: 3.1.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: akina
@@ -514,7 +514,7 @@ input[type=button]:hover,
 input[type=reset]:hover,
 input[type=submit]:hover {
     border-color: #ccc #bbb #aaa;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), inset 0 15px 17px rgba(255, 255, 255, .8), inset 0 -5px 12px rgba(0, 0, 0, .02)
+    box-shadow: none
 }
 
 button:active,
@@ -7986,14 +7986,15 @@ a.toc-link {
     background: #fc625d;
     width: 12px;
     height: 12px;
-    left: 20px;
-    margin-top: -20px;
+    left: 12px;
+    margin-top: -18px;
     -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
     box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
     z-index: 2
 }
 
 .highlight-wrap {
+    position: relative;
     background: #21252b;
     border-radius: 5px;
     font: 15px/22px "Microsoft YaHei", Arial, Sans-Serif;
@@ -8005,6 +8006,22 @@ a.toc-link {
     color: #000;
     padding-top: 30px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, .4)
+}
+
+.highlight-wrap .copy-code {
+    color: #fff;
+    position: absolute;
+    float: right;
+    right: 10px;
+    top: 0;
+    padding-top: 4px;
+    padding-right: 2px;
+    z-index: 2;
+    font-size: 16px;
+}
+
+.highlight-wrap .copy-code:hover {
+    color: rgba(255,255,255,.5);
 }
 
 .hljs-ln-line span::-moz-selection,
@@ -8051,12 +8068,12 @@ a.toc-link {
 .highlight-wrap code[data-rel]:before {
     color: #fff;
     content: attr(data-rel);
-    height: 38px;
-    line-height: 38px;
+    height: 30px;
+    line-height: 30px;
     background: #21252b;
     font-size: 16px;
     position: absolute;
-    margin-top: -35px;
+    margin-top: -30px;
     left: 0;
     width: 100%;
     font-family: Ubuntu, sans-serif;
@@ -8421,4 +8438,25 @@ td.hljs-ln-numbers {
 
 .aplayer-lrc {
     pointer-events: none
+}
+
+/*cover video*/
+#coverVideo-btn {
+    all: initial;
+    display: inline-block;
+    width: 36px;
+    font-size: 26px;
+    margin-left: 16px;
+    padding: 7px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 50%;
+}
+
+#coverVideo-btn:hover {
+  background: #ddd;
+  color: black;
 }
