@@ -1,0 +1,124 @@
+.entry-content blockquote:before,.entry-content blockquote:after {
+    display: block
+}
+
+.entry-content .begin,
+.single-begin {
+    float: left;
+    font-size: 3.6em;
+    line-height: 1em;
+    margin-right: 3px;
+    margin-top: 2px;
+    font-weight: 700
+}
+
+@media screen and (max-width:860px) {
+    .entry-content .begin,
+    .single-begin {
+        margin-top: 6px
+    }
+}
+
+.entry-content ul {
+    list-style: disc;
+    border: 1px dashed #E4E4E4;
+    padding: 15px 10px 15px 50px;
+    color: #616161;
+    margin-left: 0;
+    border-radius: 10px
+}
+
+.entry-content ol {
+    list-style: decimal;
+    border: 1px dashed #E4E4E4;
+    padding: 15px 10px 15px 50px;
+    color: #616161;
+    margin-left: 0;
+    border-radius: 10px
+}
+
+.entry-content ol li,
+.entry-content ul li {
+    padding: 8px 0
+}
+
+.entry-content {
+    position: relative
+}
+
+.entry-content h3 {
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #ddd;
+    color: #737373
+}
+
+.entry-content h3:before {
+    content: "#";
+    margin-right: 5px;
+    color: #FF6D6D
+}
+
+.entry-content h4:before {
+    content: ">";
+    margin-right: 5px;
+    color: #FF6D6D
+}
+
+.entry-content h5:before {
+    content: "?";
+    margin-right: 5px;
+    color: #FF6D6D
+}
+
+.entry-content code {
+    background: rgba(254, 250, 199, 1);
+    color: #E67474;
+    word-break: break-word;
+    font-family: 'Source Code Pro', monospace, Helvetica, Tahoma, Arial, STXihei, "STHeiti Light", "Microsoft YaHei", sans-serif;
+    padding: 2px;
+    text-shadow: none;
+    border-radius: 5px
+}
+
+.entry-content a {
+    color: #e67474;
+    text-decoration: underline dotted rgba(0, 0, 0, .1)
+}
+
+.entry-content a:hover {
+    color: orange;
+    text-decoration: underline orange
+}
+
+h1.entry-title {
+    font-size: 24px;
+    font-weight: 300
+}
+
+.entry-content p {
+    color: #797979
+}
+
+.entry-content p {
+    line-height: 30px
+}
+
+.entry-content hr {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: block;
+    border: 0;
+    text-align: center;
+    background: 0 0
+}
+
+.entry-content hr:before {
+    content: '...';
+    display: inline-block;
+    margin-left: .6em;
+    color: rgba(0, 0, 0, .8);
+    position: relative;
+    top: -30px;
+    font-size: 28px;
+    letter-spacing: .6em
+}

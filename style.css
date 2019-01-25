@@ -5,7 +5,7 @@ Theme URI: https://2heng.xin/theme-sakura/
 Author: Mashiro, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: Akina主题分支（原版地址 http://www.akina.pw/themeakina）
-Version: 3.1.1
+Version: 3.1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: akina
@@ -501,7 +501,7 @@ input[type=submit] {
     border-color: #ccc #ccc #bbb;
     border-radius: 3px;
     background: #e6e6e6;
-    box-shadow: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 15px 17px rgba(255, 255, 255, .5), inset 0 -5px 12px rgba(0, 0, 0, .05);
     color: rgba(0, 0, 0, .8);
     font-size: 12px;
     font-size: .75rem;
@@ -526,7 +526,7 @@ input[type=reset]:focus,
 input[type=submit]:active,
 input[type=submit]:focus {
     border-color: #aaa #bbb #bbb;
-    box-shadow: none
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .5), inset 0 2px 5px rgba(0, 0, 0, .15)
 }
 
 input[type=color],
@@ -1771,126 +1771,7 @@ i.iconfont.hotpost {
     display: none
 }
 
-.entry-content .begin,
-.single-begin {
-    float: left;
-    font-size: 3.6em;
-    line-height: 1em;
-    margin-right: 3px;
-    margin-top: 2px;
-    font-weight: 700
-}
 
-@media screen and (max-width:860px) {
-    .entry-content .begin,
-    .single-begin {
-        margin-top: 6px
-    }
-}
-
-.entry-content ul {
-    list-style: disc;
-    border: 1px dashed #E4E4E4;
-    padding: 15px 10px 15px 50px;
-    color: #616161;
-    margin-left: 0;
-    border-radius: 10px
-}
-
-.entry-content ol {
-    list-style: decimal;
-    border: 1px dashed #E4E4E4;
-    padding: 15px 10px 15px 50px;
-    color: #616161;
-    margin-left: 0;
-    border-radius: 10px
-}
-
-.entry-content ol li,
-.entry-content ul li {
-    padding: 8px 0
-}
-
-.entry-content {
-    position: relative
-}
-
-.entry-content h3 {
-    padding-bottom: 8px;
-    border-bottom: 1px dashed #ddd;
-    color: #737373
-}
-
-.entry-content h3:before {
-    content: "#";
-    margin-right: 5px;
-    color: #FF6D6D
-}
-
-.entry-content h4:before {
-    content: ">";
-    margin-right: 5px;
-    color: #FF6D6D
-}
-
-.entry-content h5:before {
-    content: "•";
-    margin-right: 5px;
-    color: #FF6D6D
-}
-
-.entry-content code {
-    background: rgba(254, 250, 199, 1);
-    color: #E67474;
-    word-break: break-word;
-    font-family: 'Source Code Pro', monospace, Helvetica, Tahoma, Arial, STXihei, "STHeiti Light", "Microsoft YaHei", sans-serif;
-    padding: 2px;
-    text-shadow: none;
-    border-radius: 5px
-}
-
-.entry-content a {
-    color: #e67474;
-    text-decoration: underline dotted rgba(0, 0, 0, .1)
-}
-
-.entry-content a:hover {
-    color: orange;
-    text-decoration: underline orange
-}
-
-h1.entry-title {
-    font-size: 24px;
-    font-weight: 300
-}
-
-.entry-content p {
-    color: #797979
-}
-
-.entry-content p {
-    line-height: 30px
-}
-
-.entry-content hr {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    display: block;
-    border: 0;
-    text-align: center;
-    background: 0 0
-}
-
-.entry-content hr:before {
-    content: '...';
-    display: inline-block;
-    margin-left: .6em;
-    color: rgba(0, 0, 0, .8);
-    position: relative;
-    top: -30px;
-    font-size: 28px;
-    letter-spacing: .6em
-}
 
 .entry-content .post-password-form {
     text-align: center

@@ -1032,6 +1032,8 @@ function mail_me() {
     var mail = "mailto:" + mashiro_option.email_name + "@" + mashiro_option.email_domain;
     window.open(mail);
 }
+
+/*
 var currentFontIsUbuntu = true;
 
 function changeFont() {
@@ -1056,8 +1058,11 @@ function convertChinese(zh) {
         loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
     }
 }
+*/
+
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
+loadCSS(mashiro_option.entry_content_theme_src);
 loadCSS("https://at.alicdn.com/t/font_679578_qyt5qzzavdo39pb9.css");
 loadCSS("https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css");
 loadCSS("https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC");

@@ -1,4 +1,4 @@
-Sakura🌸: A Wonderful WordPress Theme
+﻿Sakura🌸: A Wonderful WordPress Theme
 ===
 
 ![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
@@ -12,9 +12,11 @@ Sakura🌸: A Wonderful WordPress Theme
 
 两位前辈做得已经很棒了，或许我所做的只是把他们的代码弄得凌乱不堪吧 :)
 
-注意：建议 `git clone` 下载；如果选择下载压缩包，解压后记得把文件夹名改回 `Sakura`，也即保证主题路径为 `/wp-content/themes/Sakura/`；请留意主题说明里的其他注意事项。
+注意：建议 `git clone` 下载；如果选择下载压缩包，解压后记得把文件夹名改回 `Sakura`，也即保证主题路径为 `/wp-content/themes/Sakura/`；请安装必装插件 [WP Statistics](https://wordpress.org/plugins/wp-statistics/)；请留意主题说明里的其他注意事项。
 
 主题使用说明见：<https://2heng.xin/theme-sakura/>
+
+本仓库国内镜像：<https://gitee.com/mashirozx/Sakura>
 
 希望你喜欢！
 

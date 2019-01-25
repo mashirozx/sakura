@@ -486,6 +486,16 @@ function optionsframework_options() {
 	$options[] = array(
 		'name' => __('文章页', 'options_framework_theme'),
 		'type' => 'heading');
+        
+    $options[] = array(
+		'name' => __('文章样式', 'akina'),
+		'id' => 'entry_content_theme',
+		'std' => "sakura",
+		'type' => "radio",
+		'options' => array(
+			'sakura' => __('默认样式', ''),
+			'github' => __('GitHub 样式', ''),
+		));
 
 	$options[] = array(
 		'name' => __('文章点赞', 'akina'),
