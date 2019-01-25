@@ -43,11 +43,11 @@ function optionsframework_options() {
 
 	// 复选框数组
 	$multicheck_array = array(
-		'one' => __('椎名真白', 'options_framework_theme'),
-		'two' => __('时崎狂三', 'options_framework_theme'),
-		'three' => __('西木野真姬', 'options_framework_theme'),
-		'four' => __('黑泽露比', 'options_framework_theme'),
-		'five' => __('渡边曜', 'options_framework_theme')
+		'one' => __('1', 'options_framework_theme'),
+		'two' => __('2', 'options_framework_theme'),
+		'three' => __('3', 'options_framework_theme'),
+		'four' => __('4', 'options_framework_theme'),
+		'five' => __('5', 'options_framework_theme')
 	);
 
 	// 复选框默认值
@@ -59,7 +59,7 @@ function optionsframework_options() {
 	// 背景默认值
 	$background_defaults = array(
 		'color' => '',
-		'image' => '',
+		'image' => 'https://view.moezx.cc/images/2018/12/23/knights-of-the-frozen-throne-8k-qa.jpg',
 		'repeat' => 'repeat',
 		'position' => 'top center',
 		'attachment'=>'scroll' );
@@ -130,7 +130,7 @@ function optionsframework_options() {
         'name' => __("主题风格", 'akina'),
         'id' => 'theme_skin',
         'std' => "#FE9600",
-        'desc' => __('自定义主题颜色（此功能没有优化，建议使用#FE9600）', ''),
+        'desc' => __('自定义主题颜色', ''),
         'type' => "color"
 	);
 	
@@ -263,7 +263,7 @@ function optionsframework_options() {
 		'name' => __('页脚信息', 'options_framework_theme'),
 		'desc' => __('页脚说明文字，支持HTML代码', 'options_framework_theme'),
 		'id' => 'footer_info',
-		'std' => '&copy; 2018',
+		'std' => 'Copyright &copy; by Mashiro All Rights Reserved.',
 		'type' => 'textarea');
 
 	$options[] = array(
@@ -746,7 +746,7 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('关于', 'options_framework_theme'),
-    'desc' => __('Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a>', 'options_framework_theme'),
+    'desc' => __('Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>', 'options_framework_theme'),
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
