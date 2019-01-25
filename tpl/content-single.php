@@ -27,7 +27,7 @@
 			) );
 		?>
 		<!--<div class="oshimai"></div>-->
-		<h2 style="opacity:0;max-height:0;margin:0">Comments</h2><!-- 评论跳转标记 -->
+		<!--<h2 style="opacity:0;max-height:0;margin:0">Comments</h2>--><!-- 评论跳转标记 -->
 	</div><!-- .entry-content -->
 	<?php the_reward(); ?>
 	<footer class="post-footer">
