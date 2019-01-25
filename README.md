@@ -3,7 +3,8 @@
 
 ![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
 
-![PHP version from PHP-Eye](https://img.shields.io/php-eye/symfony/symfony.svg?style=flat-square)
+![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square)
+![WP version](https://img.shields.io/badge/WordPress-5.0+-0073aa.svg?style=flat-square)
 [![GitHub release](https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square)](https://github.com/mashirozx/Sakura/releases/latest)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/mashirozx/Sakura/latest.svg?style=flat-square)](https://github.com/mashirozx/Sakura/commits/)
 [![](https://data.jsdelivr.com/v1/package/gh/moezx/cdn/badge)](https://www.jsdelivr.com/package/gh/moezx/cdn)
