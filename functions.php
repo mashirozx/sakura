@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.2' );
+define( 'SAKURA_VERSION', '3.1.3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
@@ -173,10 +173,16 @@ function sakura_scripts() {
     if(akina_option('jsdelivr_cdn_test')){ 
         wp_enqueue_script( 'js_lib', get_template_directory_uri() . '/cdn/js/lib.js', array(), SAKURA_VERSION.akina_option('cookie_version', ''), true );
     } else { 
-        wp_enqueue_script( 'js_lib', 'https://cdn.jsdelivr.net/gh/moezx/cdn@' . JSDELIVR_VERSION . '/sakura/js/lib.min.js', array(), SAKURA_VERSION, true );
+        wp_enqueue_script( 'js_lib', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/cdn/js/lib.min.js', array(), SAKURA_VERSION, true );
     }
-    wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
-    wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
+    if (akina_option('app_no_jsdelivr_cdn')) {
+        wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
+        wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
+    } else {
+        wp_enqueue_style( 'saukra_css', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/style.min.css', array(), SAKURA_VERSION );
+        wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/js/sakura-app.min.js', array(), SAKURA_VERSION, true );
+    } 
+    
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -1462,6 +1468,16 @@ function change_avatar($avatar){
 	}else{
 		return $avatar ;
 	}	
+}
+
+// default feature image
+function DEFAULT_FEATURE_IMAGE() {
+    if ( empty( akina_option('default_feature_image' )) ) {
+        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
+        //return 'https://api.mashiro.top/feature/?'.rand(1,1000);
+    } else {
+        return akina_option('default_feature_image').'?'.rand(1,1000);
+    }
 }
 
 //code end 

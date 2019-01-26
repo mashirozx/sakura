@@ -25,7 +25,7 @@ if ( akina_option('theme_skin') ) { ?>
 }
 
 .site-top ul li a:after {
-        background-color: <?php echo akina_option('theme_skin'); ?>
+    background-color: <?php echo akina_option('theme_skin'); ?>
 }
 
 .scrollbar,.butterBar-message {
@@ -40,6 +40,12 @@ if ( akina_option('theme_skin') ) { ?>
 #nprogress .bar {
     background: <?php echo akina_option('theme_skin'); ?>
 }
+
+<?php if(akina_option('entry_content_theme') == "sakura"){ ?>
+.entry-content th {
+    background-color: <?php echo akina_option('theme_skin'); ?>
+}
+<?php } ?>
 
 <?php } // theme-skin ?>
 <?php // Custom style

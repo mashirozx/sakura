@@ -217,6 +217,13 @@ function optionsframework_options() {
 			'round' => __('圆形', ''),
 			'square' => __('方形', '')
 		));	
+        
+    $options[] = array(
+		'name' => __('默认文章特色图', 'options_framework_theme'),
+		'desc' => __('在未设置文章特色图的情况下展示的默认图像，留空则调用本地随机封面（要展示的图片放入 /wp-content/themes/Sakura/feature/gallery/ 目录）', 'options_framework_theme'),
+		'id' => 'default_feature_image',
+		'std' => 'https://api.mashiro.top/feature/',
+		'type' => 'text');
 		
 	$options[] = array(
 		'name' => __('评论收缩', 'akina'),
@@ -733,9 +740,16 @@ function optionsframework_options() {
 		'type' => 'text');  
         
     $options[] = array(
-		'name' => __('CDN 本地调试', 'options_framework_theme'),
+		'name' => __('本地调用前端库（lib.js、lib.css）', 'options_framework_theme'),
 		'desc' => __('前端库不走 jsDelivr，不建议启用', 'options_framework_theme'),
 		'id' => 'jsdelivr_cdn_test',
+		'std' => '0',
+		'type' => 'checkbox'); 
+        
+    $options[] = array(
+		'name' => __('本地调用主题 js、css 文件（sakura-app.js、style.css）', 'options_framework_theme'),
+		'desc' => __('主题的 js、css 文件不走 jsDelivr，DIY 时请开启', 'options_framework_theme'),
+		'id' => 'app_no_jsdelivr_cdn',
 		'std' => '0',
 		'type' => 'checkbox'); 
         
@@ -750,6 +764,18 @@ function optionsframework_options() {
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
+    
+    $options[] = array(
+		'name' => "检查更新",
+		'desc' => '<a href="https://github.com/mashirozx/Sakura/releases/latest">下载最新版</a>',
+		'id' => "release_info",
+		'std' => "tag",
+		'type' => "images",
+		'options' => array(
+			'tag' => 'https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square',
+            'tag2' => 'https://img.shields.io/github/commits-since/mashirozx/Sakura/v'.SAKURA_VERSION.'.svg?style=flat-square'
+        )
+	);
 
 	$options[] = array(
 		'name' => __('页脚悬浮播放器', 'options_framework_theme'),
@@ -875,6 +901,7 @@ function optionsframework_options() {
 		'id' => 'time_zone_fix',
 		'std' => '0',
 		'type' => 'text');
+        
  
 	return $options;
 }
