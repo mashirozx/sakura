@@ -7,7 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.0' );
+define( 'SAKURA_VERSION', '3.1.3' );
+define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
@@ -169,14 +170,19 @@ add_action( 'after_setup_theme', 'akina_content_width', 0 );
  * Enqueue scripts and styles.
  */
 function sakura_scripts() {
-    wp_enqueue_script( 'share-js', 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.5.7/js/src/13.social-share.min.js', array(), SAKURA_VERSION, true );
     if(akina_option('jsdelivr_cdn_test')){ 
-        wp_enqueue_script( 'js_lab', 'https://pages.shino.cc/cdn/js/lib.js', array(), SAKURA_VERSION, true );
+        wp_enqueue_script( 'js_lib', get_template_directory_uri() . '/cdn/js/lib.js', array(), SAKURA_VERSION.akina_option('cookie_version', ''), true );
     } else { 
-        wp_enqueue_script( 'js_lab', 'https://cdn.jsdelivr.net/gh/moezx/cdn@' . akina_option('jsdelivr_cdn_version', 'latest') . '/js/lib.min.js', array(), SAKURA_VERSION, true );
+        wp_enqueue_script( 'js_lib', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/cdn/js/lib.min.js', array(), SAKURA_VERSION, true );
     }
-    wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
-    wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
+    if (akina_option('app_no_jsdelivr_cdn')) {
+        wp_enqueue_style( 'saukra_css', get_stylesheet_uri(), array(), SAKURA_VERSION );
+        wp_enqueue_script( 'app', get_template_directory_uri() . '/js/sakura-app.js', array(), SAKURA_VERSION, true );
+    } else {
+        wp_enqueue_style( 'saukra_css', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/style.min.css', array(), SAKURA_VERSION );
+        wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/js/sakura-app.min.js', array(), SAKURA_VERSION, true );
+    } 
+    
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -223,7 +229,7 @@ require get_template_directory() . '/inc/categories-images.php';
 
 //Comment Location Start
 function convertip($ip) {
-	$dat_path = dirname(__FILE__).'/QQWry.Dat'; 
+	$dat_path = dirname(__FILE__).'/inc/QQWry.Dat'; 
     if(!$fd = @fopen($dat_path, 'rb')){
         return 'IP date file not exists or access denied';
     }
@@ -1382,22 +1388,56 @@ function codecheese_register_post( $sanitized_user_login, $user_email, $errors )
 		$errors->add('invalid_email', __('<b>ERROR</b>: This email domain (<b>@'.$email[1].'</b>) has been blocked. Please use another email.'));
 }
 
-// lazyload images in atricles
-function lazyload_img($content) {  
+// html 标签处理器
+function html_tag_parser($content) {  
     if(!is_feed()) {   
-        $content=preg_replace('/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',"<img\$1class=\"lazyload\" data-src=\"\$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\"\$3 >\n<noscript>\$0</noscript>",$content);  
+        $content=preg_replace(
+            '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
+            "<img\$1class=\"lazyload\" data-src=\"\$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\"\$3 >\n<noscript>\$0</noscript>",
+            $content
+        ); 
+        
+        //Fancybox
+        /* Markdown Regex Pattern for Matching URLs:             
+         * https://daringfireball.net/2010/07/improved_regex_for_matching_urls
+         */
+        $url_regex ='(((http|https):\/\/)?(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?)';
+        
+        //With Thumbnail: !{alt}(url)[th_url]
+        $content=preg_replace(
+            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
+            '<a data-fancybox="gallery" 
+                data-caption="$1"
+                class="fancybox" 
+                href="$2" 
+                alt="$1" 
+                title="$1"><img src="$15" target="_blank" rel="nofollow" class="fancybox"></a>',
+            $content
+        ); 
+        
+        //Without Thumbnail :!{alt}(url)
+        $content=preg_replace(
+            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i',
+            '<a data-fancybox="gallery" 
+                data-caption="$1"
+                class="fancybox"
+                href="$2"
+                alt="$1" 
+                title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
+            $content
+        );
     }  
     return $content; 
 }
-add_filter('the_content', 'lazyload_img'); //替换文章关键词
-//add_filter( 'comment_text', 'lazyload_img' );//替换评论关键词
+add_filter('the_content', 'html_tag_parser'); //替换文章关键词
+//add_filter( 'comment_text', 'html_tag_parser' );//替换评论关键词
 
 /*
  * QQ 评论
  */
 // 数据库插入评论表单的qq字段 
-add_action('wp_insert_comment','inlojv_sql_insert_qq_field',10,2);
-function inlojv_sql_insert_qq_field($comment_ID,$commmentdata) {
+add_action('wp_insert_comment','sql_insert_qq_field',10,2);
+function sql_insert_qq_field($comment_ID,$commmentdata) {
 	$qq = isset($_POST['new_field_qq']) ? $_POST['new_field_qq'] : false;  
 	update_comment_meta($comment_ID,'new_field_qq',$qq); // new_field_qq 是表单name值，也是存储在数据库里的字段名字
 }
@@ -1419,8 +1459,8 @@ function output_comments_qq_columns( $column_name, $comment_id ){
 /**
  * 头像调用路径 
  */
-add_filter( 'get_avatar', 'inlojv_change_avatar', 10, 3 );
-function inlojv_change_avatar($avatar){
+add_filter( 'get_avatar', 'change_avatar', 10, 3 );
+function change_avatar($avatar){
 	global $comment;
 	if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true ) ){
 		$qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
@@ -1428,6 +1468,16 @@ function inlojv_change_avatar($avatar){
 	}else{
 		return $avatar ;
 	}	
+}
+
+// default feature image
+function DEFAULT_FEATURE_IMAGE() {
+    if ( empty( akina_option('default_feature_image' )) ) {
+        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
+        //return 'https://api.mashiro.top/feature/?'.rand(1,1000);
+    } else {
+        return akina_option('default_feature_image').'?'.rand(1,1000);
+    }
 }
 
 //code end 

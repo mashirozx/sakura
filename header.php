@@ -119,5 +119,11 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 					</div>	
 				</div>
 			</header><!-- #masthead -->
-			<?php the_headPattern(); ?>
+			<?php if (get_post_meta(get_the_ID(), 'cover_type', true) == 'hls') {
+                the_video_headPattern_hls();
+            } elseif (get_post_meta(get_the_ID(), 'cover_type', true) == 'normal') { 
+                the_video_headPattern_normal();
+            }else {
+                the_headPattern();
+            } ?>
 		    <div id="content" class="site-content">
