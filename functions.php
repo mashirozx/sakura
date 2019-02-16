@@ -7,7 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.3' );
+define( 'SAKURA_VERSION', '3.1.4' );
+define( 'BUILD_VERSION', '1' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
@@ -1276,15 +1277,48 @@ function remove_dashboard () {
 add_action('admin_menu', 'remove_dashboard');
 
 /**
- * Filter the except length to 20 words. 限制摘要长度（似乎无效）
+ * Filter the except length to 20 words. 限制摘要长度
  *
  * @param int $length Excerpt length.
  * @return int (Maybe) modified excerpt length.
  */
-function wpdocs_custom_excerpt_length( $length ) {
-    return 50;
+
+function GBsubstr($string, $start, $length) {
+    if (strlen($string) > $length) {
+        $str = null;
+        $len = 0;
+        $i = $start;
+        while ( $len < $length) {
+        if (ord(substr($string, $i, 1)) > 0xc0) {
+            $str .=substr($string, $i, 3);
+            $i+= 3;
+        }elseif (ord(substr($string, $i, 1)) > 0xa0) {
+            $str .= substr($string, $i, 2);
+            $i+= 2;
+        }else {
+            $str.=substr($string, $i, 1);
+            $i++;
+        }
+        $len ++;
+        }
+        return $str;
+    }else {
+        return $string;
+    }
 }
-add_filter( 'excerpt_length', 'wpdocs_custom_excerpt_length', 999 );
+ 
+function excerpt_length($exp) {
+    if (!function_exists(mb_substr)) {
+        $exp = GBsubstr($exp, 0, 80);
+    } else {
+        /*
+         * To use mb_substr() function, you should uncomment "extension=php_mbstring.dll" in php.ini
+         */
+        $exp = mb_substr($exp, 0, 80);
+    }
+	return $exp;
+}
+add_filter( 'the_excerpt', 'excerpt_length' );
 
 
 /*
@@ -1302,6 +1336,7 @@ add_filter('site_url',  'wpadmin_filter', 10, 3);
 
 function admin_style() {
   wp_enqueue_style('admin-styles-fix-icon', get_site_url() . '/wp-includes/css/dashicons.css');
+  wp_enqueue_style('cus-styles-light', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-fix.css');
   if ( get_user_option( 'admin_color' ) == "light" ) {
 	wp_enqueue_style('cus-styles-light', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-light.css');  
   }
@@ -1309,11 +1344,22 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 function custom_register_admin_scripts() {
-	 wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
+	wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
 }
 add_action( 'admin_enqueue_scripts', 'custom_register_admin_scripts' );
 
-
+function custom_admin_js() {
+    echo '<script>
+    window.onload=function(){
+        lazyload();
+        
+        document.querySelector("#scheme-tip .notice-dismiss").addEventListener("click", function(){
+            location.href="?scheme-tip-dismissed'.BUILD_VERSION.'";
+        });
+    }
+    </script>';
+}
+add_action('admin_footer', 'custom_admin_js');
 
 /*
  * 后台通知
@@ -1357,15 +1403,22 @@ function recommend_light() {
 	if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
 		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
 	}
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php _e( $msg, 'sample-text-domain' ); ?></p>
-    </div>
-    <?php
+    
+    $user_id = get_current_user_id();
+    if ( !get_user_meta( $user_id, 'scheme-tip-dismissed'.BUILD_VERSION ) ) {
+        echo '<div class="notice notice-success is-dismissible" id="scheme-tip"><p><b>'.$msg.'</b></p></div>';
+    }
 }
 if ( get_user_option( 'admin_color' ) != "light" ) {
-	add_action( 'admin_notices', 'recommend_light' );
+    add_action( 'admin_notices', 'recommend_light' );
 }
+
+function scheme_tip_dismissed() {
+    $user_id = get_current_user_id();
+    if ( isset( $_GET['scheme-tip-dismissed'.BUILD_VERSION] ) )
+        add_user_meta( $user_id, 'scheme-tip-dismissed'.BUILD_VERSION, 'true', true );
+}
+add_action( 'admin_init', 'scheme_tip_dismissed' );
 
 
 // 阻止垃圾注册
