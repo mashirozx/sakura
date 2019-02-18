@@ -79,10 +79,6 @@
                             </table>
                             <div class="bili-container motion-container">' . push_bili_smilies() . '</div>
                             <div class="menhera-container motion-container" style="display:none;">
-                                <!--<img onclick="grin('."'"."https:\/\/cloud.moezx.cc\/Picture\/emotion\/Menhera-chan\/1.jpg"."'".',type = \'Img\')" 
-                                    src="https://cloud.moezx.cc/Picture/emotion/Menhera-chan/1.jpg" 
-                                    style="width: 200px;display: block;margin-left: auto;margin-right: auto;">
-                                <p style="text-align: center;">Menhera 酱施工中... 你知道吗？下面可以直接上传图片啦~</p>-->
                                 '.push_emoji_panel().'
                             </div>
                             <div class="tieba-container motion-container" style="display:none;">' . push_smilies() . '</div>
@@ -91,13 +87,13 @@
 						'comment_notes_after' => '',
 						'comment_notes_before' => '',
 						'fields' => apply_filters( 'comment_form_default_fields', array(
-                            'avatar' => '<div class="comment-user-avatar"><img src="https://gravatar.shino.cc/avatar/f11f237b3de93c93b24045e71f7f65c6?s=80&d=mm&r=g"><div class="socila-check qq-check"><i class="fa fa-qq" aria-hidden="true"></i></div><div class="socila-check gravatar-check"><i class="fa fa-google" aria-hidden="true"></i></div></div>',
+                            'avatar' => '<div class="cmt-info-container"><div class="comment-user-avatar"><img src="https://gravatar.shino.cc/avatar/f11f237b3de93c93b24045e71f7f65c6?s=80&d=mm&r=g"><div class="socila-check qq-check"><i class="fa fa-qq" aria-hidden="true"></i></div><div class="socila-check gravatar-check"><i class="fa fa-google" aria-hidden="true"></i></div></div>',
 							'author' =>
 								'<div class="popup cmt-popup cmt-author" onclick="cmt_showPopup(this)"><span class="popuptext" id="thePopup" style="margin-left: -115px;width: 230px;">输入QQ号将自动拉取昵称和头像</span><input type="text" placeholder="' . esc_attr__('昵称或QQ号', 'akina') . ' ' . ( $req ?  '(' . esc_attr__('必须 Name* ', 'akina') . ')' : '') . '" name="author" id="author" value="' . esc_attr($comment_author) . '" size="22" autocomplete="off" tabindex="1" ' . ($req ? "aria-required='true'" : '' ). ' /></div>',
 							'email' =>
 								'<div class="popup cmt-popup" onclick="cmt_showPopup(this)"><span class="popuptext" id="thePopup" style="margin-left: -65px;width: 130px;">你将收到回复通知</span><input type="text" placeholder="' . esc_attr__('邮箱', 'akina') . ' ' . ( $req ? '(' . esc_attr__('必须 Email* ', 'akina') . ')' : '') . '" name="email" id="email" value="' . esc_attr($comment_author_email) . '" size="22" tabindex="1" autocomplete="off" ' . ($req ? "aria-required='true'" : '' ). ' /></div>',
 							'url' =>
-								'<div class="popup cmt-popup" onclick="cmt_showPopup(this)"><span class="popuptext" id="thePopup" style="margin-left: -55px;width: 110px;">禁止小广告😀</span><input type="text" placeholder="' . esc_attr__('网站 (选填 Site)', 'akina') . '" name="url" id="url" value="' . esc_attr($comment_author_url) . '" size="22" autocomplete="off" tabindex="1" /></div>' . $robot_comments . $private_ms ,
+								'<div class="popup cmt-popup" onclick="cmt_showPopup(this)"><span class="popuptext" id="thePopup" style="margin-left: -55px;width: 110px;">禁止小广告😀</span><input type="text" placeholder="' . esc_attr__('网站 (选填 Site)', 'akina') . '" name="url" id="url" value="' . esc_attr($comment_author_url) . '" size="22" autocomplete="off" tabindex="1" /></div></div>' . $robot_comments . $private_ms ,
                             'qq' =>
 								'<input type="text" placeholder="' . esc_attr__('QQ', 'akina') . '" name="new_field_qq" id="qq" value="' . esc_attr($comment_author_url) . '" style="display:none" autocomplete="off"/><!--此栏不可见-->'
 							)

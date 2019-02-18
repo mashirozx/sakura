@@ -7505,7 +7505,6 @@ a.toc-link {
 .comment-user-avatar {
     position: absolute;
     display: inline-block;
-    float: left;
     width: 64px;
     height: 64px;
     margin-top: 10px;
@@ -7547,7 +7546,7 @@ a.toc-link {
         padding-top: 10px;
         width: 45px;
         height: 55px;
-        right: 36px
+        right: 11%
     }
     .comment-user-avatar .socila-check {
         width: 1.5em;
@@ -7563,7 +7562,16 @@ a.toc-link {
     display: inline-block;
     cursor: pointer
 }
-
+@media (min-width: 625px){
+    .cmt-info-container {
+        width: 100%;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: stretch
+    }
+}
 .cmt-popup {
     margin: 0 0 40px 1%;
     --widthA: 97%;
@@ -8228,7 +8236,7 @@ td.hljs-ln-numbers {
 }
 
 .control-btn-serif {
-    font-family: 'Noto Serif CJK SC', 'Noto Serif CJK', serif
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif', source-han-serif-sc, 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia, serif
 }
 
 .control-btn-sans-serif {
