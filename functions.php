@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.4' );
+define( 'SAKURA_VERSION', '3.1.5' );
 define( 'BUILD_VERSION', '1' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
