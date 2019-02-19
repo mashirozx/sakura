@@ -1353,9 +1353,11 @@ function custom_admin_js() {
     window.onload=function(){
         lazyload();
         
-        document.querySelector("#scheme-tip .notice-dismiss").addEventListener("click", function(){
-            location.href="?scheme-tip-dismissed'.BUILD_VERSION.'";
-        });
+        try{
+            document.querySelector("#scheme-tip .notice-dismiss").addEventListener("click", function(){
+                location.href="?scheme-tip-dismissed'.BUILD_VERSION.'";
+            });
+        } catch(e){}
     }
     </script>';
 }
