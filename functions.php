@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.5' );
+define( 'SAKURA_VERSION', '3.1.6' );
 define( 'BUILD_VERSION', '1' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -194,6 +194,7 @@ function sakura_scripts() {
 	$auto_height = akina_option('focus_height') ? 'fixed' : 'auto';
 	$code_lamp = 'close';
 	if(wp_is_mobile()) $auto_height = 'fixed'; //拦截移动端
+    version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ? $reply_link_version = 'new' : $reply_link_version = 'old';
 	wp_localize_script( 'app', 'Poi' , array(
 		'pjax' => akina_option('poi_pjax'),
 		'movies' => $movies,
@@ -201,7 +202,8 @@ function sakura_scripts() {
 		'codelamp' => $code_lamp,
 		'ajaxurl' => admin_url('admin-ajax.php'),
 		'order' => get_option('comment_order'), // ajax comments
-		'formpostion' => 'bottom' // ajax comments 默认为bottom，如果你的表单在顶部则设置为top。
+		'formpostion' => 'bottom', // ajax comments 默认为bottom，如果你的表单在顶部则设置为top。
+        'reply_link_version' => $reply_link_version
 	));
 }
 add_action( 'wp_enqueue_scripts', 'sakura_scripts' );
