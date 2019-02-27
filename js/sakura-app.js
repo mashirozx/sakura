@@ -158,6 +158,14 @@ try {
     code_highlight_style();
 } catch (e) {}
 
+if (Poi.reply_link_version == 'new'){
+    $('body').on('click','.comment-reply-link',function(){
+        addComment.moveForm( "comment-"+$(this).attr('data-commentid'), $(this).attr('data-commentid'), "respond", "1" );
+        console.log($(this).attr('data-commentid'));
+        return false;
+    });
+}
+
 function attach_image() {
     $('#upload-img-file').change(function () {
         if (this.files.length > 10) {
