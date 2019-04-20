@@ -6,7 +6,9 @@
 <figure id="centerbg" class="centerbg">
 <?php if ( !akina_option('focus_infos') ){ ?>
 	<div class="focusinfo">
-   		<?php if (akina_option('focus_logo')):?>
+        <?php if (akina_option('focus_logo_text')):?>
+        <h1 class="center-text glitch is-glitching Ubuntu-font" data-text="<?php echo akina_option('focus_logo_text', ''); ?>"><?php echo akina_option('focus_logo_text', ''); ?></h1>
+   		<?php elseif (akina_option('focus_logo')):?>
 	     <div class="header-tou"><a href="<?php bloginfo('url');?>" ><img src="<?php echo akina_option('focus_logo', ''); ?>"></a></div>
 	  	<?php else :?>
          <div class="header-tou" ><a href="<?php bloginfo('url');?>"><img src="<?php bloginfo('template_url'); ?>/images/avatar.jpg"></a></div>	

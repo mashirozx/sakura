@@ -139,6 +139,13 @@ function optionsframework_options() {
 	   'desc' => __('最佳高度尺寸130*130px。', 'options_framework_theme'),
 	   'id' => 'focus_logo',
 	   'type' => 'upload');
+       
+     $options[] = array(
+		'name' => __('文字版LOGO', 'options_framework_theme'),
+		'desc' => __('首页不显示上方的头像，而是显示一段文字（此处留空则使用上方的头像）。文字建议不要过长，16个字节左右为宜。', 'options_framework_theme'),
+		'id' => 'focus_logo_text',
+		'std' => '',
+		'type' => 'text');
 		
 	$options[] = array(
 		'name' => __('logo', 'options_framework_theme'),
@@ -201,7 +208,7 @@ function optionsframework_options() {
 	$options[] = array(
 		'name' => __('首页文章风格', 'akina'),
 		'id' => 'post_list_style',
-		'std' => "standard",
+		'std' => "imageflow",
 		'type' => "radio",
 		'options' => array(
 			'standard' => __('标准', ''),
@@ -234,13 +241,6 @@ function optionsframework_options() {
 			'yes' => __('开启', ''),
 			'no' => __('关闭', '')
 		));	
-
-    $options[] = array(
-		'name' => __('评论信息栏宽度调整', 'options_framework_theme'),
-		'desc' => __('不知道为什么有人老会搞出问题，求你们不要用那些莫名其妙的插件。。如果出问题了在这里调整，输入一个介于0到100的数字以调整宽度，以免出现框框换行的情况，正常情况下97左右比较正常吧。。如果本来就显示正常的请务必留空！', 'options_framework_theme'),
-		'id' => 'comment_info_box_width',
-		'std' => '',
-		'type' => 'text');	
         
     $options[] = array(
 		'name' => __('文章末尾显示作者信息？', 'options_framework_theme'),

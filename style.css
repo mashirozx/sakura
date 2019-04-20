@@ -3963,7 +3963,7 @@ li.feature-2 {
     box-sizing: initial;
     white-space: nowrap
 }
-
+/*
 .header-info:before {
     content: "";
     position: absolute;
@@ -3974,7 +3974,7 @@ li.feature-2 {
     border-style: solid;
     border-color: transparent transparent rgba(0, 0, 0, .5) transparent
 }
-
+*/
 .header-info p {
     margin: 0;
     font-family: Ubuntu, sans-serif;
@@ -8324,9 +8324,13 @@ td.hljs-ln-numbers {
     font-size: 15px;
     font-weight: 700
 }
+.aplayer .aplayer-lrc{
+    pointer-events: none;
+    background:transparent !important
+}
 
-.aplayer-lrc {
-    pointer-events: none
+#aplayer-float{
+    background:transparent !important
 }
 
 /*cover video*/
@@ -8349,3 +8353,4 @@ td.hljs-ln-numbers {
   background: #ddd;
   color: black;
 }
+
