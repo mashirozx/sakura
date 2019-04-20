@@ -768,7 +768,7 @@ function custom_html() {
 	$(document).ready(function(){
 		$( \'<p><div id="verification-slider"><div id="slider"><div id="slider_bg"></div><span id="label">»</span><span id="labelTip">Slide to Verificate</span></div><input type="hidden" name="verification" value="verification" /></div><p>\' ).insertBefore( $( ".submit" ) );
 		$(\'form\').attr(\'onsubmit\',\'return verificationOK();\');
-        $(\'a\').attr(\'style\',\'background-image: url('.akina_option('logo_img').'); \');
+        $(\'h1 a\').attr(\'style\',\'background-image: url('.akina_option('logo_img').'); \');
 		$(".forgetmenot").replaceWith(\'<p class="forgetmenot">Remember Me<input name="rememberme" id="rememberme" value="forever" type="checkbox"><label for="rememberme" style="float: right;margin-top: 5px;transform: scale(2);margin-right: -10px;"></label></p>\');
 	});
 	</script>';
