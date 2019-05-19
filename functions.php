@@ -831,6 +831,16 @@ function resetpassword_message_fix( $message ) {
 }
 add_filter( 'retrieve_password_message', 'resetpassword_message_fix' );
 
+//Fix register email bug </>
+function new_user_message_fix( $message ) {
+    $show_register_ip = "注册IP | Registration IP: ".get_the_user_ip()." (".convertip(get_the_user_ip()).")\r\n\r\n如非本人操作请忽略此邮件 | Please ignore this email if this was not your operation.\r\n\r\n";
+    $message = str_replace("To set your password, visit the following address:", $show_register_ip."在此设置密码 | To set your password, visit the following address:", $message);
+	$message = str_replace("<", "", $message);
+	$message = str_replace(">", "\r\n\r\n设置密码后在此登陆 | Login here after setting password: ", $message);
+	return $message;
+}
+add_filter( 'wp_new_user_notification_email', 'new_user_message_fix' );
+
 /*
  * 评论邮件回复
  */
