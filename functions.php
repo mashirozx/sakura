@@ -1368,31 +1368,6 @@ add_action('admin_footer', 'custom_admin_js');
 /*
  * 后台通知
  */
-function notice_welcome() {
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php _e( 'Welcome!', 'sample-text-domain' ); ?></p>
-    </div>
-    <?php
-}
-
-// 首次登陆欢迎
-function shapeSpace_register_add_meta($user_id) { 
-	add_user_meta($user_id, '_new_user', '1');
-}
-add_action('user_register', 'shapeSpace_register_add_meta');
-
-function shapeSpace_first_user_login($user_login, $user) {
-	$new_user = get_user_meta($user->ID, '_new_user', true);
-	if ($new_user) {
-		update_user_meta($user->ID, '_new_user', '0');
-		
-		// do something for first login.. e.g., send a custom email
-		add_action( 'admin_notices', 'notice_welcome' );
-	}
-}
-add_action('wp_login', 'shapeSpace_first_user_login', 10, 2);
-
 function recommend_light() {
 	$msg = '<b>Strongly recommend "Light" Scheme.</b>';
 	if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
