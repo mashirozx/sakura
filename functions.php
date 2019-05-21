@@ -831,6 +831,16 @@ function resetpassword_message_fix( $message ) {
 }
 add_filter( 'retrieve_password_message', 'resetpassword_message_fix' );
 
+//Fix register email bug </>
+function new_user_message_fix( $message ) {
+    $show_register_ip = "注册IP | Registration IP: ".get_the_user_ip()." (".convertip(get_the_user_ip()).")\r\n\r\n如非本人操作请忽略此邮件 | Please ignore this email if this was not your operation.\r\n\r\n";
+    $message = str_replace("To set your password, visit the following address:", $show_register_ip."在此设置密码 | To set your password, visit the following address:", $message);
+	$message = str_replace("<", "", $message);
+	$message = str_replace(">", "\r\n\r\n设置密码后在此登陆 | Login here after setting password: ", $message);
+	return $message;
+}
+add_filter( 'wp_new_user_notification_email', 'new_user_message_fix' );
+
 /*
  * 评论邮件回复
  */
@@ -1368,31 +1378,6 @@ add_action('admin_footer', 'custom_admin_js');
 /*
  * 后台通知
  */
-function notice_welcome() {
-    ?>
-    <div class="notice notice-success is-dismissible">
-        <p><?php _e( 'Welcome!', 'sample-text-domain' ); ?></p>
-    </div>
-    <?php
-}
-
-// 首次登陆欢迎
-function shapeSpace_register_add_meta($user_id) { 
-	add_user_meta($user_id, '_new_user', '1');
-}
-add_action('user_register', 'shapeSpace_register_add_meta');
-
-function shapeSpace_first_user_login($user_login, $user) {
-	$new_user = get_user_meta($user->ID, '_new_user', true);
-	if ($new_user) {
-		update_user_meta($user->ID, '_new_user', '0');
-		
-		// do something for first login.. e.g., send a custom email
-		add_action( 'admin_notices', 'notice_welcome' );
-	}
-}
-add_action('wp_login', 'shapeSpace_first_user_login', 10, 2);
-
 function recommend_light() {
 	$msg = '<b>Strongly recommend "Light" Scheme.</b>';
 	if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
