@@ -8,7 +8,7 @@
  */
  
 define( 'SAKURA_VERSION', '3.1.7' );
-define( 'BUILD_VERSION', '1' );
+define( 'BUILD_VERSION', '2' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
@@ -1372,18 +1372,18 @@ add_action('admin_footer', 'custom_admin_js');
  * 后台通知
  */
 function scheme_tip() {
-	$msg = '<b>Strongly recommend "Light" Scheme.</b>';
+	$msg = '<b>Why not try the new admin dashboard color scheme <a href="/wp-admin/profile.php">here</a>?</b>';
 	if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
-		$msg = '<b>管理界面配色方案建议使用“明亮”。</b>';
+		$msg = '<b>试一试新后台界面<a href="/wp-admin/profile.php">配色方案</a>吧？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "zh_TW") {
-		$msg = '<b>管理色彩配置建議使用“明亮”。</b>';
+		$msg = '<b>試一試新後台界面<a href="/wp-admin/profile.php">色彩配置</a>吧？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "ja") {
-		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+		$msg = '<b>新しい<a href="/wp-admin/profile.php">管理画面の配色</a>を試しますか？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
-		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+		$msg = '<b>新しい<a href="/wp-admin/profile.php">管理画面の配色</a>を試しますか？</b>';
 	}
     
     $user_id = get_current_user_id();
