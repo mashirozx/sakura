@@ -786,7 +786,10 @@ function siren_get_browsers($ua){
     else
       $icon = 'ie';
     }elseif (preg_match('#Edge/([a-zA-Z0-9.]+)#i', $ua, $matches)){
-    $title = 'Microsoft Edge '. $matches[1];
+    $title = 'Edge '. $matches[1];
+        $icon = 'edge';
+  }elseif (preg_match('#Edg/([a-zA-Z0-9.]+)#i', $ua, $matches)){
+    $title = 'Edge Dev (Chromium) '. $matches[1];
         $icon = 'edge';
   }elseif (preg_match('#360([a-zA-Z0-9.]+)#i', $ua, $matches)) {
     $title = '360 Browser '. $matches[1];

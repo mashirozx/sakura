@@ -7,8 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.6' );
-define( 'BUILD_VERSION', '1' );
+define( 'SAKURA_VERSION', '3.1.7' );
+define( 'BUILD_VERSION', '2' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
@@ -1346,19 +1346,12 @@ add_filter('site_url',  'wpadmin_filter', 10, 3);
  }
 */
 
-function admin_style() {
+function admin_ini() {
   wp_enqueue_style('admin-styles-fix-icon', get_site_url() . '/wp-includes/css/dashicons.css');
-  wp_enqueue_style('cus-styles-light', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-fix.css');
-  if ( get_user_option( 'admin_color' ) == "light" ) {
-	wp_enqueue_style('cus-styles-light', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-light.css');  
-  }
+  wp_enqueue_style('cus-styles-fit', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-fix.css');
+  wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
 }
-add_action('admin_enqueue_scripts', 'admin_style');
-
-function custom_register_admin_scripts() {
-	wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
-}
-add_action( 'admin_enqueue_scripts', 'custom_register_admin_scripts' );
+add_action('admin_enqueue_scripts', 'admin_ini');
 
 function custom_admin_js() {
     echo '<script>
@@ -1378,19 +1371,19 @@ add_action('admin_footer', 'custom_admin_js');
 /*
  * 后台通知
  */
-function recommend_light() {
-	$msg = '<b>Strongly recommend "Light" Scheme.</b>';
+function scheme_tip() {
+	$msg = '<b>Why not try the new admin dashboard color scheme <a href="/wp-admin/profile.php">here</a>?</b>';
 	if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
-		$msg = '<b>管理界面配色方案建议使用“明亮”。</b>';
+		$msg = '<b>试一试新后台界面<a href="/wp-admin/profile.php">配色方案</a>吧？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "zh_TW") {
-		$msg = '<b>管理色彩配置建議使用“明亮”。</b>';
+		$msg = '<b>試一試新後台界面<a href="/wp-admin/profile.php">色彩配置</a>吧？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "ja") {
-		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+		$msg = '<b>新しい<a href="/wp-admin/profile.php">管理画面の配色</a>を試しますか？</b>';
 	}
 	if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
-		$msg = '<b>管理画面の配色「ライト」を使用することをお勧めします。</b>';
+		$msg = '<b>新しい<a href="/wp-admin/profile.php">管理画面の配色</a>を試しますか？</b>';
 	}
     
     $user_id = get_current_user_id();
@@ -1398,9 +1391,8 @@ function recommend_light() {
         echo '<div class="notice notice-success is-dismissible" id="scheme-tip"><p><b>'.$msg.'</b></p></div>';
     }
 }
-if ( get_user_option( 'admin_color' ) != "light" ) {
-    add_action( 'admin_notices', 'recommend_light' );
-}
+
+add_action( 'admin_notices', 'scheme_tip' );
 
 function scheme_tip_dismissed() {
     $user_id = get_current_user_id();
@@ -1409,6 +1401,59 @@ function scheme_tip_dismissed() {
 }
 add_action( 'admin_init', 'scheme_tip_dismissed' );
 
+//dashboard scheme
+function dash_scheme($key, $name, $col1, $col2, $col3, $col4, $base, $focus, $current, $rules=""){
+    $hash = "color_1=".str_replace("#","",$col1).
+            "&color_2=".str_replace("#","",$col2).
+            "&color_3=".str_replace("#","",$col3).
+            "&color_4=".str_replace("#","",$col4).
+            "&rules=".urlencode($rules);
+
+    wp_admin_css_color(
+        $key,
+        $name,
+        get_template_directory_uri()."/inc/dash-scheme.php?".$hash,
+        array( $col1, $col2, $col3, $col4 ),
+        array( 'base' => $base, 'focus' => $focus, 'current' => $current )
+    );
+}
+
+//Sakura
+dash_scheme($key="sakura", $name="Sakura🌸", 
+            $col1='#8fbbb1', $col2='#bfd8d2', $col3='#fedcd2', $col4='#df744a', 
+            $base="#e5f8ff", $focus="#fff", $current="#fff",
+            $rules="#adminmenu .wp-has-current-submenu .wp-submenu a,#adminmenu .wp-has-current-submenu.opensub .wp-submenu a,#adminmenu .wp-submenu a,#adminmenu a.wp-has-current-submenu:focus+.wp-submenu a,#wpadminbar .ab-submenu .ab-item,#wpadminbar .quicklinks .menupop ul li a,#wpadminbar .quicklinks .menupop.hover ul li a,#wpadminbar.nojs .quicklinks .menupop:hover ul li a,.folded #adminmenu .wp-has-current-submenu .wp-submenu a{color:#f3f2f1}body{background-image:url(https://view.moezx.cc/images/2018/01/29/FLOWER.jpg);background-attachment:fixed;}#wpcontent{background:rgba(255,255,255,.6)}");
+       
+//custom
+dash_scheme($key="custom", $name="Custom", 
+            $col1=akina_option('dash_scheme_color_a'), $col2=akina_option('dash_scheme_color_b'), $col3=akina_option('dash_scheme_color_c'), $col4=akina_option('dash_scheme_color_d'), 
+            $base=akina_option('dash_scheme_color_base'), $focus=akina_option('dash_scheme_color_focus'), $current=akina_option('dash_scheme_color_current'),
+            $rules=akina_option('dash_scheme_css_rules'));
+
+// WordPress Custom Font @ Admin
+function custom_admin_open_sans_font() {
+    echo '<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">' . PHP_EOL;
+    echo '<style>body, #wpadminbar *:not([class="ab-icon"]), .wp-core-ui, .media-menu, .media-frame *, .media-modal *{font-family:"Noto Serif SC","Source Han Serif SC","Source Han Serif","source-han-serif-sc","PT Serif","SongTi SC","MicroSoft Yahei",Georgia,serif !important;}</style>' . PHP_EOL;
+}
+add_action( 'admin_head', 'custom_admin_open_sans_font' );
+
+// WordPress Custom Font @ Admin Frontend Toolbar
+function custom_admin_open_sans_font_frontend_toolbar() {
+    if(current_user_can('administrator')) {
+        echo '<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">' . PHP_EOL;
+        echo '<style>#wpadminbar *:not([class="ab-icon"]){font-family:"Noto Serif SC","Source Han Serif SC","Source Han Serif","source-han-serif-sc","PT Serif","SongTi SC","MicroSoft Yahei",Georgia,serif !important;}</style>' . PHP_EOL;
+    }
+}
+add_action( 'wp_head', 'custom_admin_open_sans_font_frontend_toolbar' );
+
+// WordPress Custom Font @ Admin Login
+function custom_admin_open_sans_font_login_page() {
+    if(stripos($_SERVER["SCRIPT_NAME"], strrchr(wp_login_url(), '/')) !== false) {
+        echo '<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">' . PHP_EOL;
+        echo '<style>body{font-family:"Noto Serif SC","Source Han Serif SC","Source Han Serif","source-han-serif-sc","PT Serif","SongTi SC","MicroSoft Yahei",Georgia,serif !important;}</style>' . PHP_EOL;
+	}
+}
+add_action( 'login_head', 'custom_admin_open_sans_font_login_page' );
 
 // 阻止垃圾注册
 add_action( 'register_post', 'codecheese_register_post', 10, 3 );
