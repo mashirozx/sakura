@@ -704,7 +704,7 @@ function optionsframework_options() {
         'name' => __("面板主色调A", 'akina'),
         'id' => 'dash_scheme_color_a',
         'std' => "#c6742b",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a feel for the theme.', ''),
         'type' => "color"
     );
     
@@ -712,7 +712,7 @@ function optionsframework_options() {
         'name' => __("面板主色调B", 'akina'),
         'id' => 'dash_scheme_color_b',
         'std' => "#d88e4c",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a feel for the theme.', ''),
         'type' => "color"
     );
     
@@ -720,7 +720,7 @@ function optionsframework_options() {
         'name' => __("面板主色调C", 'akina'),
         'id' => 'dash_scheme_color_c',
         'std' => "#695644",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a feel for the theme.', ''),
         'type' => "color"
     );
     
@@ -728,7 +728,7 @@ function optionsframework_options() {
         'name' => __("面板主色调D", 'akina'),
         'id' => 'dash_scheme_color_d',
         'std' => "#a19780",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a feel for the theme.', ''),
         'type' => "color"
     );
     
@@ -736,7 +736,7 @@ function optionsframework_options() {
         'name' => __("面板图标配色——base", 'akina'),
         'id' => 'dash_scheme_color_base',
         'std' => "#e5f8ff",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions used to color any SVG icons.', ''),
         'type' => "color"
     );
     
@@ -744,7 +744,7 @@ function optionsframework_options() {
         'name' => __("面板图标配色——focus", 'akina'),
         'id' => 'dash_scheme_color_focus',
         'std' => "#fff",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions used to color any SVG icons.', ''),
         'type' => "color"
     );
     
@@ -752,7 +752,7 @@ function optionsframework_options() {
         'name' => __("面板图标配色——current", 'akina'),
         'id' => 'dash_scheme_color_current',
         'std' => "#fff",
-        'desc' => __('', ''),
+        'desc' => __('<i>(array) (optional)</i> An array of CSS color definitions used to color any SVG icons.', ''),
         'type' => "color"
     );
 		

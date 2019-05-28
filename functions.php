@@ -398,6 +398,7 @@ if(!function_exists('akina_comment_format')){
                                                 $flag .= '否 <i class="fa fa-unlock" aria-hidden="true"></i>';
                                             }
                                             $flag .= '</span>)</a>';
+                                            $flag .= edit_comment_link(__('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 编辑'), '<span>', '</span>');
                                             echo $flag;
                                         } ?></div>
 								</div>
@@ -1429,6 +1430,19 @@ dash_scheme($key="custom", $name="Custom",
             $col1=akina_option('dash_scheme_color_a'), $col2=akina_option('dash_scheme_color_b'), $col3=akina_option('dash_scheme_color_c'), $col4=akina_option('dash_scheme_color_d'), 
             $base=akina_option('dash_scheme_color_base'), $focus=akina_option('dash_scheme_color_focus'), $current=akina_option('dash_scheme_color_current'),
             $rules=akina_option('dash_scheme_css_rules'));
+
+//Set Default Admin Color Scheme for New Users
+function set_default_admin_color($user_id) {
+    $args = array(
+        'ID' => $user_id,
+        'admin_color' => 'sunrise'
+    );
+    wp_update_user( $args );
+}
+//add_action('user_register', 'set_default_admin_color');            
+
+//Stop Users From Switching Admin Color Schemes
+//if ( !current_user_can('manage_options') ) remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
 
 // WordPress Custom Font @ Admin
 function custom_admin_open_sans_font() {
