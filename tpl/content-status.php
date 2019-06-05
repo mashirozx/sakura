@@ -31,7 +31,7 @@
         <span><i class="iconfont icon-mark"></i><?php comments_popup_link('NOTHING', '1 条评论', '% 条评论'); ?></span>
 		</div>
 		<div class="views"> 
-		<span><i class="iconfont icon-attention"></i><?php echo wp_statistics_pages('total','uri',get_the_ID()); ?> 热度</span>
+		<span><i class="iconfont icon-attention"></i><?php echo get_post_views(get_the_ID()); ?> 热度</span>
 		 </div>   
         </div>		
 	</footer><!-- .entry-footer -->
