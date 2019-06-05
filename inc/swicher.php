@@ -15,6 +15,7 @@ mashiro_option.template_url = "<?php echo get_template_directory_uri(); ?>";
 mashiro_option.site_url = "<?php echo site_url(); ?>";
 mashiro_option.qq_api_url = "https://api.2heng.xin/qqinfo/"; 
 mashiro_option.qq_avatar_api_url = "https://api.2heng.xin/qqinfo/";
+mashiro_option.is_admin = <?php if( current_user_can( 'manage_options' ) ) { echo 'true'; } else { echo 'false'; } ?>;
 
 <?php if( is_home() ){ ?>
 mashiro_option.land_at_home = true;
