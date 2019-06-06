@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.8' );
+define( 'SAKURA_VERSION', '3.1.9' );
 define( 'BUILD_VERSION', '2' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -440,15 +440,29 @@ if(!function_exists('akina_comment_format')){
     }
 
 /**
- * post views.
- * @bigfa
+ * post views
  */
 function restyle_text($number) {
-    if($number >= 1000) {
-        return round($number/1000,2) . 'k';
-    }else{
-        return $number;
+    switch (akina_option('statistics_format')) {
+        case "type_2": //23,333 次访问
+            return number_format($number);
+            break;
+        case "type_3": //23 333 次访问
+            return number_format($number, 0, '.', ' ');
+            break;
+        case "type_4": //23k 次访问
+            if($number >= 1000) {
+                return round($number/1000,2) . 'k';
+            }else{
+                return $number;
+            }
+            break;
+        default:
+            return $number;
     }
+    
+    
+    
 }
 
 function set_post_views() {
@@ -466,18 +480,23 @@ function set_post_views() {
 add_action('get_header', 'set_post_views');
 
 function get_post_views($post_id) {
-    /* 修改需配合统计插件
-	 * $count_key = 'views';
-     * $views = get_post_custom($post_id);
-     * $views = intval($views['views'][0]);
-     * $post_views = intval(post_custom('views'));
-     * if($views == '') {
-     *     return 0;
-     * }else{
-     *     return restyle_text($views);
-     * }
-	 */
-	return wp_statistics_pages('total','uri',$post_id);
+	if (akina_option('statistics_api')=='wp_statistics'){
+        if (!function_exists(wp_statistics_pages)) {
+            return '请安装 <a href="https://wordpress.org/plugins/wp-statistics/" target="_blank">WP-Statistics 插件</a>';
+        } else {
+            return restyle_text(wp_statistics_pages('total','uri',$post_id));
+        }
+    } else {
+        $count_key = 'views';
+        $views = get_post_custom($post_id);
+        $views = intval($views['views'][0]);
+        $post_views = intval(post_custom('views'));
+        if($views == '') {
+            return 0;
+        }else{
+            return restyle_text($views);
+        }
+    }
 } 
 
 

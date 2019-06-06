@@ -925,6 +925,28 @@ function optionsframework_options() {
 		'type' => 'text');
         
     $options[] = array(
+		'name' => __('统计接口', 'akina'),
+		'id' => 'statistics_api',
+		'std' => "theme_build_in",
+		'type' => "radio",
+		'options' => array(
+			'wp_statistics' => __('WP-Statistics 插件（专业性统计，可排除无效访问）', ''),
+			'theme_build_in' => __('主题内建（简单的统计，计算每一次页面访问请求）', '')
+		));
+        
+    $options[] = array(
+		'name' => __('统计数据显示格式', 'akina'),
+		'id' => 'statistics_format',
+		'std' => "type_1",
+		'type' => "radio",
+		'options' => array(
+			'type_1' => __('23333 次访问（默认）', ''),
+			'type_2' => __('23,333 次访问（英式）', ''),
+			'type_3' => __('23 333 次访问（法式）', ''),
+			'type_4' => __('23k 次访问（中式）', ''),
+		));
+        
+    $options[] = array(
 		'name' => __('启用 baguetteBox', 'options_framework_theme'),
 		'desc' => __('默认禁用，<a href="https://github.com/mashirozx/Sakura/wiki/Fancybox">请阅读说明</a>', 'options_framework_theme'),
 		'id' => 'image_viewer',
