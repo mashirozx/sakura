@@ -481,7 +481,7 @@ add_action('get_header', 'set_post_views');
 
 function get_post_views($post_id) {
 	if (akina_option('statistics_api')=='wp_statistics'){
-        if (!function_exists(wp_statistics_pages)) {
+        if (!function_exists('wp_statistics_pages')) {
             return '请安装 <a href="https://wordpress.org/plugins/wp-statistics/" target="_blank">WP-Statistics 插件</a>';
         } else {
             return restyle_text(wp_statistics_pages('total','uri',$post_id));
