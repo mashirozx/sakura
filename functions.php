@@ -481,7 +481,7 @@ add_action('get_header', 'set_post_views');
 
 function get_post_views($post_id) {
 	if (akina_option('statistics_api')=='wp_statistics'){
-        if (!function_exists(wp_statistics_pages)) {
+        if (!function_exists('wp_statistics_pages')) {
             return '请安装 <a href="https://wordpress.org/plugins/wp-statistics/" target="_blank">WP-Statistics 插件</a>';
         } else {
             return restyle_text(wp_statistics_pages('total','uri',$post_id));
@@ -1269,7 +1269,7 @@ function memory_archives_list() {
                 $mon = $mon_tmp;
                 $output .= '<li class="al_li"><span class="al_mon">'.$mon.'月 (<span id="post-num"></span>篇文章)</span><ul class="al_post_list">'; //输出月份
             }
-            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d日  ') .'</span>'. get_the_title() .' <span>('.wp_statistics_pages('total',get_permalink(),get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
+            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d日  ') .'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
         endwhile;
         wp_reset_postdata();
         $output .= '</ul></li></ul> <!--<ul class="al_mon_list"><li><ul class="al_post_list" style="display: block;"><li>博客已经萌萌哒运行了<span id="monitorday"></span>天</li></ul></li></ul>--></div>';
