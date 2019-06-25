@@ -1010,7 +1010,7 @@ global $wpsmiliestrans;
 if ( !get_option( 'use_smilies' ) )
     return;
 
-    $wpsmiliestrans = [
+    $wpsmiliestrans = array(
         ':good:' => 'icon_good.gif',
         ':han:' => 'icon_han.gif',
         ':spray:' => 'icon_spray.gif',
@@ -1043,7 +1043,7 @@ if ( !get_option( 'use_smilies' ) )
         ':niconiconi-t:' => 'icon_niconiconi_t.gif',
         ':niconiconit:' => 'icon_niconiconit.gif',
         ':awesome:' => 'icon_awesome.gif',
-    ];
+    );
 }
 smilies_reset();
 
