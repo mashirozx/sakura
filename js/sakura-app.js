@@ -1321,7 +1321,7 @@ var home = location.href,
         AH: function () {
             if (Poi.windowheight == 'auto') {
                 if ($('h1.main-title').length > 0) {
-                    var _height = $(window).height();
+                    var _height = $(window).height()+"px";
                     $('#centerbg').css({
                         'height': _height
                     });
