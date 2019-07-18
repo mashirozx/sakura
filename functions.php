@@ -952,6 +952,8 @@ function rt_add_link_target( $content ){
 	foreach( $bits as $key=>$bit ){
 	    // fix the target="_blank" bug after the link
 	    if ( strpos( $bit, 'href' ) === false ) continue;
+	    // fix the target="_blank" bug in the codeblock
+	    if ( strpos( preg_replace('/code([\s\S]*?)\/code[\s]*/m','temp',$content), $bit ) === false )  continue;
 		// find the end of each link
 		$pos = strpos( $bit, '>' );
 		// check if there is an end (only fails with malformed markup)
