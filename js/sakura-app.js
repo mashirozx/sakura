@@ -1407,9 +1407,14 @@ var home = location.href,
                     $('#bgvideo').css({
                         'min-height': _height
                     });
+                    window.resizeFlag= null;
                     $(window).resize(function () {
-                        Siren.AH();
-                    });
+                        //直接resize性能爆炸，改成延时
+                        if(resizeFlag!=null){
+                            clearTimeout(resizeFlag);
+                        }
+                        resizeFlag = setTimeout(function(){ Siren.AH();resizeFlag=null }, 1000);
+                    })
                 }
             } else {
                 $('.headertop').addClass('headertop-bar');
