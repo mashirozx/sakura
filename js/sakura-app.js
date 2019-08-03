@@ -287,7 +287,6 @@ function scrollBar() {
     }
 }
 scrollBar();
-'主题切换代码好恶心，有空一定要重构';
 
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
@@ -442,18 +441,6 @@ if (document.body.clientWidth <= 860) {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-}
-
-function reload_show_date_time() {
-    BirthDay = new Date("06/02/2017 18:00:00");
-    today = new Date();
-    timeold = (today.getTime() - BirthDay.getTime());
-    sectimeold = timeold / 1000
-    secondsold = Math.floor(sectimeold);
-    msPerDay = 24 * 60 * 60 * 1000
-    e_daysold = timeold / msPerDay
-    daysold = Math.floor(e_daysold);
-    monitorday.innerHTML = daysold;
 }
 
 function timeSeriesReload(flag) {
@@ -630,12 +617,6 @@ var pjaxInit = function () {
             reloadHermit();
         } catch (e) {};
     }
-    if ($("div").hasClass("popcontainer")) {
-        loadBotui();
-    }
-    try {
-        reload_show_date_time();
-    } catch (e) {}
     if (mashiro_global.variables.skinSecter === true) {
         $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
         $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
@@ -687,20 +668,6 @@ $.fn.commentPrivate = function () {
     }
 };
 
-function show_date_time() {
-    BirthDay = new Date("06/02/2017 18:00:00");
-    today = new Date();
-    timeold = (today.getTime() - BirthDay.getTime());
-    sectimeold = timeold / 1000
-    secondsold = Math.floor(sectimeold);
-    msPerDay = 24 * 60 * 60 * 1000
-    e_daysold = timeold / msPerDay
-    daysold = Math.floor(e_daysold);
-    monitorday.innerHTML = daysold;
-}
-try {
-    show_date_time();
-} catch (e) {}
 POWERMODE.colorful = true;
 POWERMODE.shake = false;
 document.body.addEventListener('input', POWERMODE);
@@ -767,12 +734,6 @@ function grin(tag, type, before, after) {
         myField.focus();
     }
 }
-if ($("div").hasClass("popcontainer")) {
-    loadBotui();
-}
-$("bot-ui").click(function () {
-    loadBotui();
-});
 
 function add_copyright() {
     document.body.addEventListener("copy", function (e) {
@@ -1022,50 +983,10 @@ function getqqinfo() {
     });
 }
 
-function loadBotui() {
-    if ($('div').hasClass('popcontainer')) {
-        if (mashiro_global.variables.has_bot_ui) {
-            bot_ui_ini();
-        } else {
-            $.getScript('https://pages.shino.cc/cdn/js/botui/botui.js', function () {
-                bot_ui_ini();
-                mashiro_global.variables.has_bot_ui = true;
-            });
-        }
-    }
-}
-
 function mail_me() {
     var mail = "mailto:" + mashiro_option.email_name + "@" + mashiro_option.email_domain;
     window.open(mail);
 }
-
-/*
-var currentFontIsUbuntu = true;
-
-function changeFont() {
-    if (currentFontIsUbuntu) {
-        loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-        currentFontIsUbuntu = false;
-    } else {
-        loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/or.css");
-        currentFontIsUbuntu = true;
-    }
-}
-
-function convertChinese(zh) {
-    if (zh == 'cn') {
-        $("#zh_cn").css("display", "none");
-        $("#zh_tw").css("display", "inline-block");
-        loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/tw.css");
-    }
-    if (zh == 'tw') {
-        $("#zh_tw").css("display", "none");
-        $("#zh_cn").css("display", "inline-block");
-        loadCSS("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.8/css/cn.css");
-    }
-}
-*/
 
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
