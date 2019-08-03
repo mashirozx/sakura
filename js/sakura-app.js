@@ -1,8 +1,8 @@
 /*！
- * Sakura application bundle
+ * Sakura application bundle theme ver 3.2.0
  * @author Mashiro
  * @url https://2heng.xin
- * @date 2018.12.28
+ * @date 2019.8.3
  */
 mashiro_global.variables = new function () {
     this.has_bot_ui = false;
