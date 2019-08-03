@@ -7,8 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.1.9' );
-define( 'BUILD_VERSION', '2' );
+define( 'SAKURA_VERSION', '3.2.0' );
+define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);

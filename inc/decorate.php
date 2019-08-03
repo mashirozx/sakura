@@ -15,8 +15,12 @@ if ( akina_option('theme_skin') ) { ?>
 
 #aplayer-float .aplayer-lrc-current { color: <?php echo akina_option('theme_skin'); ?> !important}
 
-.is-active-link::before {
+.is-active-link::before, .commentbody:not(:placeholder-shown)~.input-label, .commentbody:focus~.input-label {
     background-color: <?php echo akina_option('theme_skin'); ?> !important
+}
+
+.commentbody:focus {
+    border-color: <?php echo akina_option('theme_skin'); ?> !important
 }
 
 .insert-image-tips:hover, .insert-image-tips-hover{ 
