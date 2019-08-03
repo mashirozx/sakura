@@ -21,8 +21,7 @@ assignees: ''
  - （前端）操作系统: [e.g. Windows 10, Android 9.0]
  - 浏览器: [e.g. chrome, safari]
  - PHP 版本
-- WordPress 版本
-- Sakura 主题版本
+ - WordPress 版本
+ - Sakura 主题版本
 
-
-**其他**
+**补充信息**
