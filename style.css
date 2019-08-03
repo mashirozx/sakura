@@ -3446,7 +3446,7 @@ a.page-numbers {
     margin-bottom: 10px;
     color: #535a63;
     border: 1px solid #ddd;
-    background-color: rgba(255, 255, 255, 0)
+    background-color: transparent
 }
 
 .comment-respond textarea {
@@ -3454,8 +3454,37 @@ a.page-numbers {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right;
-    background-color: rgba(255, 255, 255, 0);
     resize: vertical
+}
+
+.comment-textarea {
+	position: relative
+}
+
+.commentbody:placeholder-shown::placeholder {
+	color: transparent
+}
+
+.commentbody:focus {
+	border-color: orange;
+	transition: border-color .25s
+}
+
+.input-label {
+	position: absolute;
+	left: 16px;
+	top: 20px;
+	padding: 0 6px;
+	transform-origin: 0 0;
+	pointer-events: none;
+	transition: all .25s
+}
+
+.commentbody:not(:placeholder-shown)~.input-label, .commentbody:focus~.input-label {
+	color: #fff;
+	background-color: orange;
+	transform: scale(.75) translate(-2px, -37px);
+	border-radius: 3px
 }
 
 .comment-respond .form-submit {
