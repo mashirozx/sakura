@@ -1431,27 +1431,54 @@ var home = location.href,
         },
         XLS: function () {
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+            var load_post_timer;
+            $(window).scroll(function () {
+            var htmlHeight=document.body.scrollHeight;
+            var clientHeight=$(this).height() + 1;
+            var scrollTop=document.documentElement.scrollTop;
+            var page_next = $('#pagination a').attr("href");
+            var load_key = document.getElementById("add_post_time");
+            if(scrollTop+clientHeight > htmlHeight){
+                if(page_next!=undefined && load_key ){
+                    var load_time = document.getElementById("add_post_time").title;
+                    if(load_time !="233"){
+            		    console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
+                        load_post_timer=setTimeout(function(){load_post();},load_time*1000);
+                    }
+            	}
+		    }
+            });
             $('body').on('click', '#pagination a', function () {
-                $(this).addClass("loading").text("");
+                clearTimeout(load_post_timer);
+                load_post();
+                return false;
+            });
+			function load_post() {
+                $('#pagination a').addClass("loading").text("");
                 $.ajax({
                     type: "POST",
-                    url: $(this).attr("href") + "#main",
+                    url: $('#pagination a').attr("href") + "#main",
                     success: function (data) {
                         result = $(data).find("#main .post");
                         nextHref = $(data).find("#pagination a").attr("href");
                         $("#main").append(result.fadeIn(500));
                         $("#pagination a").removeClass("loading").text("Previous");
+                        $('#add_post span').removeClass("loading").text("");
                         lazyload();
                         mashiro_global.post_list_show_animation.ini(50);
                         if (nextHref != undefined) {
                             $("#pagination a").attr("href", nextHref);
+							//加载完成上滑
+                            var tempScrollTop = $(window).scrollTop();
+                            $(window).scrollTop(tempScrollTop);
+                            $body.animate({ scrollTop: tempScrollTop + 300 }, 666)
                         } else {
                             $("#pagination").html("<span>很高兴你翻到这里，但是真的没有了...</span>");
                         }
                     }
                 });
                 return false;
-            });
+			}
         },
         XCS: function () {
             var __cancel = jQuery('#cancel-comment-reply-link'),
