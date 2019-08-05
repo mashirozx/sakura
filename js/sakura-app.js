@@ -1432,22 +1432,21 @@ var home = location.href,
         XLS: function () {
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
             var load_post_timer;
-            $(window).scroll(function () {
-            var htmlHeight=document.body.scrollHeight;
-            var clientHeight=$(this).height() + 1;
-            var scrollTop=document.documentElement.scrollTop;
-            var page_next = $('#pagination a').attr("href");
-            var load_key = document.getElementById("add_post_time");
-            if(scrollTop+clientHeight > htmlHeight){
-                if(page_next!=undefined && load_key ){
-                    var load_time = document.getElementById("add_post_time").title;
-                    if(load_time !="233"){
-            		    console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
-                        load_post_timer=setTimeout(function(){load_post();},load_time*1000);
-                    }
+            var intersectionObserver = new IntersectionObserver(function (entries) {
+            	if (entries[0].intersectionRatio <= 0) return;
+            	var page_next = $('#pagination a').attr("href");
+            	var load_key = document.getElementById("add_post_time");
+            	if(page_next!=undefined && load_key ){
+            		var load_time = document.getElementById("add_post_time").title;
+            		if(load_time !="233"){
+            			console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
+            			load_post_timer=setTimeout(function(){load_post();},load_time*1000);
+                    	}
             	}
-		    }
             });
+            intersectionObserver.observe(
+                document.querySelector('.footer-device')
+            );
             $('body').on('click', '#pagination a', function () {
                 clearTimeout(load_post_timer);
                 load_post();
