@@ -71,5 +71,9 @@ get_header();
 		</nav>
 		<?php } ?>
 	</div><!-- #primary -->
+
+	<?php
+         include ("widget.html");
+        ?>
 <?php
 get_footer();
