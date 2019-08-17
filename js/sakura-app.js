@@ -1331,10 +1331,10 @@ var home = location.href,
                     window.resizeFlag= null;
                     $(window).resize(function () {
                         //直接resize性能爆炸，改成延时
-                        if(resizeFlag!=null){
+                        if(resizeFlag=null){
                             clearTimeout(resizeFlag);
                         }
-                        resizeFlag = setTimeout(function(){ Siren.AH();resizeFlag=null }, 1000);
+                        resizeFlag = setTimeout(function(){ Siren.AH();}, 1000);
                     })
                 }
             } else {
@@ -1386,11 +1386,131 @@ var home = location.href,
             $('.js-toggle-search').on('click', function () {
                 $('.js-toggle-search').toggleClass('is-active');
                 $('.js-search').toggleClass('is-visible');
+                $('html').css('overflow-y','hidden');
+                if (mashiro_option.live_search) {
+                var QueryStorage = [];
+                search_a("https://"+document.domain+"/wp-content/themes/Sakura/cache/search.json");
+                
+                var otxt = document.getElementById("search-input"),
+                    list = document.getElementById("PostlistBox"),
+                    Record = list.innerHTML,
+                    searchFlag = null;
+                otxt.oninput = function () {
+                    if(searchFlag=null){
+                        clearTimeout(searchFlag);
+                    }
+                    searchFlag = setTimeout(function(){
+                        query(QueryStorage, otxt.value, Record);
+                        div_href();
+                    }, 250);
+                };
+
+                function search_a(val) {
+                    if(sessionStorage.getItem('search')!=null){
+                        QueryStorage = JSON.parse(sessionStorage.getItem('search'));
+                        query(QueryStorage, $("#search-input").val(), Record);
+                        div_href();
+                    }else{
+                        var _xhr = new XMLHttpRequest();
+                        _xhr.open("GET", val, true)
+                        _xhr.send();
+                        _xhr.onreadystatechange = function () {
+                            if (_xhr.readyState == 4 && _xhr.status == 200) {
+                                json = _xhr.responseText;
+                                if (json != "") {
+                                    sessionStorage.setItem('search',json);
+                                    QueryStorage = JSON.parse(json);
+                                    query(QueryStorage, otxt.value, Record);
+                                    div_href();
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!Object.values) Object.values = function (obj) {
+                    if (obj !== Object(obj))
+                        throw new TypeError('Object.values called on a non-object');
+                    var val = [],
+                        key;
+                    for (key in obj) {
+                        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                            val.push(obj[key]);
+                        }
+                    }
+                    return val;
+                }
+                function Cx(arr, q) {
+                    q = q.replace(q,"^(?=.*?"+q+").+$").replace(/\s/g,")(?=.*?");
+                    i = arr.filter(
+                        v => Object.values(v).some(
+                            v => new RegExp(q + '').test(v)
+                        )
+                    );
+                    return i;
+                }
+                function div_href(){
+                    $(".ins-selectable").each(function(){
+                        $(this).click(function(){
+                            $("#Ty").attr('href',$(this).attr('href'));
+                            $("#Ty").click();
+                            $(".search_close").click();
+                        });
+                    });
+                }
+                function search_result(keyword, link, fa, title, iconfont, comments, text){
+                    if(keyword){
+                        var s = keyword.trim().split(" "),
+                            a = title.indexOf(s[s.length-1]),
+                            b = text.indexOf(s[s.length-1]);
+                        title=a<60 ? title.slice(0,80):title.slice(a-30,a+30);
+                        title=title.replace(s[s.length-1], '<mark class="search-keyword"> ' + s[s.length-1].toUpperCase() + ' </mark>');
+                        text=b<60 ? text.slice(0,80):text.slice(b-30,b+30);
+                        text=text.replace(s[s.length-1], '<mark class="search-keyword"> ' + s[s.length-1].toUpperCase() + ' </mark>');
+                    }
+                    return '<div class="ins-selectable ins-search-item" href="' + link + '"><header><i class="fa fa-'+ fa +'" aria-hidden="true"></i>' + title + '<i class="iconfont icon-'+ iconfont +'"> ' + comments + '</i>' + '</header><p class="ins-search-preview">' + text + '</p></div>';
+                }
+
+                function query(B, A, z) {
+	                var x, v, s, y = "",
+		                w = "",
+		                u = "",
+		                r = "",
+                		p = "",
+		                F = "",
+		                H = "",
+		                G = '<section class="ins-section"><header class="ins-section-header">',
+		                D = "</section>",
+		                E = "</header>",
+		                C = Cx(B, A.trim());
+	                for (x = 0; x < Object.keys(C).length; x++) {
+		                H = C[x];
+		                switch (v = H.type) {
+		                case "post":
+			                w = w + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
+			                break;
+		                case "tag":
+			                p = p + search_result("", H.link, "tag", H.title, "none", "", "");
+			                break;
+		                case "category":
+			                r = r + search_result("", H.link, "folder", H.title, "none", "", "");
+			                break;
+		                case "page":
+			                u = u + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
+			                break;
+		                case "comment":
+			                F = F + search_result(A, H.link, "comment", H.title, "none", "", H.text);
+			                break
+		                }
+	                }
+	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = document.getElementById("PostlistBox"), s.innerHTML = y
+                }
+                }
             });
             $('.search_close').on('click', function () {
                 if ($('.js-search').hasClass('is-visible')) {
                     $('.js-toggle-search').toggleClass('is-active');
                     $('.js-search').toggleClass('is-visible');
+					$('html').css('overflow-y','unset');
                 }
             });
             $('#show-nav').on('click', function () {
@@ -1711,6 +1831,7 @@ $(function () {
             if ($('.js-search.is-visible').length > 0) {
                 $('.js-toggle-search').toggleClass('is-active');
                 $('.js-search').toggleClass('is-visible');
+                $('html').css('overflow-y','unset');
             }
         });
         window.addEventListener('popstate', function (e) {

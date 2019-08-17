@@ -50,6 +50,12 @@ if ( akina_option('theme_skin') ) { ?>
     background-color: <?php echo akina_option('theme_skin'); ?>
 }
 <?php } ?>
+<?php if(akina_option('live_search')){ ?>
+.search-form--modal .search-form__inner {
+    bottom: unset !important;
+    top: 10% !important;
+}
+<?php } ?>
 
 <?php } // theme-skin ?>
 <?php // Custom style

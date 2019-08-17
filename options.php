@@ -968,6 +968,20 @@ function optionsframework_options() {
 		));
         
     $options[] = array(
+		'name' => __('启用实时搜索', 'options_framework_theme'),
+		'desc' => __('前台实现实时搜索，每3小时更新一次缓存，可通过删除主题文件夹下的 cache 文件夹手动更新缓存'),
+		'id' => 'live_search',
+		'std' => '0',
+		'type' => 'checkbox');
+        
+    $options[] = array(
+		'name' => __('实时搜索包含评论', 'options_framework_theme'),
+		'desc' => __('在实时搜索中搜索评论（如果网站评论数量太多不建议开启）'),
+		'id' => 'live_search_comment',
+		'std' => '0',
+		'type' => 'checkbox');
+        
+    $options[] = array(
 		'name' => __('启用 baguetteBox', 'options_framework_theme'),
 		'desc' => __('默认禁用，<a href="https://github.com/mashirozx/Sakura/wiki/Fancybox">请阅读说明</a>', 'options_framework_theme'),
 		'id' => 'image_viewer',
