@@ -4312,8 +4312,8 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .ins-section-container {
 	position: relative;
-	background: rgba(241, 248, 253, 0.5);
-	border-radius: 14px;
+	background: transparent;
+	border-radius: 5px;
 	font-family: none;
 }
 
@@ -4377,8 +4377,7 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .ins-section .ins-search-item:hover,.ins-section .ins-search-item.active {
 	color: #fff;
-	background: rgba(22, 160, 133, 0.3);
-	border-radius: 14px;
+	background: rgba(0,0,0,0.1);
 }
 
 .ins-section .ins-search-item:hover .ins-slug,.ins-section .ins-search-item.active .ins-slug,.ins-section .ins-search-item:hover .ins-search-preview,.ins-section .ins-search-item.active .ins-search-preview,.ins-section .ins-search-item:hover header,.ins-section .ins-search-item:hover .iconfont {
