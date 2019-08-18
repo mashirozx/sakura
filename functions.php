@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.2' );
+define( 'SAKURA_VERSION', '3.2.3' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -28,16 +28,7 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
 }
  
-//live search
-if(akina_option('live_search')){
-    if (file_exists(get_wp_root_path().'/themes/Sakura/cache/search.json')) {
-        if (time() - filemtime(get_wp_root_path().'/themes/Sakura/cache/search.json') > 10800) {
-            require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
-        }
-    }else {
-        require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
-    }
-}
+
 
 function akina_setup() {
 	/*
@@ -1670,12 +1661,13 @@ EOS;
  
     return $result;
 }
-
-add_action( 'rest_api_init', function () {
-  register_rest_route( 'cache_search/v1', '/json/', array(
-    'methods' => 'GET',
-    'callback' => 'cache_search_json',
-  ) );
-} );
+if(akina_option('live_search')){
+	add_action( 'rest_api_init', function () {
+		register_rest_route( 'cache_search/v1', '/json/', array(
+		'methods' => 'GET',
+		'callback' => 'cache_search_json',
+	) );
+	} );
+}
 
 //code end 

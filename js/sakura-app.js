@@ -1389,7 +1389,7 @@ var home = location.href,
                 $('html').css('overflow-y','hidden');
                 if (mashiro_option.live_search) {
                 var QueryStorage = [];
-                search_a("https://"+document.domain+"/wp-content/themes/Sakura/cache/search.json");
+                search_a("https://"+document.domain+"/wp-json/cache_search/v1/json/");
                 
                 var otxt = document.getElementById("search-input"),
                     list = document.getElementById("PostlistBox"),

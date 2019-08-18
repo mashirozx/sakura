@@ -969,7 +969,7 @@ function optionsframework_options() {
         
     $options[] = array(
 		'name' => __('启用实时搜索', 'options_framework_theme'),
-		'desc' => __('前台实现实时搜索，每3小时更新一次缓存，可通过删除主题文件夹下的 cache 文件夹手动更新缓存'),
+		'desc' => __('前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间'),
 		'id' => 'live_search',
 		'std' => '0',
 		'type' => 'checkbox');
