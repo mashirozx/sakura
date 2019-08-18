@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.0' );
+define( 'SAKURA_VERSION', '3.2.2' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -28,7 +28,16 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
 }
  
-
+//live search
+if(akina_option('live_search')){
+    if (file_exists(get_wp_root_path().'/themes/Sakura/cache/search.json')) {
+        if (time() - filemtime(get_wp_root_path().'/themes/Sakura/cache/search.json') > 10800) {
+            require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
+        }
+    }else {
+        require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
+    }
+}
 
 function akina_setup() {
 	/*
@@ -952,6 +961,8 @@ function rt_add_link_target( $content ){
 	foreach( $bits as $key=>$bit ){
 	    // fix the target="_blank" bug after the link
 	    if ( strpos( $bit, 'href' ) === false ) continue;
+	    // fix the target="_blank" bug in the codeblock
+	    if ( strpos( preg_replace('/code([\s\S]*?)\/code[\s]*/m','temp',$content), $bit ) === false )  continue;
 		// find the end of each link
 		$pos = strpos( $bit, '>' );
 		// check if there is an end (only fails with malformed markup)
@@ -1600,4 +1611,9 @@ function DEFAULT_FEATURE_IMAGE() {
     }
 }
 
+//防止设置置顶文章造成的图片同侧bug
+add_action( 'pre_get_posts', function( $q ){
+    if ( $q->is_home() && $q->is_main_query() && $q->get( 'paged' ) > 1 )
+        $q->set( 'post__not_in', get_option( 'sticky_posts' ) );
+});
 //code end 

@@ -69,11 +69,22 @@
 	<!-- search start -->
 	<form class="js-search search-form search-form--modal" method="get" action="<?php echo home_url(); ?>" role="search">
 		<div class="search-form__inner">
-			<div>
+		<?php if(akina_option('live_search')){ ?>
+			<div class="micro">
+				<i class="iconfont icon-search"></i>
+				<input id="search-input" class="text-input" type="search" name="s" placeholder="<?php _e('想要找点什么呢？', 'akina') ?>" required>
+			</div>
+			<div class="ins-section-wrapper">
+                <a id="Ty" href="#"></a>
+                <div class="ins-section-container" id="PostlistBox"></div>
+            </div>
+		<?php }else{ ?>
+			<div class="micro">
 				<p class="micro mb-"><?php _e('想要找点什么呢？', 'akina') ?></p>
 				<i class="iconfont icon-search"></i>
 				<input class="text-input" type="search" name="s" placeholder="<?php _e('Search', 'akina') ?>" required>
 			</div>
+		<?php } ?>
 		</div>
 		<div class="search_close"></div>
 	</form>

@@ -258,6 +258,27 @@ function optionsframework_options() {
 			'ajax' => __('ajax加载', ''),
 			'np' => __('上一页和下一页', '')
 		));
+	
+	$options[] = array(
+		'name' => __('自动加载下一页', 'options_framework_theme'),
+		'desc' => __('（秒）设置自动加载下一页时间，默认不自动加载', 'options_framework_theme'),
+		'id' => 'auto_load_post',
+		'std' => '233',
+		'type' => 'select',
+		'options'=>array(
+			'0'=> __('0秒',''),
+			'1'=> __('1秒',''),
+			'2'=> __('2秒',''),
+			'3'=> __('3秒',''),
+			'4'=> __('4秒',''),
+			'5'=> __('5秒',''),
+			'6'=> __('6秒',''),
+			'7'=> __('7秒',''),
+			'8'=> __('8秒',''),
+			'9'=> __('9秒',''),
+			'10'=> __('10秒',''),
+			'233'=> __('233秒,即不倒计时自动加载',''),
+		));	
 
 	$options[] = array(
 		'name' => __('博主描述', 'options_framework_theme'),
@@ -945,6 +966,20 @@ function optionsframework_options() {
 			'type_3' => __('23 333 次访问（法式）', ''),
 			'type_4' => __('23k 次访问（中式）', ''),
 		));
+        
+    $options[] = array(
+		'name' => __('启用实时搜索', 'options_framework_theme'),
+		'desc' => __('前台实现实时搜索，每3小时更新一次缓存，可通过删除主题文件夹下的 cache 文件夹手动更新缓存'),
+		'id' => 'live_search',
+		'std' => '0',
+		'type' => 'checkbox');
+        
+    $options[] = array(
+		'name' => __('实时搜索包含评论', 'options_framework_theme'),
+		'desc' => __('在实时搜索中搜索评论（如果网站评论数量太多不建议开启）'),
+		'id' => 'live_search_comment',
+		'std' => '0',
+		'type' => 'checkbox');
         
     $options[] = array(
 		'name' => __('启用 baguetteBox', 'options_framework_theme'),

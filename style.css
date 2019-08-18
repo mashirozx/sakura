@@ -5,7 +5,7 @@ Theme URI: https://2heng.xin/theme-sakura/
 Author: Mashiro, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: Akina主题分支（原版地址 http://www.akina.pw/themeakina）
-Version: 3.2.0
+Version: 3.2.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: akina
@@ -4176,10 +4176,6 @@ i.iconfont.js-toggle-search.iconsearch {
     background-position: bottom right
 }
 
-.search-form div {
-    position: relative
-}
-
 .search-form .search_close {
     position: absolute;
     width: 35px;
@@ -4281,6 +4277,112 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .search-no-reasults {
     list-style-type: decimal
+}
+
+.micro {
+	position: relative
+}
+
+.ins-section-wrapper a {
+	-webkit-transition: none;
+	transition: none;
+}
+
+.ins-section-wrapper header {
+	position: unset;
+	width: auto;
+}
+
+.ins-selectable {
+	cursor: pointer;
+}
+
+.ins-section-wrapper {
+	left: 0;
+	right: 0;
+	top: 45px;
+	bottom: 0;
+	margin-top: 45px;
+	height: 70vh;
+	overflow-y: auto;
+	position: absolute;
+	border-radius: 14px 0 0 14px;
+	scroll-behavior: smooth;
+}
+
+.ins-section-container {
+	position: relative;
+	background: rgba(241, 248, 253, 0.5);
+	border-radius: 14px;
+	font-family: none;
+}
+
+.ins-section {
+	font-size: 14px;
+}
+
+.ins-section .iconfont.icon-mark {
+	font-size: 13px;
+	color: #ccc;
+	bottom: unset;
+	margin-top: unset;
+	line-height: unset;
+	margin-left: 16px;
+	left: unset;
+	position: unset;
+}
+
+.ins-section .fa {
+	font-size: 18px;
+	color: #333;
+	bottom: unset;
+	left: 12px;
+	margin-top: -3px;
+	line-height: unset;
+}
+
+.ins-section .ins-section-header,.ins-section .ins-search-item {
+	padding: 8px 15px;
+	cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur),auto;
+}
+
+.ins-section .ins-search-item .search-keyword {
+	font-size: 15px;
+	border-radius: 5px;
+}
+
+.ins-section .ins-section-header {
+	color: #9a9a9a;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.ins-section .ins-search-item header,.ins-section .ins-search-item .ins-search-preview {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #9a9a9a;
+	margin-left: 20px;
+}
+
+.ins-section .ins-search-item header i {
+	margin-right: 8px;
+}
+
+.ins-section .ins-search-item .ins-search-preview {
+	font-size: 12px;
+	color: #9a9a9a;
+	margin: 5px 0 0 20px;
+	cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur),auto;
+}
+
+.ins-section .ins-search-item:hover,.ins-section .ins-search-item.active {
+	color: #fff;
+	background: rgba(22, 160, 133, 0.3);
+	border-radius: 14px;
+}
+
+.ins-section .ins-search-item:hover .ins-slug,.ins-section .ins-search-item.active .ins-slug,.ins-section .ins-search-item:hover .ins-search-preview,.ins-section .ins-search-item.active .ins-search-preview,.ins-section .ins-search-item:hover header,.ins-section .ins-search-item:hover .iconfont {
+	color: #333;
 }
 
 .sorry ul {
