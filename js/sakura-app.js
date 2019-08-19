@@ -5,9 +5,7 @@
  * @date 2019.8.3
  */
 mashiro_global.variables = new function () {
-    this.has_bot_ui = false;
-    this.isNight = false;
-    this.skinSecter = false;
+    this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
     this.normalize = function () {
@@ -16,6 +14,7 @@ mashiro_global.ini = new function () {
         mashiro_global.post_list_show_animation.ini();
         copy_code_block();
         coverVideoIni();
+        checkskinSecter();
     }
     this.pjax = function () {
         pjaxInit();
@@ -23,6 +22,7 @@ mashiro_global.ini = new function () {
         mashiro_global.post_list_show_animation.ini();
         copy_code_block();
         coverVideoIni();
+        checkskinSecter();
     }
 }
 
@@ -288,29 +288,27 @@ function scrollBar() {
 }
 scrollBar();
 
+function checkskinSecter() {
+    if (mashiro_global.variables.skinSecter === false) {
+        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
+        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
+    } else {
+        $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
+        $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
+    }
+}
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
     if (bgurl != "") {
-        if (bgurl == "https://view.moezx.cc/images/2018/01/03/sakura.png" || bgurl == "https://view.moezx.cc/images/2018/01/03/plaid2dbf8.jpg" || bgurl == "https://view.moezx.cc/images/2018/01/10/star02.png" || bgurl == "https://view.moezx.cc/images/2018/01/24/kyotoanimation.png" || bgurl == "https://view.moezx.cc/images/2018/03/27/dot_orange.gif") {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = false;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + bgurl + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        } else if (bgurl == "https://api.shino.cc/bing/") {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = true;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + bgurl + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        } else {}
-    } else {}
+        $(".skin-menu #" + bgurl + "-bg").click();
+    } else {
+        $(".skin-menu #white-bg").click();
+    }
 }
 if (document.body.clientWidth > 860) {
+    setTimeout(function() {
+        checkBgImgCookie();
+    }, 100);
     checkBgImgCookie();
 }
 
@@ -320,87 +318,77 @@ function no_right_click() {
     });
 }
 no_right_click();
-if (mashiro_global.variables.isNight) {
-    $(".changeSkin-gear, .toc").css("background", "rgba(255,255,255,0.8)");
-} else {
-    $(".changeSkin-gear, .toc").css("background", "none");
-}
-$(document).ready(function () {
-    function changeBG(tagid, url) {
-        $(".skin-menu " + tagid).click(function () {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = false;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + url + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-            closeSkinMenu();
-            setCookie("bgImgSetting", url, 30);
+$(document).ready(function() {
+    function checkskin_bg(a){
+        return a == "none" ? "" : a
+    }
+    function changeBG() {
+        $(".menu-list li").each(function() {
+            var tagid = this.id;
+            $(".skin-menu #" + tagid).click(function() {
+                if (tagid == "white-bg") {
+                    mashiro_global.variables.skinSecter = true;
+                    $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
+                    $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
+                } else {
+                    mashiro_global.variables.skinSecter = false;
+                    $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
+                    $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
+                }
+                if (tagid == "dark-bg") {
+                    $("#night-mode-cover").css("visibility", "visible");
+                } else
+                    $("#night-mode-cover").css("visibility", "hidden");
+                switch (tagid) {
+                    case "white-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
+                        setCookie("bgImgSetting", "white", 30);
+                        break;
+                    case "sakura-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
+                        setCookie("bgImgSetting", "sakura", 30);
+                        break;
+                    case "gribs-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
+                        setCookie("bgImgSetting", "gribs", 30);
+                        break;
+                    case "pixiv-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
+                        setCookie("bgImgSetting", "pixiv", 30);
+                        break;
+                    case "KAdots-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
+                        setCookie("bgImgSetting", "KAdots", 30);
+                        break;
+                    case "totem-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
+                        setCookie("bgImgSetting", "totem", 30);
+                        break;
+                    case "bing-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
+                        setCookie("bgImgSetting", "bing", 30);
+                        break;
+                    case "dark-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
+                        setCookie("bgImgSetting", "dark", 30);
+                        break;
+                }
+                closeSkinMenu();
+            });
         });
     }
-
-    function changeBGnoTrans(tagid, url) {
-        $(".skin-menu " + tagid).click(function () {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = true;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + url + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-            closeSkinMenu();
-            setCookie("bgImgSetting", url, 30);
-        });
-    }
-    changeBG("#sakura-bg", "https://view.moezx.cc/images/2018/01/03/sakura.png");
-    changeBG("#gribs-bg", "https://view.moezx.cc/images/2018/01/03/plaid2dbf8.jpg");
-    changeBG("#pixiv-bg", "https://view.moezx.cc/images/2018/01/10/star02.png");
-    changeBG("#KAdots-bg", "https://view.moezx.cc/images/2018/01/24/kyotoanimation.png");
-    changeBG("#totem-bg", "https://view.moezx.cc/images/2018/03/27/dot_orange.gif");
-    changeBGnoTrans("#bing-bg", "https://api.shino.cc/bing/");
-    $(".skin-menu #white-bg").click(function () {
-        mashiro_global.variables.skinSecter = false;
-        mashiro_global.variables.isNight = false;
-        $("#night-mode-cover").css("visibility", "hidden");
-        $("body").css("background-image", "none");
-        $(".blank").css("background-color", "rgba(255,255,255,.0)");
-        $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
-        $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
-        closeSkinMenu();
-        setCookie("bgImgSetting", "Hello World!", 30);
-    });
-    $(".skin-menu #dark-bg").click(function () {
-        mashiro_global.variables.skinSecter = true;
-        mashiro_global.variables.isNight = true;
-        $("body").css("background-image", "url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png)");
-        $(".blank").css("background-color", "rgba(255,255,255,.8)");
-        $("#night-mode-cover").css("visibility", "visible");
-        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        closeSkinMenu();
-    });
+    changeBG();
 
     function closeSkinMenu() {
         $(".skin-menu").removeClass('show');
-        setTimeout(function () {
+        setTimeout(function() {
             $(".changeSkin-gear").css("visibility", "visible");
         }, 300);
-        if (mashiro_global.variables.isNight) {
-            $(".changeSkin-gear, .toc").css("background", "rgba(255,255,255,0.8)");
-        } else {
-            $(".changeSkin-gear, .toc").css("background", "none");
-        }
     }
-    $(".changeSkin-gear").click(function () {
+    $(".changeSkin-gear").click(function() {
         $(".skin-menu").toggleClass('show');
-        if (mashiro_global.variables.isNight) {
-            $(".changeSkin").css("background", "rgba(255,255,255,0.8)");
-        } else {
-            $(".changeSkin").css("background", "none");
-        }
     })
-    $(".skin-menu #close-skinMenu").click(function () {
+    $(".skin-menu #close-skinMenu").click(function() {
         closeSkinMenu();
     });
     add_upload_tips();
@@ -616,14 +604,6 @@ var pjaxInit = function () {
         try {
             reloadHermit();
         } catch (e) {};
-    }
-    if (mashiro_global.variables.skinSecter === true) {
-        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        if (mashiro_global.variables.isNight) {
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".toc").css("background-color", "rgba(255,255,255,0.8)");
-        }
     }
     $('.iconflat').css('width', '50px').css('height', '50px');
     $('.openNav').css('height', '50px');
