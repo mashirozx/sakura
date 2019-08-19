@@ -300,7 +300,7 @@ function checkskinSecter() {
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
     if (bgurl != "") {
-        $(".skin-menu #" + bgurl + "-bg").click();
+        $(".skin-menu #" + bgurl).click();
     } else {
         $(".skin-menu #white-bg").click();
     }
@@ -328,12 +328,10 @@ $(document).ready(function() {
             $(".skin-menu #" + tagid).click(function() {
                 if (tagid == "white-bg") {
                     mashiro_global.variables.skinSecter = true;
-                    $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
-                    $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
+                    checkskinSecter();
                 } else {
                     mashiro_global.variables.skinSecter = false;
-                    $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-                    $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
+                    checkskinSecter();
                 }
                 if (tagid == "dark-bg") {
                     $("#night-mode-cover").css("visibility", "visible");
@@ -342,37 +340,30 @@ $(document).ready(function() {
                 switch (tagid) {
                     case "white-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
-                        setCookie("bgImgSetting", "white", 30);
                         break;
                     case "sakura-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
-                        setCookie("bgImgSetting", "sakura", 30);
                         break;
                     case "gribs-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
-                        setCookie("bgImgSetting", "gribs", 30);
                         break;
                     case "pixiv-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
-                        setCookie("bgImgSetting", "pixiv", 30);
                         break;
                     case "KAdots-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
-                        setCookie("bgImgSetting", "KAdots", 30);
                         break;
                     case "totem-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
-                        setCookie("bgImgSetting", "totem", 30);
                         break;
                     case "bing-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
-                        setCookie("bgImgSetting", "bing", 30);
                         break;
                     case "dark-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
-                        setCookie("bgImgSetting", "dark", 30);
                         break;
                 }
+                setCookie("bgImgSetting", tagid, 30);
                 closeSkinMenu();
             });
         });
@@ -419,9 +410,9 @@ if (document.body.clientWidth <= 860) {
 
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("moblieGoTop").style.display = "block";
+            addComment.I("moblieGoTop").style.display = "block";
         } else {
-            document.getElementById("moblieGoTop").style.display = "none";
+            addComment.I("moblieGoTop").style.display = "none";
         }
     }
 
@@ -485,8 +476,8 @@ timeSeriesReload();
 
 /*视频feature*/
 function coverVideo() {
-    var video = document.getElementById("coverVideo");
-    var btn = document.getElementById("coverVideo-btn");
+    var video = addComment.I("coverVideo");
+    var btn = addComment.I("coverVideo-btn");
 
     if (video.paused) {
         video.play();
@@ -504,8 +495,8 @@ function coverVideo() {
 }
 
 function killCoverVideo() {
-    var video = document.getElementById("coverVideo");
-    var btn = document.getElementById("coverVideo-btn");
+    var video = addComment.I("coverVideo");
+    var btn = addComment.I("coverVideo-btn");
 
     if (video.paused) {
         //console.info('none:killCoverVideo()');
@@ -520,7 +511,7 @@ function killCoverVideo() {
 
 function coverVideoIni() {
     if ($('video').hasClass('hls')) {
-        var video = document.getElementById('coverVideo');
+        var video = addComment.I('coverVideo');
         var video_src = $('#coverVideo').attr('data-src');
         if(Hls.isSupported()) {
             var hls = new Hls();
@@ -690,8 +681,8 @@ function grin(tag, type, before, after) {
     } else {
         tag = ' :' + tag + ': ';
     }
-    if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-        myField = document.getElementById('comment');
+    if (addComment.I('comment') && addComment.I('comment').type == 'textarea') {
+        myField = addComment.I('comment');
     } else {
         return false;
     }
@@ -1371,8 +1362,8 @@ var home = location.href,
                 var QueryStorage = [];
                 search_a("https://"+document.domain+"/wp-json/cache_search/v1/json/");
                 
-                var otxt = document.getElementById("search-input"),
-                    list = document.getElementById("PostlistBox"),
+                var otxt = addComment.I("search-input"),
+                    list = addComment.I("PostlistBox"),
                     Record = list.innerHTML,
                     searchFlag = null;
                 otxt.oninput = function () {
@@ -1482,7 +1473,7 @@ var home = location.href,
 			                break
 		                }
 	                }
-	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = document.getElementById("PostlistBox"), s.innerHTML = y
+	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = addComment.I("PostlistBox"), s.innerHTML = y
                 }
                 }
             });
@@ -1535,9 +1526,9 @@ var home = location.href,
             var intersectionObserver = new IntersectionObserver(function (entries) {
             	if (entries[0].intersectionRatio <= 0) return;
             	var page_next = $('#pagination a').attr("href");
-            	var load_key = document.getElementById("add_post_time");
+            	var load_key = addComment.I("add_post_time");
             	if(page_next!=undefined && load_key ){
-            		var load_time = document.getElementById("add_post_time").title;
+            		var load_time = addComment.I("add_post_time").title;
             		if(load_time !="233"){
             			console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
             			load_post_timer=setTimeout(function(){load_post();},load_time*1000);
@@ -1856,7 +1847,7 @@ if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventL
         if (!(/^[A-z0-9_-]+$/.test(id))) {
             return;
         }
-        element = document.getElementById(id);
+        element = addComment.I(id);
         if (element) {
             if (!(/^(?:a|select|input|button|textarea)$/i.test(element.tagName))) {
                 element.tabIndex = -1;
