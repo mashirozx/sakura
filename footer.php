@@ -95,7 +95,7 @@
 <script type="text/javascript"><?php echo akina_option('site_statistics'); ?></script>
 </div>
 <?php } ?>
-<div class="changeSkin-gear no-select">
+<div class="changeSkin-gear no-select" style="bottom: -999px;">
     <div class="keys">
         <span id="open-skinMenu">
 		<i class="iconfont icon-gear inline-block rotating"></i>&nbsp; 切换主题 | SCHEME TOOL 

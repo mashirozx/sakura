@@ -309,7 +309,6 @@ if (document.body.clientWidth > 860) {
     setTimeout(function() {
         checkBgImgCookie();
     }, 100);
-    checkBgImgCookie();
 }
 
 function no_right_click() {

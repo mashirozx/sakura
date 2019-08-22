@@ -156,7 +156,8 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('切换网页背景', 'options_framework_theme'),
-		'desc' => __('前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none', 'options_framework_theme'),
+		'desc' => __('前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none。<strong>注意：如果主题是从3.2.3及以下更新过来的，请务必在<a href="/wp-admin/themes.php?page=options-framework">这里</a>修改【版本控制】参数为任意新值！</strong>
+', 'options_framework_theme'),
 		'id' => 'sakura_skin_bg',
 		'std' => 'none https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/sakura.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/plaid2dbf8.jpg https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/star02.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/kyotoanimation.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/dot_orange.gif https://api.mashiro.top/bing/ https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png',
 		'type' => 'textarea');
