@@ -135,6 +135,34 @@ function optionsframework_options() {
 	);
 	
 	$options[] = array(
+		'name' => __('切换主题菜单透明度', 'options_framework_theme'),
+		'desc' => __('调整切换主题菜单透明度，值越小越透明,默认透明度0.8', 'options_framework_theme'),
+		'id' => 'sakura_skin_alpha',
+		'std' => '0.8',
+		'type' => 'select',
+		'options'=>array(
+			'0'=> __('全透明',''),
+			'0.1'=> __('透明度0.1',''),
+			'0.2'=> __('透明度0.2',''),
+			'0.3'=> __('透明度0.3',''),
+			'0.4'=> __('透明度0.4',''),
+			'0.5'=> __('透明度0.5',''),
+			'0.6'=> __('透明度0.6',''),
+			'0.7'=> __('透明度0.7',''),
+			'0.8'=> __('透明度0.8',''),
+			'0.9'=> __('透明度0.9',''),
+			'1'=> __('不透明',''),
+		));	
+
+	$options[] = array(
+		'name' => __('切换网页背景', 'options_framework_theme'),
+		'desc' => __('前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none。<strong>注意：如果主题是从3.2.3及以下更新过来的，请务必在<a href="/wp-admin/themes.php?page=options-framework">这里</a>修改【版本控制】参数为任意新值！</strong>
+', 'options_framework_theme'),
+		'id' => 'sakura_skin_bg',
+		'std' => 'none https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/sakura.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/plaid2dbf8.jpg https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/star02.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/kyotoanimation.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/dot_orange.gif https://api.mashiro.top/bing/ https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png',
+		'type' => 'textarea');
+	
+	$options[] = array(
 	   'name' => __('个人头像', 'options_framework_theme'),
 	   'desc' => __('最佳高度尺寸130*130px。', 'options_framework_theme'),
 	   'id' => 'focus_logo',
