@@ -156,7 +156,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('切换网页背景', 'options_framework_theme'),
-		'desc' => __('前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none。<strong>注意：如果主题是从3.2.3及以下更新过来的，请务必在<a href="/wp-admin/themes.php?page=options-framework">这里</a>修改【版本控制】参数为任意新值！</strong>
+		'desc' => __('前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none。<strong>注意：如果主题是从v3.2.3及以下更新过来的，请务必将本配置页的【其他】标签下的【版本控制】参数修改为任意新值！</strong>
 ', 'options_framework_theme'),
 		'id' => 'sakura_skin_bg',
 		'std' => 'none https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/sakura.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/plaid2dbf8.jpg https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/star02.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/kyotoanimation.png https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/dot_orange.gif https://api.mashiro.top/bing/ https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png',
@@ -874,7 +874,7 @@ function optionsframework_options() {
         
 	$options[] = array(
 		'name' => __('图片库 CDN', 'options_framework_theme'),
-		'desc' => __('注意：填写格式为 http://你的CDN域名/20xx/xx/xx.png。<br>也就是说，原路径为 http://your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域名/2018/05/xx.png 加载', 'options_framework_theme'),
+		'desc' => __('注意：填写格式为 http(s)://你的CDN域名/。<br>也就是说，原路径为 http://your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域名/2018/05/xx.png 加载', 'options_framework_theme'),
 		'id' => 'qiniu_cdn',
 		'std' => '',
 		'type' => 'text');  
