@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.2' );
+define( 'SAKURA_VERSION', '3.2.4' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -28,16 +28,7 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
 }
  
-//live search
-if(akina_option('live_search')){
-    if (file_exists(get_wp_root_path().'/themes/Sakura/cache/search.json')) {
-        if (time() - filemtime(get_wp_root_path().'/themes/Sakura/cache/search.json') > 10800) {
-            require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
-        }
-    }else {
-        require_once(dirname( __FILE__ ) .'/inc/cache-search.php');
-    }
-}
+
 
 function akina_setup() {
 	/*
@@ -1616,4 +1607,67 @@ add_action( 'pre_get_posts', function( $q ){
     if ( $q->is_home() && $q->is_main_query() && $q->get( 'paged' ) > 1 )
         $q->set( 'post__not_in', get_option( 'sticky_posts' ) );
 });
+
+/* 
+ * 定制实时搜索 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/cache_search/v1/json/
+ * @可在cache_search_json()函数末尾通过设置 HTTP header 控制 json 缓存时间
+ */
+function cache_search_json() {
+    $vowels = array("[", "{","]","}","<",">","\r\n", "\r", "\n","-","'",'"','`'," ",":",";",'\\',"  ","toc");
+    $regex = <<<EOS
+/<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
+EOS;
+
+    $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
+    while ($posts->have_posts()) : $posts->the_post();
+        $output .= '{"type":"post","link":"'.get_post_permalink().'","title":'.json_encode(get_the_title()).',"comments":"'.get_comments_number('0', '1', '%').'","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex,' ',get_the_content()))).'},';
+    endwhile;
+    wp_reset_postdata();
+
+    $pages = get_pages();
+    foreach ($pages as $page) {
+        $output .= '{"type":"page","link":"'.get_page_link($page).'","title":'.json_encode($page->post_title).',"comments":"'.$page->comment_count.'","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex,' ',$page->post_content))).'},';
+    }
+
+    $tags = get_tags();
+    foreach ($tags as $tag) {
+        $output .= '{"type":"tag","link":"'.get_term_link($tag).'","title":'.json_encode($tag->name).',"comments":"","text":""},';
+    }
+
+    $categories = get_categories();
+    foreach ($categories as $category) {
+        $output .= '{"type":"category","link":"'.get_term_link($category).'","title":'.json_encode($category->name).',"comments":"","text":""},';
+    }
+    if(akina_option('live_search_comment')){
+        $comments = get_comments();
+        foreach ($comments as $comment) {
+            $is_private = get_comment_meta($comment->comment_ID, '_private', true);
+            if($is_private){
+                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：该评论为私密评论").'},';
+                continue;
+            }else{
+                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex," ",$comment->comment_author."：".$comment->comment_content))).'},';
+            }
+        }
+    }
+
+    $output = substr($output,0,strlen($output)-1);
+
+    $data = '['.$output.']';
+    $result = new WP_REST_Response(json_decode($data), 200);
+    $result->set_headers(array('Content-Type' => 'application/json',
+                               'Cache-Control' => 'max-age=3600')); // json 缓存控制
+ 
+    return $result;
+}
+if(akina_option('live_search')){
+	add_action( 'rest_api_init', function () {
+		register_rest_route( 'cache_search/v1', '/json/', array(
+		'methods' => 'GET',
+		'callback' => 'cache_search_json',
+	) );
+	} );
+}
+
 //code end 

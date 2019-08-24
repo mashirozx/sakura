@@ -5,9 +5,7 @@
  * @date 2019.8.3
  */
 mashiro_global.variables = new function () {
-    this.has_bot_ui = false;
-    this.isNight = false;
-    this.skinSecter = false;
+    this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
     this.normalize = function () {
@@ -16,6 +14,7 @@ mashiro_global.ini = new function () {
         mashiro_global.post_list_show_animation.ini();
         copy_code_block();
         coverVideoIni();
+        checkskinSecter();
     }
     this.pjax = function () {
         pjaxInit();
@@ -23,6 +22,7 @@ mashiro_global.ini = new function () {
         mashiro_global.post_list_show_animation.ini();
         copy_code_block();
         coverVideoIni();
+        checkskinSecter();
     }
 }
 
@@ -288,30 +288,27 @@ function scrollBar() {
 }
 scrollBar();
 
+function checkskinSecter() {
+    if (mashiro_global.variables.skinSecter === false) {
+        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
+        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
+    } else {
+        $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
+        $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
+    }
+}
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
     if (bgurl != "") {
-        if (bgurl == "https://view.moezx.cc/images/2018/01/03/sakura.png" || bgurl == "https://view.moezx.cc/images/2018/01/03/plaid2dbf8.jpg" || bgurl == "https://view.moezx.cc/images/2018/01/10/star02.png" || bgurl == "https://view.moezx.cc/images/2018/01/24/kyotoanimation.png" || bgurl == "https://view.moezx.cc/images/2018/03/27/dot_orange.gif") {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = false;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + bgurl + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        } else if (bgurl == "https://api.shino.cc/bing/") {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = true;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + bgurl + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        } else {}
-    } else {}
+        $(".skin-menu #" + bgurl).click();
+    } else {
+        $(".skin-menu #white-bg").click();
+    }
 }
 if (document.body.clientWidth > 860) {
-    checkBgImgCookie();
+    setTimeout(function() {
+        checkBgImgCookie();
+    }, 100);
 }
 
 function no_right_click() {
@@ -320,87 +317,68 @@ function no_right_click() {
     });
 }
 no_right_click();
-if (mashiro_global.variables.isNight) {
-    $(".changeSkin-gear, .toc").css("background", "rgba(255,255,255,0.8)");
-} else {
-    $(".changeSkin-gear, .toc").css("background", "none");
-}
-$(document).ready(function () {
-    function changeBG(tagid, url) {
-        $(".skin-menu " + tagid).click(function () {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = false;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + url + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-            closeSkinMenu();
-            setCookie("bgImgSetting", url, 30);
+$(document).ready(function() {
+    function checkskin_bg(a){
+        return a == "none" ? "" : a
+    }
+    function changeBG() {
+        $(".menu-list li").each(function() {
+            var tagid = this.id;
+            $(".skin-menu #" + tagid).click(function() {
+                if (tagid == "white-bg") {
+                    mashiro_global.variables.skinSecter = true;
+                    checkskinSecter();
+                } else {
+                    mashiro_global.variables.skinSecter = false;
+                    checkskinSecter();
+                }
+                if (tagid == "dark-bg") {
+                    $("#night-mode-cover").css("visibility", "visible");
+                } else
+                    $("#night-mode-cover").css("visibility", "hidden");
+                switch (tagid) {
+                    case "white-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
+                        break;
+                    case "sakura-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
+                        break;
+                    case "gribs-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
+                        break;
+                    case "pixiv-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
+                        break;
+                    case "KAdots-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
+                        break;
+                    case "totem-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
+                        break;
+                    case "bing-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
+                        break;
+                    case "dark-bg":
+                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
+                        break;
+                }
+                setCookie("bgImgSetting", tagid, 30);
+                closeSkinMenu();
+            });
         });
     }
-
-    function changeBGnoTrans(tagid, url) {
-        $(".skin-menu " + tagid).click(function () {
-            mashiro_global.variables.skinSecter = true;
-            mashiro_global.variables.isNight = true;
-            $("#night-mode-cover").css("visibility", "hidden");
-            $("body").css("background-image", "url(" + url + ")");
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-            $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-            closeSkinMenu();
-            setCookie("bgImgSetting", url, 30);
-        });
-    }
-    changeBG("#sakura-bg", "https://view.moezx.cc/images/2018/01/03/sakura.png");
-    changeBG("#gribs-bg", "https://view.moezx.cc/images/2018/01/03/plaid2dbf8.jpg");
-    changeBG("#pixiv-bg", "https://view.moezx.cc/images/2018/01/10/star02.png");
-    changeBG("#KAdots-bg", "https://view.moezx.cc/images/2018/01/24/kyotoanimation.png");
-    changeBG("#totem-bg", "https://view.moezx.cc/images/2018/03/27/dot_orange.gif");
-    changeBGnoTrans("#bing-bg", "https://api.shino.cc/bing/");
-    $(".skin-menu #white-bg").click(function () {
-        mashiro_global.variables.skinSecter = false;
-        mashiro_global.variables.isNight = false;
-        $("#night-mode-cover").css("visibility", "hidden");
-        $("body").css("background-image", "none");
-        $(".blank").css("background-color", "rgba(255,255,255,.0)");
-        $(".pattern-center-sakura").removeClass('pattern-center-sakura').addClass('pattern-center');
-        $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
-        closeSkinMenu();
-        setCookie("bgImgSetting", "Hello World!", 30);
-    });
-    $(".skin-menu #dark-bg").click(function () {
-        mashiro_global.variables.skinSecter = true;
-        mashiro_global.variables.isNight = true;
-        $("body").css("background-image", "url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png)");
-        $(".blank").css("background-color", "rgba(255,255,255,.8)");
-        $("#night-mode-cover").css("visibility", "visible");
-        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        closeSkinMenu();
-    });
+    changeBG();
 
     function closeSkinMenu() {
         $(".skin-menu").removeClass('show');
-        setTimeout(function () {
+        setTimeout(function() {
             $(".changeSkin-gear").css("visibility", "visible");
         }, 300);
-        if (mashiro_global.variables.isNight) {
-            $(".changeSkin-gear, .toc").css("background", "rgba(255,255,255,0.8)");
-        } else {
-            $(".changeSkin-gear, .toc").css("background", "none");
-        }
     }
-    $(".changeSkin-gear").click(function () {
+    $(".changeSkin-gear").click(function() {
         $(".skin-menu").toggleClass('show');
-        if (mashiro_global.variables.isNight) {
-            $(".changeSkin").css("background", "rgba(255,255,255,0.8)");
-        } else {
-            $(".changeSkin").css("background", "none");
-        }
     })
-    $(".skin-menu #close-skinMenu").click(function () {
+    $(".skin-menu #close-skinMenu").click(function() {
         closeSkinMenu();
     });
     add_upload_tips();
@@ -431,9 +409,9 @@ if (document.body.clientWidth <= 860) {
 
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("moblieGoTop").style.display = "block";
+            addComment.I("moblieGoTop").style.display = "block";
         } else {
-            document.getElementById("moblieGoTop").style.display = "none";
+            addComment.I("moblieGoTop").style.display = "none";
         }
     }
 
@@ -497,8 +475,8 @@ timeSeriesReload();
 
 /*视频feature*/
 function coverVideo() {
-    var video = document.getElementById("coverVideo");
-    var btn = document.getElementById("coverVideo-btn");
+    var video = addComment.I("coverVideo");
+    var btn = addComment.I("coverVideo-btn");
 
     if (video.paused) {
         video.play();
@@ -516,8 +494,8 @@ function coverVideo() {
 }
 
 function killCoverVideo() {
-    var video = document.getElementById("coverVideo");
-    var btn = document.getElementById("coverVideo-btn");
+    var video = addComment.I("coverVideo");
+    var btn = addComment.I("coverVideo-btn");
 
     if (video.paused) {
         //console.info('none:killCoverVideo()');
@@ -532,7 +510,7 @@ function killCoverVideo() {
 
 function coverVideoIni() {
     if ($('video').hasClass('hls')) {
-        var video = document.getElementById('coverVideo');
+        var video = addComment.I('coverVideo');
         var video_src = $('#coverVideo').attr('data-src');
         if(Hls.isSupported()) {
             var hls = new Hls();
@@ -616,14 +594,6 @@ var pjaxInit = function () {
         try {
             reloadHermit();
         } catch (e) {};
-    }
-    if (mashiro_global.variables.skinSecter === true) {
-        $(".pattern-center").removeClass('pattern-center').addClass('pattern-center-sakura');
-        $(".headertop-bar").removeClass('headertop-bar').addClass('headertop-bar-sakura');
-        if (mashiro_global.variables.isNight) {
-            $(".blank").css("background-color", "rgba(255,255,255,1)");
-            $(".toc").css("background-color", "rgba(255,255,255,0.8)");
-        }
     }
     $('.iconflat').css('width', '50px').css('height', '50px');
     $('.openNav').css('height', '50px');
@@ -710,8 +680,8 @@ function grin(tag, type, before, after) {
     } else {
         tag = ' :' + tag + ': ';
     }
-    if (document.getElementById('comment') && document.getElementById('comment').type == 'textarea') {
-        myField = document.getElementById('comment');
+    if (addComment.I('comment') && addComment.I('comment').type == 'textarea') {
+        myField = addComment.I('comment');
     } else {
         return false;
     }
@@ -1389,10 +1359,10 @@ var home = location.href,
                 $('html').css('overflow-y','hidden');
                 if (mashiro_option.live_search) {
                 var QueryStorage = [];
-                search_a("https://"+document.domain+"/wp-content/themes/Sakura/cache/search.json");
+                search_a("https://"+document.domain+"/wp-json/cache_search/v1/json/");
                 
-                var otxt = document.getElementById("search-input"),
-                    list = document.getElementById("PostlistBox"),
+                var otxt = addComment.I("search-input"),
+                    list = addComment.I("PostlistBox"),
                     Record = list.innerHTML,
                     searchFlag = null;
                 otxt.oninput = function () {
@@ -1502,7 +1472,7 @@ var home = location.href,
 			                break
 		                }
 	                }
-	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = document.getElementById("PostlistBox"), s.innerHTML = y
+	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = addComment.I("PostlistBox"), s.innerHTML = y
                 }
                 }
             });
@@ -1555,9 +1525,9 @@ var home = location.href,
             var intersectionObserver = new IntersectionObserver(function (entries) {
             	if (entries[0].intersectionRatio <= 0) return;
             	var page_next = $('#pagination a').attr("href");
-            	var load_key = document.getElementById("add_post_time");
+            	var load_key = addComment.I("add_post_time");
             	if(page_next!=undefined && load_key ){
-            		var load_time = document.getElementById("add_post_time").title;
+            		var load_time = addComment.I("add_post_time").title;
             		if(load_time !="233"){
             			console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
             			load_post_timer=setTimeout(function(){load_post();},load_time*1000);
@@ -1876,7 +1846,7 @@ if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventL
         if (!(/^[A-z0-9_-]+$/.test(id))) {
             return;
         }
-        element = document.getElementById(id);
+        element = addComment.I(id);
         if (element) {
             if (!(/^(?:a|select|input|button|textarea)$/i.test(element.tagName))) {
                 element.tabIndex = -1;

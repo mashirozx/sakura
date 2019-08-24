@@ -45,6 +45,10 @@ if ( akina_option('theme_skin') ) { ?>
     background: <?php echo akina_option('theme_skin'); ?>
 }
 
+.changeSkin-gear,.toc{
+    background:rgba(255,255,255,<?php echo akina_option('sakura_skin_alpha','') ?>);
+}
+
 <?php if(akina_option('entry_content_theme') == "sakura"){ ?>
 .entry-content th {
     background-color: <?php echo akina_option('theme_skin'); ?>
