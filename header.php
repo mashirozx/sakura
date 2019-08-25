@@ -79,7 +79,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 </head>
 <body <?php body_class(); ?>>
     <?php
-    if(get_template_directory_uri() != get_site_url().'/wp-content/themes/Sakura') echo '<div style="position:fixed;height:100%;width:100%;top:0;left:0;font-size:20px;z-index:999999;background-color: #fff;">Plz rename theme folder name as <span style="color:red">Sakura</span>!<br>请将主题文件夹名改为 <span style="color:red">Sakura</span>！</div>';
+    if(get_template_directory_uri() != get_site_url().'/wp-content/themes/Sakura') echo '<div style="position:fixed;height:100%;width:100%;top:0;left:0;font-size:20px;z-index:999999;background-color: #fff;">Plz rename the theme folder name as <span style="color:red">Sakura</span>!<br>请将主题文件夹名改为 <span style="color:red">Sakura</span>！</div>';
     php?>
     <div class="scrollbar" id="bar"></div>
 	<section id="main-container">
