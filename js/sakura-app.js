@@ -11,7 +11,7 @@ mashiro_global.ini = new function () {
     this.normalize = function () {
         lazyload();
         social_share();
-        mashiro_global.post_list_show_animation.ini();
+        post_list_show_animation();
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
@@ -19,7 +19,7 @@ mashiro_global.ini = new function () {
     this.pjax = function () {
         pjaxInit();
         social_share();
-        mashiro_global.post_list_show_animation.ini();
+        post_list_show_animation();
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
@@ -64,31 +64,25 @@ function imgError(ele, type) {
     }
 } 
 
-mashiro_global.post_list_show_animation = new function () {
-    this.ini = function (ajax) {
-        $("article.post-list-thumb").each(function (i) {
-            if (ajax) {
-                var window_height = $(window).height();
-            } else {
-                if ($(".headertop").hasClass("headertop-bar")) {
-                    var window_height = 0;
-                } else {
-                    if (mashiro_option.land_at_home) {
-                        var window_height = $(window).height() - 300;
-                    } else {
-                        var window_height = $(window).height();
-                    }
+function post_list_show_animation() {
+    if ($("article").hasClass("post-list-thumb")) {
+        const options = {
+            root: null,
+            threshold: [0.66]
+        }
+        var io = new IntersectionObserver(callback, options);
+        let articles = document.querySelectorAll('.post-list-thumb');
+        function callback(entries) {
+            entries.forEach((article) => {
+                if (article.isIntersecting) {
+                    article.target.classList.add("post-list-show");
+                    io.unobserve(article.target)
                 }
-            }
-            var article_height = $("article.post-list-thumb").eq(i).offset().top;
-            if ($(window).height() + $(window).scrollTop() >= article_height)
-                $("article.post-list-thumb").eq(i).addClass('post-list-show');
-            $(window).scroll(function () {
-                var scrolltop = $(window).scrollTop();
-                if (scrolltop + window_height >= article_height && scrolltop)
-                    $("article.post-list-thumb").eq(i).addClass("post-list-show");
-            });
-        });
+            })
+        }
+        articles.forEach((article) => {
+            io.observe(article)
+        })
     }
 }
 mashiro_global.font_control = new function () {
@@ -1554,7 +1548,7 @@ var home = location.href,
                         $("#pagination a").removeClass("loading").text("Previous");
                         $('#add_post span').removeClass("loading").text("");
                         lazyload();
-                        mashiro_global.post_list_show_animation.ini(50);
+                        post_list_show_animation();
                         if (nextHref != undefined) {
                             $("#pagination a").attr("href", nextHref);
 							//加载完成上滑
