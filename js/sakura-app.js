@@ -89,6 +89,7 @@ function post_list_show_animation() {
         })
     }
 }
+window.onpopstate = post_list_show_animation;
 mashiro_global.font_control = new function () {
     this.change_font = function () {
         if ($("body").hasClass("serif")) {
