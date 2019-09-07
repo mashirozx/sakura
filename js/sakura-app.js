@@ -798,9 +798,6 @@ if(mashiro_option.float_player_on) {
                             apSwitchTag =0;
                         }
                     });
-                    $(".aplayer-icon-loop").click(function(){
-
-                    });
                 }
                 var b = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r';
                 'undefined' != typeof meting_api && (b = meting_api);
