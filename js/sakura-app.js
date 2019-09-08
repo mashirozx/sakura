@@ -782,12 +782,18 @@ if(mashiro_option.float_player_on) {
                         lrcTag = 2;
                     });
                     var apSwitchTag = 0;
+                    var aplayerlist=$(".aplayer-list");
+                    aplayerlist.removeClass( "aplayer-list-hide" );
+                    aplayerlist.css({maxHeight:'0px'});
                     $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
                     $(".aplayer-miniswitcher").click(function(){
                         if (apSwitchTag == 0) {
+                            aplayerlist.removeClass( "aplayer-list-hide" );
+                            aplayerlist.animate({maxHeight:'250px'});
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass( "ap-hover" );
                             apSwitchTag = 1;
                         } else {
+                            aplayerlist.css({maxHeight:'0px'});
                             $(".aplayer.aplayer-fixed .aplayer-body").addClass( "ap-hover" );
                             apSwitchTag =0;
                         }
