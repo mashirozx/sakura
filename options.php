@@ -252,6 +252,17 @@ function optionsframework_options() {
 			'round' => __('圆形', ''),
 			'square' => __('方形', '')
 		));	
+
+	$options[] = array(
+		'name' => __('首页文章特色图对齐方式（仅对图文风格生效，默认左右交替）', 'akina'),
+		'id' => 'feature_align',
+		'std' => "alternate",
+		'type' => "radio",
+		'options' => array(
+			'left' => __('向左对齐', ''),
+			'right' => __('向右对齐', ''),
+			'alternate' => __('左右交替', '')
+		));	
         
     $options[] = array(
 		'name' => __('默认文章特色图', 'options_framework_theme'),

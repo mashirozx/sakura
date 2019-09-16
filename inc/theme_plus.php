@@ -40,18 +40,14 @@ function get_avatar_profile_url(){
 
 
 /*
- * 首页随机背景图
- * NB: I can think of this
+ * 随机图
  */
 function get_random_bg_url(){
-  $arr = array();
-  for($i=0; $i<6; $i++){ 
-    if(akina_option('focus_img_'.$i)){
-      $arr[] = akina_option('focus_img_'.$i);
+    if ( empty( akina_option('default_feature_image' )) ) {
+        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
+    } else {
+        return akina_option('default_feature_image').'?'.rand(1,1000);
     }
-  }
-  $url = rand(0, count($arr)-1);
-  return $arr[$url];
 }
 
 
