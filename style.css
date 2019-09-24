@@ -8048,7 +8048,8 @@ a.toc-link {
     background: #fff;
     color: #21252b
 }
-
+.hljs span::selection,
+.hljs::selection ,
 .hljs-ln-line span::selection,
 .hljs-ln-line::selection {
     background: #fff;
