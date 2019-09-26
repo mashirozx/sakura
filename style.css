@@ -8480,4 +8480,11 @@ td.hljs-ln-numbers {
   background: #ddd;
   color: black;
 }
+h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id*=toc-head]::before,h5[id*=toc-head]::before,h6[id*=toc-head]::before {
+	display:block;
+	content:" ";
+	height:80px;
+	margin-top:-80px;
+	visibility:hidden
+}
 

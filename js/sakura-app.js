@@ -546,20 +546,10 @@ function tableOfContentScroll(flag) {
     } else if ($("div").hasClass("have-toc") == false && $("div").hasClass("has-toc") == false) {
         $(".toc-container").remove();
     } else {
-        $(document).ready(function () {
-            if ($("div").hasClass("toc")) {
-                $(".toc-container").css("height", $(".site-content").outerHeight());
-                setTimeout(function () {
-                    $(".toc-container").css("height", $(".site-content").outerHeight());
-                }, 1000);
-                setTimeout(function () {
-                    $(".toc-container").css("height", $(".site-content").outerHeight());
-                }, 6000);
-            }
-        });
         if (flag) {
-            var id = 1;
-            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function () {
+            var id = 1,
+                heading_fix=$("div").hasClass("pattern-attachment-img") ? -75 : 200;
+            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function() {
                 var hyphenated = "toc-head-" + id;
                 this.id = hyphenated;
                 id++;
@@ -568,6 +558,7 @@ function tableOfContentScroll(flag) {
                 tocSelector: '.toc',
                 contentSelector: ['.entry-content', '.links'],
                 headingSelector: 'h1, h2, h3, h4, h5',
+                headingsOffset: heading_fix-window.innerHeight/2,
             });
         }
     }
