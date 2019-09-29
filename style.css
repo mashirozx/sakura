@@ -8048,7 +8048,8 @@ a.toc-link {
     background: #fff;
     color: #21252b
 }
-
+.hljs span::selection,
+.hljs::selection ,
 .hljs-ln-line span::selection,
 .hljs-ln-line::selection {
     background: #fff;
@@ -8478,5 +8479,12 @@ td.hljs-ln-numbers {
 #coverVideo-btn:hover {
   background: #ddd;
   color: black;
+}
+h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id*=toc-head]::before,h5[id*=toc-head]::before,h6[id*=toc-head]::before {
+	display:block;
+	content:" ";
+	height:80px;
+	margin-top:-80px;
+	visibility:hidden
 }
 
