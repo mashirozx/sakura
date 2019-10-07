@@ -15,6 +15,7 @@ mashiro_global.ini = new function () {
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
+        scrollBar();
     }
     this.pjax = function () {
         pjaxInit();
@@ -89,7 +90,6 @@ function post_list_show_animation() {
         })
     }
 }
-window.onpopstate = post_list_show_animation;
 mashiro_global.font_control = new function () {
     this.change_font = function () {
         if ($("body").hasClass("serif")) {
@@ -287,7 +287,6 @@ function scrollBar() {
         });
     }
 }
-scrollBar();
 
 function checkskinSecter() {
     if (mashiro_global.variables.skinSecter === false) {
@@ -300,10 +299,10 @@ function checkskinSecter() {
 }
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
-    if (bgurl != "") {
-        $("#" + bgurl).click();
-    } else {
+    if (!bgurl) {
         $("#white-bg").click();
+    } else {
+        $("#" + bgurl).click();
     }
 }
 if (document.body.clientWidth > 860) {
@@ -774,13 +773,11 @@ if(mashiro_option.float_player_on) {
                     });
                     var apSwitchTag = 0;
                     var aplayerlist=$(".aplayer-list");
-                    aplayerlist.removeClass( "aplayer-list-hide" );
-                    aplayerlist.css({maxHeight:'0px'});
+                    aplayerlist.removeClass( "aplayer-list-hide" ).css({maxHeight:'0px'});
                     $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
                     $(".aplayer-miniswitcher").click(function(){
                         if (apSwitchTag == 0) {
-                            aplayerlist.removeClass( "aplayer-list-hide" );
-                            aplayerlist.animate({maxHeight:'250px'});
+                            aplayerlist.removeClass( "aplayer-list-hide" ).animate({maxHeight:'250px'});
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass( "ap-hover" );
                             apSwitchTag = 1;
                         } else {
@@ -1257,8 +1254,7 @@ var home = location.href,
                     s.oncanplay = function () {
                         Siren.splay();
                         $('#video-add').show();
-                        _btn.addClass('videolive');
-                        _btn.addClass('haslive');
+                        _btn.addClass('videolive').addClass('haslive');
                     }
                 } else {
                     if ($(this).hasClass('video-pause')) {
@@ -1275,9 +1271,7 @@ var home = location.href,
                 s.onended = function () {
                     $('#bgvideo').attr('src', '');
                     $('#video-add').hide();
-                    _btn.addClass('loadvideo').removeClass('video-pause');
-                    _btn.removeClass('videolive');
-                    _btn.removeClass('haslive');
+                    _btn.addClass('loadvideo').removeClass('video-pause').removeClass('videolive').removeClass('haslive');
                     $('.focusinfo').css({
                         "top": "49.3%"
                     });
@@ -1496,9 +1490,7 @@ var home = location.href,
             });
         },
         NH: function () {
-            var h1 = 0,
-                h2 = 50,
-                ss = $(document).scrollTop();
+            var h1 = 0;
             $(window).scroll(function () {
                 var s = $(document).scrollTop(),cached = $('.site-header');
                 if (s == h1) {
@@ -1506,15 +1498,6 @@ var home = location.href,
                 }
                 if (s > h1) {
                     cached.addClass('yya');
-                }
-                if (s > h2) {
-                    cached.addClass('gizle');
-                    if (s > ss) {
-                        cached.removeClass('sabit');
-                    } else {
-                        cached.addClass('sabit');
-                    }
-                    ss = s;
                 }
             });
         },
@@ -1745,6 +1728,7 @@ var home = location.href,
                 $('body,html').animate({
                     scrollTop: 0,
                 }, scroll_top_duration);
+                return false;
             });
         }
     }
@@ -1808,6 +1792,7 @@ $(function () {
             Siren.PE();
             Siren.CE();
             timeSeriesReload(true);
+            post_list_show_animation();
         }, false);
     }
     $.fn.postLike = function () {
