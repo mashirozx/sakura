@@ -1515,7 +1515,7 @@ function html_tag_parser($content) {
     if(!is_feed()) {   
         $content=preg_replace(
             '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
-            "<img\$1class=\"lazyload\" data-src=\"\$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\"\$3 >\n<noscript>\$0</noscript>",
+            "<img $1 class=\"lazyload\" data-src=\"$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\" $3 >\n<noscript>$0</noscript>",
             $content
         ); 
         
