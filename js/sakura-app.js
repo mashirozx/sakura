@@ -8,7 +8,7 @@ mashiro_global.variables = new function () {
     this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
-    this.normalize = function () {
+    this.normalize = function () { // initial functions when page first load (首次加载页面时的初始化函数)
         lazyload();
         social_share();
         post_list_show_animation();
@@ -17,7 +17,7 @@ mashiro_global.ini = new function () {
         checkskinSecter();
         scrollBar();
     }
-    this.pjax = function () {
+    this.pjax = function () { // pjax reload functions (pjax 重载函数)
         pjaxInit();
         social_share();
         post_list_show_animation();
