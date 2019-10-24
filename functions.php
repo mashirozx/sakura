@@ -548,7 +548,7 @@ function get_link_items(){
   $linkcats = get_terms( 'link_category' );
   	if ( !empty($linkcats) ) {
       	foreach( $linkcats as $linkcat){            
-        	$result .=  '<h3 class="link-title">'.$linkcat->name.'</h3>';
+        	$result .=  '<h3 class="link-title"><span class="link-fix">'.$linkcat->name.'</span></h3>';
         	if( $linkcat->description ) $result .= '<div class="link-description">' . $linkcat->description . '</div>';
         	$result .=  get_the_link_items($linkcat->term_id);
       	}

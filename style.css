@@ -2981,8 +2981,13 @@ span.sitename {
     font-weight: 400;
     color: #6D6D6D;
     padding-left: 10px;
-    border-left: 3px solid orange;
+    border-left: none;
     margin: 50px 0 20px
+}
+
+.link-title span.link-fix {
+    padding-left:10px;
+    border-left:3px solid orange;
 }
 
 .links ul li:before {
