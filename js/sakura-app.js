@@ -16,6 +16,9 @@ mashiro_global.ini = new function () {
         coverVideoIni();
         checkskinSecter();
         scrollBar();
+			$(".hearthstone-deck").each(function () { 
+  $(this).attr('height', $(this).width()*5/9+'px');
+});
     }
     this.pjax = function () { // pjax reload functions (pjax 重载函数)
         pjaxInit();
@@ -24,8 +27,13 @@ mashiro_global.ini = new function () {
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
+			reloadHermit();
+			$(".hearthstone-deck").each(function () { 
+  $(this).attr('height', $(this).width()*5/9+'px');
+});
     }
 }
+
 
 function setCookie(name, value, days) {
     var expires = "";
