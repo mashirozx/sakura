@@ -1,5 +1,5 @@
 /*！
- * Sakura application bundle theme ver 3.2.0
+ * Sakura theme application bundle
  * @author Mashiro
  * @url https://2heng.xin
  * @date 2019.8.3
@@ -8,18 +8,19 @@ mashiro_global.variables = new function () {
     this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
-    this.normalize = function () {
+    this.normalize = function () { // initial functions when page first load (首次加载页面时的初始化函数)
         lazyload();
         social_share();
-        mashiro_global.post_list_show_animation.ini();
+        post_list_show_animation();
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
+        scrollBar();
     }
-    this.pjax = function () {
+    this.pjax = function () { // pjax reload functions (pjax 重载函数)
         pjaxInit();
         social_share();
-        mashiro_global.post_list_show_animation.ini();
+        post_list_show_animation();
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
@@ -64,31 +65,29 @@ function imgError(ele, type) {
     }
 } 
 
-mashiro_global.post_list_show_animation = new function () {
-    this.ini = function (ajax) {
-        $("article.post-list-thumb").each(function (i) {
-            if (ajax) {
-                var window_height = $(window).height();
-            } else {
-                if ($(".headertop").hasClass("headertop-bar")) {
-                    var window_height = 0;
+function post_list_show_animation() {
+    if ($("article").hasClass("post-list-thumb")) {
+        var options = {
+            root: null,
+            threshold: [0.66]
+        }
+        var io = new IntersectionObserver(callback, options);
+        var articles = document.querySelectorAll('.post-list-thumb');
+        function callback(entries) {
+            entries.forEach((article) => {
+                if (article.target.classList.contains("post-list-show")) {
+                    io.unobserve(article.target)
                 } else {
-                    if (mashiro_option.land_at_home) {
-                        var window_height = $(window).height() - 300;
-                    } else {
-                        var window_height = $(window).height();
+                    if (article.isIntersecting) {
+                        article.target.classList.add("post-list-show");
+                        io.unobserve(article.target)
                     }
                 }
-            }
-            var article_height = $("article.post-list-thumb").eq(i).offset().top;
-            if ($(window).height() + $(window).scrollTop() >= article_height)
-                $("article.post-list-thumb").eq(i).addClass('post-list-show');
-            $(window).scroll(function () {
-                var scrolltop = $(window).scrollTop();
-                if (scrolltop + window_height >= article_height && scrolltop)
-                    $("article.post-list-thumb").eq(i).addClass("post-list-show");
-            });
-        });
+            })
+        }
+        articles.forEach((article) => {
+            io.observe(article)
+        })
     }
 }
 mashiro_global.font_control = new function () {
@@ -166,6 +165,7 @@ if (Poi.reply_link_version == 'new'){
 }
 
 function attach_image() {
+    var cached = $('.insert-image-tips');
     $('#upload-img-file').change(function () {
         if (this.files.length > 10) {
             addComment.createButterbar("每次上传上限为10张.<br>10 files max per request.");
@@ -187,13 +187,13 @@ function attach_image() {
                 contentType: false,
                 data: formData,
                 beforeSend: function (xhr) {
-                    $('.insert-image-tips').html('<i class="fa fa-spinner rotating" aria-hidden="true"></i>');
+                    cached.html('<i class="fa fa-spinner rotating" aria-hidden="true"></i>');
                     addComment.createButterbar("上传中...<br>Uploading...");
                 },
                 success: function (res) {
-                    $('.insert-image-tips').html('<i class="fa fa-check" aria-hidden="true"></i>');
+                    cached.html('<i class="fa fa-check" aria-hidden="true"></i>');
                     setTimeout(function () {
-                        $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
+                        cached.html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
                     var get_the_url = res.data.url;
                     $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
@@ -202,10 +202,10 @@ function attach_image() {
                     grin(res.data.url.replace('https://i.loli.net/', '{UPLOAD}'), type = 'Img');
                 },
                 error: function () {
-                    $('.insert-image-tips').html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>');
+                    cached.html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>');
                     alert("上传失败，请重试.\nUpload failed, please try again.");
                     setTimeout(function () {
-                        $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
+                        cached.html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
                 }
             })
@@ -231,7 +231,7 @@ function add_upload_tips() {
 
 function click_to_view_image() {
     $(".comment_inline_img").click(function () {
-        var temp_url = $(this).attr('src');
+        var temp_url = this.src;
         window.open(temp_url);
     });
 }
@@ -260,33 +260,33 @@ function cmt_showPopup(ele) {
 function scrollBar() {
     if (document.body.clientWidth > 860) {
         $(window).scroll(function () {
-            var s = $(window).scrollTop();
-            var a = $(document).height();
-            var b = $(window).height();
-            var result = parseInt(s / (a - b) * 100);
-            $("#bar").css("width", result + "%");
+            var s = $(window).scrollTop(),
+                a = $(document).height(),
+                b = $(window).height(),
+                result = parseInt(s / (a - b) * 100),
+                cached = $("#bar");
+            cached.css("width", result + "%");
             if (false) {
                 if (result >= 0 && result <= 19)
-                    $("#bar").css("background", "#cccccc");
+                    cached.css("background", "#cccccc");
                 if (result >= 20 && result <= 39)
-                    $("#bar").css("background", "#50bcb6");
+                    cached.css("background", "#50bcb6");
                 if (result >= 40 && result <= 59)
-                    $("#bar").css("background", "#85c440");
+                    cached.css("background", "#85c440");
                 if (result >= 60 && result <= 79)
-                    $("#bar").css("background", "#f2b63c");
+                    cached.css("background", "#f2b63c");
                 if (result >= 80 && result <= 99)
-                    $("#bar").css("background", "#FF0000");
+                    cached.css("background", "#FF0000");
                 if (result == 100)
-                    $("#bar").css("background", "#5aaadb");
+                    cached.css("background", "#5aaadb");
             } else {
-                $("#bar").css("background", "orange");
+                cached.css("background", "orange");
             }
             $(".toc-container").css("height", $(".site-content").outerHeight());
             $(".skin-menu").removeClass('show');
         });
     }
 }
-scrollBar();
 
 function checkskinSecter() {
     if (mashiro_global.variables.skinSecter === false) {
@@ -299,10 +299,10 @@ function checkskinSecter() {
 }
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
-    if (bgurl != "") {
-        $(".skin-menu #" + bgurl).click();
+    if (!bgurl) {
+        $("#white-bg").click();
     } else {
-        $(".skin-menu #white-bg").click();
+        $("#" + bgurl).click();
     }
 }
 if (document.body.clientWidth > 860) {
@@ -322,9 +322,10 @@ $(document).ready(function() {
         return a == "none" ? "" : a
     }
     function changeBG() {
-        $(".menu-list li").each(function() {
+        var cached=$(".menu-list");
+        cached.find("li").each(function() {
             var tagid = this.id;
-            $(".skin-menu #" + tagid).click(function() {
+            cached.on("click", "#" + tagid, function(){
                 if (tagid == "white-bg") {
                     mashiro_global.variables.skinSecter = true;
                     checkskinSecter();
@@ -422,8 +423,9 @@ if (document.body.clientWidth <= 860) {
 }
 
 function timeSeriesReload(flag) {
+    var cached = $('#archives');
     if (flag == true) {
-        $('#archives span.al_mon').click(function () {
+        cached.find('span.al_mon').click(function () {
             $(this).next().slideToggle(400);
             return false;
         });
@@ -433,26 +435,26 @@ function timeSeriesReload(flag) {
             $('#al_expand_collapse,#archives span.al_mon').css({
                 cursor: "s-resize"
             });
-            $('#archives span.al_mon').each(function () {
+            cached.find('span.al_mon').each(function () {
                 var num = $(this).next().children('li').length;
                 $(this).children('#post-num').text(num);
             });
-            var $al_post_list = $('#archives ul.al_post_list'),
-                $al_post_list_f = $('#archives ul.al_post_list:first');
+            var $al_post_list = cached.find('ul.al_post_list'),
+                $al_post_list_f = cached.find('ul.al_post_list:first');
             $al_post_list.hide(1, function () {
                 $al_post_list_f.show();
             });
-            $('#archives span.al_mon').click(function () {
+            cached.find('span.al_mon').click(function () {
                 $(this).next().slideToggle(400);
                 return false;
             });
             if (document.body.clientWidth > 860) {
-                $('#archives li.al_li').mouseover(function () {
+                cached.find('li.al_li').mouseover(function () {
                     $(this).children('.al_post_list').show(400);
                     return false;
                 });
                 if (false) {
-                    $('#archives li.al_li').mouseout(function () {
+                    cached.find('li.al_li').mouseout(function () {
                         $(this).children('.al_post_list').hide(400);
                         return false;
                     });
@@ -543,28 +545,19 @@ function tableOfContentScroll(flag) {
     } else if ($("div").hasClass("have-toc") == false && $("div").hasClass("has-toc") == false) {
         $(".toc-container").remove();
     } else {
-        $(document).ready(function () {
-            if ($("div").hasClass("toc")) {
-                $(".toc-container").css("height", $(".site-content").outerHeight());
-                setTimeout(function () {
-                    $(".toc-container").css("height", $(".site-content").outerHeight());
-                }, 1000);
-                setTimeout(function () {
-                    $(".toc-container").css("height", $(".site-content").outerHeight());
-                }, 6000);
-            }
-        });
         if (flag) {
-            var id = 1;
-            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function () {
+            var id = 1,
+                heading_fix=$("article").hasClass("type-post") ? $("div").hasClass("pattern-attachment-img") ? -75 : 200 : 375;
+            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function() {
                 var hyphenated = "toc-head-" + id;
-                $(this).attr('id', hyphenated);
+                this.id = hyphenated;
                 id++;
             });
             tocbot.init({
                 tocSelector: '.toc',
                 contentSelector: ['.entry-content', '.links'],
                 headingSelector: 'h1, h2, h3, h4, h5',
+                headingsOffset: heading_fix-window.innerHeight/2,
             });
         }
     }
@@ -607,7 +600,6 @@ var pjaxInit = function () {
     timeSeriesReload();
     add_copyright();
     tableOfContentScroll(flag = true);
-    console.log($("#myscript").text());
 }
 $(document).on("click", ".sm", function () {
     var msg = "您真的要设为私密吗？";
@@ -780,12 +772,16 @@ if(mashiro_option.float_player_on) {
                         lrcTag = 2;
                     });
                     var apSwitchTag = 0;
+                    var aplayerlist=$(".aplayer-list");
+                    aplayerlist.removeClass( "aplayer-list-hide" ).css({maxHeight:'0px'});
                     $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
                     $(".aplayer-miniswitcher").click(function(){
                         if (apSwitchTag == 0) {
+                            aplayerlist.removeClass( "aplayer-list-hide" ).animate({maxHeight:'250px'});
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass( "ap-hover" );
                             apSwitchTag = 1;
                         } else {
+                            aplayerlist.css({maxHeight:'0px'});
                             $(".aplayer.aplayer-fixed .aplayer-body").addClass( "ap-hover" );
                             apSwitchTag =0;
                         }
@@ -833,26 +829,26 @@ if(mashiro_option.float_player_on) {
 }
 
 function getqqinfo() {
-    var is_get_by_qq = false;
+    var is_get_by_qq = false,cached = $('input');
     if (!getCookie('user_qq') && !getCookie('user_qq_email') && !getCookie('user_author')) {
-        $('input#qq,input#author,input#email,input#url').val('');
+        cached.filter('#qq,#author,#email,#url').val('');
     }
     if (getCookie('user_avatar') && getCookie('user_qq') && getCookie('user_qq_email')) {
         $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'));
-        $('input#author').val(getCookie('user_author'));
-        $('input#email').val(getCookie('user_qq') + '@qq.com');
-        $('input#qq').val(getCookie('user_qq'));
+        cached.filter('#author').val(getCookie('user_author'));
+        cached.filter('#email').val(getCookie('user_qq') + '@qq.com');
+        cached.filter('#qq').val(getCookie('user_qq'));
         if (mashiro_option.qzone_autocomplete) {
-            $('input#url').val('https://user.qzone.qq.com/' + getCookie('user_qq'));
+            cached.filter('#url').val('https://user.qzone.qq.com/' + getCookie('user_qq'));
         }
-        if ($('input#qq').val()) {
+        if (cached.filter('#qq').val()) {
             $('.qq-check').css('display', 'block');
             $('.gravatar-check').css('display', 'none');
         }
     }
-    var emailAddressFlag = $('input#email').val();
-    $('input#author').on('blur', function () {
-        var qq = $('input#author').val();
+    var emailAddressFlag = cached.filter('#email').val();
+    cached.filter('#author').on('blur', function () {
+        var qq = cached.filter('#author').val();
         $.ajax({
             type: 'get',
             url: mashiro_option.qq_api_url + '?type=getqqnickname&qq=' + qq,
@@ -860,15 +856,15 @@ function getqqinfo() {
             jsonp: 'callback',
             jsonpCallback: 'portraitCallBack',
             success: function (data) {
-                $('input#author').val(data[qq][6]);
-                $('input#email').val($.trim(qq) + '@qq.com');
+                cached.filter('#author').val(data[qq][6]);
+                cached.filter('#email').val($.trim(qq) + '@qq.com');
                 if (mashiro_option.qzone_autocomplete) {
-                    $('input#url').val('https://user.qzone.qq.com/' + $.trim(qq));
+                    cached.filter('#url').val('https://user.qzone.qq.com/' + $.trim(qq));
                 }
                 $('div.comment-user-avatar img').attr('src', 'https://q2.qlogo.cn/headimg_dl?dst_uin=' + qq + '&spec=100');
                 is_get_by_qq = true;
-                $('input#qq').val($.trim(qq));
-                if ($('input#qq').val()) {
+                cached.filter('#qq').val($.trim(qq));
+                if (cached.filter('#qq').val()) {
                     $('.qq-check').css('display', 'block');
                     $('.gravatar-check').css('display', 'none');
                 }
@@ -877,16 +873,16 @@ function getqqinfo() {
                 setCookie('is_user_qq', 'yes', 30);
                 setCookie('user_qq_email', qq + '@qq.com', 30);
                 setCookie('user_email', qq + '@qq.com', 30);
-                emailAddressFlag = $('input#email').val();
+                emailAddressFlag = cached.filter('#email').val();
             },
             error: function () {
-                $('input#qq').val('');
+                cached.filter('#qq').val('');
                 $('.qq-check').css('display', 'none');
                 $('.gravatar-check').css('display', 'block');
-                $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80));
+                $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
                 setCookie('user_qq', '', 30);
-                setCookie('user_email', $('input#email').val(), 30);
-                setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30);
+                setCookie('user_email', cached.filter('#email').val(), 30);
+                setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
             }
         });
         $.ajax({
@@ -900,55 +896,55 @@ function getqqinfo() {
                 setCookie('user_avatar', data[qq], 30);
             },
             error: function () {
-                $('input#qq', 'input#email', 'input#url').val('');
-                if (!$('input#qq').val()) {
+                cached.filter('#qq,#email,#url').val('');
+                if (!cached.filter('#qq').val()) {
                     $('.qq-check').css('display', 'none');
                     $('.gravatar-check').css('display', 'block');
                     setCookie('user_qq', '', 30);
-                    $('div.comment-user-avatar img').attr('src', get_gravatar($('input#email').val(), 80));
-                    setCookie('user_avatar', get_gravatar($('input#email').val(), 80), 30);
+                    $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
+                    setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
                 }
             }
         });
     });
     if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
         $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'));
-        $('input#email').val(getCookie('user_email'));
-        $('input#qq').val('');
-        if (!$('input#qq').val()) {
+        cached.filter('#email').val(getCookie('user_email'));
+        cached.filter('#qq').val('');
+        if (!cached.filter('#qq').val()) {
             $('.qq-check').css('display', 'none');
             $('.gravatar-check').css('display', 'block');
         }
     }
-    $('input#email').on('blur', function () {
-        var emailAddress = $('input#email').val();
+    cached.filter('#email').on('blur', function () {
+        var emailAddress = cached.filter('#email').val();
         if (is_get_by_qq == false || emailAddressFlag != emailAddress) {
             $('div.comment-user-avatar img').attr('src', get_gravatar(emailAddress, 80));
             setCookie('user_avatar', get_gravatar(emailAddress, 80), 30);
             setCookie('user_email', emailAddress, 30);
             setCookie('user_qq_email', '', 30);
             setCookie('is_user_qq', 'no', 30);
-            $('input#qq').val('');
-            if (!$('input#qq').val()) {
+            cached.filter('#qq').val('');
+            if (!cached.filter('#qq').val()) {
                 $('.qq-check').css('display', 'none');
                 $('.gravatar-check').css('display', 'block');
             }
         }
     });
     if (getCookie('user_url')) {
-        $('input#url').val(getCookie('user_url'));
+        cached.filter('#url').val(getCookie('user_url'));
     }
-    $('input#url').on('blur', function () {
-        var URL_Address = $('input#url').val();
-        $('input#url').val(URL_Address);
+    cached.filter('#url').on('blur', function () {
+        var URL_Address = cached.filter('#url').val();
+        cached.filter('#url').val(URL_Address);
         setCookie('user_url', URL_Address, 30);
     });
     if (getCookie('user_author')) {
-        $('input#author').val(getCookie('user_author'));
+        cached.filter('#author').val(getCookie('user_author'));
     }
-    $('input#author').on('blur', function () {
-        var user_name = $('input#author').val();
-        $('input#author').val(user_name);
+    cached.filter('#author').on('blur', function () {
+        var user_name = cached.filter('#author').val();
+        cached.filter('#author').val(user_name);
         setCookie('user_author', user_name, 30);
     });
 }
@@ -1258,8 +1254,7 @@ var home = location.href,
                     s.oncanplay = function () {
                         Siren.splay();
                         $('#video-add').show();
-                        _btn.addClass('videolive');
-                        _btn.addClass('haslive');
+                        _btn.addClass('videolive').addClass('haslive');
                     }
                 } else {
                     if ($(this).hasClass('video-pause')) {
@@ -1276,9 +1271,7 @@ var home = location.href,
                 s.onended = function () {
                     $('#bgvideo').attr('src', '');
                     $('#video-add').hide();
-                    _btn.addClass('loadvideo').removeClass('video-pause');
-                    _btn.removeClass('videolive');
-                    _btn.removeClass('haslive');
+                    _btn.addClass('loadvideo').removeClass('video-pause').removeClass('videolive').removeClass('haslive');
                     $('.focusinfo').css({
                         "top": "49.3%"
                     });
@@ -1497,25 +1490,14 @@ var home = location.href,
             });
         },
         NH: function () {
-            var h1 = 0,
-                h2 = 50,
-                ss = $(document).scrollTop();
+            var h1 = 0;
             $(window).scroll(function () {
-                var s = $(document).scrollTop();
+                var s = $(document).scrollTop(),cached = $('.site-header');
                 if (s == h1) {
-                    $('.site-header').removeClass('yya');
+                    cached.removeClass('yya');
                 }
                 if (s > h1) {
-                    $('.site-header').addClass('yya');
-                }
-                if (s > h2) {
-                    $('.site-header').addClass('gizle');
-                    if (s > ss) {
-                        $('.site-header').removeClass('sabit');
-                    } else {
-                        $('.site-header').addClass('sabit');
-                    }
-                    ss = s;
+                    cached.addClass('yya');
                 }
             });
         },
@@ -1554,7 +1536,7 @@ var home = location.href,
                         $("#pagination a").removeClass("loading").text("Previous");
                         $('#add_post span').removeClass("loading").text("");
                         lazyload();
-                        mashiro_global.post_list_show_animation.ini(50);
+                        post_list_show_animation();
                         if (nextHref != undefined) {
                             $("#pagination a").attr("href", nextHref);
 							//加载完成上滑
@@ -1746,6 +1728,7 @@ var home = location.href,
                 $('body,html').animate({
                     scrollTop: 0,
                 }, scroll_top_duration);
+                return false;
             });
         }
     }
@@ -1809,6 +1792,7 @@ $(function () {
             Siren.PE();
             Siren.CE();
             timeSeriesReload(true);
+            post_list_show_animation();
         }, false);
     }
     $.fn.postLike = function () {

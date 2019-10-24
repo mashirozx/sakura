@@ -5,7 +5,7 @@ Theme URI: https://2heng.xin/theme-sakura/
 Author: Mashiro, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: Akina主题分支（原版地址 http://www.akina.pw/themeakina）
-Version: 3.2.4
+Version: 3.2.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: akina
@@ -2981,8 +2981,13 @@ span.sitename {
     font-weight: 400;
     color: #6D6D6D;
     padding-left: 10px;
-    border-left: 3px solid orange;
+    border-left: none;
     margin: 50px 0 20px
+}
+
+.link-title span.link-fix {
+    padding-left:10px;
+    border-left:3px solid orange;
 }
 
 .links ul li:before {
@@ -8048,7 +8053,8 @@ a.toc-link {
     background: #fff;
     color: #21252b
 }
-
+.hljs span::selection,
+.hljs::selection ,
 .hljs-ln-line span::selection,
 .hljs-ln-line::selection {
     background: #fff;
@@ -8478,5 +8484,12 @@ td.hljs-ln-numbers {
 #coverVideo-btn:hover {
   background: #ddd;
   color: black;
+}
+h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id*=toc-head]::before,h5[id*=toc-head]::before,h6[id*=toc-head]::before {
+	display:block;
+	content:" ";
+	height:80px;
+	margin-top:-80px;
+	visibility:hidden
 }
 
