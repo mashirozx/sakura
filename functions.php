@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.6' );
+define( 'SAKURA_VERSION', '3.2.7' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -183,6 +183,7 @@ function sakura_scripts() {
         wp_enqueue_style( 'saukra_css', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/style.min.css', array(), SAKURA_VERSION );
         wp_enqueue_script( 'app', 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@' . SAKURA_VERSION . '/js/sakura-app.min.js', array(), SAKURA_VERSION, true );
     } 
+    wp_enqueue_script( 'github_card', 'https://cdn.jsdelivr.net/github-cards/latest/widget.js', array(), SAKURA_VERSION, true );
     
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -1546,6 +1547,18 @@ function html_tag_parser($content) {
                 href="$2"
                 alt="$1" 
                 title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
+            $content
+        );
+        
+        //Github cards
+        $content=preg_replace(
+            '/\[github repo=[\'"]([^\'"]+)[\'"]\]/i',
+            '
+            <iframe frameborder="0" scrolling="0" allowtransparency="true" 
+                    src="https://api.2heng.xin/github-card/?repo=$1" 
+                    width="400" height="153"
+                    style="margin-left: 50%; transform: translateX(-50%);"></iframe>
+            ',
             $content
         );
     }  

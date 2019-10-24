@@ -1,5 +1,5 @@
 /*！
- * Sakura application bundle theme ver 3.2.0
+ * Sakura theme application bundle
  * @author Mashiro
  * @url https://2heng.xin
  * @date 2019.8.3
