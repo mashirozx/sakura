@@ -4176,7 +4176,7 @@ i.iconfont.js-toggle-search.iconsearch {
     visibility: visible;
     opacity: .99;
     animation: elastic .5s;
-    background-image: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.2.1/img/other/iloli.gif);
+    
     background-repeat: no-repeat;
     background-position: bottom right
 }
