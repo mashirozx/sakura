@@ -58,7 +58,7 @@
 						'title_reply' => '',
 						'title_reply_to' => '<div class="graybar"><i class="fa fa-comments-o"></i>' . esc_html__('Leave a Reply to', 'akina') . ' %s' . '</div>',
 						'cancel_reply_link' => esc_html__('Cancel Reply', 'akina'),
-						'label_submit' => esc_html__('BiuBiuBiu~', 'akina'),
+						'label_submit' => esc_html__('Reply', 'akina'),
 						'comment_field' => '<p><i class="iconfont icon-markdown"></i> Markdown Supported while <i class="fa fa-code" aria-hidden="true"></i> Forbidden</p><div class="comment-textarea"><textarea placeholder="' . esc_attr__('你是我一生只会遇见一次的惊喜', 'akina') . ' ..." name="comment" class="commentbody" id="comment" rows="5" tabindex="4"></textarea><label class="input-label">你是我一生只会遇见一次的惊喜 ...</label></div>
                         <div id="upload-img-show"></div>
                         <!--插入表情面版-->
