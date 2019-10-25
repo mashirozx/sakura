@@ -1028,6 +1028,20 @@ function optionsframework_options() {
 		'type' => 'checkbox');	
         
     $options[] = array(
+		'name' => __('文章内图片启用 lazyload', 'options_framework_theme'),
+		'desc' => __('默认启用', 'options_framework_theme'),
+		'id' => 'lazyload',
+		'std' => '1',
+		'type' => 'checkbox');	
+        
+    $options[] = array(
+		'name' => __('lazyload spinner', 'options_framework_theme'),
+		'desc' => __('图片加载时要显示的占位图，填写图片 url', 'options_framework_theme'),
+		'id' => 'lazyload_spinner',
+		'std' => 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg',
+		'type' => 'text');
+        
+    $options[] = array(
 		'name' => __('是否开启剪贴板版权标识', 'options_framework_theme'),
 		'desc' => __('复制超过30个字节时自动向剪贴板添加版权标识，默认开启', 'options_framework_theme'),
 		'id' => 'clipboard_copyright',

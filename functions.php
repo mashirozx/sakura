@@ -1513,12 +1513,14 @@ function codecheese_register_post( $sanitized_user_login, $user_email, $errors )
 
 // html 标签处理器
 function html_tag_parser($content) {  
-    if(!is_feed()) {   
-        $content=preg_replace(
-            '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
-            "<img $1 class=\"lazyload\" data-src=\"$2\" src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg\" onerror=\"imgError(this)\" $3 >\n<noscript>$0</noscript>",
-            $content
-        ); 
+    if(!is_feed()) {  
+        if(akina_option('lazyload') && akina_option('lazyload_spinner')){
+            $content=preg_replace(
+                '/<img(.+)src=[\'"]([^\'"]+)[\'"](.*)>/i',
+                "<img $1 class=\"lazyload\" data-src=\"$2\" src=\"".akina_option('lazyload_spinner')."\" onerror=\"imgError(this)\" $3 >\n<noscript>$0</noscript>",
+                $content
+            ); 
+        }
         
         //Fancybox
         /* Markdown Regex Pattern for Matching URLs:             
