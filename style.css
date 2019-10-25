@@ -4357,6 +4357,12 @@ i.iconfont.js-toggle-search.iconsearch {
 }
 
 .ins-section .ins-section-header {
+	position: sticky;
+	top: 0;
+	background: #fff;
+	text-align: center;
+	padding: 8px 15px;
+	z-index: 1;
 	color: #9a9a9a;
 	border-bottom: 1px solid #e2e2e2;
 }
