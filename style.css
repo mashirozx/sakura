@@ -1195,8 +1195,9 @@ a:hover {
     padding: 10px;
     top: 46px;
     right: -13px;
-    width: 80px;
+    min-width: 80px;
     text-align: center;
+    white-space: nowrap;
     z-index: 9999;
     border-radius: 5px;
     box-shadow: 0 1px 40px -8px rgba(0, 0, 0, .5);
