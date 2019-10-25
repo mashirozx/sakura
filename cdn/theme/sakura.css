@@ -55,27 +55,34 @@
     position: relative
 }
 
+.entry-content h3, .entry-content h4, .entry-content h5 {
+    padding-left: 16px;
+}
+
 .entry-content h3 {
     padding-bottom: 8px;
     border-bottom: 1px dashed #ddd;
     color: #737373
 }
 
-.entry-content h3:before {
+.entry-content h3:after {
     content: "#";
-    margin-right: 5px;
+    position: absolute;
+    left: 0;
     color: #FF6D6D
 }
 
-.entry-content h4:before {
+.entry-content h4:after {
     content: ">";
-    margin-right: 5px;
+    position: absolute;
+    left: 0;
     color: #FF6D6D
 }
 
-.entry-content h5:before {
+.entry-content h5:after {
     content: "?";
-    margin-right: 5px;
+    position: absolute;
+    left: 0;
     color: #FF6D6D
 }
 
