@@ -463,10 +463,10 @@ function timeSeriesReload(flag) {
             var al_expand_collapse_click = 0;
             $('#al_expand_collapse').click(function () {
                 if (al_expand_collapse_click == 0) {
-                    $al_post_list.show();
+                    $al_post_list.show(400);
                     al_expand_collapse_click++;
                 } else if (al_expand_collapse_click == 1) {
-                    $al_post_list.hide();
+                    $al_post_list.hide(400);
                     al_expand_collapse_click--;
                 }
             });
