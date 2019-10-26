@@ -1796,6 +1796,7 @@ i.iconfont.hotpost {
 .entry-header hr {
     width: 30%;
     height: 1px;
+    white-space: nowrap;
     border: 0;
     background: #EFEFEF;
     margin: 20px auto
