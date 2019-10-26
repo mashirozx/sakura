@@ -1810,6 +1810,7 @@ h1.page-title {
     font-size: 20px;
     font-weight: 400;
     border: 1px dashed #ddd;
+    white-space: nowrap;
     padding: 10px 15px;
     color: #828282;
     margin-bottom: 30px
