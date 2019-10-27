@@ -1137,6 +1137,7 @@ a:hover {
     background-color: #FE9600;
     width: 100%;
     max-width: 0;
+    white-space:nowrap;
     transition: max-width .25s ease-in-out
 }
 
