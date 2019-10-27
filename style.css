@@ -1107,7 +1107,6 @@ a:hover {
 .site-top ul li a {
     padding: 10px 0;
     display: inline-block;
-    white-space:nowrap;
     color: #666
 }
 
@@ -1124,7 +1123,6 @@ a:hover {
     background-color: #FE9600;
     width: 100%;
     max-width: 0;
-    white-space:nowrap;
     transition: max-width .25s ease-in-out
 }
 
@@ -1137,7 +1135,6 @@ a:hover {
     background-color: #FE9600;
     width: 100%;
     max-width: 0;
-    white-space:nowrap;
     transition: max-width .25s ease-in-out
 }
 
