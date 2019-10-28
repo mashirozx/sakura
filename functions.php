@@ -763,7 +763,7 @@ function custom_html() {
 	if ( akina_option('login_bg') ) {
 		$loginbg = akina_option('login_bg'); 
 	}else{
-		$loginbg = get_bloginfo('template_directory').'/images/hd.png';
+		$loginbg = 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.2.7/images/hd.png';
 	}
 	echo '<script type="text/javascript" src="'.get_site_url().'/wp-content/themes/Sakura/js/login.js"></script>'."\n";
 	echo '<script type="text/javascript">'."\n";
