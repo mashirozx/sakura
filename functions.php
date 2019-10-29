@@ -565,7 +565,7 @@ function get_link_items(){
  */
 function gravatar_cn( $url ){ 
 	$gravatar_url = array('0.gravatar.com','1.gravatar.com','2.gravatar.com','secure.gravatar.com');
-	return str_replace( $gravatar_url, 'gravatar.shino.cc', $url );
+	return str_replace( $gravatar_url, 'cn.gravatar.com', $url );
 }
 add_filter( 'get_avatar_url', 'gravatar_cn', 4 );
 
@@ -763,7 +763,7 @@ function custom_html() {
 	if ( akina_option('login_bg') ) {
 		$loginbg = akina_option('login_bg'); 
 	}else{
-		$loginbg = get_bloginfo('template_directory').'/images/hd.png';
+		$loginbg = 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.2.7/images/hd.png';
 	}
 	echo '<script type="text/javascript" src="'.get_site_url().'/wp-content/themes/Sakura/js/login.js"></script>'."\n";
 	echo '<script type="text/javascript">'."\n";
@@ -1520,25 +1520,31 @@ function html_tag_parser($content) {
                 "<img $1 class=\"lazyload\" data-src=\"$2\" src=\"".akina_option('lazyload_spinner')."\" onerror=\"imgError(this)\" $3 >\n<noscript>$0</noscript>",
                 $content
             ); 
-        }
+        } 
         
         //Fancybox
         /* Markdown Regex Pattern for Matching URLs:             
          * https://daringfireball.net/2010/07/improved_regex_for_matching_urls
          */
-        $url_regex ='(((http|https):\/\/)?(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?)';
+        $url_regex ='((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))';
         
         //With Thumbnail: !{alt}(url)[th_url]
-        $content=preg_replace(
-            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
-            '<a data-fancybox="gallery" 
-                data-caption="$1"
-                class="fancybox" 
-                href="$2" 
-                alt="$1" 
-                title="$1"><img src="$15" target="_blank" rel="nofollow" class="fancybox"></a>',
-            $content
-        ); 
+        if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
+        $i=0;
+        foreach ($matches as $val) {
+            $content=str_replace($val[$i],preg_replace(
+                    '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
+                    '<a data-fancybox="gallery" 
+                        data-caption="$1"
+                        class="fancybox" 
+                        href="$2" 
+                        alt="$1" 
+                        title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
+                    $val[$i]),
+                $content);
+            $i++;
+            }
+        }
         
         //Without Thumbnail :!{alt}(url)
         $content=preg_replace(
