@@ -37,7 +37,7 @@ function akina_setup() {
 	 * If you're building a theme based on Akina, use a find and replace
 	 * to change 'akina' to the name of your theme in all the template files.
 	 */
-	load_theme_textdomain( 'akina', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'sakura', get_template_directory() . '/languages' );
 
 
 	/*
@@ -113,14 +113,14 @@ function akina_setup() {
 	* Disable the emoji's
 	*/
 	function disable_emojis() {
-	 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-	 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-	 remove_action( 'wp_print_styles', 'print_emoji_styles' );
-	 remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
-	 remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-	 remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
-	 remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	 add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+        remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+        remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+        remove_action( 'wp_print_styles', 'print_emoji_styles' );
+        remove_action( 'admin_print_styles', 'print_emoji_styles' ); 
+        remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+        remove_filter( 'comment_text_rss', 'wp_staticize_emoji' ); 
+        remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+        add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
 	}
 	add_action( 'init', 'disable_emojis' );
 	 
@@ -870,7 +870,9 @@ function comment_mail_notify($comment_id){
     $comment = get_comment($comment_id);
     $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
     $spam_confirmed = $comment->comment_approved;
-    if(($parent_id != '') && ($spam_confirmed != 'spam')){
+    $mail_notify = akina_option('mail_notify') ? get_comment_meta($parent_id,'mail_notify',false) : false;
+    $admin_notify = akina_option('admin_notify') ? '1' : (get_comment($parent_id)->comment_author_email != get_bloginfo('admin_email') ? '1' : '0');
+    if(($parent_id != '') && ($spam_confirmed != 'spam') && ($admin_notify != '0') && (!$mail_notify)){
     $wp_email = $mail_user_name . '@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME']));
     $to = trim(get_comment($parent_id)->comment_author_email);
     $subject = '你在 [' . get_option("blogname") . '] 的留言有了回应';
@@ -1690,5 +1692,12 @@ if(akina_option('live_search')){
 	) );
 	} );
 }
+
+//评论回复
+function sakura_comment_notify($comment_id){
+    if ( !$_POST['mail-notify'] ) 
+        update_comment_meta($comment_id,'mail_notify','false');
+}
+add_action('comment_post', 'sakura_comment_notify');
 
 //code end 
