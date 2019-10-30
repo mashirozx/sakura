@@ -870,7 +870,9 @@ function comment_mail_notify($comment_id){
     $comment = get_comment($comment_id);
     $parent_id = $comment->comment_parent ? $comment->comment_parent : '';
     $spam_confirmed = $comment->comment_approved;
-    if(($parent_id != '') && ($spam_confirmed != 'spam')){
+    $mail_notify = akina_option('mail_notify') ? get_comment_meta($parent_id,'mail_notify',false) : false;
+    $admin_notify = akina_option('admin_notify') ? '1' : (get_comment($parent_id)->comment_author_email != get_bloginfo('admin_email') ? '1' : '0');
+    if(($parent_id != '') && ($spam_confirmed != 'spam') && ($admin_notify != '0') && (!$mail_notify)){
     $wp_email = $mail_user_name . '@' . preg_replace('#^www\.#', '', strtolower($_SERVER['SERVER_NAME']));
     $to = trim(get_comment($parent_id)->comment_author_email);
     $subject = '你在 [' . get_option("blogname") . '] 的留言有了回应';
@@ -1690,5 +1692,12 @@ if(akina_option('live_search')){
 	) );
 	} );
 }
+
+//评论回复
+function sakura_comment_notify($comment_id){
+    if ( !$_POST['mail-notify'] ) 
+        update_comment_meta($comment_id,'mail_notify','false');
+}
+add_action('comment_post', 'sakura_comment_notify');
 
 //code end 

@@ -1054,6 +1054,20 @@ function optionsframework_options() {
 		'id' => 'mail_user_name',
 		'std' => 'bibi',
 		'type' => 'text');
+        
+    $options[] = array(
+		'name' => __('邮件回复通知', 'sakura'),
+		'desc' => __('WordPress默认会使用邮件通知用户评论收到回复，开启此项允许用户设置自己的评论收到回复时是否使用邮件通知', 'sakura'),
+		'id' => 'mail_notify',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('邮件回复通知管理员', 'sakura'),
+		'desc' => __('当管理员评论收到回复时是否使用邮件通知', 'sakura'),
+		'id' => 'admin_notify',
+		'std' => '0',
+		'type' => 'checkbox');
 
 	$options[] = array(
 		'name' => __('允许私密评论', 'sakura'),
