@@ -1056,6 +1056,13 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
+		'name' => __('邮件回复通知', 'options_framework_theme'),
+		'desc' => __('WordPress默认会使用邮件通知用户评论收到回复，开启此项允许用户设置自己的评论收到回复时是否使用邮件通知', 'options_framework_theme'),
+		'id' => 'mail_notify',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
 		'name' => __('允许私密评论', 'options_framework_theme'),
 		'desc' => __('允许用户设置自己的评论对其他人不可见', 'options_framework_theme'),
 		'id' => 'open_private_message',
