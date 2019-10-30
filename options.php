@@ -1063,6 +1063,13 @@ function optionsframework_options() {
 		'type' => 'checkbox');
 
 	$options[] = array(
+		'name' => __('邮件回复通知管理员', 'options_framework_theme'),
+		'desc' => __('当管理员评论收到回复时是否使用邮件通知', 'options_framework_theme'),
+		'id' => 'admin_notify',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
 		'name' => __('允许私密评论', 'options_framework_theme'),
 		'desc' => __('允许用户设置自己的评论对其他人不可见', 'options_framework_theme'),
 		'id' => 'open_private_message',
