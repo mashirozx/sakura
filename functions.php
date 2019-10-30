@@ -1698,6 +1698,6 @@ function sakura_comment_notify($comment_id){
     if ( !$_POST['mail-notify'] ) 
         update_comment_meta($comment_id,'mail_notify','false');
 }
-add_action('comment_post', 'spirit_comment_notify');
+add_action('comment_post', 'sakura_comment_notify');
 
 //code end 
