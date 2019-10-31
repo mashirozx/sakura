@@ -28,7 +28,7 @@
 	<footer class="entry-footer">
 	<div class="info-meta">
        <div class="comnum">  
-        <span><i class="iconfont icon-mark"></i><?php comments_popup_link('NOTHING', '1 '.__("comment"."sakura")/*条评论*/, '% '.__("comment"."sakura")/*条评论*/); ?></span>
+        <span><i class="iconfont icon-mark"></i><?php comments_popup_link('NOTHING', '1 '.__("comment","sakura")/*条评论*/, '% '.__("comments","sakura")/*条评论*/); ?></span>
 		</div>
 		<div class="views"> 
 		<span><i class="iconfont icon-attention"></i><?php echo get_post_views(get_the_ID()).' '._n('Hit','Hits',get_post_views(get_the_ID()),'sakura')/*热度*/?></span>

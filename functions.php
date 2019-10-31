@@ -1269,7 +1269,7 @@ function memory_archives_list() {
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
-                $output .= '<li class="al_li"><span class="al_mon">'.$mon. __("","sakura"). /*月*/' (<span id="post-num"></span>'._n(" article"," articles","sakura") /*篇文章*/.')</span><ul class="al_post_list">'; //输出月份
+                $output .= '<li class="al_li"><span class="al_mon">'.$mon. __("","sakura"). /*月*/' (<span id="post-num"></span>'.__(" articles","sakura") /*篇文章*/.')</span><ul class="al_post_list">'; //输出月份
             }
             $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d'.__("","sakura")) /*日*/.'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
         endwhile;
