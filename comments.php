@@ -19,12 +19,12 @@
 
 		<div class="commentwrap comments-hidden">
 			<div class="notification"><i class="iconfont icon-mark"></i><?php _e('view comments', 'sakura'); /*查看评论*/?> -
-			<span class="noticom"><?php comments_number('NOTHING', __('1 comment','sakura'), __('% comments','sakura')); ?> </span>
+			<span class="noticom"><?php comments_number('NOTHING', '1'.__(" comment","sakura"), '%'.__(" comments","sakura")); ?> </span>
 			</div>
 		</div>
 
 		<div class="comments-main">
-		 <h3 id="comments-list-title">Comments | <span class="noticom"><?php comments_number('NOTHING', __('1 comment','sakura'), __('% comments','sakura')); ?> </span></h3> 
+		 <h3 id="comments-list-title">Comments | <span class="noticom"><?php comments_number('NOTHING', '1'.__(" comment","sakura"), '%'.__(" comments","sakura")); ?> </span></h3> 
 		<div id="loading-comments"><span></span></div>
 			<?php if(have_comments()): ?>
 
