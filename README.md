@@ -43,5 +43,5 @@ Enjoy it!
 ### Donate
 [WeChat Pay](https://view.moezx.cc/images/2018/05/28/WeChanQR.png) | [AliPay](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg) | [PayPal](https://paypal.me/mashirozx)
 
-### 
+### Need a server?
 [![](https://www.vultr.com/media/banners/banner_728x90.png)](https://www.vultr.com/?ref=7674346)
