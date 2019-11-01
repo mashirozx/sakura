@@ -1254,7 +1254,7 @@ function siren_private(){
 //时间序列
 function memory_archives_list() {
 	if( true ){
-		$output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">全部展开/收缩</span>]<!-- (注: 点击月份可以展开)--></p>';
+		$output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">'.__( "All expand/collapse", "sakura" )/*全部展开/收缩*/.'</span>]<!-- (注: 点击月份可以展开)--></p>';
 		$the_query = new WP_Query( 'posts_per_page=-1&ignore_sticky_posts=1&post_type=post' ); //update: 加上忽略置顶文章
 		$year=0; $mon=0; $i=0; $j=0;
 		while ( $the_query->have_posts() ) : $the_query->the_post();
@@ -1265,13 +1265,13 @@ function memory_archives_list() {
             if ($year != $year_tmp && $year > 0) $output .= '</ul>';
             if ($year != $year_tmp) {
                 $year = $year_tmp;
-                $output .= '<h3 class="al_year">'. $year .' 年</h3><ul class="al_mon_list">'; //输出年份
+                $output .= '<h3 class="al_year">'. $year . __("","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
-                $output .= '<li class="al_li"><span class="al_mon">'.$mon.'月 (<span id="post-num"></span>篇文章)</span><ul class="al_post_list">'; //输出月份
+                $output .= '<li class="al_li"><span class="al_mon"><span style="color:#0bf;">'.get_the_time('M').'</span> (<span id="post-num"></span>'.__(" post(s)","sakura") /*篇文章*/.')</span><ul class="al_post_list">'; //输出月份
             }
-            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d日  ') .'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
+            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'/*get_the_time('d'.__(" ","sakura")) 日*/.'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
         endwhile;
         wp_reset_postdata();
         $output .= '</ul></li></ul> <!--<ul class="al_mon_list"><li><ul class="al_post_list" style="display: block;"><li>博客已经萌萌哒运行了<span id="monitorday"></span>天</li></ul></li></ul>--></div>';
@@ -1664,7 +1664,7 @@ EOS;
         foreach ($comments as $comment) {
             $is_private = get_comment_meta($comment->comment_ID, '_private', true);
             if($is_private){
-                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：该评论为私密评论").'},';
+                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：".__("The comment is private","sakura")/*该评论为私密评论*/).'},';
                 continue;
             }else{
                 $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex," ",$comment->comment_author."：".$comment->comment_content))).'},';
