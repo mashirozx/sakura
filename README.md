@@ -1,7 +1,7 @@
-Sakura🌸: A Wonderful WordPress Theme
+﻿Sakura🌸: 樱花庄的白猫博客主题
 ===
 
-[中文](README-zh_CN.md) | Engilsh
+中文 | [Engilsh](README-en.md)
 
 ![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
 
@@ -11,37 +11,24 @@ Sakura🌸: A Wonderful WordPress Theme
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/mashirozx/Sakura/latest.svg?style=flat-square)](https://github.com/mashirozx/Sakura/commits/)
 [![](https://data.jsdelivr.com/v1/package/gh/moezx/cdn/badge)](https://www.jsdelivr.com/package/gh/moezx/cdn)
 
-Modified based on theme [Akina (by Fuzzz)](http://www.akina.pw/themeakina) and [Siren (by Louie)](https://github.com/louie-senpai/Siren).
+在 Louie 基于 Fuzzz 的 [Akina](http://www.akina.pw/themeakina) 主题修改的主题 [Siren](https://github.com/louie-senpai/Siren) 基础上三次修改 =.=
 
-The rebuild version is on the way :)
+两位前辈做得已经很棒了，或许我所做的只是把他们的代码弄得凌乱不堪吧 :)
 
-### Install
+特别感谢 [@Spirit](https://github.com/spirit1431007) 对本项目的贡献！
 
-#### By GIT
-```bash
-cd /wp-content/themes/
-git clone https://github.com/mashirozx/Sakura.git
-```
+注意：建议 `git clone` 下载（[简易 Git 使用指南](https://github.com/mashirozx/Sakura/wiki/Git-%E4%B8%8B%E8%BD%BD%E3%80%81%E6%9B%B4%E6%96%B0%E6%8C%87%E5%8D%97)）；如果选择下载压缩包，**解压后记得把文件夹名改回 `Sakura`，也即保证主题路径为 `/wp-content/themes/Sakura/`**；主题设置在 `菜单-外观-Sakura 主题设置` 中；DIY 的时候建议采用[子主题](https://github.com/mashirozx/Sakura/tree/child) 并勾选 `Sakura 主题设置-CDN-本地调用主题 js、css 文件`；请留意主题说明里的其他注意事项。
 
-#### By FTP
-**Rename the theme folder name as `Sakura`** if you download form the green [Clone or download] button on this page. Make sure the path to the theme root is /wp-content/themes/Sakura/`.
+主题使用说明见：<https://2heng.xin/theme-sakura/>
 
-### Configuration
-Config your theme at `Mune-Appearance-Sakura Options`. Please turn on `Use js and css file of the theme locally` under CDN tag if you want to modify local SCC an Javascript files.
+本仓库国内镜像：<https://gitee.com/mashirozx/Sakura>
 
-### Update
-```bash
-cd /wp-content/themes/Sakura
-git fetch
-git pull
-```
+主题交流群：860262481
 
-[Learn more info about the theme (Chinese)](https://2heng.xin/theme-sakura/)
+希望你喜欢！
 
-Enjoy it!
+### 打赏支持~
+[微信支付](https://view.moezx.cc/images/2018/05/28/WeChanQR.png) | [支付宝](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg) | [PayPal](https://paypal.me/mashirozx)
 
-### Donate
-[WeChat Pay](https://view.moezx.cc/images/2018/05/28/WeChanQR.png) | [AliPay](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg) | [PayPal](https://paypal.me/mashirozx)
-
-### Need a server?
+### 需要服务器吗？
 [![](https://www.vultr.com/media/banners/banner_728x90.png)](https://www.vultr.com/?ref=7674346)
