@@ -25,20 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* If the user can't edit theme options, no use running this plugin */
 
-if ( get_user_locale( get_current_user_id() ) == "zh_CN") {
-    define( 'SAKURA_OPTIONS', 'Sakura主题设置' );
-}
-if ( get_user_locale( get_current_user_id() ) == "zh_TW") {
-    define( 'SAKURA_OPTIONS', 'Sakura主題設置' );
-}
-if ( get_user_locale( get_current_user_id() ) == "ja") {
-    define( 'SAKURA_OPTIONS', 'さくらテーマの設定' );
-}
-if ( get_user_locale( get_current_user_id() ) == "ja-JP") {
-    define( 'SAKURA_OPTIONS', 'さくらテーマの設定' );
-} else {
-    define( 'SAKURA_OPTIONS', 'Sakura Options' );
-}
+define( 'SAKURA_OPTIONS', __('Sakura Options', 'sakura') );
 
 add_action( 'init', 'optionsframework_rolescheck' );
 
@@ -288,8 +275,8 @@ function optionsframework_page() { ?>
 			<?php settings_fields( 'optionsframework' ); ?>
 			<?php optionsframework_fields(); /* Settings */ ?>
 			<div id="optionsframework-submit">
-				<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( '保存设置', 'options_framework_theme' ); ?>" />
-				<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( '恢复默认', 'options_framework_theme' ); ?>" onclick="return confirm( '<?php print esc_js( __( '如果单击“确定”会导致之前所有的设置都丢失，确定要这样做吗？', 'options_framework_theme' ) ); ?>' );" />
+				<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save', 'sakaura' ); ?>" />
+				<input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore default', 'sakura' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'All setting will be lost, sure?', 'sakura' ) ); ?>' );" />
 				<div class="clear"></div>
 			</div>
 			</form>

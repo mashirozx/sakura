@@ -61,10 +61,10 @@ function get_random_bg_url(){
  */
 function poi_time_since( $older_date, $comment_date = false, $text = false ) {
   $chunks = array(
-    array( 24 * 60 * 60, __( ' 天前', 'akina' ) ),
-    array( 60 * 60 , __( ' 小时前', 'akina' ) ),
-    array( 60 , __( ' 分钟前', 'akina' ) ),
-    array( 1, __( ' 秒前', 'akina' ) )
+    array( 24 * 60 * 60, __( ' days ago', 'sakura' ) ),/*天前*/
+    array( 60 * 60 , __( ' hours ago', 'sakura' ) ),/*小时前*/
+    array( 60 , __( ' minutes ago', 'sakura' ) ),/*分钟前*/
+    array( 1, __( ' seconds ago', 'sakura' ) )/*秒前*/
   );
 
   $newer_date = time() - (akina_option('time_zone_fix')*60*60);
@@ -72,7 +72,7 @@ function poi_time_since( $older_date, $comment_date = false, $text = false ) {
   if($text){
     $output = '';
   }else{
-    $output = '发布于 ';
+    $output = __('Posted on ','sakura')/*发布于*/;
   }
 
   if ( $since < 30 * 24 * 60 * 60 ) {
@@ -128,7 +128,7 @@ add_filter( 'comment_text' , 'comment_add_at', 20, 2);
 /*
  * Ajax评论
  */
-if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) { wp_die('请升级到4.4以上版本'); }
+if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) { wp_die(__('Please upgrade wordpress to version 4.4+','sakura')); }/*请升级到4.4以上版本*/
 // 提示
 if(!function_exists('siren_ajax_comment_err')) {
     function siren_ajax_comment_err($t) {
@@ -184,7 +184,7 @@ if(!function_exists('siren_ajax_comment_callback')) {
                 <div class="commentinfo">
                   <section class="commeta">
                     <div class="left">
-                      <h4 class="author"><a href="<?php comment_author_url(); ?>"><?php echo get_avatar( $comment->comment_author_email, '80', '', get_comment_author() ); ?><?php comment_author(); ?> <span class="isauthor" title="<?php esc_attr_e('Author', 'akina'); ?>"></span></a></h4>
+                      <h4 class="author"><a href="<?php comment_author_url(); ?>"><?php echo get_avatar( $comment->comment_author_email, '80', '', get_comment_author() ); ?><?php comment_author(); ?> <span class="isauthor" title="<?php esc_attr_e('Author', 'sakura'); ?>"></span></a></h4>
                     </div>
                     <div class="right">
                       <div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date), true );//comment_date(get_option('date_format')); ?></time></div>
@@ -230,16 +230,16 @@ function Exuser_center(){ ?>
     function gopage(url,type){ 
         URL = url; 
         if(type == 1){
-          TYPE = '管理后台';
+          TYPE = <?php _e('dashboard','sakura')/*管理后台*/?>;
         }else{
-          TYPE = '主页';
+          TYPE = <?php _e('home','sakura')/*主页*/?>;
         }
         for(var i=secs;i>=0;i--){ 
             window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
         } 
     } 
     function doUpdate(num){ 
-        document.getElementById('login-showtime').innerHTML = '空降成功，'+num+'秒后自动转到'+TYPE; 
+        document.getElementById('login-showtime').innerHTML = '<?php _e("Login successful, ","sakura")/*空降成功*/?>'+num+'<?php _e("seconds later automatically transfer to","sakura")/*秒后自动转到*/?>'+TYPE; 
         if(num == 0) { window.location=URL; } 
     } 
   </script>    
@@ -262,16 +262,16 @@ function login_ok(){
   global $current_user;
   get_currentuserinfo();
 ?>
-  <p class="ex-login-avatar"><a href="http://cn.gravatar.com/" title="更换头像" target="_blank" rel="nofollow"><?php echo get_avatar( $current_user->user_email, '110' ); ?></a></p>
-  <p class="ex-login-username">你好，<strong><?php echo $current_user->display_name; ?></strong></p>
+  <p class="ex-login-avatar"><a href="http://cn.gravatar.com/" title="<?php _e('Change avatar','sakura')/*更换头像*/?>" target="_blank" rel="nofollow"><?php echo get_avatar( $current_user->user_email, '110' ); ?></a></p>
+  <p class="ex-login-username"><?php _e('Hello, ','sakura')/*你好，*/?><strong><?php echo $current_user->display_name; ?></strong></p>
   <?php if($current_user->user_email){echo '<p>'.$current_user->user_email.'</p>';} ?>
   <p id="login-showtime"></p>
   <p class="ex-logout">
-    <a href="<?php bloginfo('url'); ?>" title="首页">首页</a>
+    <a href="<?php bloginfo('url'); ?>" title="<?php _e('Home','sakura')/*首页*/?>"><?php _e('Home','sakura')/*首页*/?></a>
     <?php if(current_user_can('level_10')){  ?>
-    <a href="<?php bloginfo('url'); ?>/wp-admin/" title="后台" target="_top">后台</a> 
+    <a href="<?php bloginfo('url'); ?>/wp-admin/" title="<?php _e('Manage','sakura')/*后台*/?>" target="_top"><?php _e('Manage','sakura')/*后台*/?></a> 
     <?php } ?>
-    <a href="<?php echo wp_logout_url(get_bloginfo('url')); ?>" title="登出" target="_top">登出？</a>
+    <a href="<?php echo wp_logout_url(get_bloginfo('url')); ?>" title="<?php _e('Logout','sakura')/*登出*/?>" target="_top"><?php _e('Sign out? ','sakura')/*登出？*/?></a>
   </p>
 <?php 
 }
@@ -296,7 +296,7 @@ function the_headPattern(){
         $edit_this_post_link = '';
     }
     $t .= the_title( '<h1 class="entry-title">', '</h1>', false);
-    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' 次阅读'.$edit_this_post_link.'</p>';
+    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' '._n("View","Views",get_post_views(get_the_ID()),"sakura")/*次阅读*/.$edit_this_post_link.'</p>';
     endwhile; endif;
   }elseif(is_page()){
     $full_image_url = $full_image_url[0];
@@ -308,7 +308,7 @@ function the_headPattern(){
     $t .= ' <span class="cat-des">'.$des.'</span>';
   }elseif(is_search()){
     $full_image_url = get_random_bg_url();
-    $t .= '<h1 class="entry-title search-title"> 关于“ '.get_search_query().' ”的搜索结果</h1>';
+    $t .= '<h1 class="entry-title search-title"> '.printf( __( "Search results for \" %s \"","sakura" ), get_search_query()) ./*关于“ '.get_search_query().' ”的搜索结果*/'</h1>';
   }
   if(akina_option('patternimg')) $full_image_url = false;
   if(!is_home() && $full_image_url) : ?>
@@ -351,7 +351,7 @@ function the_video_headPattern_hls(){
         $edit_this_post_link = '';
     }
     $t .= the_title( '<h1 class="entry-title">', '<button id="coverVideo-btn" class=".constant-width-to-height-ratio" onclick="coverVideo()"><i class="fa fa-pause" aria-hidden="true"></i></button></h1>', false);
-    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' 次阅读'.$edit_this_post_link.'</p>';
+    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' '._n("View","Views",get_post_views(get_the_ID()),"sakura")/*次阅读*/.$edit_this_post_link.'</p>';
     endwhile; endif;
   }elseif(is_page()){
     $full_image_url = $full_image_url[0];
@@ -366,7 +366,7 @@ function the_video_headPattern_hls(){
   }elseif(is_search()){
     $full_image_url = get_random_bg_url();
     $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
-    $t .= '<h1 class="entry-title search-title"> 关于“ '.get_search_query().' ”的搜索结果</h1>';
+    $t .= '<h1 class="entry-title search-title"> '.printf( __( "Search results for \" %s \"","sakura" ), get_search_query()) ./*关于“ '.get_search_query().' ”的搜索结果*/'</h1>';
   }
   $thubm_image_url = $thubm_image_url . "#lazyload-blur";
 	$thubm_image_url = str_replace(akina_option('qiniu_cdn'),'https://cdn.2heng.xin/',$thubm_image_url);
@@ -414,12 +414,12 @@ function the_video_headPattern_normal(){
     $ava = akina_option('focus_logo', '') ? akina_option('focus_logo', '') : get_avatar_url(get_the_author_meta('user_email'));
     global $user_ID; 
     if($user_ID && current_user_can('level_10')) {
-        $edit_this_post_link = '<span class="bull">·</span><a href="'.get_edit_post_link().'">EDIT</a>';
+        $edit_this_post_link = '<span class="bull">·</span><a href="'.get_edit_post_link().'">'._e("EDIT","sakura").'</a>';
     } else {
         $edit_this_post_link = '';
     }
     $t .= the_title( '<h1 class="entry-title">', '<button id="coverVideo-btn" class=".constant-width-to-height-ratio" onclick="coverVideo()"><i class="fa fa-pause" aria-hidden="true"></i></button></h1>', false);
-    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' 次阅读'.$edit_this_post_link.'</p>';
+    $t .= '<p class="entry-census"><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'"><img src="'. get_avatar_url( get_the_author_meta('ID'), 64 )/*$ava*/ .'"></a></span><span><a href="'. esc_url(get_author_posts_url(get_the_author_meta('ID'),get_the_author_meta( 'user_nicename' ))) .'">'. get_the_author() .'</a></span><span class="bull">·</span>'. poi_time_since(get_post_time('U', true),false,true) .'<span class="bull">·</span>'. get_post_views(get_the_ID()) .' '._n("View","Views",get_post_views(get_the_ID()),"sakura")/*次阅读*/.$edit_this_post_link.'</p>';
     endwhile; endif;
   }elseif(is_page()){
     $full_image_url = $full_image_url[0];
@@ -434,7 +434,7 @@ function the_video_headPattern_normal(){
   }elseif(is_search()){
     $full_image_url = get_random_bg_url();
     $thubm_image_url = 'https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.1/img/svg/loader/orange.progress-bar-stripe-loader.svg';
-    $t .= '<h1 class="entry-title search-title"> 关于“ '.get_search_query().' ”的搜索结果</h1>';
+    $t .= '<h1 class="entry-title search-title"> '.printf( __( "Search results for \" %s \"","sakura" ), get_search_query()) ./*关于“ '.get_search_query().' ”的搜索结果*/'</h1>';
   }
   $thubm_image_url = $thubm_image_url . "#lazyload-blur";
 	$thubm_image_url = str_replace(akina_option('qiniu_cdn'),'https://cdn.2heng.xin/',$thubm_image_url);
@@ -476,11 +476,11 @@ function header_user_menu(){
         </div>
         <div class="user-menu-option">
           <?php if (current_user_can('level_10')) { ?>
-            <a href="<?php bloginfo('url'); ?>/wp-admin/" target="_blank">管理中心</a>
-            <a href="<?php bloginfo('url'); ?>/wp-admin/post-new.php" target="_blank">撰写文章</a>
+            <a href="<?php bloginfo('url'); ?>/wp-admin/" target="_blank"><?php _e('Dashboard','sakura')/*管理中心*/?></a>
+            <a href="<?php bloginfo('url'); ?>/wp-admin/post-new.php" target="_blank"><?php _e('New post','sakura')/*撰写文章*/?></a>
           <?php } ?>
-          <a href="<?php bloginfo('url'); ?>/wp-admin/profile.php" target="_blank">个人资料</a>
-          <a href="<?php echo wp_logout_url(get_bloginfo('url')); ?>" target="_top">退出登录</a>
+          <a href="<?php bloginfo('url'); ?>/wp-admin/profile.php" target="_blank"><?php _e('Profile','sakura')/*个人资料*/?></a>
+          <a href="<?php echo wp_logout_url(get_bloginfo('url')); ?>" target="_top"><?php _e('Sign out','sakura')/*退出登录*/?></a>
         </div>
       </div>
     </div>
@@ -723,7 +723,7 @@ function siren_private_message_hook($comment_content , $comment){
     $current_commenter = wp_get_current_commenter();
     if ( $is_private ) $comment_content = '#私密# ' . $comment_content;
     if ( $current_commenter['comment_author_email'] == $email || $parent_email == $current_commenter['comment_author_email'] || current_user_can('delete_user') ) return $comment_content;
-    if ( $is_private ) return '<i class="fa fa-lock" aria-hidden="true"></i> 该评论为私密评论';
+    if ( $is_private ) return '<i class="fa fa-lock" aria-hidden="true"></i> '.__("The comment is private","sakura")/*该评论为私密评论*/;
     return $comment_content;
 }
 add_filter('get_comment_text','siren_private_message_hook',10,2);

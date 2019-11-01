@@ -1,32 +1,44 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-10-30 19:30+0800\n"
-"PO-Revision-Date: 2019-10-30 19:37+0800\n"
+"POT-Creation-Date: 2019-11-01 15:09+0800\n"
+"PO-Revision-Date: 2019-11-01 22:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;"
+"esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;"
+"__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: 404.php:17 header.php:35
+#: 404.php:17
 #, php-format
-msgid "第 %s 页"
-msgstr "Page %s"
+msgid "page %s"
+msgstr ""
 
-#: 404.php:54 search.php:42
+#: 404.php:46
+msgid "return to previous page"
+msgstr "Return to previous page"
+
+#: 404.php:47
+msgid "return to home page"
+msgstr "Return to home page"
+
+#: 404.php:50
+msgid "Don't worry, search in site?"
+msgstr ""
+
+#: 404.php:53 footer.php:62 search.php:42
 msgid "Search..."
 msgstr "Search..."
 
@@ -34,60 +46,93 @@ msgstr "Search..."
 msgid "Previous"
 msgstr "Previous"
 
-#: comments.php:21 layouts/duoshuo.php:12
-msgid "查看评论"
-msgstr "Check comments"
+#: comments.php:21
+msgid "view comments"
+msgstr "View comments"
+
+#: comments.php:22 comments.php:27
+msgid " comment"
+msgstr ""
+
+#: comments.php:22 comments.php:27
+#, php-format
+msgid " comments"
+msgstr ""
 
 #: comments.php:43
-msgid "暂无评论"
-msgstr "No comment"
+msgid "no comment"
+msgstr ""
 
-#: comments.php:59
+#: comments.php:53
+msgid "I'm not a robot"
+msgstr ""
+
+#: comments.php:54
+msgid "Comment in private"
+msgstr ""
+
+#: comments.php:55
+msgid "Comment reply notify"
+msgstr ""
+
+#: comments.php:60
 msgid "Leave a Reply to"
 msgstr "Leave a Reply to"
 
-#: comments.php:60
+#: comments.php:61
 msgid "Cancel Reply"
 msgstr "Cancel Reply"
 
-#: comments.php:61
+#: comments.php:62
 msgid "BiuBiuBiu~"
 msgstr "BiuBiuBiu~"
 
-#: comments.php:62
-msgid "你是我一生只会遇见一次的惊喜"
+#: comments.php:63
+msgid "You are a surprise that I will only meet once in my life"
 msgstr ""
 
-#: comments.php:92
-msgid "昵称或QQ号"
+#: comments.php:67
+msgid "Click me OωO"
 msgstr ""
 
-#: comments.php:92
-msgid "必须 Name* "
+#: comments.php:68
+msgid "Woooooow ヾ(≧∇≦*)ゝ"
 msgstr ""
 
-#: comments.php:94
-msgid "邮箱"
+#: comments.php:93
+msgid "Auto pull nickname and avatar with a QQ num. entered"
 msgstr ""
 
-#: comments.php:94
-msgid "必须 Email* "
+#: comments.php:93
+msgid "Nickname or QQ number"
 msgstr ""
 
-#: comments.php:96
-msgid "网站 (选填 Site)"
+#: comments.php:93
+msgid "Name* "
 msgstr ""
 
-#: comments.php:98 functions.php:1591
-msgid "QQ"
+#: comments.php:95
+msgid "You\\' receive notification by email"
 msgstr ""
 
-#: footer.php:62
-msgid "搜索..."
+#: comments.php:95
+msgid "email"
+msgstr ""
+
+#: comments.php:95
+msgid "Must* "
+msgstr ""
+
+#: comments.php:97
+msgid "Advertisement is forbidden 😀"
+msgstr ""
+
+#: comments.php:97
+msgid "Site"
 msgstr ""
 
 #: footer.php:75 footer.php:83
-msgid "想要找点什么呢？"
+msgid "Want to find something？"
 msgstr ""
 
 #: footer.php:85
@@ -95,84 +140,142 @@ msgid "Search"
 msgstr ""
 
 #: functions.php:53
-msgid "导航菜单"
+msgid "Nav Menus"
+msgstr ""
+
+#: functions.php:387 inc/theme_plus.php:187 layouts/authorprofile.php:11 options.php:123
+msgid "Author"
+msgstr ""
+
+#: functions.php:387
+msgid "Blogger"
+msgstr ""
+
+#: functions.php:391
+msgid "Location"
+msgstr ""
+
+#: functions.php:395
+msgid "Private"
+msgstr ""
+
+#: functions.php:397
+msgid "Yes"
+msgstr ""
+
+#: functions.php:399
+msgid "No"
 msgstr ""
 
 #: functions.php:402
-msgid "<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> 编辑"
+msgid "Edit"
 msgstr ""
 
-#: functions.php:1295 functions.php:1298
+#: functions.php:483
+msgid ""
+"Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/\" target=\"_blank"
+"\">WP-Statistics</a>"
+msgstr ""
+
+#: functions.php:536
+msgid "This guy is so lazy ╮(╯▽╰)╭"
+msgstr ""
+
+#: functions.php:1257
+msgid "All expand/collapse"
+msgstr ""
+
+#: functions.php:1272
+msgid " post(s)"
+msgstr ""
+
+#: functions.php:1294 functions.php:1297 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1511
+#: functions.php:1510
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: inc/categories-images.php:45 inc/categories-images.php:66
-msgid "分类/标签图像"
+#: functions.php:1590
+msgid "QQ"
 msgstr ""
 
-#: inc/categories-images.php:48 inc/categories-images.php:68
-#: inc/categories-images.php:197
-msgid "添加图像"
+#: functions.php:1667 inc/theme_plus.php:726
+msgid "The comment is private"
 msgstr ""
+
+#: header.php:35
+#, php-format
+msgid "page %s "
+msgstr ""
+
+#: inc/categories-images.php:45 inc/categories-images.php:66
+msgid "category/tag image"
+msgstr ""
+
+#: inc/categories-images.php:48 inc/categories-images.php:68 inc/categories-images.php:197
+msgid "add image"
+msgstr "Add image"
 
 #: inc/categories-images.php:69 inc/categories-images.php:198
-msgid "删除图像"
-msgstr ""
+msgid "remove image"
+msgstr "Remove image"
 
 #: inc/categories-images.php:211
-msgid "图像"
+msgid "image"
 msgstr ""
 
 #: inc/categories-images.php:223
-msgid "暂无"
+msgid "no image"
 msgstr ""
 
-#: inc/options-framework.php:243
+#: inc/options-framework.php:28
+msgid "Sakura Options"
+msgstr ""
+
+#: inc/options-framework.php:230
 msgid "Clear"
 msgstr ""
 
-#: inc/options-framework.php:244
+#: inc/options-framework.php:231
 msgid "Default"
 msgstr ""
 
-#: inc/options-framework.php:245
+#: inc/options-framework.php:232
 msgid "Select Color"
 msgstr ""
 
-#: inc/options-framework.php:291
-msgid "保存设置"
+#: inc/options-framework.php:278
+msgid "Save"
 msgstr ""
 
-#: inc/options-framework.php:292
-msgid "恢复默认"
+#: inc/options-framework.php:279
+msgid "Restore default"
 msgstr ""
 
-#: inc/options-framework.php:292
-msgid "如果单击“确定”会导致之前所有的设置都丢失，确定要这样做吗？"
+#: inc/options-framework.php:279
+msgid "All setting will be lost, sure?"
 msgstr ""
 
-#: inc/options-framework.php:324
+#: inc/options-framework.php:311
 msgid "Default options restored."
 msgstr ""
 
-#: inc/options-framework.php:378
+#: inc/options-framework.php:365
 msgid "Options saved."
 msgstr ""
 
 #: inc/options-media-uploader.php:51
-msgid "未选择文件"
+msgid "Choose file"
 msgstr ""
 
 #: inc/options-media-uploader.php:54 inc/options-media-uploader.php:113
-msgid "上传"
+msgid "Upload"
 msgstr ""
 
 #: inc/options-media-uploader.php:56 inc/options-media-uploader.php:114
-msgid "移除"
+msgid "Remove"
 msgstr ""
 
 #: inc/options-media-uploader.php:59
@@ -223,1180 +326,1341 @@ msgid "Edit %s"
 msgstr ""
 
 #: inc/theme_plus.php:64
-msgid " 天前"
+msgid " days ago"
 msgstr ""
 
 #: inc/theme_plus.php:65
-msgid " 小时前"
+msgid " hours ago"
 msgstr ""
 
 #: inc/theme_plus.php:66
-msgid " 分钟前"
+msgid " minutes ago"
 msgstr ""
 
 #: inc/theme_plus.php:67
-msgid " 秒前"
+msgid " seconds ago"
 msgstr ""
 
-#: inc/theme_plus.php:187 layouts/authorprofile.php:11
-msgid "Author"
+#: inc/theme_plus.php:75
+msgid "Posted on "
 msgstr ""
 
-#: options.php:34 options.php:46
+#: inc/theme_plus.php:131
+msgid "Please upgrade wordpress to version 4.4+"
+msgstr ""
+
+#: inc/theme_plus.php:233
+msgid "dashboard"
+msgstr ""
+
+#: inc/theme_plus.php:235
+msgid "home"
+msgstr ""
+
+#: inc/theme_plus.php:242
+msgid "Login successful, "
+msgstr ""
+
+#: inc/theme_plus.php:242
+msgid "seconds later automatically transfer to"
+msgstr ""
+
+#: inc/theme_plus.php:265
+msgid "Change avatar"
+msgstr ""
+
+#: inc/theme_plus.php:266
+msgid "Hello, "
+msgstr ""
+
+#: inc/theme_plus.php:270
+msgid "Home"
+msgstr ""
+
+#: inc/theme_plus.php:272
+msgid "Manage"
+msgstr ""
+
+#: inc/theme_plus.php:274
+msgid "Logout"
+msgstr ""
+
+#: inc/theme_plus.php:274
+msgid "Sign out? "
+msgstr ""
+
+#: inc/theme_plus.php:299 inc/theme_plus.php:354 inc/theme_plus.php:422 tpl/content-single.php:16
+#: tpl/single-image.php:18
+msgid "View"
+msgid_plural "Views"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/theme_plus.php:311 inc/theme_plus.php:369 inc/theme_plus.php:437
+#, php-format
+msgid "Search results for \" %s \""
+msgstr ""
+
+#: inc/theme_plus.php:417
+msgid "EDIT"
+msgstr ""
+
+#: inc/theme_plus.php:480
+msgid "New post"
+msgstr ""
+
+#: inc/theme_plus.php:482
+msgid "Profile"
+msgstr ""
+
+#: inc/theme_plus.php:483
+msgid "Sign out"
+msgstr ""
+
+#: layouts/duoshuo.php:12
+msgid "View comments"
+msgstr ""
+
+#: options.php:34 options.php:46 options.php:308
 msgid "1"
 msgstr ""
 
-#: options.php:35 options.php:47
+#: options.php:35 options.php:47 options.php:309
 msgid "2"
 msgstr ""
 
-#: options.php:36 options.php:48
+#: options.php:36 options.php:48 options.php:310
 msgid "3"
 msgstr ""
 
-#: options.php:37 options.php:49
+#: options.php:37 options.php:49 options.php:311
 msgid "4"
 msgstr ""
 
-#: options.php:38 options.php:50
+#: options.php:38 options.php:50 options.php:312
 msgid "5"
 msgstr ""
 
-#: options.php:39
+#: options.php:39 options.php:313
 msgid "6"
 msgstr ""
 
-#: options.php:40
+#: options.php:40 options.php:314
 msgid "7"
 msgstr ""
 
 #: options.php:112
-msgid "基本设置"
-msgstr "Basic settings"
-
-#: options.php:116
-msgid "站点名称"
-msgstr "Site title"
-
-#: options.php:117
-msgid "樱花庄的白猫"
+msgid "Basic settings"
 msgstr ""
 
-#: options.php:123
-msgid "作者"
-msgstr "Author"
+#: options.php:116
+msgid "Site title"
+msgstr ""
+
+#: options.php:117
+msgid "Mashiro's Blog"
+msgstr ""
 
 #: options.php:124
 msgid "Mashiro"
 msgstr ""
 
 #: options.php:130
-msgid "主题风格"
-msgstr "Theme style"
+msgid "Theme style"
+msgstr ""
 
 #: options.php:133
-msgid "自定义主题颜色"
-msgstr "Custom theme color"
+msgid "Custom theme color"
+msgstr ""
 
 #: options.php:138
-msgid "切换主题菜单透明度"
-msgstr "\"Switch theme button\"  transparency"
+msgid "Theme scheme tool transparency"
+msgstr ""
 
 #: options.php:139
-msgid "调整切换主题菜单透明度，值越小越透明,默认透明度0.8"
+msgid ""
+"Adjust the theme scheme menu transparency, the smaller the value, the more transparent. The "
+"default value is 0.8"
 msgstr ""
-"The smaller the value, the more transparent, the default transparency is "
-"0.8"
 
 #: options.php:144
-msgid "全透明"
-msgstr "Fully transparent 0"
+msgid "Transparent"
+msgstr ""
 
 #: options.php:145
-msgid "透明度0.1"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.1"
+msgstr ""
 
 #: options.php:146
-msgid "透明度0.2"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.2"
+msgstr ""
 
 #: options.php:147
-msgid "透明度0.3"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.3"
+msgstr ""
 
 #: options.php:148
-msgid "透明度0.4"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.4"
+msgstr ""
 
 #: options.php:149
-msgid "透明度0.5"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.5"
+msgstr ""
 
 #: options.php:150
-msgid "透明度0.6"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.6"
+msgstr ""
 
 #: options.php:151
-msgid "透明度0.7"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.7"
+msgstr ""
 
 #: options.php:152
-msgid "透明度0.8"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.8"
+msgstr ""
 
 #: options.php:153
-msgid "透明度0.9"
-msgstr "Transparency 0.1"
+msgid "Transparency 0.9"
+msgstr ""
 
 #: options.php:154
-msgid "不透明"
-msgstr "Opaque 1"
+msgid "Opaque"
+msgstr ""
 
 #: options.php:158
-msgid "切换网页背景"
+msgid "Change web background"
 msgstr ""
 
 #: options.php:159
 msgid ""
-"前台切换网页背景，共8个url，使用空格分隔，顺序对应前台切换主题按钮位置（按"
-"钮顺序从左至右，从上至下）,如不需要背景则填写对应位置为none。<strong>注意："
-"如果主题是从v3.2.3及以下更新过来的，请务必将本配置页的【其他】标签下的【版"
-"本控制】参数修改为任意新值！</strong>\n"
+"The foreground switches the background of the webpage. There are 8 urls separated by commas. "
+"The order corresponds to the foreground scheme tool button position (the order of the buttons "
+"is from left to right, top to bottom). If no background is needed, fill in the corresponding "
+"position as none.<strong>Note: If the theme is updated from v3.2.3 and below, be sure to "
+"change the [Version Control] parameter under the [Other] tab of this configuration page to any "
+"new value!</strong>"
+msgstr ""
+
+#: options.php:165
+msgid "Personal avatar"
 msgstr ""
 
 #: options.php:166
-msgid "个人头像"
+msgid "The best size is 130px*130px."
 msgstr ""
 
-#: options.php:167
-msgid "最佳高度尺寸130*130px。"
+#: options.php:171
+msgid "Text LOGO"
 msgstr ""
 
 #: options.php:172
-msgid "文字版LOGO"
-msgstr ""
-
-#: options.php:173
 msgid ""
-"首页不显示上方的头像，而是显示一段文字（此处留空则使用上方的头像）。文字建"
-"议不要过长，16个字节左右为宜。"
+"The home page does not display the avatar above, but displays a paragraph of text (use the "
+"avatar above if left blank).The text is recommended not to be too long, about 16 bytes is "
+"appropriate."
 msgstr ""
 
-#: options.php:179
+#: options.php:178
 msgid "logo"
 msgstr ""
 
-#: options.php:180
-msgid "最佳高度尺寸40px。"
+#: options.php:179
+msgid "The best height size is 40px。"
 msgstr ""
 
-#: options.php:185
+#: options.php:184
 msgid "Favicon"
 msgstr ""
 
-#: options.php:186
-msgid "就是浏览器标签栏上那个小 logo，填写url"
+#: options.php:185
+msgid "It is the small logo on the browser tab, fill in the url"
+msgstr ""
+
+#: options.php:191
+msgid "Custom keywords and descriptions "
 msgstr ""
 
 #: options.php:192
-msgid "自定义关键词和描述"
+msgid "Customize keywords and descriptions after opening"
 msgstr ""
 
-#: options.php:193
-msgid "开启之后可自定义填写关键词和描述"
+#: options.php:198
+msgid "Site keywords"
 msgstr ""
 
 #: options.php:199
-msgid "网站关键词"
+msgid "Each keyword is divided by a comma \",\" and the number is within 5."
 msgstr ""
 
-#: options.php:200
-msgid "各关键字间用半角逗号\",\"分割，数量在5个以内最佳。"
+#: options.php:205
+msgid "Site descriptions"
 msgstr ""
 
 #: options.php:206
-msgid "网站描述"
+msgid "Describe the site in concise text, with a maximum of 120 words."
 msgstr ""
 
-#: options.php:207
-msgid "用简洁的文字描述本站点，字数建议在120个字以内。"
+#: options.php:212
+msgid "Expand the nav menu"
 msgstr ""
 
 #: options.php:213
-msgid "展开导航菜单"
+msgid "Check to enable, default shrink"
 msgstr ""
 
-#: options.php:214
-msgid "勾选开启，默认收缩"
+#: options.php:219
+msgid "Head decoration"
 msgstr ""
 
 #: options.php:220
-msgid "头部装饰图"
+msgid ""
+"Enable by default, check off, display on the article page, separate page and category page"
 msgstr ""
 
-#: options.php:221
-msgid "默认开启，勾选关闭，显示在文章页面，独立页面以及分类页"
+#: options.php:226
+msgid "Search button"
 msgstr ""
 
-#: options.php:227
-msgid "搜索按钮"
+#: options.php:231 options.php:279 options.php:572 options.php:582 options.php:592
+#: options.php:602
+msgid "Open"
 msgstr ""
 
-#: options.php:232 options.php:280 options.php:573 options.php:583
-#: options.php:593 options.php:603
-msgid "开启"
+#: options.php:232 options.php:280 options.php:573 options.php:583 options.php:593
+#: options.php:603
+msgid "Close"
 msgstr ""
 
-#: options.php:233 options.php:281 options.php:574 options.php:584
-#: options.php:594 options.php:604
-msgid "关闭"
+#: options.php:236
+msgid "Home article style"
 msgstr ""
 
-#: options.php:237
-msgid "首页文章风格"
+#: options.php:241
+msgid "Standard"
 msgstr ""
 
 #: options.php:242
-msgid "标准"
+msgid "Graphic"
 msgstr ""
 
-#: options.php:243
-msgid "图文"
+#: options.php:246
+msgid "Home article feature images (only valid for standard mode)"
 msgstr ""
 
-#: options.php:247
-msgid "首页文章特色图（仅对标准风格生效）"
+#: options.php:251
+msgid "Round"
 msgstr ""
 
 #: options.php:252
-msgid "圆形"
+msgid "Square"
 msgstr ""
 
-#: options.php:253
-msgid "方形"
+#: options.php:256
+msgid ""
+"Home article feature images alignment (only for graphic mode, default left and right alternate)"
 msgstr ""
 
-#: options.php:257
-msgid "首页文章特色图对齐方式（仅对图文风格生效，默认左右交替）"
+#: options.php:261
+msgid "Left"
 msgstr ""
 
 #: options.php:262
-msgid "向左对齐"
+msgid "Right"
 msgstr ""
 
 #: options.php:263
-msgid "向右对齐"
+msgid "Alternate"
 msgstr ""
 
-#: options.php:264 options.php:455
-msgid "左右交替"
+#: options.php:267
+msgid "Default article feature image"
 msgstr ""
 
 #: options.php:268
-msgid "默认文章特色图"
-msgstr ""
-
-#: options.php:269
 msgid ""
-"在未设置文章特色图的情况下展示的默认图像，留空则调用本地随机封面（要展示的"
-"图片放入 /wp-content/themes/Sakura/feature/gallery/ 目录）"
+"The default image displayed without the article feature image set, use random cover if left "
+"blank (the image to be displayed is placed in the /wp-content/themes/Sakura/feature/gallery/ "
+"directory)"
 msgstr ""
 
-#: options.php:275
-msgid "评论收缩"
+#: options.php:274
+msgid "Comment shrink"
+msgstr ""
+
+#: options.php:284
+msgid "Display author information at the end of the article?"
 msgstr ""
 
 #: options.php:285
-msgid "文章末尾显示作者信息？"
+msgid "Check to enable"
 msgstr ""
 
-#: options.php:286
-msgid "勾选启用"
+#: options.php:291
+msgid "Paging mode"
 msgstr ""
 
-#: options.php:292
-msgid "分页模式"
+#: options.php:296
+msgid "Ajax load"
 msgstr ""
 
 #: options.php:297
-msgid "ajax加载"
+msgid "Previous and next page"
 msgstr ""
 
-#: options.php:298
-msgid "上一页和下一页"
+#: options.php:301
+msgid "Automatically load the next page"
 msgstr ""
 
 #: options.php:302
-msgid "自动加载下一页"
+msgid ""
+"(seconds) Set to automatically load the next page time, the default is not automatically loaded"
 msgstr ""
 
-#: options.php:303
-msgid "（秒）设置自动加载下一页时间，默认不自动加载"
-msgstr ""
-
-#: options.php:308
-msgid "0秒"
-msgstr ""
-
-#: options.php:309
-msgid "1秒"
-msgstr ""
-
-#: options.php:310
-msgid "2秒"
-msgstr ""
-
-#: options.php:311
-msgid "3秒"
-msgstr ""
-
-#: options.php:312
-msgid "4秒"
-msgstr ""
-
-#: options.php:313
-msgid "5秒"
-msgstr ""
-
-#: options.php:314
-msgid "6秒"
+#: options.php:307
+msgid "0"
 msgstr ""
 
 #: options.php:315
-msgid "7秒"
+msgid "8"
 msgstr ""
 
 #: options.php:316
-msgid "8秒"
+msgid "9"
 msgstr ""
 
 #: options.php:317
-msgid "9秒"
+msgid "10"
 msgstr ""
 
 #: options.php:318
-msgid "10秒"
+msgid "Do not load automatically"
 msgstr ""
 
-#: options.php:319
-msgid "233秒,即不倒计时自动加载"
+#: options.php:322
+msgid "Blogger description"
 msgstr ""
 
 #: options.php:323
-msgid "博主描述"
+msgid "A self-described statement"
 msgstr ""
 
-#: options.php:324
-msgid "一段自我描述的话"
+#: options.php:329
+msgid "Footer info"
 msgstr ""
 
 #: options.php:330
-msgid "页脚信息"
+msgid "Footer description, support for HTML code"
 msgstr ""
 
-#: options.php:331
-msgid "页脚说明文字，支持HTML代码"
+#: options.php:336
+msgid "Google analytics"
 msgstr ""
 
 #: options.php:337
-msgid "Google 统计代码"
-msgstr ""
-
-#: options.php:338
 msgid "UA-xxxxx-x"
 msgstr ""
 
-#: options.php:344
-msgid "站长统计（不建议使用）"
+#: options.php:343
+msgid "CNZZ Statistics (not recommand)"
 msgstr ""
 
-#: options.php:345
-msgid "填写统计代码，将被隐藏"
+#: options.php:344
+msgid "Statistics code, which will be invisible in web page."
+msgstr ""
+
+#: options.php:350
+msgid "Customize CSS styles"
 msgstr ""
 
 #: options.php:351
-msgid "自定义CSS样式"
+msgid "Fill in the CSS code directly, no need to write style tags"
 msgstr ""
 
-#: options.php:352
-msgid "直接填写CSS代码，不需要写style标签"
+#: options.php:359
+msgid "First screen"
 msgstr ""
 
-#: options.php:360
-msgid "第一屏"
+#: options.php:363
+msgid "Main switch"
 msgstr ""
 
-#: options.php:364
-msgid "总开关"
+#: options.php:364 options.php:388
+msgid "Default on, check off"
 msgstr ""
 
-#: options.php:365 options.php:389
-msgid "默认开启，勾选关闭"
+#: options.php:370
+msgid "Social information"
 msgstr ""
 
 #: options.php:371
-msgid "社交信息"
+msgid "Enable by default, check off, display avatar, signature, SNS"
 msgstr ""
 
-#: options.php:372
-msgid "默认开启，勾选关闭，显示头像、签名、SNS"
+#: options.php:377
+msgid "Social information style"
 msgstr ""
 
-#: options.php:378
-msgid "社交信息样式"
+#: options.php:382
+msgid "Merge with signature"
 msgstr ""
 
 #: options.php:383
-msgid "与签名合并"
+msgid "Independent line"
 msgstr ""
 
-#: options.php:384
-msgid "独立成行"
+#: options.php:387
+msgid "full-screen display"
 msgstr ""
 
-#: options.php:388
-msgid "全屏显示"
+#: options.php:394
+msgid "Enable video"
 msgstr ""
 
 #: options.php:395
-msgid "开启视频"
+msgid "Check on"
 msgstr ""
 
-#: options.php:396
-msgid "勾选开启"
-msgstr ""
-
-#: options.php:402
+#: options.php:401
 msgid "Live"
 msgstr ""
 
-#: options.php:403
-msgid "勾选开启，视频自动续播，需要开启Pjax功能"
+#: options.php:402
+msgid "Check to enable, the video will continue to play automatically, you need to enable Pjax"
+msgstr ""
+
+#: options.php:408
+msgid "Video address"
 msgstr ""
 
 #: options.php:409
-msgid "视频地址"
+msgid ""
+"The source address of the video, the address is spliced below the video name, the slash is not "
+"required at the end of the address"
 msgstr ""
 
-#: options.php:410
-msgid "视频的来源地址，该地址拼接下面的视频名，地址尾部不需要加斜杠"
+#: options.php:415
+msgid "Video name"
 msgstr ""
 
 #: options.php:416
-msgid "视频名称"
+msgid ""
+"abc.mp4, just fill in the video file name abc, multiple videos separated by commas such as "
+"abc, efg, do not care about the order, because the loading is random extraction"
 msgstr ""
 
-#: options.php:417
-msgid ""
-"abc.mp4 ，只需要填写视频文件名 abc 即可，多个用英文逗号隔开如 abc,efg ，无"
-"需在意顺序，因为加载是随机的抽取的 "
+#: options.php:422
+msgid "Cover image"
 msgstr ""
 
 #: options.php:423
-msgid "封面图"
-msgstr ""
-
-#: options.php:424
 msgid ""
-"此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）"
+"Leave this blank to use the built-in API (put the images that need to be randomly displayed "
+"into the /cover/gallery/ directory)"
 msgstr ""
 
-#: options.php:430
-msgid "背景图滤镜"
+#: options.php:429
+msgid "Background image filter"
+msgstr ""
+
+#: options.php:434
+msgid "Nothing"
 msgstr ""
 
 #: options.php:435
-msgid "无"
+msgid "Undertint"
 msgstr ""
 
 #: options.php:436
-msgid "浅色"
+msgid "Dim"
 msgstr ""
 
 #: options.php:437
-msgid "暗淡"
+msgid "Grid"
 msgstr ""
 
 #: options.php:438
-msgid "网格"
+msgid "Dot"
 msgstr ""
 
-#: options.php:439
-msgid "点点"
+#: options.php:442
+msgid "Whether to turn on the top-feature"
 msgstr ""
 
-#: options.php:443
-msgid "是否开启聚焦"
+#: options.php:443 options.php:1031
+msgid "Default on"
 msgstr ""
 
-#: options.php:444
-msgid "默认开启"
+#: options.php:449
+msgid "Top-feature style"
 msgstr ""
 
-#: options.php:450
-msgid "聚焦样式"
+#: options.php:454
+msgid "Alternate left and right"
 msgstr ""
 
-#: options.php:456
-msgid "从下往上"
+#: options.php:455
+msgid "From bottom to top"
+msgstr ""
+
+#: options.php:459
+msgid "Top-feature title"
 msgstr ""
 
 #: options.php:460
-msgid "聚焦标题"
+msgid ""
+"Default is Discovery, you can also change it to other, of course you can't use it as an "
+"advertisement!Not allowed!!"
 msgstr ""
 
-#: options.php:461
-msgid "默认为聚焦，你也可以修改为其他，当然不能当广告用！不允许！！"
+#: options.php:467
+msgid "Top-feature 1 image"
 msgstr ""
 
-#: options.php:468
-msgid "聚焦图一"
+#: options.php:468 options.php:496 options.php:524
+msgid "size 257px*160px"
 msgstr ""
 
-#: options.php:469 options.php:497 options.php:525
-msgid "尺寸257px*160px"
+#: options.php:474 options.php:475
+msgid "Top-feature 1 title"
 msgstr ""
 
-#: options.php:475 options.php:476
-msgid "聚焦图一标题"
+#: options.php:481 options.php:482
+msgid "Top-feature 1 description"
 msgstr ""
 
-#: options.php:482 options.php:483
-msgid "聚焦图一描述"
+#: options.php:488 options.php:489
+msgid "Top-feature 1 link"
 msgstr ""
 
-#: options.php:489 options.php:490
-msgid "聚焦图一链接"
+#: options.php:495
+msgid "Top-feature 2 image"
 msgstr ""
 
-#: options.php:496
-msgid "聚焦图二"
+#: options.php:502 options.php:503
+msgid "Top-feature 2 title"
 msgstr ""
 
-#: options.php:503 options.php:504
-msgid "聚焦图二标题"
+#: options.php:509 options.php:510
+msgid "Top-feature 2 description"
 msgstr ""
 
-#: options.php:510 options.php:511
-msgid "聚焦图二描述"
+#: options.php:516 options.php:517
+msgid "Top-feature 2 link"
 msgstr ""
 
-#: options.php:517 options.php:518
-msgid "聚焦图二链接"
+#: options.php:523
+msgid "Top-feature 3 image"
 msgstr ""
 
-#: options.php:524
-msgid "聚焦图三"
+#: options.php:530 options.php:531
+msgid "Top-feature 3 title"
 msgstr ""
 
-#: options.php:531 options.php:532
-msgid "聚焦图三标题"
+#: options.php:537 options.php:538
+msgid "Top-feature 3 description"
 msgstr ""
 
-#: options.php:538 options.php:539
-msgid "聚焦图三描述"
+#: options.php:544 options.php:545
+msgid "Top-feature 3 link"
 msgstr ""
 
-#: options.php:545 options.php:546
-msgid "聚焦图三链接"
+#: options.php:553
+msgid "Post page"
 msgstr ""
 
-#: options.php:554
-msgid "文章页"
+#: options.php:557
+msgid "Post style"
 msgstr ""
 
-#: options.php:558
-msgid "文章样式"
+#. Theme Name of the plugin/theme
+#: options.php:562
+msgid "Sakura"
 msgstr ""
 
-#: options.php:563
-msgid "默认样式"
-msgstr ""
-
-#: options.php:564
-msgid "GitHub 样式"
-msgstr ""
-
-#: options.php:568
-msgid "文章点赞"
-msgstr ""
-
-#: options.php:578
-msgid "文章分享"
-msgstr ""
-
-#: options.php:588
-msgid "上一篇下一篇"
-msgstr ""
-
-#: options.php:598
-msgid "博主信息"
-msgstr ""
-
-#: options.php:608
-msgid "支付宝打赏"
-msgstr ""
-
-#: options.php:609
-msgid "支付宝二维码"
-msgstr ""
-
-#: options.php:614
-msgid "微信打赏"
-msgstr ""
-
-#: options.php:615 options.php:627
-msgid "微信二维码"
-msgstr ""
-
-#: options.php:622
-msgid "社交网络"
-msgstr ""
-
-#: options.php:626
-msgid "微信"
-msgstr ""
-
-#: options.php:632
-msgid "新浪微博"
-msgstr ""
-
-#: options.php:633
-msgid "新浪微博地址"
-msgstr ""
-
-#: options.php:639
-msgid "腾讯QQ"
-msgstr ""
-
-#: options.php:640
-msgid "tencent://message/?uin={{QQ号码}}，如tencent://message/?uin=123456"
-msgstr ""
-
-#: options.php:646
-msgid "Telegram"
-msgstr ""
-
-#: options.php:647
-msgid "Telegram链接"
-msgstr ""
-
-#: options.php:653
-msgid "QQ空间"
-msgstr ""
-
-#: options.php:654
-msgid "QQ空间地址"
-msgstr ""
-
-#: options.php:660
+#: options.php:563 options.php:659
 msgid "GitHub"
 msgstr ""
 
-#: options.php:661
-msgid "GitHub地址"
+#: options.php:567
+msgid "Post like"
 msgstr ""
 
-#: options.php:667
+#: options.php:577
+msgid "Post share"
+msgstr ""
+
+#: options.php:587
+#, fuzzy
+#| msgid "Previous"
+msgid "Previous and Next"
+msgstr "Previous"
+
+#: options.php:597
+msgid "Author profile"
+msgstr ""
+
+#: options.php:607
+msgid "Alipay reward"
+msgstr ""
+
+#: options.php:608
+msgid "Alipay qrcode"
+msgstr ""
+
+#: options.php:613
+msgid "Wechat reward"
+msgstr ""
+
+#: options.php:614
+msgid "Wechat qrcode "
+msgstr ""
+
+#: options.php:621
+msgid "Social network"
+msgstr ""
+
+#: options.php:625
+msgid "Wechat"
+msgstr ""
+
+#: options.php:626
+msgid "Wechat qrcode"
+msgstr ""
+
+#: options.php:631
+msgid "Sina Weibo"
+msgstr ""
+
+#: options.php:632
+msgid "Sina Weibo address"
+msgstr ""
+
+#: options.php:638
+msgid "Tencent QQ"
+msgstr ""
+
+#: options.php:639
+msgid "tencent://message/?uin={{QQ number}}. for example, tencent://message/?uin=123456"
+msgstr ""
+
+#: options.php:645
+msgid "Telegram"
+msgstr ""
+
+#: options.php:646
+msgid "Telegram link"
+msgstr ""
+
+#: options.php:652
+msgid "Qzone"
+msgstr ""
+
+#: options.php:653
+msgid "Qzone address"
+msgstr ""
+
+#: options.php:660
+msgid "GitHub address"
+msgstr ""
+
+#: options.php:666
 msgid "Lofter"
 msgstr ""
 
-#: options.php:668
-msgid "lofter地址"
+#: options.php:667
+msgid "Lofter address"
 msgstr ""
 
-#: options.php:674
+#: options.php:673
 msgid "BiliBili"
 msgstr ""
 
-#: options.php:675
-msgid "B站地址"
+#: options.php:674
+msgid "BiliBili address"
+msgstr ""
+
+#: options.php:680
+msgid "Youku video"
 msgstr ""
 
 #: options.php:681
-msgid "优酷视频"
+msgid "Youku video address"
 msgstr ""
 
-#: options.php:682
-msgid "优酷地址"
+#: options.php:687
+msgid "Netease Cloud Music"
 msgstr ""
 
 #: options.php:688
-msgid "网易云音乐"
+msgid "Netease Cloud Music address"
 msgstr ""
 
-#: options.php:689
-msgid "网易云音乐地址"
-msgstr ""
-
-#: options.php:695
+#: options.php:694
 msgid "Twitter"
 msgstr ""
 
-#: options.php:696
-msgid "推特地址"
+#: options.php:695
+msgid "Twitter address"
 msgstr ""
 
-#: options.php:702
+#: options.php:701
 msgid "Facebook"
 msgstr ""
 
-#: options.php:703
-msgid "脸书地址"
+#: options.php:702
+msgid "Facebook address"
 msgstr ""
 
-#: options.php:709
+#: options.php:708
 msgid "Google+"
 msgstr ""
 
-#: options.php:710
-msgid "G+地址"
+#: options.php:709
+msgid "G+ address"
+msgstr ""
+
+#: options.php:715
+msgid "Jianshu"
 msgstr ""
 
 #: options.php:716
-msgid "简书"
+msgid "Jianshu address"
 msgstr ""
 
-#: options.php:717
-msgid "简书地址"
-msgstr ""
-
-#: options.php:723
+#: options.php:722
 msgid "CSDN"
 msgstr ""
 
-#: options.php:724
-msgid "CSND社区地址"
+#: options.php:723
+msgid "CSND community address"
+msgstr ""
+
+#: options.php:729
+msgid "Zhihu"
 msgstr ""
 
 #: options.php:730
-msgid "知乎"
+msgid "Zhihu address"
 msgstr ""
 
-#: options.php:731
-msgid "知乎地址"
+#: options.php:736
+msgid "Email-name"
 msgstr ""
 
 #: options.php:737
-msgid "邮箱-用户名"
+msgid ""
+"The name part of name@domain.com, only the frontend has js runtime environment can get the "
+"full address, you can rest assured to fill in"
 msgstr ""
 
-#: options.php:738
-msgid ""
-"name@domain.com 的 name 部分，前端仅具有js运行环境时才能获取完整地址，可放"
-"心填写"
+#: options.php:743
+msgid "Email-domain"
 msgstr ""
 
 #: options.php:744
-msgid "邮箱-域名"
+msgid "The domain.com part of name@domain.com"
 msgstr ""
 
-#: options.php:745
-msgid "name@domain.com 的 domain.com 部分"
+#: options.php:751
+msgid "Background configuration"
 msgstr ""
 
-#: options.php:752
-msgid "后台配置"
+#: options.php:756
+msgid "Background panel custom color scheme"
 msgstr ""
 
 #: options.php:757
-msgid "后台面板自定义配色方案"
-msgstr ""
-
-#: options.php:758
 msgid ""
-"你可以在下面自行设计后台面板（/wp-admin/）样式，不过在开始之前请到<a href="
-"\"/wp-admin/profile.php\">这里</a>将配色方案改为自定义（Custom）。"
-"<br><b>Tip: </b>如何搭配颜色？或许<a href=\"https://mashiro.top/color-"
-"thief/\">这个</a>可以帮到你。"
+"You can design the background panel (/wp-admin/) style yourself below, but before you start, "
+"please go to <a href=\"/wp-admin/profile.php\">here</a> to change the color scheme to custom."
+"(Custom).<br><b>Tip: </b>How to match colors? Maybe <a href=\"https://mashiro.top/color-thief/"
+"\">this</a> can help you."
 msgstr ""
 
-#: options.php:764
-msgid "面板主色调A"
+#: options.php:763
+msgid "Panel main color A"
 msgstr ""
 
-#: options.php:767 options.php:775 options.php:783 options.php:791
+#: options.php:766 options.php:774 options.php:782 options.php:790
 msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions which are used "
-"to give the user a feel for the theme."
+"<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a "
+"feel for the theme."
 msgstr ""
 
-#: options.php:772
-msgid "面板主色调B"
+#: options.php:771
+msgid "Panel main color B"
 msgstr ""
 
-#: options.php:780
-msgid "面板主色调C"
+#: options.php:779
+msgid "Panel main color C"
 msgstr ""
 
-#: options.php:788
-msgid "面板主色调D"
+#: options.php:787
+msgid "Panel main color D"
 msgstr ""
 
-#: options.php:796
-msgid "面板图标配色——base"
+#: options.php:795
+msgid "Panel icon color——base"
 msgstr ""
 
-#: options.php:799 options.php:807 options.php:815
-msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions used to color "
-"any SVG icons."
+#: options.php:798 options.php:806 options.php:814
+msgid "<i>(array) (optional)</i> An array of CSS color definitions used to color any SVG icons."
 msgstr ""
 
-#: options.php:804
-msgid "面板图标配色——focus"
+#: options.php:803
+msgid "Panel icon color——focus"
 msgstr ""
 
-#: options.php:812
-msgid "面板图标配色——current"
+#: options.php:811
+msgid "Panel icon color——current"
+msgstr ""
+
+#: options.php:819
+msgid "Other custom panel styles(CSS)"
 msgstr ""
 
 #: options.php:820
-msgid "其他自定义面板样式(CSS)"
+msgid "If you need to adjust other styles of the panel, put the style here."
 msgstr ""
 
-#: options.php:821
-msgid "如果还需要对面板其他样式进行调整可以把style放到这里"
+#: options.php:826
+msgid "Login interface background image"
 msgstr ""
 
 #: options.php:827
-msgid "后台登陆界面背景图"
+msgid "Use the default image if left this blank"
 msgstr ""
 
-#: options.php:828
-msgid "该地址为空则使用默认图片"
+#: options.php:832
+msgid "Login interface logo"
 msgstr ""
 
 #: options.php:833
-msgid "后台登陆界面logo"
+msgid "Used for login interface display"
 msgstr ""
 
-#: options.php:834
-msgid "用于登录界面显示"
+#: options.php:839
+msgid "Login/registration related settings"
 msgstr ""
 
-#: options.php:840
-msgid "登陆/注册相关设定"
+#: options.php:846
+msgid "Specify login address"
 msgstr ""
 
 #: options.php:847
-msgid "指定登录地址"
+msgid ""
+"Forcibly do not use the background address to log in, fill in the new landing page address, "
+"such as http://www.xxx.com/login [Note] Before you fill out, test your new page can be opened "
+"normally, so as not to enter the background or other problems happening"
 msgstr ""
 
-#: options.php:848
-msgid ""
-"强制不使用后台地址登陆，填写新建的登陆页面地址，比如 http://www.xxx.com/"
-"login【注意】填写前先测试下你新建的页面是可以正常打开的，以免造成无法进入后"
-"台等情况"
+#: options.php:853
+msgid "Specify registered address"
 msgstr ""
 
 #: options.php:854
-msgid "指定注册地址"
+msgid "This link is used on the login page as a registration entry"
 msgstr ""
 
-#: options.php:855
-msgid "该链接使用在登录页面作为注册入口，建议填写"
+#: options.php:860
+msgid "Allow users to register"
 msgstr ""
 
 #: options.php:861
-msgid "允许用户注册"
+msgid "Check to allow users to register at the frontend"
 msgstr ""
 
-#: options.php:862
-msgid "勾选开启，允许用户在前台注册"
+#: options.php:867
+msgid "Automatically redirect after login"
 msgstr ""
 
 #: options.php:868
-msgid "登录后自动跳转"
+msgid ""
+"After checken, the administrator redirects to the background and the user redirects to the "
+"home page."
 msgstr ""
 
-#: options.php:869
-msgid "勾选开启，管理员跳转至后台，用户跳转至主页"
+#: options.php:874
+msgid "Registration verification (frontend only, backend forced open)"
 msgstr ""
 
 #: options.php:875
-msgid "注册验证（仅前端，后端强制开启）"
+msgid "Check to enable slide verification"
 msgstr ""
 
-#: options.php:876
-msgid "勾选开启滑动验证"
-msgstr ""
-
-#: options.php:883
+#: options.php:882
 msgid "CDN"
 msgstr ""
 
-#: options.php:887
-msgid "图片库 CDN"
+#: options.php:886
+msgid "Images CDN"
 msgstr ""
 
-#: options.php:888
+#: options.php:887
 msgid ""
-"注意：填写格式为 http(s)://你的CDN域名/。<br>也就是说，原路径为 http://"
-"your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域"
-"名/2018/05/xx.png 加载"
+"Note: Fill in the format http(s)://your CDN domain name/. <br>In other words, the original "
+"path is http://your.domain/wp-content/uploads/2018/05/xx.png and the picture will load from "
+"http://your CDN domain/2018/05/xx.png"
+msgstr ""
+
+#: options.php:893
+msgid "Use the front-end library locally (lib.js、lib.css)"
 msgstr ""
 
 #: options.php:894
-msgid "本地调用前端库（lib.js、lib.css）"
+msgid "The front-end library don't load from jsDelivr, not recommand"
 msgstr ""
 
-#: options.php:895
-msgid "前端库不走 jsDelivr，不建议启用"
+#: options.php:900
+msgid "Use js and css file of the theme (sakura-app.js、style.css) locally"
 msgstr ""
 
 #: options.php:901
-msgid "本地调用主题 js、css 文件（sakura-app.js、style.css）"
+msgid "The js and css files of the theme do not load from jsDelivr, please open when DIY"
 msgstr ""
 
-#: options.php:902
-msgid "主题的 js、css 文件不走 jsDelivr，DIY 时请开启"
+#: options.php:908
+msgid "Others"
 msgstr ""
 
-#: options.php:909
-msgid "其他"
+#: options.php:912
+msgid "About"
 msgstr ""
 
 #: options.php:913
-msgid "关于"
-msgstr ""
-
-#: options.php:914
 msgid "Theme Sakura v"
 msgstr ""
 
-#: options.php:932
-msgid "页脚悬浮播放器"
+#: options.php:919
+msgid "Check for Updates"
 msgstr ""
 
-#: options.php:933
+#: options.php:931
+msgid "Footer float music player"
+msgstr ""
+
+#: options.php:932
 msgid ""
-"如果不需要播放器留空即可。填写网易云音乐的「歌单」ID，eg：https://"
-"music.163.com/#/playlist?id=2288037900的ID是2288037900"
+"If you don't need the player just leave it blank.Fill in the \"song list\" ID of Netease Cloud "
+"Music, eg: https://music.163.com/#/playlist?id=2288037900 The ID is 2288037900"
+msgstr ""
+
+#: options.php:938
+msgid "Version Control"
 msgstr ""
 
 #: options.php:939
-msgid "版本控制"
+msgid "Used to update frontend cookies and browser caches, any string can be used"
 msgstr ""
 
-#: options.php:940
-msgid "用于更新前端 cookie 及浏览器缓存，可使用任意字符串"
+#: options.php:945
+msgid "Enable PJAX (recommand on)"
 msgstr ""
 
 #: options.php:946
-msgid "开启PJAX局部刷新（建议开启）"
+msgid "The principle is the same as Ajax"
 msgstr ""
 
-#: options.php:947
-msgid "原理与Ajax相同"
+#: options.php:952
+msgid "Enable NProgress progress bar"
 msgstr ""
 
-#: options.php:953
-msgid "开启NProgress加载进度条"
+#: options.php:960 options.php:953
+msgid "Default off, check on"
 msgstr ""
 
-#: options.php:954
-msgid "默认不开启，勾选开启"
+#: options.php:959
+msgid "Enable Announcement"
 msgstr ""
 
-#: options.php:960
-msgid "开启公告"
-msgstr ""
-
-#: options.php:961
-msgid "默认不显示，勾选开启"
+#: options.php:966
+msgid "Announcement content"
 msgstr ""
 
 #: options.php:967
-msgid "公告内容"
-msgstr ""
-
-#: options.php:968
 msgid ""
-"公告内容，文字超出142个字节将会被滚动显示（移动端无效），一个汉字 = 3字节，"
-"一个字母 = 1字节，自己计算吧"
+"Announcement content, the text exceeds 142 bytes will be scrolled display (mobile device is "
+"invalid)"
 msgstr ""
 
-#: options.php:974
-msgid "首页不显示的分类文章"
+#: options.php:973
+msgid "The categories of articles that don\\t not show on homepage"
 msgstr ""
 
-#: options.php:975 options.php:982
-msgid "填写分类ID，多个用英文“ , ”分开"
+#: options.php:974 options.php:981
+msgid "Fill in category ID, multiple IDs are divided by a comma \",\""
 msgstr ""
 
-#: options.php:981
-msgid "图片展示分类"
+#: options.php:980
+msgid "Images category"
 msgstr ""
 
-#: options.php:988
-msgid "统计接口"
+#: options.php:987
+msgid "Statistics Interface"
+msgstr ""
+
+#: options.php:992
+msgid "WP-Statistics plugin (Professional statistics, can exclude invalid access)"
 msgstr ""
 
 #: options.php:993
-msgid "WP-Statistics 插件（专业性统计，可排除无效访问）"
+msgid "Theme built-in (simple statistics, calculate each page access request)"
 msgstr ""
 
-#: options.php:994
-msgid "主题内建（简单的统计，计算每一次页面访问请求）"
+#: options.php:997
+msgid "Statistical data display format"
 msgstr ""
 
-#: options.php:998
-msgid "统计数据显示格式"
+#: options.php:1002
+msgid "23333 Views (default)"
 msgstr ""
 
 #: options.php:1003
-msgid "23333 次访问（默认）"
+msgid "23,333 Views (britain)"
 msgstr ""
 
 #: options.php:1004
-msgid "23,333 次访问（英式）"
+msgid "23 333 Views (french)"
 msgstr ""
 
 #: options.php:1005
-msgid "23 333 次访问（法式）"
+msgid "23k Views (chinese)"
 msgstr ""
 
-#: options.php:1006
-msgid "23k 次访问（中式）"
+#: options.php:1009
+msgid "Enable live search"
 msgstr ""
 
 #: options.php:1010
-msgid "启用实时搜索"
+msgid ""
+"Real-time search in the foreground, call the Rest API to update the cache every hour, you can "
+"manually set the cache time in functions.php"
 msgstr ""
 
-#: options.php:1011
-msgid ""
-"前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手"
-"动设置缓存时间"
+#: options.php:1016
+msgid "Include comments in live search"
 msgstr ""
 
 #: options.php:1017
-msgid "实时搜索包含评论"
+msgid ""
+"Search for comments in real-time search (not recommended if there are too many comments on the "
+"site)"
 msgstr ""
 
-#: options.php:1018
-msgid "在实时搜索中搜索评论（如果网站评论数量太多不建议开启）"
+#: options.php:1023
+msgid "Enable baguetteBox"
 msgstr ""
 
 #: options.php:1024
-msgid "启用 baguetteBox"
-msgstr ""
-
-#: options.php:1025
 msgid ""
-"默认禁用，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox\">请"
-"阅读说明</a>"
+"Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox\">please read wiki</a>"
 msgstr ""
 
-#: options.php:1031
-msgid "文章内图片启用 lazyload"
+#: options.php:1030
+msgid "Enable lazyload in posts"
 msgstr ""
 
-#: options.php:1032
-msgid "默认启用"
-msgstr ""
-
-#: options.php:1038
+#: options.php:1037
 msgid "lazyload spinner"
 msgstr ""
 
-#: options.php:1039
-msgid "图片加载时要显示的占位图，填写图片 url"
+#: options.php:1038
+msgid "The placeholder to display when the image loads, fill in the image url"
+msgstr ""
+
+#: options.php:1044
+msgid "Whether to enable the clipboard copyright"
 msgstr ""
 
 #: options.php:1045
-msgid "是否开启剪贴板版权标识"
+msgid ""
+"Automatically add a copyright to the clipboard when copying more than 30 bytes, which is "
+"enabled by default."
 msgstr ""
 
-#: options.php:1046
-msgid "复制超过30个字节时自动向剪贴板添加版权标识，默认开启"
+#: options.php:1051
+msgid "Email address prefix"
 msgstr ""
 
 #: options.php:1052
-msgid "发件地址前缀"
+msgid ""
+"For sending system mail, the sender address displayed in the user's mailbox, do not use "
+"Chinese, the default system email address is bibi@your_domain_name"
 msgstr ""
 
-#: options.php:1053
-msgid ""
-"用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮"
-"件地址为 bibi@你的域名"
+#: options.php:1058
+msgid "Comments reply notification"
 msgstr ""
 
 #: options.php:1059
-msgid "允许私密评论"
+msgid ""
+"WordPress will use email to notify users when their comments receive a reply by default. Tick "
+"this item allows users to set their own comments reply notification"
 msgstr ""
 
-#: options.php:1060
-msgid "允许用户设置自己的评论对其他人不可见"
+#: options.php:1065
+msgid "Administrator comment notification"
 msgstr ""
 
 #: options.php:1066
-msgid "机器人验证"
+msgid "Whether to use email notification when the administrator's comments receive a reply"
 msgstr ""
 
-#: options.php:1067
-msgid "开启机器人验证"
+#: options.php:1072
+msgid "Enable private comment"
 msgstr ""
 
 #: options.php:1073
-msgid "评论UA信息"
+msgid "Allow users to set their own comments to be invisible to others"
 msgstr ""
 
-#: options.php:1074
-msgid "勾选开启，用户的浏览器，操作系统信息"
+#: options.php:1079
+msgid "Human verification"
 msgstr ""
 
 #: options.php:1080
-msgid "开启多说插件支持"
+msgid "Enable human verification"
 msgstr ""
 
-#: options.php:1081
-msgid "多说已经凉了"
+#: options.php:1086
+msgid "Comment UA infomation"
 msgstr ""
 
 #: options.php:1087
-msgid "时区调整"
+msgid "Check to enable, display the user's browser, operating system information"
 msgstr ""
 
-#: options.php:1088
+#: options.php:1093
+msgid "Enable disqus"
+msgstr ""
+
+#: options.php:1094
+msgid "Enable disqus for comment"
+msgstr ""
+
+#: options.php:1100
+msgid "Time Zone adjustment"
+msgstr ""
+
+#: options.php:1101
 msgid ""
-"如果评论出现时差问题在这里调整，填入一个整数，计算方法：实际时间=显示错误的"
-"时间-你输入的整数（单位：小时）"
+"If the comment has a time difference problem adjust here, fill in an integer, the calculation "
+"method: actual_time = display_error_time - the_integer_you_entered (unit: hour)"
 msgstr ""
 
 #: search.php:19
 #, php-format
-msgid "搜索结果: %s"
+msgid "search result: %s"
+msgstr "Search result: %s"
+
+#: tpl/content-category.php:30
+msgid "NOTHING"
 msgstr ""
 
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
+msgid "Comment"
+msgstr ""
+
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
+msgid "Comments"
+msgstr ""
+
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content.php:37 tpl/content-thumb.php:52
+msgid "Hit"
+msgid_plural "Hits"
+msgstr[0] ""
+msgstr[1] ""
+
 #: tpl/content-none.php:14
-msgid "没有找到任何东西！"
+msgid "There is noyhing here！"
 msgstr ""
 
 #: tpl/content-none.php:21
 #, php-format
-msgid "准备好发布你的第一篇文章了么？ <a href=\"%1$s\">点击这里开始</a>."
+msgid "Ready to post your first article? <a href=\"%1$s\">Click here to start</a>."
 msgstr ""
 
 #: tpl/content-none.php:25
-msgid "没有找到你想要的，看看其他的吧。"
+msgid "Didn't find what you want, look at the other ones."
 msgstr ""
 
 #: tpl/content-none.php:43
-msgid "我们似乎没有找到你想要的东西. 或许你可以搜索一下试试."
+msgid "We didn't seem to find what you want. Maybe you can search for it."
 msgstr ""
 
 #: tpl/content-page.php:24 tpl/content-single.php:25 tpl/single-image.php:28
 msgid "Pages:"
 msgstr ""
 
+#: tpl/content-single.php:34
+msgid "Attribution-NonCommercial-ShareAlike 4.0 International"
+msgstr ""
+
 #: user/page-login.php:18
 msgid "Remember Me"
 msgstr ""
 
-#. Theme Name of the plugin/theme
-msgid "Sakura"
+#: user/page-register.php:14 user/page-register.php:16 user/page-register.php:19
+#: user/page-register.php:24 user/page-register.php:26 user/page-register.php:29
+#: user/page-register.php:34 user/page-register.php:36 user/page-register.php:41
+#: user/page-register.php:47
+msgid "Error"
+msgstr ""
+
+#: user/page-register.php:14
+msgid "Please enter username."
+msgstr ""
+
+#: user/page-register.php:16
+msgid "Invalid characters, please enter a valid username."
+msgstr ""
+
+#: user/page-register.php:19
+msgid "This username has been registered."
+msgstr ""
+
+#: user/page-register.php:24
+msgid "Please enter email address."
+msgstr ""
+
+#: user/page-register.php:26
+msgid "Invalid email address"
+msgstr ""
+
+#: user/page-register.php:29
+msgid "This email address has been registered."
+msgstr ""
+
+#: user/page-register.php:34
+msgid "Password length is at least 6 digits"
+msgstr ""
+
+#: user/page-register.php:36
+msgid "Inconsistent password entered twice"
+msgstr ""
+
+#: user/page-register.php:41
+msgid "Please drag the slider to verify identity"
+msgstr ""
+
+#: user/page-register.php:47
+msgid "Unable to complete registration request...Please contact"
+msgstr ""
+
+#: user/page-register.php:47
+msgid "administrator"
+msgstr ""
+
+#: user/page-register.php:76
+msgid "Drag the slider to verify"
+msgstr ""
+
+#: user/page-register.php:83
+msgid "Sign up"
+msgstr ""
+
+#: user/page-register.php:92
+msgid "Registration is not open yet"
 msgstr ""
 
 #. Theme URI of the plugin/theme
@@ -1404,7 +1668,7 @@ msgid "https://2heng.xin/theme-sakura/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
+msgid "A branch of theme Akina"
 msgstr ""
 
 #. Author of the plugin/theme
@@ -1422,3 +1686,67 @@ msgstr ""
 #. Template Name of the plugin/theme
 msgid "links"
 msgstr ""
+
+#, php-format
+#~ msgid "第 %s 页"
+#~ msgstr "Page %s"
+
+#~ msgid "查看评论"
+#~ msgstr "Check comments"
+
+#~ msgid "暂无评论"
+#~ msgstr "No comment"
+
+#~ msgid "基本设置"
+#~ msgstr "Basic settings"
+
+#~ msgid "站点名称"
+#~ msgstr "Site title"
+
+#~ msgid "作者"
+#~ msgstr "Author"
+
+#~ msgid "主题风格"
+#~ msgstr "Theme style"
+
+#~ msgid "自定义主题颜色"
+#~ msgstr "Custom theme color"
+
+#~ msgid "切换主题菜单透明度"
+#~ msgstr "\"Switch theme button\"  transparency"
+
+#~ msgid "调整切换主题菜单透明度，值越小越透明,默认透明度0.8"
+#~ msgstr "The smaller the value, the more transparent, the default transparency is 0.8"
+
+#~ msgid "全透明"
+#~ msgstr "Fully transparent 0"
+
+#~ msgid "透明度0.1"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.2"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.3"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.4"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.5"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.6"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.7"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.8"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "透明度0.9"
+#~ msgstr "Transparency 0.1"
+
+#~ msgid "不透明"
+#~ msgstr "Opaque 1"

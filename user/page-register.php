@@ -11,40 +11,40 @@ if( !empty($_POST['register_reg']) ) {
 
 	// Check the username
 	if ( $sanitized_user_login == '' ) {
-	  $error .= '<strong>错误</strong>：请输入用户名。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Please enter username.","sakura")./*请输入用户名。*/'<br />';
 	} elseif ( ! validate_username( $sanitized_user_login ) ) {
-	  $error .= '<strong>错误</strong>：此用户名包含无效字符，请输入有效的用户名。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Invalid characters, please enter a valid username.","sakura")./*此用户名包含无效字符，请输入有效的用户名。*/'<br />';
 	  $sanitized_user_login = '';
 	} elseif ( username_exists( $sanitized_user_login ) ) {
-	  $error .= '<strong>错误</strong>：该用户名已被注册。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("This username has been registered.","sakura")./*该用户名已被注册。*/'<br />';
 	}
 
 	// Check the e-mail address
 	if ( $user_email == '' ) {
-	  $error .= '<strong>错误</strong>：请填写电子邮件地址。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Please enter email address.","sakura")./*请填写电子邮件地址。*/'<br />';
 	} elseif ( ! is_email( $user_email ) ) {
-	  $error .= '<strong>错误</strong>：电子邮件地址不正确。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Invalid email address","sakura")./*电子邮件地址不正确。*/'<br />';
 	  $user_email = '';
 	} elseif ( email_exists( $user_email ) ) {
-	  $error .= '<strong>错误</strong>：该电子邮件地址已经被注册。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("This email address has been registered.","sakura")./*该电子邮件地址已经被注册。*/'<br />';
 	}
 
 	// Check the password
 	if(strlen($_POST['user_pass']) < 6){
-	  $error .= '<strong>错误</strong>：密码长度至少6位。<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Password length is at least 6 digits","sakura")./*密码长度至少6位。*/'<br />';
 	}elseif($_POST['user_pass'] != $_POST['user_pass2']){
-		$error .= '<strong>错误</strong>：两次输入的密码不一致。<br />';
+		$error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Inconsistent password entered twice","sakura")./*两次输入的密码不一致。*/'<br />';
 	}
 
 	// verification
 	if(akina_option('login_validate') && strlen($_POST['verification']) > 0 ){
-		$error .= '<strong>错误</strong>：请拖动滑块验证身份<br />';
+		$error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Please drag the slider to verify identity","sakura")./*请拖动滑块验证身份*/'<br />';
 	}
 
 	if($error == '') {
 		$user_id = wp_create_user( $sanitized_user_login, $_POST['user_pass'], $user_email );
 		if ( !$user_id ) {
-			$error .= sprintf( '<strong>错误</strong>：无法完成注册请求... 请联系<a href=\"mailto:%s\">管理员</a>！<br />', get_option( 'admin_email' ) );
+			$error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Unable to complete registration request...Please contact","sakura")./*无法完成注册请求... 请联系*/'<a href=\"mailto:'. get_option( 'admin_email' ) .'\">'.__("administrator","sakura")./*管理员*/'</a>！<br />';
 		}else if (!is_user_logged_in()) {
 			$user = get_userdatabylogin($sanitized_user_login);
 			$user_id = $user->ID;
@@ -73,14 +73,14 @@ if( !empty($_POST['register_reg']) ) {
 					<div id="verification-slider">
 						<div id="slider">
 							<div id="slider_bg"></div>
-							<span id="label">»</span><span id="labelTip">拖动滑块验证</span>
+							<span id="label">»</span><span id="labelTip"><?php _e("Drag the slider to verify","sakura")/*拖动滑块验证*/?></span>
 						</div>
 						<input type="hidden" name="verification" value="verification" />
 					</div>
 					<?php endif; ?>
 					<input type="hidden" name="register_reg" value="ok" />
 					<?php if(!empty($error)) { echo '<p class="user-error">'.$error.'</p>'; } ?>
-					<input class="button register-button" name="submit" type="submit" value="注 册">
+					<input class="button register-button" name="submit" type="submit" value="<?php _e("Sign up","sakura")/*注 册*/?>">
 				</form>
 			</div>
 		<?php }else{ 
@@ -89,7 +89,7 @@ if( !empty($_POST['register_reg']) ) {
 		<script>//window.location.href='<?php echo $loadurl; ?>';</script>
 		<?php } ?>
 		<?php else : ?>
-			<div class="register-close"><p>暂未开放注册。</p></div>
+			<div class="register-close"><p><?php _e("Registration is not open yet","sakura")/*暂未开放注册。*/?></p></div>
 		<?php endif; ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
