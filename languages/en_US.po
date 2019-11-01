@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
 "POT-Creation-Date: 2019-11-01 15:09+0800\n"
-"PO-Revision-Date: 2019-11-01 15:10+0800\n"
+"PO-Revision-Date: 2019-11-01 16:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -28,11 +28,11 @@ msgstr ""
 
 #: 404.php:46
 msgid "return to previous page"
-msgstr ""
+msgstr "Return to previous page"
 
 #: 404.php:47
 msgid "return to home page"
-msgstr ""
+msgstr "Return to home page"
 
 #: 404.php:50
 msgid "Don't worry, search in site?"
@@ -48,15 +48,15 @@ msgstr "Previous"
 
 #: comments.php:21
 msgid "view comments"
-msgstr ""
+msgstr "View comments"
 
 #: comments.php:22 comments.php:27
-msgid "1 comment"
+msgid " comment"
 msgstr ""
 
 #: comments.php:22 comments.php:27
 #, php-format
-msgid "% comments"
+msgid " comments"
 msgstr ""
 
 #: comments.php:43
@@ -222,11 +222,11 @@ msgstr ""
 #: inc/categories-images.php:48 inc/categories-images.php:68
 #: inc/categories-images.php:197
 msgid "add image"
-msgstr ""
+msgstr "Add image"
 
 #: inc/categories-images.php:69 inc/categories-images.php:198
 msgid "remove image"
-msgstr ""
+msgstr "Remove image"
 
 #: inc/categories-images.php:211
 msgid "image"
@@ -395,7 +395,7 @@ msgstr ""
 msgid "Sign out? "
 msgstr ""
 
-#: inc/theme_plus.php:299 inc/theme_plus.php:422 tpl/content-single.php:16
+#: inc/theme_plus.php:299 inc/theme_plus.php:354 inc/theme_plus.php:422 tpl/content-single.php:16
 #: tpl/single-image.php:18
 msgid "View"
 msgid_plural "Views"
@@ -1388,16 +1388,13 @@ msgstr ""
 msgid "Enable NProgress progress bar"
 msgstr ""
 
+#: options.php:960
 #: options.php:953
 msgid "Default off, check on"
 msgstr ""
 
 #: options.php:959
 msgid "Enable Announcement"
-msgstr ""
-
-#: options.php:960
-msgid "Default off, check o"
 msgstr ""
 
 #: options.php:966
@@ -1585,21 +1582,21 @@ msgstr ""
 #: search.php:19
 #, php-format
 msgid "search result: %s"
-msgstr ""
+msgstr "Search result: %s"
 
 #: tpl/content-category.php:30
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:52
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content.php:37 tpl/content-thumb.php:52
 msgid "Hit"
 msgid_plural "Hits"
 msgstr[0] ""

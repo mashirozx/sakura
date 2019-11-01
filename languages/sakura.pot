@@ -51,12 +51,12 @@ msgid "view comments"
 msgstr ""
 
 #: comments.php:22 comments.php:27
-msgid "1 comment"
+msgid " comment"
 msgstr ""
 
 #: comments.php:22 comments.php:27
 #, php-format
-msgid "% comments"
+msgid " comments"
 msgstr ""
 
 #: comments.php:43
@@ -395,7 +395,7 @@ msgstr ""
 msgid "Sign out? "
 msgstr ""
 
-#: inc/theme_plus.php:299 inc/theme_plus.php:422 tpl/content-single.php:16
+#: inc/theme_plus.php:299 inc/theme_plus.php:354 inc/theme_plus.php:422 tpl/content-single.php:16
 #: tpl/single-image.php:18
 msgid "View"
 msgid_plural "Views"
@@ -1386,16 +1386,13 @@ msgstr ""
 msgid "Enable NProgress progress bar"
 msgstr ""
 
+#: options.php:960
 #: options.php:953
 msgid "Default off, check on"
 msgstr ""
 
 #: options.php:959
 msgid "Enable Announcement"
-msgstr ""
-
-#: options.php:960
-msgid "Default off, check o"
 msgstr ""
 
 #: options.php:966
@@ -1589,15 +1586,15 @@ msgstr ""
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:52
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content.php:37 tpl/content-thumb.php:52
 msgid "Hit"
 msgid_plural "Hits"
 msgstr[0] ""

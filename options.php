@@ -957,7 +957,7 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('Enable Announcement', 'sakura'),
-		'desc' => __('Default off, check o', 'sakura'),/*默认不显示，勾选开启*/
+		'desc' => __('Default off, check on', 'sakura'),/*默认不显示，勾选开启*/
 		'id' => 'head_notice',
 		'std' => '0',
 		'type' => 'checkbox');	
