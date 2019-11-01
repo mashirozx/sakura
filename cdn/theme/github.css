@@ -924,6 +924,6 @@
 }
 
 /*other fix*/
-.entry-content ol, ul {
+.entry-content ol,.entry-content ul {
     margin: auto !important;
 }
