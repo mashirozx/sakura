@@ -3,21 +3,21 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-01 15:09+0800\n"
+"POT-Creation-Date: 2019-11-01 22:45+0800\n"
 "PO-Revision-Date: 2019-11-01 14:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;"
+"esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;"
+"__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -143,8 +143,7 @@ msgstr ""
 msgid "Nav Menus"
 msgstr ""
 
-#: functions.php:387 inc/theme_plus.php:187 layouts/authorprofile.php:11
-#: options.php:123
+#: functions.php:387 inc/theme_plus.php:187 layouts/authorprofile.php:11 options.php:123
 msgid "Author"
 msgstr ""
 
@@ -172,14 +171,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: functions.php:402
-msgid "<i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> "
-msgstr ""
-
 #: functions.php:483
 msgid ""
-"Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
-"\" target=\"_blank\">WP-Statistics</a>"
+"Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/\" target=\"_blank"
+"\">WP-Statistics</a>"
 msgstr ""
 
 #: functions.php:536
@@ -219,8 +214,7 @@ msgstr ""
 msgid "category/tag image"
 msgstr ""
 
-#: inc/categories-images.php:48 inc/categories-images.php:68
-#: inc/categories-images.php:197
+#: inc/categories-images.php:48 inc/categories-images.php:68 inc/categories-images.php:197
 msgid "add image"
 msgstr ""
 
@@ -485,8 +479,8 @@ msgstr ""
 
 #: options.php:139
 msgid ""
-"Adjust the theme scheme menu transparency, the smaller the value, the more "
-"transparent. The default value is 0.8"
+"Adjust the theme scheme menu transparency, the smaller the value, the more transparent. The "
+"default value is 0.8"
 msgstr ""
 
 #: options.php:144
@@ -539,13 +533,12 @@ msgstr ""
 
 #: options.php:159
 msgid ""
-"The foreground switches the background of the webpage. There are 8 urls "
-"separated by commas. The order corresponds to the foreground scheme tool "
-"button position (the order of the buttons is from left to right, top to "
-"bottom). If no background is needed, fill in the corresponding position as "
-"none.<strong>Note: If the theme is updated from v3.2.3 and below, be sure to "
-"change the [Version Control] parameter under the [Other] tab of this "
-"configuration page to any new value!</strong>"
+"The foreground switches the background of the webpage. There are 8 urls separated by commas. "
+"The order corresponds to the foreground scheme tool button position (the order of the buttons "
+"is from left to right, top to bottom). If no background is needed, fill in the corresponding "
+"position as none.<strong>Note: If the theme is updated from v3.2.3 and below, be sure to "
+"change the [Version Control] parameter under the [Other] tab of this configuration page to any "
+"new value!</strong>"
 msgstr ""
 
 #: options.php:165
@@ -562,9 +555,9 @@ msgstr ""
 
 #: options.php:172
 msgid ""
-"The home page does not display the avatar above, but displays a paragraph of "
-"text (use the avatar above if left blank).The text is recommended not to be "
-"too long, about 16 bytes is appropriate."
+"The home page does not display the avatar above, but displays a paragraph of text (use the "
+"avatar above if left blank).The text is recommended not to be too long, about 16 bytes is "
+"appropriate."
 msgstr ""
 
 #: options.php:178
@@ -621,21 +614,20 @@ msgstr ""
 
 #: options.php:220
 msgid ""
-"Enable by default, check off, display on the article page, separate page and "
-"category page"
+"Enable by default, check off, display on the article page, separate page and category page"
 msgstr ""
 
 #: options.php:226
 msgid "Search button"
 msgstr ""
 
-#: options.php:231 options.php:279 options.php:572 options.php:582
-#: options.php:592 options.php:602
+#: options.php:231 options.php:279 options.php:572 options.php:582 options.php:592
+#: options.php:602
 msgid "Open"
 msgstr ""
 
-#: options.php:232 options.php:280 options.php:573 options.php:583
-#: options.php:593 options.php:603
+#: options.php:232 options.php:280 options.php:573 options.php:583 options.php:593
+#: options.php:603
 msgid "Close"
 msgstr ""
 
@@ -665,8 +657,7 @@ msgstr ""
 
 #: options.php:256
 msgid ""
-"Home article feature images alignment (only for graphic mode, default left "
-"and right alternate)"
+"Home article feature images alignment (only for graphic mode, default left and right alternate)"
 msgstr ""
 
 #: options.php:261
@@ -687,9 +678,9 @@ msgstr ""
 
 #: options.php:268
 msgid ""
-"The default image displayed without the article feature image set, use "
-"random cover if left blank (the image to be displayed is placed in the /wp-"
-"content/themes/Sakura/feature/gallery/ directory)"
+"The default image displayed without the article feature image set, use random cover if left "
+"blank (the image to be displayed is placed in the /wp-content/themes/Sakura/feature/gallery/ "
+"directory)"
 msgstr ""
 
 #: options.php:274
@@ -722,8 +713,7 @@ msgstr ""
 
 #: options.php:302
 msgid ""
-"(seconds) Set to automatically load the next page time, the default is not "
-"automatically loaded"
+"(seconds) Set to automatically load the next page time, the default is not automatically loaded"
 msgstr ""
 
 #: options.php:307
@@ -835,9 +825,7 @@ msgid "Live"
 msgstr ""
 
 #: options.php:402
-msgid ""
-"Check to enable, the video will continue to play automatically, you need to "
-"enable Pjax"
+msgid "Check to enable, the video will continue to play automatically, you need to enable Pjax"
 msgstr ""
 
 #: options.php:408
@@ -846,8 +834,8 @@ msgstr ""
 
 #: options.php:409
 msgid ""
-"The source address of the video, the address is spliced below the video "
-"name, the slash is not required at the end of the address"
+"The source address of the video, the address is spliced below the video name, the slash is not "
+"required at the end of the address"
 msgstr ""
 
 #: options.php:415
@@ -856,9 +844,8 @@ msgstr ""
 
 #: options.php:416
 msgid ""
-"abc.mp4, just fill in the video file name abc, multiple videos separated by "
-"commas such as abc, efg, do not care about the order, because the loading is "
-"random extraction"
+"abc.mp4, just fill in the video file name abc, multiple videos separated by commas such as "
+"abc, efg, do not care about the order, because the loading is random extraction"
 msgstr ""
 
 #: options.php:422
@@ -867,8 +854,8 @@ msgstr ""
 
 #: options.php:423
 msgid ""
-"Leave this blank to use the built-in API (put the images that need to be "
-"randomly displayed into the /cover/gallery/ directory)"
+"Leave this blank to use the built-in API (put the images that need to be randomly displayed "
+"into the /cover/gallery/ directory)"
 msgstr ""
 
 #: options.php:429
@@ -921,8 +908,8 @@ msgstr ""
 
 #: options.php:460
 msgid ""
-"Default is Discovery, you can also change it to other, of course you can't "
-"use it as an advertisement!Not allowed!!"
+"Default is Discovery, you can also change it to other, of course you can't use it as an "
+"advertisement!Not allowed!!"
 msgstr ""
 
 #: options.php:467
@@ -1051,9 +1038,7 @@ msgid "Tencent QQ"
 msgstr ""
 
 #: options.php:639
-msgid ""
-"tencent://message/?uin={{QQ number}}. for example, tencent://message/?"
-"uin=123456"
+msgid "tencent://message/?uin={{QQ number}}. for example, tencent://message/?uin=123456"
 msgstr ""
 
 #: options.php:645
@@ -1162,8 +1147,8 @@ msgstr ""
 
 #: options.php:737
 msgid ""
-"The name part of name@domain.com, only the frontend has js runtime "
-"environment can get the full address, you can rest assured to fill in"
+"The name part of name@domain.com, only the frontend has js runtime environment can get the "
+"full address, you can rest assured to fill in"
 msgstr ""
 
 #: options.php:743
@@ -1184,11 +1169,10 @@ msgstr ""
 
 #: options.php:757
 msgid ""
-"You can design the background panel (/wp-admin/) style yourself below, but "
-"before you start, please go to <a href=\"/wp-admin/profile.php\">here</a> to "
-"change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match "
-"colors? Maybe <a href=\"https://mashiro.top/color-thief/\">this</a> can help "
-"you."
+"You can design the background panel (/wp-admin/) style yourself below, but before you start, "
+"please go to <a href=\"/wp-admin/profile.php\">here</a> to change the color scheme to custom."
+"(Custom).<br><b>Tip: </b>How to match colors? Maybe <a href=\"https://mashiro.top/color-thief/"
+"\">this</a> can help you."
 msgstr ""
 
 #: options.php:763
@@ -1197,8 +1181,8 @@ msgstr ""
 
 #: options.php:766 options.php:774 options.php:782 options.php:790
 msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions which are used "
-"to give the user a feel for the theme."
+"<i>(array) (optional)</i> An array of CSS color definitions which are used to give the user a "
+"feel for the theme."
 msgstr ""
 
 #: options.php:771
@@ -1218,9 +1202,7 @@ msgid "Panel icon color——base"
 msgstr ""
 
 #: options.php:798 options.php:806 options.php:814
-msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions used to color "
-"any SVG icons."
+msgid "<i>(array) (optional)</i> An array of CSS color definitions used to color any SVG icons."
 msgstr ""
 
 #: options.php:803
@@ -1265,10 +1247,9 @@ msgstr ""
 
 #: options.php:847
 msgid ""
-"Forcibly do not use the background address to log in, fill in the new "
-"landing page address, such as http://www.xxx.com/login [Note] Before you "
-"fill out, test your new page can be opened normally, so as not to enter the "
-"background or other problems happening"
+"Forcibly do not use the background address to log in, fill in the new landing page address, "
+"such as http://www.xxx.com/login [Note] Before you fill out, test your new page can be opened "
+"normally, so as not to enter the background or other problems happening"
 msgstr ""
 
 #: options.php:853
@@ -1293,8 +1274,8 @@ msgstr ""
 
 #: options.php:868
 msgid ""
-"After checken, the administrator redirects to the background and the user "
-"redirects to the home page."
+"After checken, the administrator redirects to the background and the user redirects to the "
+"home page."
 msgstr ""
 
 #: options.php:874
@@ -1315,9 +1296,9 @@ msgstr ""
 
 #: options.php:887
 msgid ""
-"Note: Fill in the format http(s)://your CDN domain name/. <br>In other "
-"words, the original path is http://your.domain/wp-content/uploads/2018/05/xx."
-"png and the picture will load from http://your CDN domain/2018/05/xx.png"
+"Note: Fill in the format http(s)://your CDN domain name/. <br>In other words, the original "
+"path is http://your.domain/wp-content/uploads/2018/05/xx.png and the picture will load from "
+"http://your CDN domain/2018/05/xx.png"
 msgstr ""
 
 #: options.php:893
@@ -1333,9 +1314,7 @@ msgid "Use js and css file of the theme (sakura-app.js、style.css) locally"
 msgstr ""
 
 #: options.php:901
-msgid ""
-"The js and css files of the theme do not load from jsDelivr, please open "
-"when DIY"
+msgid "The js and css files of the theme do not load from jsDelivr, please open when DIY"
 msgstr ""
 
 #: options.php:908
@@ -1360,9 +1339,8 @@ msgstr ""
 
 #: options.php:932
 msgid ""
-"If you don't need the player just leave it blank.Fill in the \"song list\" "
-"ID of Netease Cloud Music, eg: https://music.163.com/#/playlist?"
-"id=2288037900 The ID is 2288037900"
+"If you don't need the player just leave it blank.Fill in the \"song list\" ID of Netease Cloud "
+"Music, eg: https://music.163.com/#/playlist?id=2288037900 The ID is 2288037900"
 msgstr ""
 
 #: options.php:938
@@ -1370,8 +1348,7 @@ msgid "Version Control"
 msgstr ""
 
 #: options.php:939
-msgid ""
-"Used to update frontend cookies and browser caches, any string can be used"
+msgid "Used to update frontend cookies and browser caches, any string can be used"
 msgstr ""
 
 #: options.php:945
@@ -1386,8 +1363,7 @@ msgstr ""
 msgid "Enable NProgress progress bar"
 msgstr ""
 
-#: options.php:960
-#: options.php:953
+#: options.php:960 options.php:953
 msgid "Default off, check on"
 msgstr ""
 
@@ -1401,8 +1377,8 @@ msgstr ""
 
 #: options.php:967
 msgid ""
-"Announcement content, the text exceeds 142 bytes will be scrolled display "
-"(mobile device is invalid)"
+"Announcement content, the text exceeds 142 bytes will be scrolled display (mobile device is "
+"invalid)"
 msgstr ""
 
 #: options.php:973
@@ -1422,8 +1398,7 @@ msgid "Statistics Interface"
 msgstr ""
 
 #: options.php:992
-msgid ""
-"WP-Statistics plugin (Professional statistics, can exclude invalid access)"
+msgid "WP-Statistics plugin (Professional statistics, can exclude invalid access)"
 msgstr ""
 
 #: options.php:993
@@ -1456,8 +1431,8 @@ msgstr ""
 
 #: options.php:1010
 msgid ""
-"Real-time search in the foreground, call the Rest API to update the cache "
-"every hour, you can manually set the cache time in functions.php"
+"Real-time search in the foreground, call the Rest API to update the cache every hour, you can "
+"manually set the cache time in functions.php"
 msgstr ""
 
 #: options.php:1016
@@ -1466,8 +1441,8 @@ msgstr ""
 
 #: options.php:1017
 msgid ""
-"Search for comments in real-time search (not recommended if there are too "
-"many comments on the site)"
+"Search for comments in real-time search (not recommended if there are too many comments on the "
+"site)"
 msgstr ""
 
 #: options.php:1023
@@ -1476,8 +1451,7 @@ msgstr ""
 
 #: options.php:1024
 msgid ""
-"Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox"
-"\">please read wiki</a>"
+"Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox\">please read wiki</a>"
 msgstr ""
 
 #: options.php:1030
@@ -1498,8 +1472,8 @@ msgstr ""
 
 #: options.php:1045
 msgid ""
-"Automatically add a copyright to the clipboard when copying more than 30 "
-"bytes, which is enabled by default."
+"Automatically add a copyright to the clipboard when copying more than 30 bytes, which is "
+"enabled by default."
 msgstr ""
 
 #: options.php:1051
@@ -1508,8 +1482,8 @@ msgstr ""
 
 #: options.php:1052
 msgid ""
-"For sending system mail, the sender address displayed in the user's mailbox, "
-"do not use Chinese, the default system email address is bibi@your_domain_name"
+"For sending system mail, the sender address displayed in the user's mailbox, do not use "
+"Chinese, the default system email address is bibi@your_domain_name"
 msgstr ""
 
 #: options.php:1058
@@ -1518,9 +1492,8 @@ msgstr ""
 
 #: options.php:1059
 msgid ""
-"WordPress will use email to notify users when their comments receive a reply "
-"by default. Tick this item allows users to set their own comments reply "
-"notification"
+"WordPress will use email to notify users when their comments receive a reply by default. Tick "
+"this item allows users to set their own comments reply notification"
 msgstr ""
 
 #: options.php:1065
@@ -1528,9 +1501,7 @@ msgid "Administrator comment notification"
 msgstr ""
 
 #: options.php:1066
-msgid ""
-"Whether to use email notification when the administrator's comments receive "
-"a reply"
+msgid "Whether to use email notification when the administrator's comments receive a reply"
 msgstr ""
 
 #: options.php:1072
@@ -1554,8 +1525,7 @@ msgid "Comment UA infomation"
 msgstr ""
 
 #: options.php:1087
-msgid ""
-"Check to enable, display the user's browser, operating system information"
+msgid "Check to enable, display the user's browser, operating system information"
 msgstr ""
 
 #: options.php:1093
@@ -1572,9 +1542,8 @@ msgstr ""
 
 #: options.php:1101
 msgid ""
-"If the comment has a time difference problem adjust here, fill in an "
-"integer, the calculation method: actual_time = display_error_time - "
-"the_integer_you_entered (unit: hour)"
+"If the comment has a time difference problem adjust here, fill in an integer, the calculation "
+"method: actual_time = display_error_time - the_integer_you_entered (unit: hour)"
 msgstr ""
 
 #: search.php:19
@@ -1606,8 +1575,7 @@ msgstr ""
 
 #: tpl/content-none.php:21
 #, php-format
-msgid ""
-"Ready to post your first article? <a href=\"%1$s\">Click here to start</a>."
+msgid "Ready to post your first article? <a href=\"%1$s\">Click here to start</a>."
 msgstr ""
 
 #: tpl/content-none.php:25
@@ -1630,11 +1598,10 @@ msgstr ""
 msgid "Remember Me"
 msgstr ""
 
-#: user/page-register.php:14 user/page-register.php:16
-#: user/page-register.php:19 user/page-register.php:24
-#: user/page-register.php:26 user/page-register.php:29
-#: user/page-register.php:34 user/page-register.php:36
-#: user/page-register.php:41 user/page-register.php:47
+#: user/page-register.php:14 user/page-register.php:16 user/page-register.php:19
+#: user/page-register.php:24 user/page-register.php:26 user/page-register.php:29
+#: user/page-register.php:34 user/page-register.php:36 user/page-register.php:41
+#: user/page-register.php:47
 msgid "Error"
 msgstr ""
 

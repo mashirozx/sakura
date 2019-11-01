@@ -399,7 +399,7 @@ if(!function_exists('akina_comment_format')){
                                                 $flag .= __('No', 'mashiro').' <i class="fa fa-unlock" aria-hidden="true"></i>';
                                             }
                                             $flag .= '</span></a>';
-                                            $flag .= edit_comment_link(__('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.__('Edit', 'mashiro').''), ' <span style="color:rgba(0,0,0,.35)>', '</span>');
+                                            $flag .= edit_comment_link('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.__("Edit", "mashiro"), ' <span style="color:rgba(0,0,0,.35)">', '</span>');
                                             echo $flag;
                                         } ?></div>
 								</div>
