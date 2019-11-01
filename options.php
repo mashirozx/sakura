@@ -114,7 +114,7 @@ function optionsframework_options() {
 	
 	$options[] = array(
 		'name' => __('Site title', 'sakura'),/*站点名称*/
-		'desc' => __('樱花庄的白猫', 'sakura'),
+		'desc' => __('Mashiro\'s Blog', 'sakura'),
 		'id' => 'site_name',
 		'std' => '',
 		'type' => 'text');	
@@ -340,8 +340,8 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
-		'name' => __('站长统计（不建议使用）', 'sakura'),
-		'desc' => __('填写统计代码，将被隐藏', 'sakura'),
+		'name' => __('CNZZ Statistics (not recommand)', 'sakura'), /*站长统计（不建议使用）*/
+		'desc' => __('Statistics code, which will be invisible in web page.', 'sakura'), /*填写统计代码，将被隐藏*/
 		'id' => 'site_statistics',
 		'std' => '',
 		'type' => 'textarea');
@@ -457,9 +457,9 @@ function optionsframework_options() {
 
 	$options[] = array(
 		'name' => __('Top-feature title', 'sakura'),/*聚焦标题*/
-		'desc' => __('Default is 聚焦, you can also change it to other, of course you can\'t use it as an advertisement!Not allowed!!', 'sakura'),/*默认为聚焦，你也可以修改为其他，当然不能当广告用！不允许！！*/
+		'desc' => __('Default is Discovery, you can also change it to other, of course you can\'t use it as an advertisement!Not allowed!!', 'sakura'),/*默认为聚焦，你也可以修改为其他，当然不能当广告用！不允许！！*/
 		'id' => 'feature_title',
-		'std' => '聚焦',
+		'std' => 'Discovery',
 		'class' => 'mini',
 		'type' => 'text');	
 		
