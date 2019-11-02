@@ -17,7 +17,7 @@ mashiro_option.qq_api_url = "https://api.2heng.xin/qqinfo/";
 mashiro_option.qq_avatar_api_url = "https://api.2heng.xin/qqinfo/";
 mashiro_option.live_search = <?php if ( akina_option('live_search') ){ echo 'true'; } else { echo 'false'; } ?>;
 
-<?php if( akina_option('sakura_skin_bg' )){ $bg_arry=explode(" ", akina_option('sakura_skin_bg' ));?>
+<?php if( akina_option('sakura_skin_bg' )){ $bg_arry=explode(",", akina_option('sakura_skin_bg' ));?>
 mashiro_option.skin_bg0 = "<?php echo $bg_arry[0] ?>";
 mashiro_option.skin_bg1 = "<?php echo $bg_arry[1] ?>";
 mashiro_option.skin_bg2 = "<?php echo $bg_arry[2] ?>";

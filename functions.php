@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.7' );
+define( 'SAKURA_VERSION', '3.2.8' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
@@ -50,7 +50,7 @@ function akina_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => esc_html__( '导航菜单', 'akina' ),
+		'primary' => __( 'Nav Menus', 'sakura' ), //导航菜单
 	) );
 
 	/*
@@ -355,7 +355,7 @@ function convertip($ip) {
     if( $ipaddr != '  ' )
         return $ipaddr;
     else
-        $ipaddr = '火星来客';
+        $ipaddr = 'Unknown';
         return $ipaddr;
 }
 //Comment Location End
@@ -384,22 +384,22 @@ if(!function_exists('akina_comment_format')){
 						<div class="commentinfo">
 							<section class="commeta">
 								<div class="left">
-									<h4 class="author"><a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo get_avatar( $comment->comment_author_email, '24', '', get_comment_author() ); ?><span class="bb-comment isauthor" title="中央钦定的<?php #esc_attr_e('Author', 'akina'); ?>">博主</span> <?php comment_author(); ?> <?php echo get_author_class($comment->comment_author_email,$comment->user_id); ?></a></h4>
+									<h4 class="author"><a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo get_avatar( $comment->comment_author_email, '24', '', get_comment_author() ); ?><span class="bb-comment isauthor" title="<?php _e('Author', 'mashiro'); ?>"><?php _e('Blogger', 'mashiro'); /*博主*/?></span> <?php comment_author(); ?> <?php echo get_author_class($comment->comment_author_email,$comment->user_id); ?></a></h4>
 								</div>
 								<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
 								<div class="right">
-									<div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true );//comment_date(get_option('date_format')); ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;来自: <?php echo convertip(get_comment_author_ip()); ?>
+									<div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true );//comment_date(get_option('date_format')); ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;<?php _e('Location', 'mashiro'); /*来自*/?>: <?php echo convertip(get_comment_author_ip()); ?>
     									<?php if (current_user_can('manage_options') and (wp_is_mobile() == false) ) {
                                             $comment_ID = $comment->comment_ID;
                                             $i_private = get_comment_meta($comment_ID, '_private', true);
-                                            $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> 状态: <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">私密(<span class="has_set_private">';
+                                            $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">'.__('Private', 'mashiro').': <span class="has_set_private">';
                                             if (!empty($i_private)) {
-                                                $flag .= '是 <i class="fa fa-lock" aria-hidden="true"></i>';
+                                                $flag .= __('Yes', 'mashiro').' <i class="fa fa-lock" aria-hidden="true"></i>';
                                             } else {
-                                                $flag .= '否 <i class="fa fa-unlock" aria-hidden="true"></i>';
+                                                $flag .= __('No', 'mashiro').' <i class="fa fa-unlock" aria-hidden="true"></i>';
                                             }
-                                            $flag .= '</span>)</a>';
-                                            $flag .= edit_comment_link(__('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> 编辑'), '<span>', '</span>');
+                                            $flag .= '</span></a>';
+                                            $flag .= edit_comment_link('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.__("Edit", "mashiro"), ' <span style="color:rgba(0,0,0,.35)">', '</span>');
                                             echo $flag;
                                         } ?></div>
 								</div>
@@ -427,17 +427,17 @@ if(!function_exists('akina_comment_format')){
         if($author_count>=1 && $author_count< 5 )//数字可自行修改，代表评论次数。
             echo '<span class="showGrade0" title="萌萌哒新人~"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=6 && $author_count< 10)
-            echo '<span class="showGrade1" title="巴拉巴拉小魔仙"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade1" title="Lv1"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=10 && $author_count< 20)
-            echo '<span class="showGrade2" title="初露头角"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade2" title="Lv2"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=20 && $author_count< 40)
-            echo '<span class="showGrade3" title="大水笔"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade3" title="Lv3"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=40 && $author_count< 80)
-            echo '<span class="showGrade4" title="大佬 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade4" title="Lv4 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=80 && $author_count< 160)
-            echo '<span class="showGrade5" title="日暮里大魔王"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade5" title="Lv5"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=160)
-            echo '<span class="showGrade6" title="德国骨科"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade6" title="Lv6"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     }
 
 /**
@@ -461,9 +461,6 @@ function restyle_text($number) {
         default:
             return $number;
     }
-    
-    
-    
 }
 
 function set_post_views() {
@@ -483,7 +480,7 @@ add_action('get_header', 'set_post_views');
 function get_post_views($post_id) {
 	if (akina_option('statistics_api')=='wp_statistics'){
         if (!function_exists('wp_statistics_pages')) {
-            return '请安装 <a href="https://wordpress.org/plugins/wp-statistics/" target="_blank">WP-Statistics 插件</a>';
+            return __('Please install pulgin <a href="https://wordpress.org/plugins/wp-statistics/" target="_blank">WP-Statistics</a>', 'sakura');
         } else {
             return restyle_text(wp_statistics_pages('total','uri',$post_id));
         }
@@ -536,7 +533,7 @@ function get_the_link_items($id = null){
   if ( !empty($bookmarks) ) {
       $output .= '<ul class="link-items fontSmooth">';
       foreach ($bookmarks as $bookmark) {
-		if (empty($bookmark->link_description)) $bookmark->link_description = '这家伙好懒╮(╯▽╰)╭';
+		if (empty($bookmark->link_description)) $bookmark->link_description = __('This guy is so lazy ╮(╯▽╰)╭', 'sakura');
 		if (empty($bookmark->link_image)) $bookmark->link_image = 'https://view.moezx.cc/images/2017/12/30/Transparent_Akkarin.th.jpg';
         $output .=  '<li class="link-item"><a class="link-item-inner effect-apollo" href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" rel="friend"><img class="lazyload" onerror="imgError(this,1)" data-src="' . $bookmark->link_image . '" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg"><span class="sitename">'. $bookmark->link_name .'</span><div class="linkdes">'. $bookmark->link_description .'</div></a></li>';
       }
@@ -1257,7 +1254,7 @@ function siren_private(){
 //时间序列
 function memory_archives_list() {
 	if( true ){
-		$output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">全部展开/收缩</span>]<!-- (注: 点击月份可以展开)--></p>';
+		$output = '<div id="archives"><p style="text-align:right;">[<span id="al_expand_collapse">'.__( "All expand/collapse", "sakura" )/*全部展开/收缩*/.'</span>]<!-- (注: 点击月份可以展开)--></p>';
 		$the_query = new WP_Query( 'posts_per_page=-1&ignore_sticky_posts=1&post_type=post' ); //update: 加上忽略置顶文章
 		$year=0; $mon=0; $i=0; $j=0;
 		while ( $the_query->have_posts() ) : $the_query->the_post();
@@ -1268,13 +1265,13 @@ function memory_archives_list() {
             if ($year != $year_tmp && $year > 0) $output .= '</ul>';
             if ($year != $year_tmp) {
                 $year = $year_tmp;
-                $output .= '<h3 class="al_year">'. $year .' 年</h3><ul class="al_mon_list">'; //输出年份
+                $output .= '<h3 class="al_year">'. $year . __("","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
-                $output .= '<li class="al_li"><span class="al_mon">'.$mon.'月 (<span id="post-num"></span>篇文章)</span><ul class="al_post_list">'; //输出月份
+                $output .= '<li class="al_li"><span class="al_mon"><span style="color:#0bf;">'.get_the_time('M').'</span> (<span id="post-num"></span>'.__(" post(s)","sakura") /*篇文章*/.')</span><ul class="al_post_list">'; //输出月份
             }
-            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'.get_the_time('d日  ') .'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
+            $output .= '<li>'.'<a href="'. get_permalink() .'"><span style="color:#0bf;">'/*get_the_time('d'.__(" ","sakura")) 日*/.'</span>'. get_the_title() .' <span>('.get_post_views(get_the_ID()).' <span class="fa fa-fire" aria-hidden="true"></span> / '. get_comments_number('0', '1', '%') .' <span class="fa fa-commenting" aria-hidden="true"></span>)</span></a></li>'; //输出文章日期和标题
         endwhile;
         wp_reset_postdata();
         $output .= '</ul></li></ul> <!--<ul class="al_mon_list"><li><ul class="al_post_list" style="display: block;"><li>博客已经萌萌哒运行了<span id="monitorday"></span>天</li></ul></li></ul>--></div>';
@@ -1667,7 +1664,7 @@ EOS;
         foreach ($comments as $comment) {
             $is_private = get_comment_meta($comment->comment_ID, '_private', true);
             if($is_private){
-                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：该评论为私密评论").'},';
+                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：".__("The comment is private","sakura")/*该评论为私密评论*/).'},';
                 continue;
             }else{
                 $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex," ",$comment->comment_author."：".$comment->comment_content))).'},';
