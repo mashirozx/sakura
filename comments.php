@@ -64,8 +64,8 @@
                         <div id="upload-img-show"></div>
                         <!--插入表情面版-->
                         <p id="emotion-toggle" class="no-select">
-                            <span class="emotion-toggle-off">' . __("Click me OωO", "sakura")/*表情面版*/ . '</span>
-                            <span class="emotion-toggle-on">' . __("Woooooow ヾ(≧∇≦*)ゝ", "sakura")/*收起*/ . '</span>
+                            <span class="emotion-toggle-off">' . __("表情面版", "sakura")/*表情面版*/ . '</span>
+                            <span class="emotion-toggle-on">' . __("收起", "sakura")/*收起*/ . '</span>
                         </p>
                         <div class="emotion-box no-select">
                             <table class="motion-switcher-table">
