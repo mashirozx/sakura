@@ -233,6 +233,7 @@ require get_template_directory() . '/inc/categories-images.php';
 
 //Comment Location Start
 function convertip($ip) {
+    error_reporting(E_ALL ^ E_NOTICE);
 	$dat_path = dirname(__FILE__).'/inc/QQWry.Dat'; 
     if(!$fd = @fopen($dat_path, 'rb')){
         return 'IP date file not exists or access denied';
@@ -468,7 +469,7 @@ function set_post_views() {
     $post_id = intval($post->ID);
     $count_key = 'views';
     $views = get_post_custom($post_id);
-    $views = intval($views['views'][0]);
+    $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
     if(is_single() || is_page()) {
         if(!update_post_meta($post_id, 'views', ($views + 1))) {
             add_post_meta($post_id, 'views', 1, true);
@@ -487,7 +488,7 @@ function get_post_views($post_id) {
     } else {
         $count_key = 'views';
         $views = get_post_custom($post_id);
-        $views = intval($views['views'][0]);
+        $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
         $post_views = intval(post_custom('views'));
         if($views == '') {
             return 0;
@@ -1286,7 +1287,7 @@ function memory_archives_list() {
 /* Remove the "Dashboard" from the admin menu for non-admin users */
 function remove_dashboard () {
     global $current_user, $menu, $submenu;
-    get_currentuserinfo();
+    wp_get_current_user();
 
     if( ! in_array( 'administrator', $current_user->roles ) ) {
         reset( $menu );
@@ -1603,13 +1604,17 @@ function output_comments_qq_columns( $column_name, $comment_id ){
  */
 add_filter( 'get_avatar', 'change_avatar', 10, 3 );
 function change_avatar($avatar){
-	global $comment;
-	if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true ) ){
-		$qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
-        return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
-	}else{
-		return $avatar ;
-	}	
+    global $comment;
+    if ($comment) {
+        if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true )){
+            $qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
+            return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+        }else{
+            return $avatar ;
+        }
+    } else{
+        return $avatar ;
+    }
 }
 
 // default feature image

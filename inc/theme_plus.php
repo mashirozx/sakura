@@ -260,7 +260,7 @@ function Exuser_center(){ ?>
 // 登录成功
 function login_ok(){ 
   global $current_user;
-  get_currentuserinfo();
+  wp_get_current_user();
 ?>
   <p class="ex-login-avatar"><a href="http://cn.gravatar.com/" title="<?php _e('Change avatar','sakura')/*更换头像*/?>" target="_blank" rel="nofollow"><?php echo get_avatar( $current_user->user_email, '110' ); ?></a></p>
   <p class="ex-login-username"><?php _e('Hello, ','sakura')/*你好，*/?><strong><?php echo $current_user->display_name; ?></strong></p>
@@ -464,7 +464,7 @@ function the_video_headPattern_normal(){
  * 导航栏用户菜单
  */
 function header_user_menu(){
-  global $current_user;get_currentuserinfo(); 
+  global $current_user;wp_get_current_user(); 
   if(is_user_logged_in()){
     $ava = akina_option('focus_logo') ? akina_option('focus_logo') : get_avatar_url( $current_user->user_email );
     ?>
@@ -510,7 +510,9 @@ function header_user_menu(){
 // 上一篇
 function get_prev_thumbnail_url() { 
   $prev_post = get_previous_post(); 
-  if ( has_post_thumbnail($prev_post->ID) ) { 
+  if (!$prev_post) {
+    return get_random_bg_url(); // 首页图
+  } else if ( has_post_thumbnail($prev_post->ID) ) { 
     $img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $prev_post->ID ), 'large'); 
     return $img_src[0]; // 特色图
   } 
