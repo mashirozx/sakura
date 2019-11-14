@@ -28,7 +28,7 @@ function upload_image(WP_REST_Request $request)
    *   -F "cmt_img_file=@screenshot.jpg" \
    *   https://dev.2heng.xin/wp-json/sakura/v1/image/upload
    */
-  // $file = $req->get_file_params();
+  // $file = $request->get_file_params();
   if ( !check_ajax_referer('wp_rest', '_wpnonce', false) ) {
     $output = array(
       'status' => 403,
