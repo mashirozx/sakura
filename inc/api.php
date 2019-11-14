@@ -28,22 +28,70 @@ function upload_image(WP_REST_Request $req)
    *   -F "cmt_img_file=@screenshot.jpg" \
    *   https://dev.2heng.xin/wp-json/sakura/v1/image/upload
    */
-  $file = $req->get_file_params();
-  $image = file_get_contents($_FILES["cmt_img_file"]["tmp_name"]);
-
+  // $file = $req->get_file_params();
+  
   switch (akina_option("img_upload_api")) {
-      case 'imgur':
-          $API_Request = Imgur_API($image);
-          break;
-      case 'smms':
-          $API_Request = SMMS_API($image);
-          break;
+    case 'imgur':
+      $image = file_get_contents($_FILES["cmt_img_file"]["tmp_name"]);
+      $API_Request = Imgur_API($image);
+      break;
+    case 'smms':
+      $image = $_FILES;
+      $API_Request = SMMS_API($image);
+      break;
+    case 'chevereto':
+      $image = file_get_contents($_FILES["cmt_img_file"]["tmp_name"]);
+      $API_Request = Chevereto_API($image);
+      break;
   }
 
-  $result = new WP_REST_Response($API_Request, 200);
-  $result->set_headers(array('Content-Type' => 'application/json',
-                             'Cache-Control' => 'max-age=3600')); // json 缓存控制
+  $result = new WP_REST_Response($API_Request, $API_Request->status);
+  $result->set_headers(array('Content-Type' => 'application/json'));
   return $result;
+}
+
+/**
+ * Chevereto upload interface
+ */
+function Chevereto_API($image)
+{
+    $fields = array(
+      'source' => base64_encode($image),
+      'key' => akina_option('chevereto_api_key')
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, akina_option('cheverto_url').'/api/1/upload');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+
+    $reply = curl_exec($ch);
+    curl_close($ch);
+
+    $reply = json_decode($reply);
+
+    if ($reply->status_txt == 'OK' && $reply->status_code == 200) {
+        $status = 200;
+        $success = true;
+        $message = "success";
+        $link = $reply->image->image->url;
+        $proxy = akina_option('cmt_image_proxy') . $link;
+    } else {
+        $status = $reply->status_code;
+        $success = false;
+        $message = $reply->error->message;
+        $link = 'https://view.moezx.cc/images/2019/10/28/default_d_h_large.gif';
+        $proxy = akina_option('cmt_image_proxy') . $link;
+    }
+    $output = array(
+        'status' => $status,
+        'success' => $success,
+        'message' => $message,
+        'link' => $link,
+        'proxy' => $proxy,
+    );
+    return $output;
 }
 
 /**
@@ -67,17 +115,20 @@ function Imgur_API($image)
 
     if ($reply->success && $reply->status == 200) {
         $status = 200;
+        $success = true;
         $message = "success";
         $link = $reply->data->link;
         $proxy = akina_option('cmt_image_proxy') . $link;
     } else {
         $status = $reply->status;
+        $success = false;
         $message = $reply->data->error;
         $link = 'https://view.moezx.cc/images/2019/10/28/default_d_h_large.gif';
         $proxy = akina_option('cmt_image_proxy') . $link;
     }
     $output = array(
         'status' => $status,
+        'success' => $success,
         'message' => $message,
         'link' => $link,
         'proxy' => $proxy,
@@ -85,17 +136,36 @@ function Imgur_API($image)
     return $output;
 }
 
+/**
+ * smms upload interface
+ */
 function SMMS_API($image)
 {
   $client_id = akina_option('smms_client_id');
 
+  $filename = $image['cmt_img_file']['name'];
+  $filedata = $image['cmt_img_file']['tmp_name'];
+  $filesize = $image['cmt_img_file']['size'];
+
+  $url = "https://sm.ms/api/v2/upload";
+  $headers = array();
+  array_push($headers, "Content-Type: multipart/form-data");
+  array_push($headers, "Authorization: Basic " . $client_id);
+  array_push($headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97");
+
+  $finfo = new \finfo(FILEINFO_MIME_TYPE);
+  $mimetype = $finfo->file($filedata);
+
+  $fields = array('smfile' => curl_file_create($filedata, $mimetype, $filename));
+
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, 'https://sm.ms/api/v2/upload');
-  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_URL, $url);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Basic ' . $client_id));
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type ' . 'multipart/form-data'));
-  curl_setopt($ch, CURLOPT_POSTFIELDS, array('smfile' => $image));
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+  curl_setopt($ch, CURLOPT_POST, true);
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
   $reply = curl_exec($ch);
   curl_close($ch);
@@ -103,20 +173,30 @@ function SMMS_API($image)
   $reply = json_decode($reply);
 
   if ($reply->success && $reply->code == 'success') {
-      $status = 200;
-      $message = $reply->message;
-      $link = $reply->data->url;
-      $proxy = akina_option('cmt_image_proxy') . $link;
+    $status = 200;
+    $success = true;
+    $message = $reply->message;
+    $link = $reply->data->url;
+    $proxy = akina_option('cmt_image_proxy') . $link;
+  } else if (preg_match("/Image upload repeated limit/i", $reply->message, $matches)) {
+    $status = 200; // sm.ms 接口不规范，建议检测到重复的情况下返回标准化的 code，并单独把 url 放进一个字段
+    $success = true;
+    $message = $reply->message;
+    $link = str_replace('Image upload repeated limit, this image exists at: ', '', $reply->message);
+    $proxy = akina_option('cmt_image_proxy') . $link;
   } else {
-      $status = 0; // sm.ms 接口不规范，谁给提个意见？我要状态码！
-      $message = $reply->message;
-      $link = 'https://view.moezx.cc/images/2019/10/28/default_d_h_large.gif';
-      $proxy = akina_option('cmt_image_proxy') . $link;
+    $status = 400;
+    $success = false;
+    $message = $reply->message;
+    $link = 'https://view.moezx.cc/images/2019/10/28/default_d_h_large.gif';
+    $proxy = akina_option('cmt_image_proxy') . $link;
   }
-  $output = array('status' => $status,
-      'message' => $message,
-      'link' => $link,
-      'proxy' => $proxy,
+  $output = array(
+    'status' => $status,
+    'success' => $success,
+    'message' => $message,
+    'link' => $link,
+    'proxy' => $proxy,
   );
   return $output;
 }

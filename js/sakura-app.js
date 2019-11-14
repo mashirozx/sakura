@@ -196,11 +196,15 @@ function attach_image() {
                     setTimeout(function () {
                         cached.html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
-                    var get_the_url = res.proxy;
-                    $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
-                    lazyload();
-                    addComment.createButterbar("图片上传成功~<br>Uploaded successfully~");
-                    grin(get_the_url, type = 'Img');
+                    if (res.status == 200) {
+                        var get_the_url = res.proxy;
+                        $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
+                        lazyload();
+                        addComment.createButterbar("图片上传成功~<br>Uploaded successfully~");
+                        grin(get_the_url, type = 'Img');
+                    } else {
+                        addComment.createButterbar("上传失败！<br>Uploaded failed!<br> 文件名/Filename: "+f.name+"<br>code: "+res.status+"<br>"+res.message, 3000);
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     cached.html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>');

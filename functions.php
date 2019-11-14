@@ -7,12 +7,13 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.8' );
+define( 'SAKURA_VERSION', '3.3.0' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
+error_reporting(E_ALL ^ E_NOTICE);
 
 if ( !function_exists( 'akina_setup' ) ) :
 /**
