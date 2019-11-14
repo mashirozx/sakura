@@ -7,12 +7,13 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.2.8' );
+define( 'SAKURA_VERSION', '3.3.0' );
 define( 'BUILD_VERSION', '3' );
 define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
+error_reporting(E_ALL ^ E_NOTICE);
 
 if ( !function_exists( 'akina_setup' ) ) :
 /**
@@ -27,8 +28,6 @@ if ( !function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
 	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
 }
- 
-
 
 function akina_setup() {
 	/*
@@ -214,6 +213,7 @@ add_action( 'wp_enqueue_scripts', 'sakura_scripts' );
  */
 require get_template_directory() .'/inc/decorate.php';
 require get_template_directory() .'/inc/swicher.php';
+require get_template_directory() .'/inc/api.php';
 
 /**
  * Custom template tags for this theme.
@@ -233,6 +233,7 @@ require get_template_directory() . '/inc/categories-images.php';
 
 //Comment Location Start
 function convertip($ip) {
+    error_reporting(E_ALL ^ E_NOTICE);
 	$dat_path = dirname(__FILE__).'/inc/QQWry.Dat'; 
     if(!$fd = @fopen($dat_path, 'rb')){
         return 'IP date file not exists or access denied';
@@ -468,7 +469,7 @@ function set_post_views() {
     $post_id = intval($post->ID);
     $count_key = 'views';
     $views = get_post_custom($post_id);
-    $views = intval($views['views'][0]);
+    $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
     if(is_single() || is_page()) {
         if(!update_post_meta($post_id, 'views', ($views + 1))) {
             add_post_meta($post_id, 'views', 1, true);
@@ -487,7 +488,7 @@ function get_post_views($post_id) {
     } else {
         $count_key = 'views';
         $views = get_post_custom($post_id);
-        $views = intval($views['views'][0]);
+        $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
         $post_views = intval(post_custom('views'));
         if($views == '') {
             return 0;
@@ -1286,7 +1287,7 @@ function memory_archives_list() {
 /* Remove the "Dashboard" from the admin menu for non-admin users */
 function remove_dashboard () {
     global $current_user, $menu, $submenu;
-    get_currentuserinfo();
+    wp_get_current_user();
 
     if( ! in_array( 'administrator', $current_user->roles ) ) {
         reset( $menu );
@@ -1603,13 +1604,17 @@ function output_comments_qq_columns( $column_name, $comment_id ){
  */
 add_filter( 'get_avatar', 'change_avatar', 10, 3 );
 function change_avatar($avatar){
-	global $comment;
-	if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true ) ){
-		$qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
-        return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
-	}else{
-		return $avatar ;
-	}	
+    global $comment;
+    if ($comment) {
+        if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true )){
+            $qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
+            return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+        }else{
+            return $avatar ;
+        }
+    } else{
+        return $avatar ;
+    }
 }
 
 // default feature image
@@ -1627,68 +1632,6 @@ add_action( 'pre_get_posts', function( $q ){
     if ( $q->is_home() && $q->is_main_query() && $q->get( 'paged' ) > 1 )
         $q->set( 'post__not_in', get_option( 'sticky_posts' ) );
 });
-
-/* 
- * 定制实时搜索 rest api
- * @rest api接口路径：https://sakura.2heng.xin/wp-json/cache_search/v1/json/
- * @可在cache_search_json()函数末尾通过设置 HTTP header 控制 json 缓存时间
- */
-function cache_search_json() {
-    $vowels = array("[", "{","]","}","<",">","\r\n", "\r", "\n","-","'",'"','`'," ",":",";",'\\',"  ","toc");
-    $regex = <<<EOS
-/<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
-EOS;
-
-    $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
-    while ($posts->have_posts()) : $posts->the_post();
-        $output .= '{"type":"post","link":"'.get_post_permalink().'","title":'.json_encode(get_the_title()).',"comments":"'.get_comments_number('0', '1', '%').'","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex,' ',get_the_content()))).'},';
-    endwhile;
-    wp_reset_postdata();
-
-    $pages = get_pages();
-    foreach ($pages as $page) {
-        $output .= '{"type":"page","link":"'.get_page_link($page).'","title":'.json_encode($page->post_title).',"comments":"'.$page->comment_count.'","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex,' ',$page->post_content))).'},';
-    }
-
-    $tags = get_tags();
-    foreach ($tags as $tag) {
-        $output .= '{"type":"tag","link":"'.get_term_link($tag).'","title":'.json_encode($tag->name).',"comments":"","text":""},';
-    }
-
-    $categories = get_categories();
-    foreach ($categories as $category) {
-        $output .= '{"type":"category","link":"'.get_term_link($category).'","title":'.json_encode($category->name).',"comments":"","text":""},';
-    }
-    if(akina_option('live_search_comment')){
-        $comments = get_comments();
-        foreach ($comments as $comment) {
-            $is_private = get_comment_meta($comment->comment_ID, '_private', true);
-            if($is_private){
-                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode($comment->comment_author."：".__("The comment is private","sakura")/*该评论为私密评论*/).'},';
-                continue;
-            }else{
-                $output .= '{"type":"comment","link":"'.get_comment_link($comment).'","title":'.json_encode(get_the_title($comment->comment_post_ID)).',"comments":"","text":'.json_encode(str_replace($vowels, " ",preg_replace($regex," ",$comment->comment_author."：".$comment->comment_content))).'},';
-            }
-        }
-    }
-
-    $output = substr($output,0,strlen($output)-1);
-
-    $data = '['.$output.']';
-    $result = new WP_REST_Response(json_decode($data), 200);
-    $result->set_headers(array('Content-Type' => 'application/json',
-                               'Cache-Control' => 'max-age=3600')); // json 缓存控制
- 
-    return $result;
-}
-if(akina_option('live_search')){
-	add_action( 'rest_api_init', function () {
-		register_rest_route( 'cache_search/v1', '/json/', array(
-		'methods' => 'GET',
-		'callback' => 'cache_search_json',
-	) );
-	} );
-}
 
 //评论回复
 function sakura_comment_notify($comment_id){

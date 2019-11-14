@@ -63,7 +63,7 @@ function imgError(ele, type) {
         default:
             ele.src = 'https://view.moezx.cc/images/2018/05/13/image-404.png';
     }
-} 
+}
 
 function post_list_show_animation() {
     if ($("article").hasClass("post-list-thumb")) {
@@ -73,6 +73,7 @@ function post_list_show_animation() {
         }
         var io = new IntersectionObserver(callback, options);
         var articles = document.querySelectorAll('.post-list-thumb');
+
         function callback(entries) {
             entries.forEach((article) => {
                 if (article.target.classList.contains("post-list-show")) {
@@ -157,9 +158,9 @@ try {
     code_highlight_style();
 } catch (e) {}
 
-if (Poi.reply_link_version == 'new'){
-    $('body').on('click','.comment-reply-link',function(){
-        addComment.moveForm( "comment-"+$(this).attr('data-commentid'), $(this).attr('data-commentid'), "respond", $(this).attr('data-postid') );
+if (Poi.reply_link_version == 'new') {
+    $('body').on('click', '.comment-reply-link', function () {
+        addComment.moveForm("comment-" + $(this).attr('data-commentid'), $(this).attr('data-commentid'), "respond", $(this).attr('data-postid'));
         return false;
     });
 }
@@ -179,9 +180,9 @@ function attach_image() {
         for (var i = 0; i < this.files.length; i++) {
             var f = this.files[i];
             var formData = new FormData();
-            formData.append('smfile', f);
+            formData.append('cmt_img_file', f);
             $.ajax({
-                url: 'https://sm.ms/api/upload',
+                url: '/wp-json/sakura/v1/image/upload',
                 type: 'POST',
                 processData: false,
                 contentType: false,
@@ -195,18 +196,28 @@ function attach_image() {
                     setTimeout(function () {
                         cached.html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
-                    var get_the_url = res.data.url;
-                    $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
-                    lazyload();
-                    addComment.createButterbar("图片上传成功~<br>Uploaded successfully~");
-                    grin(res.data.url.replace('https://i.loli.net/', '{UPLOAD}'), type = 'Img');
+                    if (res.status == 200) {
+                        var get_the_url = res.proxy;
+                        $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
+                        lazyload();
+                        addComment.createButterbar("图片上传成功~<br>Uploaded successfully~");
+                        grin(get_the_url, type = 'Img');
+                    } else {
+                        addComment.createButterbar("上传失败！<br>Uploaded failed!<br> 文件名/Filename: "+f.name+"<br>code: "+res.status+"<br>"+res.message, 3000);
+                    }
                 },
-                error: function () {
+                error: function (jqXHR, textStatus, errorThrown) {
                     cached.html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>');
                     alert("上传失败，请重试.\nUpload failed, please try again.");
                     setTimeout(function () {
                         cached.html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
+                    // console.info(jqXHR.responseText);
+                    // console.info(jqXHR.status);
+                    // console.info(jqXHR.readyState);
+                    // console.info(jqXHR.statusText);
+                    // console.info(textStatus);
+                    // console.info(errorThrown);
                 }
             })
         }
@@ -297,6 +308,7 @@ function checkskinSecter() {
         $(".headertop-bar-sakura").removeClass('headertop-bar-sakura').addClass('headertop-bar');
     }
 }
+
 function checkBgImgCookie() {
     var bgurl = getCookie("bgImgSetting");
     if (!bgurl) {
@@ -306,7 +318,7 @@ function checkBgImgCookie() {
     }
 }
 if (document.body.clientWidth > 860) {
-    setTimeout(function() {
+    setTimeout(function () {
         checkBgImgCookie();
     }, 100);
 }
@@ -317,15 +329,16 @@ function no_right_click() {
     });
 }
 no_right_click();
-$(document).ready(function() {
-    function checkskin_bg(a){
+$(document).ready(function () {
+    function checkskin_bg(a) {
         return a == "none" ? "" : a
     }
+
     function changeBG() {
-        var cached=$(".menu-list");
-        cached.find("li").each(function() {
+        var cached = $(".menu-list");
+        cached.find("li").each(function () {
             var tagid = this.id;
-            cached.on("click", "#" + tagid, function(){
+            cached.on("click", "#" + tagid, function () {
                 if (tagid == "white-bg") {
                     mashiro_global.variables.skinSecter = true;
                     checkskinSecter();
@@ -372,14 +385,14 @@ $(document).ready(function() {
 
     function closeSkinMenu() {
         $(".skin-menu").removeClass('show');
-        setTimeout(function() {
+        setTimeout(function () {
             $(".changeSkin-gear").css("visibility", "visible");
         }, 300);
     }
-    $(".changeSkin-gear").click(function() {
+    $(".changeSkin-gear").click(function () {
         $(".skin-menu").toggleClass('show');
     })
-    $(".skin-menu #close-skinMenu").click(function() {
+    $(".skin-menu #close-skinMenu").click(function () {
         closeSkinMenu();
     });
     add_upload_tips();
@@ -514,16 +527,16 @@ function coverVideoIni() {
     if ($('video').hasClass('hls')) {
         var video = addComment.I('coverVideo');
         var video_src = $('#coverVideo').attr('data-src');
-        if(Hls.isSupported()) {
+        if (Hls.isSupported()) {
             var hls = new Hls();
             hls.loadSource(video_src);
             hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED,function() {
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
                 video.play();
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = video_src;
-            video.addEventListener('loadedmetadata',function() {
+            video.addEventListener('loadedmetadata', function () {
                 video.play();
             });
         }
@@ -533,7 +546,9 @@ function coverVideoIni() {
 
 function copy_code_block() {
     $('pre code').each(function (i, block) {
-        $(block).attr({ id: 'hljs-' + i });
+        $(block).attr({
+            id: 'hljs-' + i
+        });
         $(this).after('<a class="copy-code" href="javascript:" data-clipboard-target="#hljs-' + i + '" title="拷贝代码"><i class="fa fa-clipboard" aria-hidden="true"></i></a>');
     });
     var clipboard = new ClipboardJS('.copy-code');
@@ -548,7 +563,7 @@ function tableOfContentScroll(flag) {
         if (flag) {
             var id = 1,
                 heading_fix = mashiro_option.entry_content_theme == "sakura" ? $("article").hasClass("type-post") ? $("div").hasClass("pattern-attachment-img") ? -75 : 200 : 375 : window.innerHeight / 2;
-            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function() {
+            $(".entry-content , .links").children("h1,h2,h3,h4,h5").each(function () {
                 var hyphenated = "toc-head-" + id;
                 this.id = hyphenated;
                 id++;
@@ -557,7 +572,7 @@ function tableOfContentScroll(flag) {
                 tocSelector: '.toc',
                 contentSelector: ['.entry-content', '.links'],
                 headingSelector: 'h1, h2, h3, h4, h5',
-                headingsOffset: heading_fix-window.innerHeight/2,
+                headingsOffset: heading_fix - window.innerHeight / 2,
             });
         }
     }
@@ -722,7 +737,7 @@ $(function () {
     getqqinfo();
 });
 
-if(mashiro_option.float_player_on) {
+if (mashiro_option.float_player_on) {
     function aplayerF() {
         'use strict';
         var aplayers = [],
@@ -761,7 +776,7 @@ if(mashiro_option.float_player_on) {
                         console.log(a)
                     }
                     var lrcTag = 1;
-                    $(".aplayer.aplayer-fixed").click(function(){
+                    $(".aplayer.aplayer-fixed").click(function () {
                         if (lrcTag == 1) {
                             for (var f = 0; f < aplayers.length; f++) try {
                                 aplayers[f].lrc.show();
@@ -772,18 +787,24 @@ if(mashiro_option.float_player_on) {
                         lrcTag = 2;
                     });
                     var apSwitchTag = 0;
-                    var aplayerlist=$(".aplayer-list");
-                    aplayerlist.removeClass( "aplayer-list-hide" ).css({maxHeight:'0px'});
+                    var aplayerlist = $(".aplayer-list");
+                    aplayerlist.removeClass("aplayer-list-hide").css({
+                        maxHeight: '0px'
+                    });
                     $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
-                    $(".aplayer-miniswitcher").click(function(){
+                    $(".aplayer-miniswitcher").click(function () {
                         if (apSwitchTag == 0) {
-                            aplayerlist.removeClass( "aplayer-list-hide" ).animate({maxHeight:'250px'});
-                            $(".aplayer.aplayer-fixed .aplayer-body").removeClass( "ap-hover" );
+                            aplayerlist.removeClass("aplayer-list-hide").animate({
+                                maxHeight: '250px'
+                            });
+                            $(".aplayer.aplayer-fixed .aplayer-body").removeClass("ap-hover");
                             apSwitchTag = 1;
                         } else {
-                            aplayerlist.css({maxHeight:'0px'});
-                            $(".aplayer.aplayer-fixed .aplayer-body").addClass( "ap-hover" );
-                            apSwitchTag =0;
+                            aplayerlist.css({
+                                maxHeight: '0px'
+                            });
+                            $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
+                            apSwitchTag = 0;
                         }
                     });
                 }
@@ -824,12 +845,13 @@ if(mashiro_option.float_player_on) {
         document.addEventListener('DOMContentLoaded', loadMeting, !1);
     }
     if (document.body.clientWidth > 860) {
-        aplayerF ();
+        aplayerF();
     }
 }
 
 function getqqinfo() {
-    var is_get_by_qq = false,cached = $('input');
+    var is_get_by_qq = false,
+        cached = $('input');
     if (!getCookie('user_qq') && !getCookie('user_qq_email') && !getCookie('user_author')) {
         cached.filter('#qq,#author,#email,#url').val('');
     }
@@ -1284,20 +1306,22 @@ var home = location.href,
         AH: function () {
             if (Poi.windowheight == 'auto') {
                 if ($('h1.main-title').length > 0) {
-                    var _height = $(window).height()+"px";
+                    var _height = $(window).height() + "px";
                     $('#centerbg').css({
                         'height': _height
                     });
                     $('#bgvideo').css({
                         'min-height': _height
                     });
-                    window.resizeFlag= null;
+                    window.resizeFlag = null;
                     $(window).resize(function () {
                         //直接resize性能爆炸，改成延时
-                        if(resizeFlag=null){
+                        if (resizeFlag = null) {
                             clearTimeout(resizeFlag);
                         }
-                        resizeFlag = setTimeout(function(){ Siren.AH();}, 1000);
+                        resizeFlag = setTimeout(function () {
+                            Siren.AH();
+                        }, 1000);
                     })
                 }
             } else {
@@ -1349,131 +1373,134 @@ var home = location.href,
             $('.js-toggle-search').on('click', function () {
                 $('.js-toggle-search').toggleClass('is-active');
                 $('.js-search').toggleClass('is-visible');
-                $('html').css('overflow-y','hidden');
+                $('html').css('overflow-y', 'hidden');
                 if (mashiro_option.live_search) {
-                var QueryStorage = [];
-                search_a("https://"+document.domain+"/wp-json/cache_search/v1/json/");
-                
-                var otxt = addComment.I("search-input"),
-                    list = addComment.I("PostlistBox"),
-                    Record = list.innerHTML,
-                    searchFlag = null;
-                otxt.oninput = function () {
-                    if(searchFlag=null){
-                        clearTimeout(searchFlag);
-                    }
-                    searchFlag = setTimeout(function(){
-                        query(QueryStorage, otxt.value, Record);
-                        div_href();
-                    }, 250);
-                };
+                    var QueryStorage = [];
+                    search_a("https://" + document.domain + "/wp-json/sakura/v1/cache_search/json");
 
-                function search_a(val) {
-                    if(sessionStorage.getItem('search')!=null){
-                        QueryStorage = JSON.parse(sessionStorage.getItem('search'));
-                        query(QueryStorage, $("#search-input").val(), Record);
-                        div_href();
-                    }else{
-                        var _xhr = new XMLHttpRequest();
-                        _xhr.open("GET", val, true)
-                        _xhr.send();
-                        _xhr.onreadystatechange = function () {
-                            if (_xhr.readyState == 4 && _xhr.status == 200) {
-                                json = _xhr.responseText;
-                                if (json != "") {
-                                    sessionStorage.setItem('search',json);
-                                    QueryStorage = JSON.parse(json);
-                                    query(QueryStorage, otxt.value, Record);
-                                    div_href();
+                    var otxt = addComment.I("search-input"),
+                        list = addComment.I("PostlistBox"),
+                        Record = list.innerHTML,
+                        searchFlag = null;
+                    otxt.oninput = function () {
+                        if (searchFlag = null) {
+                            clearTimeout(searchFlag);
+                        }
+                        searchFlag = setTimeout(function () {
+                            query(QueryStorage, otxt.value, Record);
+                            div_href();
+                        }, 250);
+                    };
+
+                    function search_a(val) {
+                        if (sessionStorage.getItem('search') != null) {
+                            QueryStorage = JSON.parse(sessionStorage.getItem('search'));
+                            query(QueryStorage, $("#search-input").val(), Record);
+                            div_href();
+                        } else {
+                            var _xhr = new XMLHttpRequest();
+                            _xhr.open("GET", val, true)
+                            _xhr.send();
+                            _xhr.onreadystatechange = function () {
+                                if (_xhr.readyState == 4 && _xhr.status == 200) {
+                                    json = _xhr.responseText;
+                                    if (json != "") {
+                                        sessionStorage.setItem('search', json);
+                                        QueryStorage = JSON.parse(json);
+                                        query(QueryStorage, otxt.value, Record);
+                                        div_href();
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                if (!Object.values) Object.values = function (obj) {
-                    if (obj !== Object(obj))
-                        throw new TypeError('Object.values called on a non-object');
-                    var val = [],
-                        key;
-                    for (key in obj) {
-                        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                            val.push(obj[key]);
+                    if (!Object.values) Object.values = function (obj) {
+                        if (obj !== Object(obj))
+                            throw new TypeError('Object.values called on a non-object');
+                        var val = [],
+                            key;
+                        for (key in obj) {
+                            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                                val.push(obj[key]);
+                            }
                         }
+                        return val;
                     }
-                    return val;
-                }
-                function Cx(arr, q) {
-                    q = q.replace(q,"^(?=.*?"+q+").+$").replace(/\s/g,")(?=.*?");
-                    i = arr.filter(
-                        v => Object.values(v).some(
-                            v => new RegExp(q + '').test(v)
-                        )
-                    );
-                    return i;
-                }
-                function div_href(){
-                    $(".ins-selectable").each(function(){
-                        $(this).click(function(){
-                            $("#Ty").attr('href',$(this).attr('href'));
-                            $("#Ty").click();
-                            $(".search_close").click();
-                        });
-                    });
-                }
-                function search_result(keyword, link, fa, title, iconfont, comments, text){
-                    if(keyword){
-                        var s = keyword.trim().split(" "),
-                            a = title.indexOf(s[s.length-1]),
-                            b = text.indexOf(s[s.length-1]);
-                        title=a<60 ? title.slice(0,80):title.slice(a-30,a+30);
-                        title=title.replace(s[s.length-1], '<mark class="search-keyword"> ' + s[s.length-1].toUpperCase() + ' </mark>');
-                        text=b<60 ? text.slice(0,80):text.slice(b-30,b+30);
-                        text=text.replace(s[s.length-1], '<mark class="search-keyword"> ' + s[s.length-1].toUpperCase() + ' </mark>');
-                    }
-                    return '<div class="ins-selectable ins-search-item" href="' + link + '"><header><i class="fa fa-'+ fa +'" aria-hidden="true"></i>' + title + '<i class="iconfont icon-'+ iconfont +'"> ' + comments + '</i>' + '</header><p class="ins-search-preview">' + text + '</p></div>';
-                }
 
-                function query(B, A, z) {
-	                var x, v, s, y = "",
-		                w = "",
-		                u = "",
-		                r = "",
-                		p = "",
-		                F = "",
-		                H = "",
-		                G = '<section class="ins-section"><header class="ins-section-header">',
-		                D = "</section>",
-		                E = "</header>",
-		                C = Cx(B, A.trim());
-	                for (x = 0; x < Object.keys(C).length; x++) {
-		                H = C[x];
-		                switch (v = H.type) {
-		                case "post":
-			                w = w + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
-			                break;
-		                case "tag":
-			                p = p + search_result("", H.link, "tag", H.title, "none", "", "");
-			                break;
-		                case "category":
-			                r = r + search_result("", H.link, "folder", H.title, "none", "", "");
-			                break;
-		                case "page":
-			                u = u + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
-			                break;
-		                case "comment":
-			                F = F + search_result(A, H.link, "comment", H.title, "none", "", H.text);
-			                break
-		                }
-	                }
-	                w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = addComment.I("PostlistBox"), s.innerHTML = y
-                }
+                    function Cx(arr, q) {
+                        q = q.replace(q, "^(?=.*?" + q + ").+$").replace(/\s/g, ")(?=.*?");
+                        i = arr.filter(
+                            v => Object.values(v).some(
+                                v => new RegExp(q + '').test(v)
+                            )
+                        );
+                        return i;
+                    }
+
+                    function div_href() {
+                        $(".ins-selectable").each(function () {
+                            $(this).click(function () {
+                                $("#Ty").attr('href', $(this).attr('href'));
+                                $("#Ty").click();
+                                $(".search_close").click();
+                            });
+                        });
+                    }
+
+                    function search_result(keyword, link, fa, title, iconfont, comments, text) {
+                        if (keyword) {
+                            var s = keyword.trim().split(" "),
+                                a = title.indexOf(s[s.length - 1]),
+                                b = text.indexOf(s[s.length - 1]);
+                            title = a < 60 ? title.slice(0, 80) : title.slice(a - 30, a + 30);
+                            title = title.replace(s[s.length - 1], '<mark class="search-keyword"> ' + s[s.length - 1].toUpperCase() + ' </mark>');
+                            text = b < 60 ? text.slice(0, 80) : text.slice(b - 30, b + 30);
+                            text = text.replace(s[s.length - 1], '<mark class="search-keyword"> ' + s[s.length - 1].toUpperCase() + ' </mark>');
+                        }
+                        return '<div class="ins-selectable ins-search-item" href="' + link + '"><header><i class="fa fa-' + fa + '" aria-hidden="true"></i>' + title + '<i class="iconfont icon-' + iconfont + '"> ' + comments + '</i>' + '</header><p class="ins-search-preview">' + text + '</p></div>';
+                    }
+
+                    function query(B, A, z) {
+                        var x, v, s, y = "",
+                            w = "",
+                            u = "",
+                            r = "",
+                            p = "",
+                            F = "",
+                            H = "",
+                            G = '<section class="ins-section"><header class="ins-section-header">',
+                            D = "</section>",
+                            E = "</header>",
+                            C = Cx(B, A.trim());
+                        for (x = 0; x < Object.keys(C).length; x++) {
+                            H = C[x];
+                            switch (v = H.type) {
+                                case "post":
+                                    w = w + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
+                                    break;
+                                case "tag":
+                                    p = p + search_result("", H.link, "tag", H.title, "none", "", "");
+                                    break;
+                                case "category":
+                                    r = r + search_result("", H.link, "folder", H.title, "none", "", "");
+                                    break;
+                                case "page":
+                                    u = u + search_result(A, H.link, "file", H.title, "mark", H.comments, H.text);
+                                    break;
+                                case "comment":
+                                    F = F + search_result(A, H.link, "comment", H.title, "none", "", H.text);
+                                    break
+                            }
+                        }
+                        w && (y = y + G + "文章" + E + w + D), u && (y = y + G + "页面" + E + u + D), r && (y = y + G + "分类" + E + r + D), p && (y = y + G + "标签" + E + p + D), F && (y = y + G + "评论" + E + F + D), s = addComment.I("PostlistBox"), s.innerHTML = y
+                    }
                 }
             });
             $('.search_close').on('click', function () {
                 if ($('.js-search').hasClass('is-visible')) {
                     $('.js-toggle-search').toggleClass('is-active');
                     $('.js-search').toggleClass('is-visible');
-					$('html').css('overflow-y','unset');
+                    $('html').css('overflow-y', 'unset');
                 }
             });
             $('#show-nav').on('click', function () {
@@ -1492,7 +1519,8 @@ var home = location.href,
         NH: function () {
             var h1 = 0;
             $(window).scroll(function () {
-                var s = $(document).scrollTop(),cached = $('.site-header');
+                var s = $(document).scrollTop(),
+                    cached = $('.site-header');
                 if (s == h1) {
                     cached.removeClass('yya');
                 }
@@ -1505,16 +1533,18 @@ var home = location.href,
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
             var load_post_timer;
             var intersectionObserver = new IntersectionObserver(function (entries) {
-            	if (entries[0].intersectionRatio <= 0) return;
-            	var page_next = $('#pagination a').attr("href");
-            	var load_key = addComment.I("add_post_time");
-            	if(page_next!=undefined && load_key ){
-            		var load_time = addComment.I("add_post_time").title;
-            		if(load_time !="233"){
-            			console.log("%c 自动加载时倒计时 %c","background:#9a9da2; color:#ffffff; border-radius:4px;","","",load_time);
-            			load_post_timer=setTimeout(function(){load_post();},load_time*1000);
-                    	}
-            	}
+                if (entries[0].intersectionRatio <= 0) return;
+                var page_next = $('#pagination a').attr("href");
+                var load_key = addComment.I("add_post_time");
+                if (page_next != undefined && load_key) {
+                    var load_time = addComment.I("add_post_time").title;
+                    if (load_time != "233") {
+                        console.log("%c 自动加载时倒计时 %c", "background:#9a9da2; color:#ffffff; border-radius:4px;", "", "", load_time);
+                        load_post_timer = setTimeout(function () {
+                            load_post();
+                        }, load_time * 1000);
+                    }
+                }
             });
             intersectionObserver.observe(
                 document.querySelector('.footer-device')
@@ -1524,7 +1554,8 @@ var home = location.href,
                 load_post();
                 return false;
             });
-			function load_post() {
+
+            function load_post() {
                 $('#pagination a').addClass("loading").text("");
                 $.ajax({
                     type: "POST",
@@ -1539,17 +1570,19 @@ var home = location.href,
                         post_list_show_animation();
                         if (nextHref != undefined) {
                             $("#pagination a").attr("href", nextHref);
-							//加载完成上滑
+                            //加载完成上滑
                             var tempScrollTop = $(window).scrollTop();
                             $(window).scrollTop(tempScrollTop);
-                            $body.animate({ scrollTop: tempScrollTop + 300 }, 666)
+                            $body.animate({
+                                scrollTop: tempScrollTop + 300
+                            }, 666)
                         } else {
                             $("#pagination").html("<span>很高兴你翻到这里，但是真的没有了...</span>");
                         }
                     }
                 });
                 return false;
-			}
+            }
         },
         XCS: function () {
             var __cancel = jQuery('#cancel-comment-reply-link'),
@@ -1748,8 +1781,8 @@ $(function () {
         $(document).pjax('a[target!=_top]', '#page', {
             fragment: '#page',
             timeout: 8000,
-        }).on('pjax:beforeSend', () => {  //离开页面停止播放
-            $('.normal-cover-video').each(function() {
+        }).on('pjax:beforeSend', () => { //离开页面停止播放
+            $('.normal-cover-video').each(function () {
                 this.pause();
                 this.src = '';
                 this.load = '';
@@ -1784,7 +1817,7 @@ $(function () {
             if ($('.js-search.is-visible').length > 0) {
                 $('.js-toggle-search').toggleClass('is-active');
                 $('.js-search').toggleClass('is-visible');
-                $('html').css('overflow-y','unset');
+                $('html').css('overflow-y', 'unset');
             }
         });
         window.addEventListener('popstate', function (e) {
