@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-01 22:45+0800\n"
+"POT-Creation-Date: 2019-11-14 19:18+0800\n"
 "PO-Revision-Date: 2019-11-01 14:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: style.css\n"
@@ -55,7 +55,6 @@ msgid " comment"
 msgstr ""
 
 #: comments.php:22 comments.php:27
-#, php-format
 msgid " comments"
 msgstr ""
 
@@ -139,75 +138,75 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: functions.php:53
+#: functions.php:52
 msgid "Nav Menus"
 msgstr ""
 
-#: functions.php:387 inc/theme_plus.php:187 layouts/authorprofile.php:11 options.php:123
+#: functions.php:388 inc/theme_plus.php:187 layouts/authorprofile.php:11 options.php:123
 msgid "Author"
 msgstr ""
 
-#: functions.php:387
+#: functions.php:388
 msgid "Blogger"
 msgstr ""
 
-#: functions.php:391
+#: functions.php:392
 msgid "Location"
 msgstr ""
 
-#: functions.php:395
+#: functions.php:396
 msgid "Private"
 msgstr ""
 
-#: functions.php:397
+#: functions.php:398
 msgid "Yes"
 msgstr ""
 
-#: functions.php:399
+#: functions.php:400
 msgid "No"
 msgstr ""
 
-#: functions.php:402
+#: functions.php:403
 msgid "Edit"
 msgstr ""
 
-#: functions.php:483
+#: functions.php:484
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/\" target=\"_blank"
 "\">WP-Statistics</a>"
 msgstr ""
 
-#: functions.php:536
+#: functions.php:537
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1257
+#: functions.php:1258
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1272
+#: functions.php:1273
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1294 functions.php:1297 inc/theme_plus.php:479
+#: functions.php:1295 functions.php:1298 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1510
+#: functions.php:1511
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1590
+#: functions.php:1591
 msgid "QQ"
-msgstr ""
-
-#: functions.php:1667 inc/theme_plus.php:726
-msgid "The comment is private"
 msgstr ""
 
 #: header.php:35
 #, php-format
 msgid "page %s "
+msgstr ""
+
+#: inc/api.php:241 inc/theme_plus.php:728
+msgid "The comment is private"
 msgstr ""
 
 #: inc/categories-images.php:45 inc/categories-images.php:66
@@ -886,7 +885,7 @@ msgstr ""
 msgid "Whether to turn on the top-feature"
 msgstr ""
 
-#: options.php:443 options.php:1031
+#: options.php:443 options.php:1084
 msgid "Default on"
 msgstr ""
 
@@ -1363,7 +1362,7 @@ msgstr ""
 msgid "Enable NProgress progress bar"
 msgstr ""
 
-#: options.php:960 options.php:953
+#: options.php:953 options.php:960
 msgid "Default off, check on"
 msgstr ""
 
@@ -1426,121 +1425,192 @@ msgid "23k Views (chinese)"
 msgstr ""
 
 #: options.php:1009
+msgid "Comment image upload API"
+msgstr ""
+
+#: options.php:1014
+msgid "Imgur (https://imgur.com)"
+msgstr ""
+
+#: options.php:1015
+msgid "SM.MS (https://sm.ms)"
+msgstr ""
+
+#: options.php:1016
+msgid "Chevereto (https://chevereto.com)"
+msgstr ""
+
+#: options.php:1020
+msgid "Imgur Client ID"
+msgstr ""
+
+#: options.php:1021
+msgid ""
+"Register your application <a href=\"https://api.imgur.com/oauth2/addclient\">here</a>, note we "
+"only need the Client ID here."
+msgstr ""
+
+#: options.php:1027
+msgid "SM.MS Secret Token"
+msgstr ""
+
+#: options.php:1028
+msgid "Register your application <a href=\"https://sm.ms/home/apitoken\">here</a>."
+msgstr ""
+
+#: options.php:1034
+msgid "Chevereto API v1 key"
+msgstr ""
+
+#: options.php:1035
+msgid "Get your API key here "
+msgstr ""
+
+#: options.php:1041
+msgid "Chevereto URL"
+msgstr ""
+
+#: options.php:1042
+msgid "Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto.com"
+msgstr ""
+
+#: options.php:1048
+msgid "Comment images proxy"
+msgstr ""
+
+#: options.php:1049
+msgid "A front-ed proxy for the uploaded images. Leave it blank if you do not need."
+msgstr ""
+
+#: options.php:1055
+msgid "Imgur upload proxy"
+msgstr ""
+
+#: options.php:1056
+msgid ""
+"A back-ed proxy to upload images. You may set a self hosted proxy with Nginx, following my <a "
+"href=\"https://2heng.xin/2018/06/06/javascript-upload-images-with-imgur-api/\">turtal</a>. "
+"This feature is mainly for Chinese who cannot access to Imgur due to the GFW. The default and "
+"official setting is 【<a href=\"https://api.imgur.com/3/image/\">https://api.imgur.com/3/image/"
+"</a>】"
+msgstr ""
+
+#: options.php:1062
 msgid "Enable live search"
 msgstr ""
 
-#: options.php:1010
+#: options.php:1063
 msgid ""
 "Real-time search in the foreground, call the Rest API to update the cache every hour, you can "
 "manually set the cache time in functions.php"
 msgstr ""
 
-#: options.php:1016
+#: options.php:1069
 msgid "Include comments in live search"
 msgstr ""
 
-#: options.php:1017
+#: options.php:1070
 msgid ""
 "Search for comments in real-time search (not recommended if there are too many comments on the "
 "site)"
 msgstr ""
 
-#: options.php:1023
+#: options.php:1076
 msgid "Enable baguetteBox"
 msgstr ""
 
-#: options.php:1024
+#: options.php:1077
 msgid ""
 "Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox\">please read wiki</a>"
 msgstr ""
 
-#: options.php:1030
+#: options.php:1083
 msgid "Enable lazyload in posts"
 msgstr ""
 
-#: options.php:1037
+#: options.php:1090
 msgid "lazyload spinner"
 msgstr ""
 
-#: options.php:1038
+#: options.php:1091
 msgid "The placeholder to display when the image loads, fill in the image url"
 msgstr ""
 
-#: options.php:1044
+#: options.php:1097
 msgid "Whether to enable the clipboard copyright"
 msgstr ""
 
-#: options.php:1045
+#: options.php:1098
 msgid ""
 "Automatically add a copyright to the clipboard when copying more than 30 bytes, which is "
 "enabled by default."
 msgstr ""
 
-#: options.php:1051
+#: options.php:1104
 msgid "Email address prefix"
 msgstr ""
 
-#: options.php:1052
+#: options.php:1105
 msgid ""
 "For sending system mail, the sender address displayed in the user's mailbox, do not use "
 "Chinese, the default system email address is bibi@your_domain_name"
 msgstr ""
 
-#: options.php:1058
+#: options.php:1111
 msgid "Comments reply notification"
 msgstr ""
 
-#: options.php:1059
+#: options.php:1112
 msgid ""
 "WordPress will use email to notify users when their comments receive a reply by default. Tick "
 "this item allows users to set their own comments reply notification"
 msgstr ""
 
-#: options.php:1065
+#: options.php:1118
 msgid "Administrator comment notification"
 msgstr ""
 
-#: options.php:1066
+#: options.php:1119
 msgid "Whether to use email notification when the administrator's comments receive a reply"
 msgstr ""
 
-#: options.php:1072
+#: options.php:1125
 msgid "Enable private comment"
 msgstr ""
 
-#: options.php:1073
+#: options.php:1126
 msgid "Allow users to set their own comments to be invisible to others"
 msgstr ""
 
-#: options.php:1079
+#: options.php:1132
 msgid "Human verification"
 msgstr ""
 
-#: options.php:1080
+#: options.php:1133
 msgid "Enable human verification"
 msgstr ""
 
-#: options.php:1086
+#: options.php:1139
 msgid "Comment UA infomation"
 msgstr ""
 
-#: options.php:1087
+#: options.php:1140
 msgid "Check to enable, display the user's browser, operating system information"
 msgstr ""
 
-#: options.php:1093
+#: options.php:1146
 msgid "Enable disqus"
 msgstr ""
 
-#: options.php:1094
+#: options.php:1147
 msgid "Enable disqus for comment"
 msgstr ""
 
-#: options.php:1100
+#: options.php:1153
 msgid "Time Zone adjustment"
 msgstr ""
 
-#: options.php:1101
+#: options.php:1154
 msgid ""
 "If the comment has a time difference problem adjust here, fill in an integer, the calculation "
 "method: actual_time = display_error_time - the_integer_you_entered (unit: hour)"
@@ -1555,15 +1625,15 @@ msgstr ""
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53 tpl/content.php:34
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content.php:34 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53 tpl/content.php:34
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content.php:37 tpl/content-thumb.php:52
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:52 tpl/content.php:37
 msgid "Hit"
 msgid_plural "Hits"
 msgstr[0] ""

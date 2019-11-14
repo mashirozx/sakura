@@ -1004,6 +1004,59 @@ function optionsframework_options() {
 			'type_3' => __('23 333 Views (french)', 'sakura'),/*23 333 次访问（法式）*/
 			'type_4' => __('23k Views (chinese)', 'sakura'),/*23k 次访问（中式）*/
 		));
+
+		$options[] = array(
+			'name' => __('Comment image upload API', 'sakura'),/*评论图片上传接口*/
+			'id' => 'img_upload_api',
+			'std' => "imgur",
+			'type' => "radio",
+			'options' => array(
+				'imgur' => __('Imgur (https://imgur.com)', 'sakura'),
+				'smms' => __('SM.MS (https://sm.ms)', 'sakura'),
+				'chevereto' => __('Chevereto (https://chevereto.com)', 'sakura')
+			));
+
+		$options[] = array(
+			'name' => __('Imgur Client ID', 'sakura'),
+			'desc' => __('Register your application <a href="https://api.imgur.com/oauth2/addclient">here</a>, note we only need the Client ID here.', 'sakura'),
+			'id' => 'imgur_client_id',
+			'std' => '',
+			'type' => 'text');
+
+		$options[] = array(
+			'name' => __('SM.MS Secret Token', 'sakura'),
+			'desc' => __('Register your application <a href="https://sm.ms/home/apitoken">here</a>.', 'sakura'),
+			'id' => 'smms_client_id',
+			'std' => '',
+			'type' => 'text');
+
+		$options[] = array(
+			'name' => __('Chevereto API v1 key', 'sakura'),
+			'desc' => __('Get your API key here '.akina_option('cheverto_url').'/dashboard/settings/api', 'sakura'),
+			'id' => 'chevereto_api_key',
+			'std' => '',
+			'type' => 'text');
+
+		$options[] = array(
+			'name' => __('Chevereto URL', 'sakura'),
+			'desc' => __('Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto.com', 'sakura'),
+			'id' => 'cheverto_url',
+			'std' => 'https://your.cherverto.com',
+			'type' => 'text');
+
+		$options[] = array(
+			'name' => __('Comment images proxy', 'sakura'),
+			'desc' => __('A front-ed proxy for the uploaded images. Leave it blank if you do not need.', 'sakura'),
+			'id' => 'cmt_image_proxy',
+			'std' => 'https://images.weserv.nl/?url=',
+			'type' => 'text');
+
+		$options[] = array(
+			'name' => __('Imgur upload proxy', 'sakura'),
+			'desc' => __('A back-ed proxy to upload images. You may set a self hosted proxy with Nginx, following my <a href="https://2heng.xin/2018/06/06/javascript-upload-images-with-imgur-api/">turtal</a>. This feature is mainly for Chinese who cannot access to Imgur due to the GFW. The default and official setting is 【<a href="https://api.imgur.com/3/image/">https://api.imgur.com/3/image/</a>】', 'sakura'),
+			'id' => 'imgur_upload_image_proxy',
+			'std' => 'https://api.imgur.com/3/image/',
+			'type' => 'text');
         
     $options[] = array(
 		'name' => __('Enable live search', 'sakura'),/*启用实时搜索*/
