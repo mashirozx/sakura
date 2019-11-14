@@ -17,7 +17,7 @@ add_action('rest_api_init', function () {
 /**
  * Image uploader response
  */
-function upload_image(WP_REST_Request $req)
+function upload_image(WP_REST_Request $request)
 {
   // see: https://developer.wordpress.org/rest-api/requests/
 
@@ -28,8 +28,20 @@ function upload_image(WP_REST_Request $req)
    *   -F "cmt_img_file=@screenshot.jpg" \
    *   https://dev.2heng.xin/wp-json/sakura/v1/image/upload
    */
-  // $file = $req->get_file_params();
-  
+  // $file = $request->get_file_params();
+  if ( !check_ajax_referer('wp_rest', '_wpnonce', false) ) {
+    $output = array(
+      'status' => 403,
+      'success' => false,
+      'message' => 'Unauthorized client.',
+      'link' => "https://view.moezx.cc/images/2019/11/14/step04.md.png",
+      'proxy' => akina_option('cmt_image_proxy') . "https://view.moezx.cc/images/2019/11/14/step04.md.png",
+    );
+    $result = new WP_REST_Response($output, 403);
+    $result->set_headers(array('Content-Type' => 'application/json'));
+    return $result;
+  }
+
   switch (akina_option("img_upload_api")) {
     case 'imgur':
       $image = file_get_contents($_FILES["cmt_img_file"]["tmp_name"]);

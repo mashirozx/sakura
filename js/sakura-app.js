@@ -182,7 +182,7 @@ function attach_image() {
             var formData = new FormData();
             formData.append('cmt_img_file', f);
             $.ajax({
-                url: '/wp-json/sakura/v1/image/upload',
+                url: '/wp-json/sakura/v1/image/upload/?_wpnonce='+$('body').attr('nonce-data'),
                 type: 'POST',
                 processData: false,
                 contentType: false,
