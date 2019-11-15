@@ -976,6 +976,17 @@ function mail_me() {
     window.open(mail);
 }
 
+function activate_widget(){
+    if (document.body.clientWidth > 860) {
+        $('.show_hide').on('click', function() {
+            $("#secondary").toggleClass("active")
+        });
+    }else{
+        $("#secondary").remove();
+    }
+}
+activate_widget();
+
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
 loadCSS(mashiro_option.entry_content_theme_src);

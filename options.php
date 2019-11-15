@@ -954,6 +954,13 @@ function optionsframework_options() {
 		'id' => 'nprogress_on',
 		'std' => '0',
 		'type' => 'checkbox');	
+    
+    $options[] = array(
+		'name' => __('Enable sidebar widget', 'sakura'),/*支持侧栏小部件*/
+		'desc' => __('Default off, check on', 'sakura'),/*默认不开启，勾选开启*/
+		'id' => 'sakura_widget',
+		'std' => '0',
+		'type' => 'checkbox');	
 
 	$options[] = array(
 		'name' => __('Enable Announcement', 'sakura'),
