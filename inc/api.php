@@ -215,7 +215,7 @@ function SMMS_API($image)
 
 /*
  * 定制实时搜索 rest api
- * @rest api接口路径：https://sakura.2heng.xin/wp-json/cache_search/v1/json/
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/cache_search/json
  * @可在cache_search_json()函数末尾通过设置 HTTP header 控制 json 缓存时间
  */
 function cache_search_json()

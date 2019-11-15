@@ -38,6 +38,15 @@
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
+	<aside id="secondary" class="widget-area" role="complementary" style="left: -400px;">
+    <button class="show_hide">
+        <i class="fa fa-magic" aria-hidden="true"></i>
+    </button>
+    <div class="heading"><?php _e('Widget') /*小工具*/ ?></div>
+    <div class="sakura_widget">
+	<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('sakura_widget')) : endif; ?>
+	</div>
+    </aside>
 	<div class="openNav no-select">
 		<div class="iconflat no-select">	 
 			<div class="icon"></div>
@@ -72,7 +81,7 @@
 		<?php if(akina_option('live_search')){ ?>
 			<div class="micro">
 				<i class="iconfont icon-search"></i>
-				<input id="search-input" class="text-input" type="search" name="s" placeholder="<?php _e('Want to find something？', 'sakura') /*想要找点什么呢*/?>" required>
+				<input id="search-input" class="text-input" type="search" name="s" placeholder="<?php _e('Want to find something?', 'sakura') /*想要找点什么呢*/?>" required>
 			</div>
 			<div class="ins-section-wrapper">
                 <a id="Ty" href="#"></a>
@@ -80,7 +89,7 @@
             </div>
 		<?php }else{ ?>
 			<div class="micro">
-				<p class="micro mb-"><?php _e('Want to find something？', 'sakura') /*想要找点什么呢*/?></p>
+				<p class="micro mb-"><?php _e('Want to find something?', 'sakura') /*想要找点什么呢*/?></p>
 				<i class="iconfont icon-search"></i>
 				<input class="text-input" type="search" name="s" placeholder="<?php _e('Search', 'sakura') ?>" required>
 			</div>
