@@ -837,7 +837,7 @@ function optionsframework_options() {
     
     $options[] = array(
     'name' => __('Login/registration related settings', 'sakura'),/*登陆/注册相关设定*/
-    'desc' => __('', 'sakura'),
+    'desc' => __(' ', 'space' , 'sakura'),
     'id' => 'login_tip',
     'std' => '',
     'type' => 'typography ');

@@ -428,7 +428,7 @@ if(!function_exists('akina_comment_format')){
         $author_count = count($wpdb->get_results(
         "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "));
         if($author_count>=1 && $author_count< 5 )//数字可自行修改，代表评论次数。
-            echo '<span class="showGrade0" title="萌萌哒新人~"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade0" title="Lv0"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=6 && $author_count< 10)
             echo '<span class="showGrade1" title="Lv1"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=10 && $author_count< 20)
@@ -436,7 +436,7 @@ if(!function_exists('akina_comment_format')){
         else if($author_count>=20 && $author_count< 40)
             echo '<span class="showGrade3" title="Lv3"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=40 && $author_count< 80)
-            echo '<span class="showGrade4" title="Lv4 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade4" title="Lv4"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=80 && $author_count< 160)
             echo '<span class="showGrade5" title="Lv5"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=160)
@@ -1268,7 +1268,7 @@ function memory_archives_list() {
             if ($year != $year_tmp && $year > 0) $output .= '</ul>';
             if ($year != $year_tmp) {
                 $year = $year_tmp;
-                $output .= '<h3 class="al_year">'. $year . __("","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
+                $output .= '<h3 class="al_year">'. $year . __(" ","year","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
@@ -1646,7 +1646,7 @@ add_action('comment_post', 'sakura_comment_notify');
 if (akina_option('sakura_widget')) {
     if (function_exists('register_sidebar')) {
         register_sidebar(array(
-            'name' => '侧栏',
+            'name' => __('Sidebar'),//侧栏
             'id' => 'sakura_widget',
             'before_widget' => '<div class="widget %2$s">',
             'after_widget' => '</div>',
