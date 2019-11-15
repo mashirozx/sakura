@@ -203,7 +203,9 @@ function sakura_scripts() {
 		'ajaxurl' => admin_url('admin-ajax.php'),
 		'order' => get_option('comment_order'), // ajax comments
 		'formpostion' => 'bottom', // ajax comments 默认为bottom，如果你的表单在顶部则设置为top。
-        'reply_link_version' => $reply_link_version
+        'reply_link_version' => $reply_link_version,
+        'api' => esc_url_raw( rest_url() ),
+        'nonce' => wp_create_nonce( 'wp_rest' )
 	));
 }
 add_action( 'wp_enqueue_scripts', 'sakura_scripts' );
