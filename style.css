@@ -8502,7 +8502,7 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 
 .widget-area {
     position: fixed;
-    top: 88%;
+    top: calc(100% - 132px);
     bottom: 10%;
     left: -400px;
     z-index: 3;

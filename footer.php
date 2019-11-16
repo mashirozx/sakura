@@ -40,8 +40,8 @@
 	</footer><!-- #colophon -->
 	<?php if (akina_option('sakura_widget')) : ?>
 	<aside id="secondary" class="widget-area" role="complementary" style="left: -400px;">
-    <button class="show_hide">
-        <i class="fa fa-magic" aria-hidden="true"></i>
+    <button class="show_hide faa-parent animated-hover">
+        <i class="fa fa-magic faa-vertical" aria-hidden="true"></i>
     </button>
     <div class="heading"><?php _e('Widgets') /*小工具*/ ?></div>
     <div class="sakura_widget">
