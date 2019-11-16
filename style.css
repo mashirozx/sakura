@@ -8507,10 +8507,11 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     left: -400px;
     z-index: 3;
     width: 400px;
-    webkit-transition: .3s;
+    -webkit-transition: .3s;
     transition: all .3s;
     background-color: rgba(255,255,255,0.8);
     box-shadow: 0 1px 20px -8px rgba(0,0,0,.5);
+    z-index: 50;
 }
 .widget-area.active{
     top: 100px;
