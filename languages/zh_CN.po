@@ -130,7 +130,7 @@ msgstr "禁止小广告😀"
 msgid "Site"
 msgstr "网站"
 
-#: footer.php:46
+#: footer.php:144
 msgid "Widgets"
 msgstr "小工具"
 

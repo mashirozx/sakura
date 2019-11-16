@@ -38,17 +38,6 @@
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
-	<?php if (akina_option('sakura_widget')) : ?>
-	<aside id="secondary" class="widget-area" role="complementary" style="left: -400px;">
-    <button class="show_hide faa-parent animated-hover">
-        <i class="fa fa-magic faa-vertical" aria-hidden="true"></i>
-    </button>
-    <div class="heading"><?php _e('Widgets') /*小工具*/ ?></div>
-    <div class="sakura_widget">
-	<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('sakura_widget')) : endif; ?>
-	</div>
-    </aside>
-    <?php endif; ?>
 	<div class="openNav no-select">
 		<div class="iconflat no-select">	 
 			<div class="icon"></div>
@@ -150,16 +139,25 @@
     </div>
 </div>
 <canvas id="night-mode-cover"></canvas>
+<?php if (akina_option('sakura_widget')) : ?>
+	<aside id="secondary" class="widget-area" role="complementary" style="left: -400px;">
+    <div class="heading"><?php _e('Widgets') /*小工具*/ ?></div>
+    <div class="sakura_widget">
+	<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('sakura_widget')) : endif; ?>
+	</div>
+	<div class="show-hide-wrap"><button class="show-hide"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32"><path d="M22 16l-10.105-10.6-1.895 1.987 8.211 8.613-8.211 8.612 1.895 1.988 8.211-8.613z"></path></svg></button></div>
+    </aside>
+<?php endif; ?>
 <?php if (akina_option('playlist_id', '')): ?>
-<div id="aplayer-float" style="z-index: 100;"
-	class="aplayer"
-    data-id="<?php echo akina_option('playlist_id', ''); ?>"
-    data-server="netease"
-    data-type="playlist"
-    data-fixed="true"
-    data-theme="orange">
-</div>
-<style>.skin-menu{left:auto;right:10px;}.changeSkin-gear{left:auto;right:5px;}</style>
+    <div id="aplayer-float" style="z-index: 100;"
+	    class="aplayer"
+        data-id="<?php echo akina_option('playlist_id', ''); ?>"
+        data-server="netease"
+        data-type="playlist"
+        data-fixed="true"
+        data-theme="orange">
+    </div>
+    <style>.skin-menu{left:auto;right:10px;}.changeSkin-gear{left:auto;right:5px;}</style>
 <?php endif; ?>
 </body>
 </html>

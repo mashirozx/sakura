@@ -130,7 +130,7 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: footer.php:46
+#: footer.php:144
 msgid "Widgets"
 msgstr ""
 

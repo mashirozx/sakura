@@ -798,12 +798,14 @@ if (mashiro_option.float_player_on) {
                                 maxHeight: '250px'
                             });
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass("ap-hover");
+                            $("#secondary").addClass("active");
                             apSwitchTag = 1;
                         } else {
                             aplayerlist.css({
                                 maxHeight: '0px'
                             });
                             $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
+                            $("#secondary").removeClass("active");
                             apSwitchTag = 0;
                         }
                     });
@@ -978,7 +980,7 @@ function mail_me() {
 
 function activate_widget(){
     if (document.body.clientWidth > 860) {
-        $('.show_hide').on('click', function() {
+        $('.show-hide').on('click', function() {
             $("#secondary").toggleClass("active")
         });
     }else{
