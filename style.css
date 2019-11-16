@@ -8524,6 +8524,16 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     overflow-y: auto;
 }
 
+.widget-area .sakura_widget h2 {
+    border-bottom: 1px solid #000;
+}
+
+.widget-area .sakura_widget ol,.widget-area .sakura_widget ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .widget-area .heading{
     color: #555;
     font-size: 20px;
@@ -8542,6 +8552,7 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     border-color: #ddd;
     outline:none;
     box-shadow: none;
+    border: none;
     border-left-width: 0;
 }
 

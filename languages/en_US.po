@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-15 23:51+0800\n"
-"PO-Revision-Date: 2019-11-15 23:51+0800\n"
+"POT-Creation-Date: 2019-11-16 10:08+0800\n"
+"PO-Revision-Date: 2019-11-16 10:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -38,7 +38,7 @@ msgstr "Return to home page"
 msgid "Don't worry, search in site?"
 msgstr ""
 
-#: 404.php:53 footer.php:71 search.php:42
+#: 404.php:53 footer.php:73 search.php:42
 msgid "Search..."
 msgstr "Search..."
 
@@ -130,15 +130,15 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: footer.php:45
-msgid "Widget"
+#: footer.php:46
+msgid "Widgets"
 msgstr ""
 
-#: footer.php:84 footer.php:92
+#: footer.php:86 footer.php:94
 msgid "Want to find something?"
 msgstr ""
 
-#: footer.php:94
+#: footer.php:96
 msgid "Search"
 msgstr ""
 

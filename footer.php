@@ -38,15 +38,17 @@
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
+	<?php if (akina_option('sakura_widget')) : ?>
 	<aside id="secondary" class="widget-area" role="complementary" style="left: -400px;">
     <button class="show_hide">
         <i class="fa fa-magic" aria-hidden="true"></i>
     </button>
-    <div class="heading"><?php _e('Widget') /*小工具*/ ?></div>
+    <div class="heading"><?php _e('Widgets') /*小工具*/ ?></div>
     <div class="sakura_widget">
 	<?php if (function_exists('dynamic_sidebar') && dynamic_sidebar('sakura_widget')) : endif; ?>
 	</div>
     </aside>
+    <?php endif; ?>
 	<div class="openNav no-select">
 		<div class="iconflat no-select">	 
 			<div class="icon"></div>

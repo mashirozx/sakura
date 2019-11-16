@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-15 23:50+0800\n"
-"PO-Revision-Date: 2019-11-15 23:50+0800\n"
+"POT-Creation-Date: 2019-11-16 10:08+0800\n"
+"PO-Revision-Date: 2019-11-16 10:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -38,7 +38,7 @@ msgstr "返回首页"
 msgid "Don't worry, search in site?"
 msgstr "别着急，试试站内检索？"
 
-#: 404.php:53 footer.php:71 search.php:42
+#: 404.php:53 footer.php:73 search.php:42
 msgid "Search..."
 msgstr "搜索..."
 
@@ -130,15 +130,15 @@ msgstr "禁止小广告😀"
 msgid "Site"
 msgstr "网站"
 
-#: footer.php:45
-msgid "Widget"
+#: footer.php:46
+msgid "Widgets"
 msgstr "小工具"
 
-#: footer.php:84 footer.php:92
+#: footer.php:86 footer.php:94
 msgid "Want to find something?"
 msgstr "想要找点什么呢？"
 
-#: footer.php:94
+#: footer.php:96
 msgid "Search"
 msgstr "搜索"
 
@@ -1020,10 +1020,8 @@ msgid "Post share"
 msgstr "文章分享"
 
 #: options.php:587
-#, fuzzy
-#| msgid "Previous"
 msgid "Previous and Next"
-msgstr "上一页"
+msgstr "上一篇下一篇"
 
 #: options.php:597
 msgid "Author profile"
