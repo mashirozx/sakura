@@ -1655,4 +1655,58 @@ if (akina_option('sakura_widget')) {
         ));
     }
 }
+
+// 评论Markdown解析
+function markdown_parser($incoming_comment) {
+    global $wpdb,$comment_markdown_content;
+    $re = '/```([\s\S]*?)```[\s]*|`{1,2}[^`](.*?)`{1,2}|\[.*?\]\([\s\S]*?\)/m';
+    if(preg_replace($re,'temp',$incoming_comment['comment_content']) != strip_tags(preg_replace($re,'temp',$incoming_comment['comment_content']))){
+    siren_ajax_comment_err('评论只支持Markdown啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa fa-code" aria-hidden="true"></i> Forbidden');
+    return( $incoming_comment );
+    }
+    $myCustomer = $wpdb->get_row("SELECT * FROM wp_comments");
+    //Add column if not present.
+    if (!isset($myCustomer->say_state)) {
+        $wpdb->query("ALTER TABLE wp_comments ADD comment_markdown text");
+    }
+    $comment_markdown_content = $incoming_comment['comment_content'];
+    include 'inc/Parsedown.php';
+    $Parsedown = new Parsedown();
+    $incoming_comment['comment_content'] = $Parsedown->text($incoming_comment['comment_content']);
+    return $incoming_comment;
+}
+add_filter('preprocess_comment' , 'markdown_parser');
+
+//保存Markdown评论
+function save_markdown_comment($comment_ID, $comment_approved) {
+    global $wpdb,$comment_markdown_content;
+    $comment = get_comment($comment_ID);
+    $comment_content = $comment_markdown_content;
+    //store markdow content
+    $wpdb->query("UPDATE wp_comments SET comment_markdown='".$comment_content."' WHERE comment_ID='".$comment_ID."';");
+}
+add_action('comment_post', 'save_markdown_comment', 10, 2);
+
+//打开评论HTML标签限制
+function allow_more_tag_in_comment() {
+	global $allowedtags;
+	$allowedtags['pre'] = array('class'=>array());
+	$allowedtags['code'] = array('class'=>array());
+	$allowedtags['h1'] = array('class'=>array());
+	$allowedtags['h2'] = array('class'=>array());
+	$allowedtags['h3'] = array('class'=>array());
+	$allowedtags['h4'] = array('class'=>array());
+	$allowedtags['h5'] = array('class'=>array());
+	$allowedtags['ul'] = array('class'=>array());
+	$allowedtags['ol'] = array('class'=>array());
+	$allowedtags['li'] = array('class'=>array());
+	$allowedtags['td'] = array('class'=>array());
+	$allowedtags['th'] = array('class'=>array());
+	$allowedtags['tr'] = array('class'=>array());
+	$allowedtags['table'] = array('class'=>array());
+	$allowedtags['thead'] = array('class'=>array());
+	$allowedtags['tbody'] = array('class'=>array());
+	$allowedtags['span'] = array('class'=>array());
+}
+add_action('pre_comment_on_post', 'allow_more_tag_in_comment');
 //code end 

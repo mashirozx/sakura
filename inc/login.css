@@ -66,9 +66,10 @@ color: #676767 !important}
 	background: none;
     box-shadow: none;
 	margin-top: 10px;
+	border: none;
 }
 
-#login form p {
+#login form p,#login form .user-pass-wrap {
 	font-family:"Microsoft Yahei";
 	position:relative;
 	padding:0px 35px;
@@ -114,6 +115,18 @@ color: #676767 !important}
 	box-shadow:0 0 0px 1000px white inset;
 	color: #676767 !important;
 	border: 1px solid #FF5656;
+}
+
+.login .button.wp-hide-pw{
+    height: 46px;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    opacity: .8;
+}
+
+.login .button.wp-hide-pw .dashicons{
+    right: 1rem;
 }
 
 #login .form-send .bot {
