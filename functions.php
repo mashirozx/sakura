@@ -738,7 +738,7 @@ function bolo_QTnextpage_arg1() {
 //Login Page style
 function custom_login() {
 	//echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css" />'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css?'.SAKURA_VERSION.'" />'."\n";
 	//echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
 	echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>'."\n";
 }
