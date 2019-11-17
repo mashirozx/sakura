@@ -1039,7 +1039,7 @@ function optionsframework_options() {
 
 		$options[] = array(
 			'name' => __('Chevereto API v1 key', 'sakura'),
-			'desc' => __('Get your API key here '.akina_option('cheverto_url').'/dashboard/settings/api', 'sakura'),
+			'desc' => __('Get your API key here: '.akina_option('cheverto_url').'/dashboard/settings/api', 'sakura'),
 			'id' => 'chevereto_api_key',
 			'std' => '',
 			'type' => 'text');

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-16 10:08+0800\n"
-"PO-Revision-Date: 2019-11-16 10:11+0800\n"
+"POT-Creation-Date: 2019-11-17 21:32+0800\n"
+"PO-Revision-Date: 2019-11-17 21:32+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -38,13 +38,9 @@ msgstr "Return to home page"
 msgid "Don't worry, search in site?"
 msgstr ""
 
-#: 404.php:53 footer.php:73 search.php:42
+#: 404.php:53 footer.php:62 search.php:42
 msgid "Search..."
 msgstr "Search..."
-
-#: archive.php:55 author.php:76
-msgid "Previous"
-msgstr "Previous"
 
 #: comments.php:21
 msgid "view comments"
@@ -130,86 +126,86 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+#: footer.php:75 footer.php:83
+msgid "Want to find something?"
+msgstr ""
+
+#: footer.php:85
+msgid "Search"
+msgstr ""
+
 #: footer.php:144
 msgid "Widgets"
 msgstr ""
 
-#: footer.php:86 footer.php:94
-msgid "Want to find something?"
-msgstr ""
-
-#: footer.php:96
-msgid "Search"
-msgstr ""
-
-#: functions.php:52
+#: functions.php:51
 msgid "Nav Menus"
 msgstr ""
 
-#: functions.php:390 inc/theme_plus.php:187 layouts/authorprofile.php:11
+#: functions.php:389 inc/theme_plus.php:187 layouts/authorprofile.php:11
 #: options.php:123
 msgid "Author"
 msgstr ""
 
-#: functions.php:390
+#: functions.php:389
 msgid "Blogger"
 msgstr ""
 
-#: functions.php:394
+#: functions.php:393
 msgid "Location"
 msgstr ""
 
-#: functions.php:398
+#: functions.php:397
 msgid "Private"
 msgstr ""
 
-#: functions.php:400
+#: functions.php:399
 msgid "Yes"
 msgstr ""
 
-#: functions.php:402
+#: functions.php:401
 msgid "No"
 msgstr ""
 
-#: functions.php:405
+#: functions.php:404
 msgid "Edit"
 msgstr ""
 
-#: functions.php:486
+#: functions.php:485
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
 msgstr ""
 
-#: functions.php:539
+#: functions.php:538
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1260
+#: functions.php:1248
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1271 options.php:840
+#: functions.php:1259 options.php:840
 msgid " "
 msgstr ""
 
-#: functions.php:1275
+#: functions.php:1263
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1297 functions.php:1300 inc/theme_plus.php:479
+#: functions.php:1285 functions.php:1288 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1513
+#: functions.php:1501
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1593
+#: functions.php:1581
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1649
+#: functions.php:1637
 msgid "Sidebar"
 msgstr ""
 
@@ -1501,7 +1497,7 @@ msgid "Chevereto API v1 key"
 msgstr ""
 
 #: options.php:1042
-msgid "Get your API key here "
+msgid "Get your API key here: "
 msgstr ""
 
 #: options.php:1048
@@ -1745,7 +1741,7 @@ msgid "Please enter email address."
 msgstr ""
 
 #: user/page-register.php:26
-msgid "Invalid email address"
+msgid "Invalid email address."
 msgstr ""
 
 #: user/page-register.php:29
@@ -1753,11 +1749,11 @@ msgid "This email address has been registered."
 msgstr ""
 
 #: user/page-register.php:34
-msgid "Password length is at least 6 digits"
+msgid "Password length is at least 6 digits."
 msgstr ""
 
 #: user/page-register.php:36
-msgid "Inconsistent password entered twice"
+msgid "Inconsistent password entered twice."
 msgstr ""
 
 #: user/page-register.php:41
@@ -1781,8 +1777,11 @@ msgid "Sign up"
 msgstr ""
 
 #: user/page-register.php:92
-msgid "Registration is not open yet"
+msgid "Registration is not open yet."
 msgstr ""
+
+#~ msgid " Previous"
+#~ msgstr " Previous"
 
 #, php-format
 #~ msgid "第 %s 页"
