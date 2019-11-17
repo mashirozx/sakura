@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-14 19:18+0800\n"
-"PO-Revision-Date: 2019-11-14 19:31+0800\n"
+"POT-Creation-Date: 2019-11-16 10:08+0800\n"
+"PO-Revision-Date: 2019-11-16 10:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -38,7 +38,7 @@ msgstr "返回首页"
 msgid "Don't worry, search in site?"
 msgstr "别着急，试试站内检索？"
 
-#: 404.php:53 footer.php:62 search.php:42
+#: 404.php:53 footer.php:73 search.php:42
 msgid "Search..."
 msgstr "搜索..."
 
@@ -130,11 +130,15 @@ msgstr "禁止小广告😀"
 msgid "Site"
 msgstr "网站"
 
-#: footer.php:75 footer.php:83
-msgid "Want to find something？"
+#: footer.php:144
+msgid "Widgets"
+msgstr "小工具"
+
+#: footer.php:86 footer.php:94
+msgid "Want to find something?"
 msgstr "想要找点什么呢？"
 
-#: footer.php:85
+#: footer.php:96
 msgid "Search"
 msgstr "搜索"
 
@@ -142,36 +146,36 @@ msgstr "搜索"
 msgid "Nav Menus"
 msgstr "导航菜单"
 
-#: functions.php:388 inc/theme_plus.php:187 layouts/authorprofile.php:11
+#: functions.php:390 inc/theme_plus.php:187 layouts/authorprofile.php:11
 #: options.php:123
 msgid "Author"
 msgstr "作者"
 
-#: functions.php:388
+#: functions.php:390
 msgid "Blogger"
 msgstr "博主"
 
-#: functions.php:392
+#: functions.php:394
 msgid "Location"
 msgstr "来自"
 
-#: functions.php:396
+#: functions.php:398
 msgid "Private"
 msgstr "私密"
 
-#: functions.php:398
+#: functions.php:400
 msgid "Yes"
 msgstr "是"
 
-#: functions.php:400
+#: functions.php:402
 msgid "No"
 msgstr "否"
 
-#: functions.php:403
+#: functions.php:405
 msgid "Edit"
 msgstr "编辑"
 
-#: functions.php:484
+#: functions.php:486
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
@@ -179,36 +183,44 @@ msgstr ""
 "请安装插件 <a href=\"https://wordpress.org/plugins/wp-statistics/\" target="
 "\"_blank\">WP-Statistics</a>"
 
-#: functions.php:537
+#: functions.php:539
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr "这家伙好懒╮(╯▽╰)╭"
 
-#: functions.php:1258
+#: functions.php:1260
 msgid "All expand/collapse"
 msgstr "全部展开/收缩"
 
-#: functions.php:1273
+#: functions.php:1271 options.php:840
+msgid " "
+msgstr ""
+
+#: functions.php:1275
 msgid " post(s)"
 msgstr " 篇文章"
 
-#: functions.php:1295 functions.php:1298 inc/theme_plus.php:479
+#: functions.php:1297 functions.php:1300 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr "管理中心"
 
-#: functions.php:1511
+#: functions.php:1513
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1591
+#: functions.php:1593
 msgid "QQ"
 msgstr ""
+
+#: functions.php:1649
+msgid "Sidebar"
+msgstr "侧栏"
 
 #: header.php:35
 #, php-format
 msgid "page %s "
 msgstr "第 %s 页 "
 
-#: inc/api.php:241 inc/theme_plus.php:728
+#: inc/api.php:253 inc/theme_plus.php:728
 msgid "The comment is private"
 msgstr "该评论为私密评论"
 
@@ -905,7 +917,7 @@ msgstr "点点"
 msgid "Whether to turn on the top-feature"
 msgstr "是否开启聚焦"
 
-#: options.php:443 options.php:1084
+#: options.php:443 options.php:1091
 msgid "Default on"
 msgstr "默认开启"
 
@@ -991,7 +1003,6 @@ msgstr "文章页"
 msgid "Post style"
 msgstr "文章样式"
 
-#. Theme Name of the plugin/theme
 #: options.php:562
 msgid "Sakura"
 msgstr "默认样式"
@@ -1009,10 +1020,8 @@ msgid "Post share"
 msgstr "文章分享"
 
 #: options.php:587
-#, fuzzy
-#| msgid "Previous"
 msgid "Previous and Next"
-msgstr "上一页"
+msgstr "上一篇下一篇"
 
 #: options.php:597
 msgid "Author profile"
@@ -1408,19 +1417,23 @@ msgstr "原理与Ajax相同"
 msgid "Enable NProgress progress bar"
 msgstr "开启NProgress加载进度条"
 
-#: options.php:953 options.php:960
+#: options.php:953 options.php:960 options.php:967
 msgid "Default off, check on"
 msgstr "默认不开启，勾选开启"
 
 #: options.php:959
+msgid "Enable sidebar widget"
+msgstr "支持侧栏小部件"
+
+#: options.php:966
 msgid "Enable Announcement"
 msgstr "开启公告"
 
-#: options.php:966
+#: options.php:973
 msgid "Announcement content"
 msgstr "公告内容"
 
-#: options.php:967
+#: options.php:974
 msgid ""
 "Announcement content, the text exceeds 142 bytes will be scrolled display "
 "(mobile device is invalid)"
@@ -1428,72 +1441,72 @@ msgstr ""
 "公告内容，文字超出142个字节将会被滚动显示（移动端无效），一个汉字 = 3字节，一"
 "个字母 = 1字节，自己计算吧"
 
-#: options.php:973
+#: options.php:980
 msgid "The categories of articles that don\\t not show on homepage"
 msgstr "首页不显示的分类文章"
 
-#: options.php:974 options.php:981
+#: options.php:981 options.php:988
 msgid "Fill in category ID, multiple IDs are divided by a comma \",\""
 msgstr "填写分类ID，多个用英文“ , ”分开"
 
-#: options.php:980
+#: options.php:987
 msgid "Images category"
 msgstr "图片展示分类"
 
-#: options.php:987
+#: options.php:994
 msgid "Statistics Interface"
 msgstr "统计接口"
 
-#: options.php:992
+#: options.php:999
 msgid ""
 "WP-Statistics plugin (Professional statistics, can exclude invalid access)"
 msgstr "WP-Statistics 插件（专业性统计，可排除无效访问）"
 
-#: options.php:993
+#: options.php:1000
 msgid "Theme built-in (simple statistics, calculate each page access request)"
 msgstr "主题内建（简单的统计，计算每一次页面访问请求）"
 
-#: options.php:997
+#: options.php:1004
 msgid "Statistical data display format"
 msgstr "统计数据显示格式"
 
-#: options.php:1002
+#: options.php:1009
 msgid "23333 Views (default)"
 msgstr "23333 次访问（默认）"
 
-#: options.php:1003
+#: options.php:1010
 msgid "23,333 Views (britain)"
 msgstr "23,333 次访问（英式）"
 
-#: options.php:1004
+#: options.php:1011
 msgid "23 333 Views (french)"
 msgstr "23 333 次访问（法式）"
 
-#: options.php:1005
+#: options.php:1012
 msgid "23k Views (chinese)"
 msgstr "23k 次访问（中式）"
 
-#: options.php:1009
+#: options.php:1016
 msgid "Comment image upload API"
 msgstr "评论上传图片接口"
 
-#: options.php:1014
+#: options.php:1021
 msgid "Imgur (https://imgur.com)"
 msgstr ""
 
-#: options.php:1015
+#: options.php:1022
 msgid "SM.MS (https://sm.ms)"
 msgstr ""
 
-#: options.php:1016
+#: options.php:1023
 msgid "Chevereto (https://chevereto.com)"
 msgstr ""
 
-#: options.php:1020
+#: options.php:1027
 msgid "Imgur Client ID"
 msgstr ""
 
-#: options.php:1021
+#: options.php:1028
 msgid ""
 "Register your application <a href=\"https://api.imgur.com/oauth2/addclient"
 "\">here</a>, note we only need the Client ID here."
@@ -1501,48 +1514,48 @@ msgstr ""
 "在<a href=\"https://api.imgur.com/oauth2/addclient\">这里</a>注册你的 "
 "application , 注意此处只需要填写 Client ID."
 
-#: options.php:1027
+#: options.php:1034
 msgid "SM.MS Secret Token"
 msgstr ""
 
-#: options.php:1028
+#: options.php:1035
 msgid ""
 "Register your application <a href=\"https://sm.ms/home/apitoken\">here</a>."
 msgstr "在<a href=\"https://sm.ms/home/apitoken\">这里</a>获取 key."
 
-#: options.php:1034
+#: options.php:1041
 msgid "Chevereto API v1 key"
 msgstr ""
 
-#: options.php:1035
+#: options.php:1042
 msgid "Get your API key here "
 msgstr "在这里获取你的 API key："
 
-#: options.php:1041
+#: options.php:1048
 msgid "Chevereto URL"
 msgstr ""
 
-#: options.php:1042
+#: options.php:1049
 msgid ""
 "Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto."
 "com"
 msgstr ""
 "你的 Chevereto 首页 url, 注意结尾没有 /, 例如：https://your.cherverto.com"
 
-#: options.php:1048
+#: options.php:1055
 msgid "Comment images proxy"
 msgstr "评论图片代理"
 
-#: options.php:1049
+#: options.php:1056
 msgid ""
 "A front-ed proxy for the uploaded images. Leave it blank if you do not need."
 msgstr "前端显示的图片的代理"
 
-#: options.php:1055
+#: options.php:1062
 msgid "Imgur upload proxy"
 msgstr "Imgur 上传代理"
 
-#: options.php:1056
+#: options.php:1063
 msgid ""
 "A back-ed proxy to upload images. You may set a self hosted proxy with "
 "Nginx, following my <a href=\"https://2heng.xin/2018/06/06/javascript-upload-"
@@ -1557,11 +1570,11 @@ msgstr ""
 "端显示都需要代理！如果服务器在国外不需要上传代理，此处填写默认值即可：【<a "
 "href=\"https://api.imgur.com/3/image/\">https://api.imgur.com/3/image/</a>】"
 
-#: options.php:1062
+#: options.php:1069
 msgid "Enable live search"
 msgstr "启用实时搜索"
 
-#: options.php:1063
+#: options.php:1070
 msgid ""
 "Real-time search in the foreground, call the Rest API to update the cache "
 "every hour, you can manually set the cache time in functions.php"
@@ -1569,21 +1582,21 @@ msgstr ""
 "前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动"
 "设置缓存时间"
 
-#: options.php:1069
+#: options.php:1076
 msgid "Include comments in live search"
 msgstr "实时搜索包含评论"
 
-#: options.php:1070
+#: options.php:1077
 msgid ""
 "Search for comments in real-time search (not recommended if there are too "
 "many comments on the site)"
 msgstr "在实时搜索中搜索评论（如果网站评论数量太多不建议开启）"
 
-#: options.php:1076
+#: options.php:1083
 msgid "Enable baguetteBox"
 msgstr "启用 baguetteBox"
 
-#: options.php:1077
+#: options.php:1084
 msgid ""
 "Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox"
 "\">please read wiki</a>"
@@ -1591,33 +1604,33 @@ msgstr ""
 "默认禁用，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox\">请阅"
 "读说明</a>"
 
-#: options.php:1083
+#: options.php:1090
 msgid "Enable lazyload in posts"
 msgstr "文章内图片启用 lazyload"
 
-#: options.php:1090
+#: options.php:1097
 msgid "lazyload spinner"
 msgstr "lazyload 占位图"
 
-#: options.php:1091
+#: options.php:1098
 msgid "The placeholder to display when the image loads, fill in the image url"
 msgstr "图片加载时要显示的占位图，填写图片 url"
 
-#: options.php:1097
+#: options.php:1104
 msgid "Whether to enable the clipboard copyright"
 msgstr "是否开启剪贴板版权标识"
 
-#: options.php:1098
+#: options.php:1105
 msgid ""
 "Automatically add a copyright to the clipboard when copying more than 30 "
 "bytes, which is enabled by default."
 msgstr "复制超过30个字节时自动向剪贴板添加版权标识，默认开启。"
 
-#: options.php:1104
+#: options.php:1111
 msgid "Email address prefix"
 msgstr "发件地址前缀"
 
-#: options.php:1105
+#: options.php:1112
 msgid ""
 "For sending system mail, the sender address displayed in the user's mailbox, "
 "do not use Chinese, the default system email address is bibi@your_domain_name"
@@ -1625,11 +1638,11 @@ msgstr ""
 "用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮件"
 "地址为 bibi@你的域名"
 
-#: options.php:1111
+#: options.php:1118
 msgid "Comments reply notification"
 msgstr "邮件回复通知"
 
-#: options.php:1112
+#: options.php:1119
 msgid ""
 "WordPress will use email to notify users when their comments receive a reply "
 "by default. Tick this item allows users to set their own comments reply "
@@ -1638,54 +1651,54 @@ msgstr ""
 "WordPress默认会使用邮件通知用户评论收到回复，开启此项允许用户设置自己的评论收"
 "到回复时是否使用邮件通知"
 
-#: options.php:1118
+#: options.php:1125
 msgid "Administrator comment notification"
 msgstr "邮件回复通知管理员"
 
-#: options.php:1119
+#: options.php:1126
 msgid ""
 "Whether to use email notification when the administrator's comments receive "
 "a reply"
 msgstr "当管理员评论收到回复时是否使用邮件通知"
 
-#: options.php:1125
+#: options.php:1132
 msgid "Enable private comment"
 msgstr "允许私密评论"
 
-#: options.php:1126
+#: options.php:1133
 msgid "Allow users to set their own comments to be invisible to others"
 msgstr "允许用户设置自己的评论对其他人不可见"
 
-#: options.php:1132
+#: options.php:1139
 msgid "Human verification"
 msgstr "机器人验证"
 
-#: options.php:1133
+#: options.php:1140
 msgid "Enable human verification"
 msgstr "开启机器人验证"
 
-#: options.php:1139
+#: options.php:1146
 msgid "Comment UA infomation"
 msgstr "评论UA信息"
 
-#: options.php:1140
+#: options.php:1147
 msgid ""
 "Check to enable, display the user's browser, operating system information"
 msgstr "勾选开启，显示用户的浏览器，操作系统信息"
 
-#: options.php:1146
+#: options.php:1153
 msgid "Enable disqus"
 msgstr "开启多说插件支持"
 
-#: options.php:1147
+#: options.php:1154
 msgid "Enable disqus for comment"
 msgstr "多说已经凉了～～"
 
-#: options.php:1153
+#: options.php:1160
 msgid "Time Zone adjustment"
 msgstr "时区调整"
 
-#: options.php:1154
+#: options.php:1161
 msgid ""
 "If the comment has a time difference problem adjust here, fill in an "
 "integer, the calculation method: actual_time = display_error_time - "
@@ -1813,29 +1826,8 @@ msgstr "注 册"
 msgid "Registration is not open yet"
 msgstr "暂未开放注册。 "
 
-#. Theme URI of the plugin/theme
-msgid "https://2heng.xin/theme-sakura/"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "A branch of theme Akina"
-msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
-
-#. Author of the plugin/theme
-msgid "Mashiro, Louie, Fuzzz"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://2heng.xin"
-msgstr ""
-
-#. Template Name of the plugin/theme
-msgid "archive"
-msgstr ""
-
-#. Template Name of the plugin/theme
-msgid "links"
-msgstr ""
+#~ msgid "A branch of theme Akina"
+#~ msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
 
 #, php-format
 #~ msgid "第 %s 页"
