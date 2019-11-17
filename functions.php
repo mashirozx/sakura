@@ -7,9 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.1' );
+define( 'SAKURA_VERSION', '3.3.2' );
 define( 'BUILD_VERSION', '3' );
-define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
@@ -203,7 +202,9 @@ function sakura_scripts() {
 		'ajaxurl' => admin_url('admin-ajax.php'),
 		'order' => get_option('comment_order'), // ajax comments
 		'formpostion' => 'bottom', // ajax comments 默认为bottom，如果你的表单在顶部则设置为top。
-        'reply_link_version' => $reply_link_version
+        'reply_link_version' => $reply_link_version,
+        'api' => esc_url_raw( rest_url() ),
+        'nonce' => wp_create_nonce( 'wp_rest' )
 	));
 }
 add_action( 'wp_enqueue_scripts', 'sakura_scripts' );
@@ -385,19 +386,19 @@ if(!function_exists('akina_comment_format')){
 						<div class="commentinfo">
 							<section class="commeta">
 								<div class="left">
-									<h4 class="author"><a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo get_avatar( $comment->comment_author_email, '24', '', get_comment_author() ); ?><span class="bb-comment isauthor" title="<?php _e('Author', 'mashiro'); ?>"><?php _e('Blogger', 'mashiro'); /*博主*/?></span> <?php comment_author(); ?> <?php echo get_author_class($comment->comment_author_email,$comment->user_id); ?></a></h4>
+									<h4 class="author"><a href="<?php comment_author_url(); ?>" target="_blank" rel="nofollow"><?php echo get_avatar( $comment->comment_author_email, '24', '', get_comment_author() ); ?><span class="bb-comment isauthor" title="<?php _e('Author', 'sakura'); ?>"><?php _e('Blogger', 'sakura'); /*博主*/?></span> <?php comment_author(); ?> <?php echo get_author_class($comment->comment_author_email,$comment->user_id); ?></a></h4>
 								</div>
 								<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
 								<div class="right">
-									<div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true );//comment_date(get_option('date_format')); ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;<?php _e('Location', 'mashiro'); /*来自*/?>: <?php echo convertip(get_comment_author_ip()); ?>
+									<div class="info"><time datetime="<?php comment_date('Y-m-d'); ?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true );//comment_date(get_option('date_format')); ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;<?php _e('Location', 'sakura'); /*来自*/?>: <?php echo convertip(get_comment_author_ip()); ?>
     									<?php if (current_user_can('manage_options') and (wp_is_mobile() == false) ) {
                                             $comment_ID = $comment->comment_ID;
                                             $i_private = get_comment_meta($comment_ID, '_private', true);
-                                            $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">'.__('Private', 'mashiro').': <span class="has_set_private">';
+                                            $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">'.__("Private", "sakura").': <span class="has_set_private">';
                                             if (!empty($i_private)) {
-                                                $flag .= __('Yes', 'mashiro').' <i class="fa fa-lock" aria-hidden="true"></i>';
+                                                $flag .= __("Yes", "sakura").' <i class="fa fa-lock" aria-hidden="true"></i>';
                                             } else {
-                                                $flag .= __('No', 'mashiro').' <i class="fa fa-unlock" aria-hidden="true"></i>';
+                                                $flag .= __("No", "sakura").' <i class="fa fa-unlock" aria-hidden="true"></i>';
                                             }
                                             $flag .= '</span></a>';
                                             $flag .= edit_comment_link('<i class="fa fa-pencil-square-o" aria-hidden="true"></i> '.__("Edit", "mashiro"), ' <span style="color:rgba(0,0,0,.35)">', '</span>');
@@ -426,7 +427,7 @@ if(!function_exists('akina_comment_format')){
         $author_count = count($wpdb->get_results(
         "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "));
         if($author_count>=1 && $author_count< 5 )//数字可自行修改，代表评论次数。
-            echo '<span class="showGrade0" title="萌萌哒新人~"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade0" title="Lv0"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=6 && $author_count< 10)
             echo '<span class="showGrade1" title="Lv1"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=10 && $author_count< 20)
@@ -434,7 +435,7 @@ if(!function_exists('akina_comment_format')){
         else if($author_count>=20 && $author_count< 40)
             echo '<span class="showGrade3" title="Lv3"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=40 && $author_count< 80)
-            echo '<span class="showGrade4" title="Lv4 orz"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+            echo '<span class="showGrade4" title="Lv4"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=80 && $author_count< 160)
             echo '<span class="showGrade5" title="Lv5"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
         else if($author_count>=160)
@@ -643,19 +644,19 @@ function wpjam_custom_upload_dir( $uploads ) {
  * 删除自带小工具
 */
 function unregister_default_widgets() {
-	unregister_widget("WP_Widget_Pages");
-	unregister_widget("WP_Widget_Calendar");
-	unregister_widget("WP_Widget_Archives");
-	unregister_widget("WP_Widget_Links");
-	unregister_widget("WP_Widget_Meta");
-	unregister_widget("WP_Widget_Search");
-	unregister_widget("WP_Widget_Text");
-	unregister_widget("WP_Widget_Categories");
-	unregister_widget("WP_Widget_Recent_Posts");
-	unregister_widget("WP_Widget_Recent_Comments");
-	unregister_widget("WP_Widget_RSS");
-	unregister_widget("WP_Widget_Tag_Cloud");
-	unregister_widget("WP_Nav_Menu_Widget");
+ 	unregister_widget("WP_Widget_Pages");
+ 	unregister_widget("WP_Widget_Calendar");
+ 	unregister_widget("WP_Widget_Archives");
+ 	unregister_widget("WP_Widget_Links");
+ 	unregister_widget("WP_Widget_Meta");
+ 	unregister_widget("WP_Widget_Search");
+    //unregister_widget("WP_Widget_Text");
+ 	unregister_widget("WP_Widget_Categories");
+ 	unregister_widget("WP_Widget_Recent_Posts");
+    //unregister_widget("WP_Widget_Recent_Comments");
+    //unregister_widget("WP_Widget_RSS");
+    //unregister_widget("WP_Widget_Tag_Cloud");
+ 	unregister_widget("WP_Nav_Menu_Widget");
 }
 add_action("widgets_init", "unregister_default_widgets", 11);
 
@@ -737,7 +738,7 @@ function bolo_QTnextpage_arg1() {
 //Login Page style
 function custom_login() {
 	//echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css" />'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css?'.SAKURA_VERSION.'" />'."\n";
 	//echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
 	echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>'."\n";
 }
@@ -1188,17 +1189,6 @@ add_filter('the_content', 'toc_support');
 add_filter('the_excerpt_rss', 'toc_support');
 add_filter('the_content_feed', 'toc_support');
 
-// Markdown parser
-/* 处理超时？？
-function markdown_parser($content) {
-    include 'inc/Parsedown.php';
-    $Parsedown = new Parsedown();
-    $content = $Parsedown->text($content);
-    return $content;
-}
-add_filter( 'comment_text', 'markdown_parser' );
-*/
-
 // 显示访客当前 IP
 function get_the_user_ip() {
 if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
@@ -1266,7 +1256,7 @@ function memory_archives_list() {
             if ($year != $year_tmp && $year > 0) $output .= '</ul>';
             if ($year != $year_tmp) {
                 $year = $year_tmp;
-                $output .= '<h3 class="al_year">'. $year . __("","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
+                $output .= '<h3 class="al_year">'. $year . __(" ","year","sakura"). /*年*/' </h3><ul class="al_mon_list">'; //输出年份
             }
             if ($mon != $mon_tmp) {
                 $mon = $mon_tmp;
@@ -1640,4 +1630,71 @@ function sakura_comment_notify($comment_id){
 }
 add_action('comment_post', 'sakura_comment_notify');
 
+//侧栏小工具
+if (akina_option('sakura_widget')) {
+    if (function_exists('register_sidebar')) {
+        register_sidebar(array(
+            'name' => __('Sidebar'),//侧栏
+            'id' => 'sakura_widget',
+            'before_widget' => '<div class="widget %2$s">',
+            'after_widget' => '</div>',
+            'before_title' => '<div class="title"><h2>',
+            'after_title' => '</h2></div>'
+        ));
+    }
+}
+
+// 评论Markdown解析
+function markdown_parser($incoming_comment) {
+    global $wpdb,$comment_markdown_content;
+    $re = '/```([\s\S]*?)```[\s]*|`{1,2}[^`](.*?)`{1,2}|\[.*?\]\([\s\S]*?\)/m';
+    if(preg_replace($re,'temp',$incoming_comment['comment_content']) != strip_tags(preg_replace($re,'temp',$incoming_comment['comment_content']))){
+    siren_ajax_comment_err('评论只支持Markdown啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa fa-code" aria-hidden="true"></i> Forbidden');
+    return( $incoming_comment );
+    }
+    $myCustomer = $wpdb->get_row("SELECT * FROM wp_comments");
+    //Add column if not present.
+    if (!isset($myCustomer->say_state)) {
+        $wpdb->query("ALTER TABLE wp_comments ADD comment_markdown text");
+    }
+    $comment_markdown_content = $incoming_comment['comment_content'];
+    include 'inc/Parsedown.php';
+    $Parsedown = new Parsedown();
+    $incoming_comment['comment_content'] = $Parsedown->text($incoming_comment['comment_content']);
+    return $incoming_comment;
+}
+add_filter('preprocess_comment' , 'markdown_parser');
+
+//保存Markdown评论
+function save_markdown_comment($comment_ID, $comment_approved) {
+    global $wpdb,$comment_markdown_content;
+    $comment = get_comment($comment_ID);
+    $comment_content = $comment_markdown_content;
+    //store markdow content
+    $wpdb->query("UPDATE wp_comments SET comment_markdown='".$comment_content."' WHERE comment_ID='".$comment_ID."';");
+}
+add_action('comment_post', 'save_markdown_comment', 10, 2);
+
+//打开评论HTML标签限制
+function allow_more_tag_in_comment() {
+	global $allowedtags;
+	$allowedtags['pre'] = array('class'=>array());
+	$allowedtags['code'] = array('class'=>array());
+	$allowedtags['h1'] = array('class'=>array());
+	$allowedtags['h2'] = array('class'=>array());
+	$allowedtags['h3'] = array('class'=>array());
+	$allowedtags['h4'] = array('class'=>array());
+	$allowedtags['h5'] = array('class'=>array());
+	$allowedtags['ul'] = array('class'=>array());
+	$allowedtags['ol'] = array('class'=>array());
+	$allowedtags['li'] = array('class'=>array());
+	$allowedtags['td'] = array('class'=>array());
+	$allowedtags['th'] = array('class'=>array());
+	$allowedtags['tr'] = array('class'=>array());
+	$allowedtags['table'] = array('class'=>array());
+	$allowedtags['thead'] = array('class'=>array());
+	$allowedtags['tbody'] = array('class'=>array());
+	$allowedtags['span'] = array('class'=>array());
+}
+add_action('pre_comment_on_post', 'allow_more_tag_in_comment');
 //code end 

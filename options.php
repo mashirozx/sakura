@@ -837,7 +837,7 @@ function optionsframework_options() {
     
     $options[] = array(
     'name' => __('Login/registration related settings', 'sakura'),/*登陆/注册相关设定*/
-    'desc' => __('', 'sakura'),
+    'desc' => __(' ', 'space' , 'sakura'),
     'id' => 'login_tip',
     'std' => '',
     'type' => 'typography ');
@@ -952,6 +952,13 @@ function optionsframework_options() {
 		'name' => __('Enable NProgress progress bar', 'sakura'),/*开启NProgress加载进度条*/
 		'desc' => __('Default off, check on', 'sakura'),/*默认不开启，勾选开启*/
 		'id' => 'nprogress_on',
+		'std' => '0',
+		'type' => 'checkbox');	
+    
+    $options[] = array(
+		'name' => __('Enable sidebar widget', 'sakura'),/*支持侧栏小部件*/
+		'desc' => __('Default off, check on', 'sakura'),/*默认不开启，勾选开启*/
+		'id' => 'sakura_widget',
 		'std' => '0',
 		'type' => 'checkbox');	
 

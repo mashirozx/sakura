@@ -182,7 +182,7 @@ function attach_image() {
             var formData = new FormData();
             formData.append('cmt_img_file', f);
             $.ajax({
-                url: '/wp-json/sakura/v1/image/upload/?_wpnonce='+$('body').attr('nonce-data'),
+                url: Poi.api + 'sakura/v1/image/upload?_wpnonce=' + Poi.nonce,
                 type: 'POST',
                 processData: false,
                 contentType: false,
@@ -798,12 +798,14 @@ if (mashiro_option.float_player_on) {
                                 maxHeight: '250px'
                             });
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass("ap-hover");
+                            $("#secondary").addClass("active");
                             apSwitchTag = 1;
                         } else {
                             aplayerlist.css({
                                 maxHeight: '0px'
                             });
                             $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
+                            $("#secondary").removeClass("active");
                             apSwitchTag = 0;
                         }
                     });
@@ -975,6 +977,17 @@ function mail_me() {
     var mail = "mailto:" + mashiro_option.email_name + "@" + mashiro_option.email_domain;
     window.open(mail);
 }
+
+function activate_widget(){
+    if (document.body.clientWidth > 860) {
+        $('.show-hide').on('click', function() {
+            $("#secondary").toggleClass("active")
+        });
+    }else{
+        $("#secondary").remove();
+    }
+}
+activate_widget();
 
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
@@ -1376,7 +1389,7 @@ var home = location.href,
                 $('html').css('overflow-y', 'hidden');
                 if (mashiro_option.live_search) {
                     var QueryStorage = [];
-                    search_a("https://" + document.domain + "/wp-json/sakura/v1/cache_search/json");
+                    search_a(Poi.api + "sakura/v1/cache_search/json");
 
                     var otxt = addComment.I("search-input"),
                         list = addComment.I("PostlistBox"),

@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-14 19:31+0800\n"
-"PO-Revision-Date: 2019-11-14 19:31+0800\n"
+"POT-Creation-Date: 2019-11-16 10:08+0800\n"
+"PO-Revision-Date: 2019-11-16 10:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -38,7 +38,7 @@ msgstr "Return to home page"
 msgid "Don't worry, search in site?"
 msgstr ""
 
-#: 404.php:53 footer.php:62 search.php:42
+#: 404.php:53 footer.php:73 search.php:42
 msgid "Search..."
 msgstr "Search..."
 
@@ -130,11 +130,15 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: footer.php:75 footer.php:83
-msgid "Want to find something？"
+#: footer.php:144
+msgid "Widgets"
 msgstr ""
 
-#: footer.php:85
+#: footer.php:86 footer.php:94
+msgid "Want to find something?"
+msgstr ""
+
+#: footer.php:96
 msgid "Search"
 msgstr ""
 
@@ -142,63 +146,71 @@ msgstr ""
 msgid "Nav Menus"
 msgstr ""
 
-#: functions.php:388 inc/theme_plus.php:187 layouts/authorprofile.php:11
+#: functions.php:390 inc/theme_plus.php:187 layouts/authorprofile.php:11
 #: options.php:123
 msgid "Author"
 msgstr ""
 
-#: functions.php:388
+#: functions.php:390
 msgid "Blogger"
 msgstr ""
 
-#: functions.php:392
+#: functions.php:394
 msgid "Location"
 msgstr ""
 
-#: functions.php:396
+#: functions.php:398
 msgid "Private"
 msgstr ""
 
-#: functions.php:398
+#: functions.php:400
 msgid "Yes"
 msgstr ""
 
-#: functions.php:400
+#: functions.php:402
 msgid "No"
 msgstr ""
 
-#: functions.php:403
+#: functions.php:405
 msgid "Edit"
 msgstr ""
 
-#: functions.php:484
+#: functions.php:486
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
 msgstr ""
 
-#: functions.php:537
+#: functions.php:539
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1258
+#: functions.php:1260
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1273
+#: functions.php:1271 options.php:840
+msgid " "
+msgstr ""
+
+#: functions.php:1275
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1295 functions.php:1298 inc/theme_plus.php:479
+#: functions.php:1297 functions.php:1300 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1511
+#: functions.php:1513
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1591
+#: functions.php:1593
 msgid "QQ"
+msgstr ""
+
+#: functions.php:1649
+msgid "Sidebar"
 msgstr ""
 
 #: header.php:35
@@ -206,7 +218,7 @@ msgstr ""
 msgid "page %s "
 msgstr ""
 
-#: inc/api.php:241 inc/theme_plus.php:728
+#: inc/api.php:253 inc/theme_plus.php:728
 msgid "The comment is private"
 msgstr ""
 
@@ -894,7 +906,7 @@ msgstr ""
 msgid "Whether to turn on the top-feature"
 msgstr ""
 
-#: options.php:443 options.php:1084
+#: options.php:443 options.php:1091
 msgid "Default on"
 msgstr ""
 
@@ -980,7 +992,6 @@ msgstr ""
 msgid "Post style"
 msgstr ""
 
-#. Theme Name of the plugin/theme
 #: options.php:562
 msgid "Sakura"
 msgstr ""
@@ -1383,136 +1394,140 @@ msgstr ""
 msgid "Enable NProgress progress bar"
 msgstr ""
 
-#: options.php:953 options.php:960
+#: options.php:953 options.php:960 options.php:967
 msgid "Default off, check on"
 msgstr ""
 
 #: options.php:959
-msgid "Enable Announcement"
+msgid "Enable sidebar widget"
 msgstr ""
 
 #: options.php:966
+msgid "Enable Announcement"
+msgstr ""
+
+#: options.php:973
 msgid "Announcement content"
 msgstr ""
 
-#: options.php:967
+#: options.php:974
 msgid ""
 "Announcement content, the text exceeds 142 bytes will be scrolled display "
 "(mobile device is invalid)"
 msgstr ""
 
-#: options.php:973
+#: options.php:980
 msgid "The categories of articles that don\\t not show on homepage"
 msgstr ""
 
-#: options.php:974 options.php:981
+#: options.php:981 options.php:988
 msgid "Fill in category ID, multiple IDs are divided by a comma \",\""
 msgstr ""
 
-#: options.php:980
+#: options.php:987
 msgid "Images category"
 msgstr ""
 
-#: options.php:987
+#: options.php:994
 msgid "Statistics Interface"
 msgstr ""
 
-#: options.php:992
+#: options.php:999
 msgid ""
 "WP-Statistics plugin (Professional statistics, can exclude invalid access)"
 msgstr ""
 
-#: options.php:993
+#: options.php:1000
 msgid "Theme built-in (simple statistics, calculate each page access request)"
 msgstr ""
 
-#: options.php:997
+#: options.php:1004
 msgid "Statistical data display format"
 msgstr ""
 
-#: options.php:1002
+#: options.php:1009
 msgid "23333 Views (default)"
 msgstr ""
 
-#: options.php:1003
+#: options.php:1010
 msgid "23,333 Views (britain)"
 msgstr ""
 
-#: options.php:1004
+#: options.php:1011
 msgid "23 333 Views (french)"
 msgstr ""
 
-#: options.php:1005
+#: options.php:1012
 msgid "23k Views (chinese)"
 msgstr ""
 
-#: options.php:1009
+#: options.php:1016
 msgid "Comment image upload API"
 msgstr ""
 
-#: options.php:1014
+#: options.php:1021
 msgid "Imgur (https://imgur.com)"
 msgstr ""
 
-#: options.php:1015
+#: options.php:1022
 msgid "SM.MS (https://sm.ms)"
 msgstr ""
 
-#: options.php:1016
+#: options.php:1023
 msgid "Chevereto (https://chevereto.com)"
 msgstr ""
 
-#: options.php:1020
+#: options.php:1027
 msgid "Imgur Client ID"
 msgstr ""
 
-#: options.php:1021
+#: options.php:1028
 msgid ""
 "Register your application <a href=\"https://api.imgur.com/oauth2/addclient"
 "\">here</a>, note we only need the Client ID here."
 msgstr ""
 
-#: options.php:1027
+#: options.php:1034
 msgid "SM.MS Secret Token"
 msgstr ""
 
-#: options.php:1028
+#: options.php:1035
 msgid ""
 "Register your application <a href=\"https://sm.ms/home/apitoken\">here</a>."
 msgstr ""
 
-#: options.php:1034
+#: options.php:1041
 msgid "Chevereto API v1 key"
 msgstr ""
 
-#: options.php:1035
+#: options.php:1042
 msgid "Get your API key here "
 msgstr ""
 
-#: options.php:1041
+#: options.php:1048
 msgid "Chevereto URL"
 msgstr ""
 
-#: options.php:1042
+#: options.php:1049
 msgid ""
 "Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto."
 "com"
 msgstr ""
 
-#: options.php:1048
+#: options.php:1055
 msgid "Comment images proxy"
 msgstr ""
 
-#: options.php:1049
+#: options.php:1056
 msgid ""
 "A front-ed proxy for the uploaded images. Leave it blank if you do not need."
 msgstr ""
 
-#: options.php:1055
+#: options.php:1062
 msgid "Imgur upload proxy"
 msgstr ""
 
-#: options.php:1056
+#: options.php:1063
 msgid ""
 "A back-ed proxy to upload images. You may set a self hosted proxy with "
 "Nginx, following my <a href=\"https://2heng.xin/2018/06/06/javascript-upload-"
@@ -1522,127 +1537,127 @@ msgid ""
 "a>】"
 msgstr ""
 
-#: options.php:1062
+#: options.php:1069
 msgid "Enable live search"
 msgstr ""
 
-#: options.php:1063
+#: options.php:1070
 msgid ""
 "Real-time search in the foreground, call the Rest API to update the cache "
 "every hour, you can manually set the cache time in functions.php"
 msgstr ""
 
-#: options.php:1069
+#: options.php:1076
 msgid "Include comments in live search"
 msgstr ""
 
-#: options.php:1070
+#: options.php:1077
 msgid ""
 "Search for comments in real-time search (not recommended if there are too "
 "many comments on the site)"
 msgstr ""
 
-#: options.php:1076
+#: options.php:1083
 msgid "Enable baguetteBox"
 msgstr ""
 
-#: options.php:1077
+#: options.php:1084
 msgid ""
 "Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox"
 "\">please read wiki</a>"
 msgstr ""
 
-#: options.php:1083
+#: options.php:1090
 msgid "Enable lazyload in posts"
 msgstr ""
 
-#: options.php:1090
+#: options.php:1097
 msgid "lazyload spinner"
 msgstr ""
 
-#: options.php:1091
+#: options.php:1098
 msgid "The placeholder to display when the image loads, fill in the image url"
 msgstr ""
 
-#: options.php:1097
+#: options.php:1104
 msgid "Whether to enable the clipboard copyright"
 msgstr ""
 
-#: options.php:1098
+#: options.php:1105
 msgid ""
 "Automatically add a copyright to the clipboard when copying more than 30 "
 "bytes, which is enabled by default."
 msgstr ""
 
-#: options.php:1104
+#: options.php:1111
 msgid "Email address prefix"
 msgstr ""
 
-#: options.php:1105
+#: options.php:1112
 msgid ""
 "For sending system mail, the sender address displayed in the user's mailbox, "
 "do not use Chinese, the default system email address is bibi@your_domain_name"
 msgstr ""
 
-#: options.php:1111
+#: options.php:1118
 msgid "Comments reply notification"
 msgstr ""
 
-#: options.php:1112
+#: options.php:1119
 msgid ""
 "WordPress will use email to notify users when their comments receive a reply "
 "by default. Tick this item allows users to set their own comments reply "
 "notification"
 msgstr ""
 
-#: options.php:1118
+#: options.php:1125
 msgid "Administrator comment notification"
 msgstr ""
 
-#: options.php:1119
+#: options.php:1126
 msgid ""
 "Whether to use email notification when the administrator's comments receive "
 "a reply"
 msgstr ""
 
-#: options.php:1125
+#: options.php:1132
 msgid "Enable private comment"
 msgstr ""
 
-#: options.php:1126
+#: options.php:1133
 msgid "Allow users to set their own comments to be invisible to others"
 msgstr ""
 
-#: options.php:1132
+#: options.php:1139
 msgid "Human verification"
 msgstr ""
 
-#: options.php:1133
+#: options.php:1140
 msgid "Enable human verification"
 msgstr ""
 
-#: options.php:1139
+#: options.php:1146
 msgid "Comment UA infomation"
 msgstr ""
 
-#: options.php:1140
+#: options.php:1147
 msgid ""
 "Check to enable, display the user's browser, operating system information"
 msgstr ""
 
-#: options.php:1146
+#: options.php:1153
 msgid "Enable disqus"
 msgstr ""
 
-#: options.php:1147
+#: options.php:1154
 msgid "Enable disqus for comment"
 msgstr ""
 
-#: options.php:1153
+#: options.php:1160
 msgid "Time Zone adjustment"
 msgstr ""
 
-#: options.php:1154
+#: options.php:1161
 msgid ""
 "If the comment has a time difference problem adjust here, fill in an "
 "integer, the calculation method: actual_time = display_error_time - "
@@ -1767,30 +1782,6 @@ msgstr ""
 
 #: user/page-register.php:92
 msgid "Registration is not open yet"
-msgstr ""
-
-#. Theme URI of the plugin/theme
-msgid "https://2heng.xin/theme-sakura/"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "A branch of theme Akina"
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Mashiro, Louie, Fuzzz"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "http://2heng.xin"
-msgstr ""
-
-#. Template Name of the plugin/theme
-msgid "archive"
-msgstr ""
-
-#. Template Name of the plugin/theme
-msgid "links"
 msgstr ""
 
 #, php-format
