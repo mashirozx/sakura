@@ -7,9 +7,8 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.1' );
+define( 'SAKURA_VERSION', '3.3.2' );
 define( 'BUILD_VERSION', '3' );
-define( 'JSDELIVR_VERSION', '3.6.7' );
 
 //ini_set('display_errors', true);
 //error_reporting(E_ALL);   
@@ -1189,17 +1188,6 @@ function toc_support($content) {
 add_filter('the_content', 'toc_support');
 add_filter('the_excerpt_rss', 'toc_support');
 add_filter('the_content_feed', 'toc_support');
-
-// Markdown parser
-/* 处理超时？？
-function markdown_parser($content) {
-    include 'inc/Parsedown.php';
-    $Parsedown = new Parsedown();
-    $content = $Parsedown->text($content);
-    return $content;
-}
-add_filter( 'comment_text', 'markdown_parser' );
-*/
 
 // 显示访客当前 IP
 function get_the_user_ip() {
