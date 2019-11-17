@@ -7,8 +7,7 @@
  * @package Akina
  */
 
-//disable get_sidebar()
-if ( is_active_sidebar( 'sakura_widget' ) ) {
+if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }
 ?>
