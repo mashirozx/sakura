@@ -8,9 +8,7 @@
  */
 
 //disable get_sidebar()
-if ( is_active_sidebar( 'sakura_widget' ) ) {
-	return;
-}
+return;
 ?>
 
 <aside id="secondary" class="widget-area" role="complementary">

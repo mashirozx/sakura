@@ -23,7 +23,7 @@ if( !empty($_POST['register_reg']) ) {
 	if ( $user_email == '' ) {
 	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Please enter email address.","sakura")./*请填写电子邮件地址。*/'<br />';
 	} elseif ( ! is_email( $user_email ) ) {
-	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Invalid email address","sakura")./*电子邮件地址不正确。*/'<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Invalid email address.","sakura")./*电子邮件地址不正确。*/'<br />';
 	  $user_email = '';
 	} elseif ( email_exists( $user_email ) ) {
 	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("This email address has been registered.","sakura")./*该电子邮件地址已经被注册。*/'<br />';
@@ -31,9 +31,9 @@ if( !empty($_POST['register_reg']) ) {
 
 	// Check the password
 	if(strlen($_POST['user_pass']) < 6){
-	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Password length is at least 6 digits","sakura")./*密码长度至少6位。*/'<br />';
+	  $error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Password length is at least 6 digits.","sakura")./*密码长度至少6位。*/'<br />';
 	}elseif($_POST['user_pass'] != $_POST['user_pass2']){
-		$error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Inconsistent password entered twice","sakura")./*两次输入的密码不一致。*/'<br />';
+		$error .= '<strong>'.__("Error","sakura")./*错误*/'</strong>：'.__("Inconsistent password entered twice.","sakura")./*两次输入的密码不一致。*/'<br />';
 	}
 
 	// verification
@@ -89,7 +89,7 @@ if( !empty($_POST['register_reg']) ) {
 		<script>//window.location.href='<?php echo $loadurl; ?>';</script>
 		<?php } ?>
 		<?php else : ?>
-			<div class="register-close"><p><?php _e("Registration is not open yet","sakura")/*暂未开放注册。*/?></p></div>
+			<div class="register-close"><p><?php _e("Registration is not open yet.","sakura")/*暂未开放注册。*/?></p></div>
 		<?php endif; ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->

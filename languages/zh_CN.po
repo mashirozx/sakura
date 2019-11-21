@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-16 10:08+0800\n"
-"PO-Revision-Date: 2019-11-16 10:11+0800\n"
+"POT-Creation-Date: 2019-11-17 21:32+0800\n"
+"PO-Revision-Date: 2019-11-17 21:32+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -38,13 +38,9 @@ msgstr "返回首页"
 msgid "Don't worry, search in site?"
 msgstr "别着急，试试站内检索？"
 
-#: 404.php:53 footer.php:73 search.php:42
+#: 404.php:53 footer.php:62 search.php:42
 msgid "Search..."
 msgstr "搜索..."
-
-#: archive.php:55 author.php:76
-msgid "Previous"
-msgstr "上一页"
 
 #: comments.php:21
 msgid "view comments"
@@ -130,52 +126,52 @@ msgstr "禁止小广告😀"
 msgid "Site"
 msgstr "网站"
 
+#: footer.php:75 footer.php:83
+msgid "Want to find something?"
+msgstr "想要找点什么呢？"
+
+#: footer.php:85
+msgid "Search"
+msgstr "搜索"
+
 #: footer.php:144
 msgid "Widgets"
 msgstr "小工具"
 
-#: footer.php:86 footer.php:94
-msgid "Want to find something?"
-msgstr "想要找点什么呢？"
-
-#: footer.php:96
-msgid "Search"
-msgstr "搜索"
-
-#: functions.php:52
+#: functions.php:51
 msgid "Nav Menus"
 msgstr "导航菜单"
 
-#: functions.php:390 inc/theme_plus.php:187 layouts/authorprofile.php:11
+#: functions.php:389 inc/theme_plus.php:187 layouts/authorprofile.php:11
 #: options.php:123
 msgid "Author"
 msgstr "作者"
 
-#: functions.php:390
+#: functions.php:389
 msgid "Blogger"
 msgstr "博主"
 
-#: functions.php:394
+#: functions.php:393
 msgid "Location"
 msgstr "来自"
 
-#: functions.php:398
+#: functions.php:397
 msgid "Private"
 msgstr "私密"
 
-#: functions.php:400
+#: functions.php:399
 msgid "Yes"
 msgstr "是"
 
-#: functions.php:402
+#: functions.php:401
 msgid "No"
 msgstr "否"
 
-#: functions.php:405
+#: functions.php:404
 msgid "Edit"
 msgstr "编辑"
 
-#: functions.php:486
+#: functions.php:485
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
@@ -183,35 +179,35 @@ msgstr ""
 "请安装插件 <a href=\"https://wordpress.org/plugins/wp-statistics/\" target="
 "\"_blank\">WP-Statistics</a>"
 
-#: functions.php:539
+#: functions.php:538
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr "这家伙好懒╮(╯▽╰)╭"
 
-#: functions.php:1260
+#: functions.php:1248
 msgid "All expand/collapse"
 msgstr "全部展开/收缩"
 
-#: functions.php:1271 options.php:840
+#: functions.php:1259 options.php:840
 msgid " "
 msgstr ""
 
-#: functions.php:1275
+#: functions.php:1263
 msgid " post(s)"
 msgstr " 篇文章"
 
-#: functions.php:1297 functions.php:1300 inc/theme_plus.php:479
+#: functions.php:1285 functions.php:1288 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr "管理中心"
 
-#: functions.php:1513
+#: functions.php:1501
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1593
+#: functions.php:1581
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1649
+#: functions.php:1637
 msgid "Sidebar"
 msgstr "侧栏"
 
@@ -1528,8 +1524,8 @@ msgid "Chevereto API v1 key"
 msgstr ""
 
 #: options.php:1042
-msgid "Get your API key here "
-msgstr "在这里获取你的 API key："
+msgid "Get your API key here: "
+msgstr "在这里获取你的 API key： "
 
 #: options.php:1048
 msgid "Chevereto URL"
@@ -1549,7 +1545,7 @@ msgstr "评论图片代理"
 #: options.php:1056
 msgid ""
 "A front-ed proxy for the uploaded images. Leave it blank if you do not need."
-msgstr "前端显示的图片的代理"
+msgstr "前端显示的图片的代理。"
 
 #: options.php:1062
 msgid "Imgur upload proxy"
@@ -1710,7 +1706,7 @@ msgstr ""
 #: search.php:19
 #, php-format
 msgid "search result: %s"
-msgstr "关于 %s 的搜索结果： "
+msgstr "关于 %s 的搜索结果："
 
 #: tpl/content-category.php:30
 msgid "NOTHING"
@@ -1783,24 +1779,26 @@ msgid "This username has been registered."
 msgstr "该用户名已被注册。"
 
 #: user/page-register.php:24
+#, fuzzy
+#| msgid "Please enter email address."
 msgid "Please enter email address."
 msgstr "请填写电子邮件地址。"
 
 #: user/page-register.php:26
-msgid "Invalid email address"
-msgstr "电子邮件地址不正确。 "
+msgid "Invalid email address."
+msgstr "电子邮件地址不正确。"
 
 #: user/page-register.php:29
 msgid "This email address has been registered."
 msgstr "该电子邮件地址已经被注册。"
 
 #: user/page-register.php:34
-msgid "Password length is at least 6 digits"
-msgstr "密码长度至少6位。 "
+msgid "Password length is at least 6 digits."
+msgstr "密码长度至少6位。"
 
 #: user/page-register.php:36
-msgid "Inconsistent password entered twice"
-msgstr "两次输入的密码不一致。 "
+msgid "Inconsistent password entered twice."
+msgstr "两次输入的密码不一致。"
 
 #: user/page-register.php:41
 msgid "Please drag the slider to verify identity"
@@ -1823,8 +1821,13 @@ msgid "Sign up"
 msgstr "注 册"
 
 #: user/page-register.php:92
-msgid "Registration is not open yet"
-msgstr "暂未开放注册。 "
+#, fuzzy
+#| msgid "Registration is not open yet"
+msgid "Registration is not open yet."
+msgstr "暂未开放注册。"
+
+#~ msgid " Previous"
+#~ msgstr " 上一页"
 
 #~ msgid "A branch of theme Akina"
 #~ msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
