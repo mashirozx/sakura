@@ -1519,8 +1519,8 @@ function html_tag_parser($content) {
         //With Thumbnail: !{alt}(url)[th_url]
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
         $i=0;
-        foreach ($matches as $val) {
-            $content=str_replace($val[$i],preg_replace(
+        if ($i<sizeof($matches)) {
+            $content=str_replace($matches[$i],preg_replace(
                     '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
                     '<a data-fancybox="gallery" 
                         data-caption="$1"
@@ -1528,7 +1528,7 @@ function html_tag_parser($content) {
                         href="$2" 
                         alt="$1" 
                         title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
-                    $val[$i]),
+                    $matches[$i]),
                 $content);
             $i++;
             }
