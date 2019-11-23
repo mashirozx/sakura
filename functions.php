@@ -466,17 +466,18 @@ function restyle_text($number) {
 }
 
 function set_post_views() {
-    global $post;
-    $post_id = intval($post->ID);
-    $count_key = 'views';
-    $views = get_post_custom($post_id);
-    $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
-    if(is_single() || is_page()) {
-        if(!update_post_meta($post_id, 'views', ($views + 1))) {
-            add_post_meta($post_id, 'views', 1, true);
+    if (is_singular()) {
+        global $post;
+        $post_id = intval($post->ID);
+        if($post_id) {
+            $views = get_post_meta($post_id, 'views', true);
+            if(!update_post_meta($post_id, 'views', ($views + 1))) {
+                add_post_meta($post_id, 'views', 1, true);
+            }
         }
     }
 }
+
 add_action('get_header', 'set_post_views');
 
 function get_post_views($post_id) {
@@ -487,10 +488,7 @@ function get_post_views($post_id) {
             return restyle_text(wp_statistics_pages('total','uri',$post_id));
         }
     } else {
-        $count_key = 'views';
-        $views = get_post_custom($post_id);
-        $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
-        $post_views = intval(post_custom('views'));
+        $views = get_post_meta($post_id, 'views', true);
         if($views == '') {
             return 0;
         }else{
@@ -1521,8 +1519,8 @@ function html_tag_parser($content) {
         //With Thumbnail: !{alt}(url)[th_url]
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
         $i=0;
-        foreach ($matches as $val) {
-            $content=str_replace($val[$i],preg_replace(
+        if ($i<sizeof($matches)) {
+            $content=str_replace($matches[$i],preg_replace(
                     '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
                     '<a data-fancybox="gallery" 
                         data-caption="$1"
@@ -1530,7 +1528,7 @@ function html_tag_parser($content) {
                         href="$2" 
                         alt="$1" 
                         title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
-                    $val[$i]),
+                    $matches[$i]),
                 $content);
             $i++;
             }
