@@ -928,6 +928,13 @@ function optionsframework_options() {
 	);
 
 	$options[] = array(
+		'name' => __('开启波浪动画', 'options_framework_theme'),
+		'desc' => __('默认关闭，勾选开启', 'options_framework_theme'),
+		'id' => 'bannerwave',
+		'std' => '0',
+		'type' => 'checkbox');	
+
+	$options[] = array(
 		'name' => __('Footer float music player', 'sakura'),/*页脚悬浮播放器*/
 		'desc' => __('If you don\'t need the player just leave it blank.Fill in the "song list" ID of Netease Cloud Music, eg: https://music.163.com/#/playlist?id=2288037900 The ID is 2288037900', 'sakura'),/*如果不需要播放器留空即可。填写网易云音乐的「歌单」ID，eg：https://music.163.com/#/playlist?id=2288037900的ID是2288037900*/
 		'id' => 'playlist_id',
@@ -947,7 +954,7 @@ function optionsframework_options() {
 		'id' => 'poi_pjax',
 		'std' => '0',
 		'type' => 'checkbox');
-    
+
     $options[] = array(
 		'name' => __('Enable NProgress progress bar', 'sakura'),/*开启NProgress加载进度条*/
 		'desc' => __('Default off, check on', 'sakura'),/*默认不开启，勾选开启*/

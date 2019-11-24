@@ -95,6 +95,27 @@
 <script type="text/javascript"><?php echo akina_option('site_statistics'); ?></script>
 </div>
 <?php } ?>
+
+<!-- 波浪动画 -->
+<?php if (akina_option('bannerwave') != '0'){ ?>
+<script>
+	$(function () {
+		//底部波浪动画
+		function bannerwave1() {
+			$("#banner_wave_1").css({"left": "-236px"}).animate({"left": "-1233px"}, 25000, 'linear', bannerwave1);
+		}
+		function bannerwave2() {
+			$("#banner_wave_2").css({"left": "0px"}).animate({"left": "-1009px"}, 60000, 'linear', bannerwave2);
+		}
+		//循环播放
+		if (screen && screen.width > 800) {
+		bannerwave1();
+		bannerwave2();
+		}
+	});
+</script>
+<?php } ?>
+
 <div class="changeSkin-gear no-select" style="bottom: -999px;">
     <div class="keys">
         <span id="open-skinMenu">

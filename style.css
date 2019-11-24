@@ -8588,3 +8588,73 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     width: 100%;
     height: 100%;
 }
+
+.lazyload {
+	-webkit-filter: blur(0px);
+	-moz-filter: blur(0px);
+	-ms-filter: blur(0px);
+	filter: blur(0px);
+	-webkit-transition: .3s -webkit-filter linear;
+	-moz-transition: .3s -moz-filter linear;
+	-moz-transition: .3s filter linear;
+	-ms-transition: .3s -ms-filter linear;
+	-o-transition: .3s -o-filter linear;
+	transition: .3s filter linear, .3s -webkit-filter linear
+}
+
+.lazyload[src*="#lazyload-blur"],
+.lazyload[style*="#lazyload-blur"] {
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px)
+}
+
+
+#banner_wave_1 {
+    width: auto;
+    height: 65px;
+    background: url("images/wave1.png") repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0px;
+    width: 400%;
+    left: -236px;
+    z-index: 5;
+}
+
+
+#banner_wave_2 {
+    width: auto;
+    height: 80px;
+    background: url("images/wave2.png") repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0px;
+    width: 400%;
+    left: 0px;
+    z-index: 4;
+}
+
+.banner_wave_hide,
+.banner_wave_hide_fit_skin {
+	opacity: 0 !important;
+	bottom: -999px !important;
+}
+
+@media (max-width:860px) {
+
+	#banner_wave_1,
+	#banner_wave_2 {
+		display: none
+	}
+}
+
+#banner_wave_hide_transition {
+	transition-duration: .4s,.4s;
+    position: absolute;
+    bottom: 0px;
+    width: 400%;
+    left: 0px;
+    z-index: 3;
+}

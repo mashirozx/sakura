@@ -4,6 +4,12 @@
 
 ?>
 <figure id="centerbg" class="centerbg">
+	<?php if (akina_option('bannerwave') != '0'){ ?>
+    	<div id="banner_wave_hide_transition">
+    		<div id="banner_wave_1"></div>
+    		<div id="banner_wave_2"></div>
+    	</div>
+	<?php } ?>
 <?php if ( !akina_option('focus_infos') ){ ?>
 	<div class="focusinfo">
         <?php if (akina_option('focus_logo_text')):?>
