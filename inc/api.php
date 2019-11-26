@@ -153,8 +153,11 @@ function SMMS_API($image) {
 
     $headers = array();
     array_push($headers, "Content-Type: multipart/form-data; boundary=$Boundary");
+    array_push($headers, '');
     array_push($headers, "Authorization: Basic " . $client_id);
+    array_push($headers, '');
     array_push($headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97");
+    $headers = implode("\r\n", $headers);
 
     $fields = array();
     array_push($fields, "--" . $Boundary);
@@ -172,23 +175,6 @@ function SMMS_API($image) {
 
     $response = wp_remote_post($upload_url, $args);
     $reply = json_decode($response["body"]);
-    /**
-     * php curl
-     *
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-
-    $reply = curl_exec($ch);
-    curl_close($ch);
-
-    $reply = json_decode($reply);
-     */
 
     if ($reply->success && $reply->code == 'success') {
         $status = 200;
@@ -197,8 +183,7 @@ function SMMS_API($image) {
         $link = $reply->data->url;
         $proxy = akina_option('cmt_image_proxy') . $link;
     } else if (preg_match("/Image upload repeated limit/i", $reply->message, $matches)) {
-        $status = 200;
-        // sm.ms 接口不规范，建议检测到重复的情况下返回标准化的 code，并单独把 url 放进一个字段
+        $status = 200; // sm.ms 接口不规范，建议检测到重复的情况下返回标准化的 code，并单独把 url 放进一个字段
         $success = true;
         $message = $reply->message;
         $link = str_replace('Image upload repeated limit, this image exists at: ', '', $reply->message);
@@ -268,9 +253,12 @@ EOS;
 
     $data = '[' . $output . ']';
     $result = new WP_REST_Response(json_decode($data), 200);
-    $result->set_headers(array('Content-Type' => 'application/json',
-        'Cache-Control' => 'max-age=3600'));
-    // json 缓存控制
+    $result->set_headers(
+        array(
+            'Content-Type' => 'application/json',
+            'Cache-Control' => 'max-age=3600'// json 缓存控制
+        )
+    );
 
     return $result;
 }
