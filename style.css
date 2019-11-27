@@ -8500,6 +8500,12 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 	visibility:hidden
 }
 
+@media (max-width:860px) {
+    .widget-area{
+        display: none;
+    }
+}
+
 .widget-area {
     position: fixed;
     top: 100px;

@@ -1592,7 +1592,7 @@ function html_tag_parser($content) {
         //Github cards
         $content=preg_replace(
             '/\[github repo=[\'"]([^\'"]+)[\'"]\]/i',
-            '<a href="https://github.com/$1"',
+            '<a href="https://github.com/$1">',
             $content
         );
     }  
