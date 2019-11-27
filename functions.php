@@ -1565,29 +1565,15 @@ function html_tag_parser($content) {
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
         $i=0;
         if ($i<sizeof($matches)) {
-            $content=str_replace($matches[$i],preg_replace(
-                    '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
-                    '<a data-fancybox="gallery" 
-                        data-caption="$1"
-                        class="fancybox" 
-                        href="$2" 
-                        alt="$1" 
-                        title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
-                    $matches[$i]),
-                $content);
+            $content=str_replace(
+                $matches[$i],
+                preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i','<a href="$2"><img src="$7" alt="$1" title="$1"></a>',$matches[$i]),
+                $content
+            );
             $i++;
             }
         }
-        $content=preg_replace(
-            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i',
-            '<a data-fancybox="gallery" 
-                data-caption="$1"
-                class="fancybox"
-                href="$2"
-                alt="$1" 
-                title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
-            $content
-        );
+        $content=preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i','<a href="$2"><img src="$2" alt="$1" title="$1"></a>',$content);
         
         //Github cards
         $content=preg_replace(
@@ -1646,7 +1632,7 @@ function change_avatar($avatar){
 // default feature image
 function DEFAULT_FEATURE_IMAGE() {
     if ( empty( akina_option('default_feature_image' )) ) {
-        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
+        return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
         //return 'https://api.mashiro.top/feature/?'.rand(1,1000);
     } else {
         return akina_option('default_feature_image').'?'.rand(1,1000);

@@ -44,7 +44,7 @@ function get_avatar_profile_url(){
  */
 function get_random_bg_url(){
     if ( empty( akina_option('default_feature_image' )) ) {
-        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
+        return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
     } else {
         return akina_option('default_feature_image').'?'.rand(1,1000);
     }

@@ -12,6 +12,14 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'cache_search_json',
     ));
+    register_rest_route('sakura/v1', '/image/cover', array(
+        'methods' => 'GET',
+        'callback' => 'cover_gallery',
+    ));
+    register_rest_route('sakura/v1', '/image/feature', array(
+        'methods' => 'GET',
+        'callback' => 'feature_gallery',
+    ));
 });
 
 /**
@@ -261,4 +269,32 @@ EOS;
     );
 
     return $result;
+}
+
+/*
+ * 随机封面图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/cover
+ */
+function cover_gallery() {
+    $img_array = glob(get_wp_root_path(). "/themes/Sakura/cover/gallery/*.{gif,jpg,png}",GLOB_BRACE);
+    $img = array_rand($img_array);
+    $imgurl = $img_array[$img];
+    $mimetype = end(getimagesize($imgurl));
+    $imgdata = file_get_contents($imgurl);
+    header("Content-type: ".$mimetype);
+    echo $imgdata;
+}
+
+/*
+ * 随机文章特色图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/feature
+ */
+function feature_gallery() {
+    $img_array = glob(get_wp_root_path(). "/themes/Sakura/feature/gallery/*.{gif,jpg,png}",GLOB_BRACE);
+    $img = array_rand($img_array);
+    $imgurl = $img_array[$img];
+    $mimetype = end(getimagesize($imgurl));
+    $imgdata = file_get_contents($imgurl);
+    header("Content-type: ".$mimetype);
+    echo $imgdata;
 }
