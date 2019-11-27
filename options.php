@@ -265,7 +265,7 @@ function optionsframework_options() {
         
     $options[] = array(
 		'name' => __('Default article feature image', 'sakura'),/*默认文章特色图*/
-		'desc' => __('The default image displayed without the article feature image set, use random cover if left blank (the image to be displayed is placed in the /wp-content/themes/Sakura/feature/gallery/ directory)', 'sakura'),/*在未设置文章特色图的情况下展示的默认图像，留空则调用本地随机封面（要展示的图片放入 /wp-content/themes/Sakura/feature/gallery/ 目录）*/
+		'desc' => __('The default image to be displayed without the feature map of the article. Leave blank here to use the built-in API (write the URL of the image to be displayed randomly to the /feature/img.txt file)', 'sakura'),/*在未设置文章特色图的情况下展示的默认图像，此处留空则使用内置API（将需要随机展示的图片url写入 /feature/img.txt 文件）*/
 		'id' => 'default_feature_image',
 		'std' => 'https://api.mashiro.top/feature/',
 		'type' => 'text');
@@ -420,7 +420,7 @@ function optionsframework_options() {
 
     $options[] = array(
  		'name' => __('Cover image', 'sakura'),/*封面图*/
- 		'desc' => __('Leave this blank to use the built-in API (put the images that need to be randomly displayed into the /cover/gallery/ directory)', 'sakura'),/*此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）*/
+ 		'desc' => __('Leave blank here to use the built-in API (write the URL of the image that needs to be displayed randomly to the /cover/img.txt file))', 'sakura'),/*此处留空则使用内置API（将需要随机展示的图片url写入 /cover/img.txt 文件）*/
  		'id' => 'cover_img',
  		'std' => '',
  		'type' => 'text');

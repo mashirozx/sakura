@@ -1,9 +1,8 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-17 21:32+0800\n"
+"POT-Creation-Date: 2019-11-27 23:10+0800\n"
 "PO-Revision-Date: 2019-11-01 14:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -170,41 +169,41 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: functions.php:485
+#: functions.php:486
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/\" target=\"_blank"
 "\">WP-Statistics</a>"
 msgstr ""
 
-#: functions.php:538
+#: functions.php:536
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1248
+#: functions.php:1246
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1259 options.php:840
+#: functions.php:1257 options.php:840
 msgid " "
 msgstr ""
 
-#: functions.php:1263
+#: functions.php:1261
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1285 functions.php:1288 inc/theme_plus.php:479
+#: functions.php:1283 functions.php:1286 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1501
+#: functions.php:1499
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1581
+#: functions.php:1603
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1637
+#: functions.php:1659
 msgid "Sidebar"
 msgstr ""
 
@@ -213,7 +212,7 @@ msgstr ""
 msgid "page %s "
 msgstr ""
 
-#: inc/api.php:253 inc/theme_plus.php:728
+#: inc/api.php:252 inc/theme_plus.php:728
 msgid "The comment is private"
 msgstr ""
 
@@ -685,9 +684,9 @@ msgstr ""
 
 #: options.php:268
 msgid ""
-"The default image displayed without the article feature image set, use random cover if left "
-"blank (the image to be displayed is placed in the /wp-content/themes/Sakura/feature/gallery/ "
-"directory)"
+"The default image to be displayed without the feature map of the article. Leave blank here to "
+"use the built-in API (write the URL of the image to be displayed randomly to the /feature/img."
+"txt file)"
 msgstr ""
 
 #: options.php:274
@@ -861,8 +860,8 @@ msgstr ""
 
 #: options.php:423
 msgid ""
-"Leave this blank to use the built-in API (put the images that need to be randomly displayed "
-"into the /cover/gallery/ directory)"
+"Leave blank here to use the built-in API (write the URL of the image that needs to be "
+"displayed randomly to the /cover/img.txt file))"
 msgstr ""
 
 #: options.php:429

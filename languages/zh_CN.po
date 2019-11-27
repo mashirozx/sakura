@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-17 21:32+0800\n"
-"PO-Revision-Date: 2019-11-17 21:32+0800\n"
+"POT-Creation-Date: 2019-11-27 23:14+0800\n"
+"PO-Revision-Date: 2019-11-27 23:14+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -171,7 +171,7 @@ msgstr "否"
 msgid "Edit"
 msgstr "编辑"
 
-#: functions.php:485
+#: functions.php:486
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
@@ -179,35 +179,35 @@ msgstr ""
 "请安装插件 <a href=\"https://wordpress.org/plugins/wp-statistics/\" target="
 "\"_blank\">WP-Statistics</a>"
 
-#: functions.php:538
+#: functions.php:536
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr "这家伙好懒╮(╯▽╰)╭"
 
-#: functions.php:1248
+#: functions.php:1246
 msgid "All expand/collapse"
 msgstr "全部展开/收缩"
 
-#: functions.php:1259 options.php:840
+#: functions.php:1257 options.php:840
 msgid " "
 msgstr ""
 
-#: functions.php:1263
+#: functions.php:1261
 msgid " post(s)"
 msgstr " 篇文章"
 
-#: functions.php:1285 functions.php:1288 inc/theme_plus.php:479
+#: functions.php:1283 functions.php:1286 inc/theme_plus.php:479
 msgid "Dashboard"
 msgstr "管理中心"
 
-#: functions.php:1501
+#: functions.php:1499
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1581
+#: functions.php:1603
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1637
+#: functions.php:1659
 msgid "Sidebar"
 msgstr "侧栏"
 
@@ -216,7 +216,7 @@ msgstr "侧栏"
 msgid "page %s "
 msgstr "第 %s 页 "
 
-#: inc/api.php:253 inc/theme_plus.php:728
+#: inc/api.php:252 inc/theme_plus.php:728
 msgid "The comment is private"
 msgstr "该评论为私密评论"
 
@@ -697,12 +697,12 @@ msgstr "默认文章特色图"
 
 #: options.php:268
 msgid ""
-"The default image displayed without the article feature image set, use "
-"random cover if left blank (the image to be displayed is placed in the /wp-"
-"content/themes/Sakura/feature/gallery/ directory)"
+"The default image to be displayed without the feature map of the article. "
+"Leave blank here to use the built-in API (write the URL of the image to be "
+"displayed randomly to the /feature/img.txt file)"
 msgstr ""
-"在未设置文章特色图的情况下展示的默认图像，留空则调用本地随机封面（要展示的图"
-"片放入 /wp-content/themes/Sakura/feature/gallery/ 目录）"
+"在未设置文章特色图的情况下展示的默认图像，此处留空则使用内置API（将需要随机展"
+"示的图片url写入 /feature/img.txt 文件）"
 
 #: options.php:274
 msgid "Comment shrink"
@@ -881,9 +881,10 @@ msgstr "封面图"
 
 #: options.php:423
 msgid ""
-"Leave this blank to use the built-in API (put the images that need to be "
-"randomly displayed into the /cover/gallery/ directory)"
-msgstr "此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）"
+"Leave blank here to use the built-in API (write the URL of the image that "
+"needs to be displayed randomly to the /cover/img.txt file))"
+msgstr ""
+"此处留空则使用内置API（将需要随机展示的图片url写入 /cover/img.txt 文件）"
 
 #: options.php:429
 msgid "Background image filter"
@@ -1779,8 +1780,6 @@ msgid "This username has been registered."
 msgstr "该用户名已被注册。"
 
 #: user/page-register.php:24
-#, fuzzy
-#| msgid "Please enter email address."
 msgid "Please enter email address."
 msgstr "请填写电子邮件地址。"
 
@@ -1821,8 +1820,6 @@ msgid "Sign up"
 msgstr "注 册"
 
 #: user/page-register.php:92
-#, fuzzy
-#| msgid "Registration is not open yet"
 msgid "Registration is not open yet."
 msgstr "暂未开放注册。"
 
