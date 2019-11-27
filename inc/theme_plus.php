@@ -118,7 +118,9 @@ if(akina_option('classify_display')){
  */
 function comment_add_at( $comment_text, $comment = '') {
   if( $comment->comment_parent > 0) {
-    $comment_text = '<a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;' . $comment_text;
+      if(substr($comment_text, 0, 3) === "<p>") 
+        $comment_text = str_replace(substr($comment_text, 0, 3), '<p><a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;', $comment_text);
+      else $comment_text = '<a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;' . $comment_text;
   }
   return $comment_text;
 }
