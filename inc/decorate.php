@@ -78,15 +78,7 @@ if ( akina_option('toggle-menu') == 'no') { ?>
 .comments .comments-hidden {display:none !important;}
 <?php } // comments ?>
 <?php 
-
-if (akina_option('cover_img')) {
-    $imgurl = akina_option('cover_img');
-} else {
-    $imgurl = rest_url('sakura/v1/image/cover');
-}
-
-
-$image_api = 'background-image: url("'.$imgurl.'");';
+$image_api = 'background-image: url("'.rest_url('sakura/v1/image/cover').'");';
 $bg_style = akina_option('focus_height') ? 'background-position: center center;background-attachment: inherit;' : '';
 ?>
 .centerbg{<?php echo $image_api.$bg_style ?>background-position: center center;background-attachment: inherit;}

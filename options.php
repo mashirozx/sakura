@@ -262,13 +262,6 @@ function optionsframework_options() {
 			'right' => __('Right', 'sakura'),/*向右对齐*/
 			'alternate' => __('Alternate', 'sakura')/*左右交替*/
 		));	
-        
-    $options[] = array(
-		'name' => __('Default article feature image', 'sakura'),/*默认文章特色图*/
-		'desc' => __('The default image to be displayed without the feature map of the article. Leave blank here to use the built-in API (write the URL of the image to be displayed randomly to the /feature/img.txt file)', 'sakura'),/*在未设置文章特色图的情况下展示的默认图像，此处留空则使用内置API（将需要随机展示的图片url写入 /feature/img.txt 文件）*/
-		'id' => 'default_feature_image',
-		'std' => 'https://api.mashiro.top/feature/',
-		'type' => 'text');
 		
 	$options[] = array(
 		'name' => __('Comment shrink', 'sakura'),/*评论收缩*/
@@ -418,13 +411,6 @@ function optionsframework_options() {
 		'std' => '',
 		'type' => 'text');
 
-    $options[] = array(
- 		'name' => __('Cover image', 'sakura'),/*封面图*/
- 		'desc' => __('Leave blank here to use the built-in API (write the URL of the image that needs to be displayed randomly to the /cover/img.txt file))', 'sakura'),/*此处留空则使用内置API（将需要随机展示的图片url写入 /cover/img.txt 文件）*/
- 		'id' => 'cover_img',
- 		'std' => '',
- 		'type' => 'text');
-        
 	$options[] = array(
 		'name' => __('Background image filter', 'sakura'),/*背景图滤镜*/
 		'id' => 'focus_img_filter',
@@ -887,6 +873,13 @@ function optionsframework_options() {
 		'desc' => __('Note: Fill in the format http(s)://your CDN domain name/. <br>In other words, the original path is http://your.domain/wp-content/uploads/2018/05/xx.png and the picture will load from http://your CDN domain/2018/05/xx.png', 'sakura'),/*注意：填写格式为 http(s)://你的CDN域名/。<br>也就是说，原路径为 http://your.domain/wp-content/uploads/2018/05/xx.png 的图片将从 http://你的CDN域名/2018/05/xx.png 加载*/
 		'id' => 'qiniu_cdn',
 		'std' => '',
+		'type' => 'text');  
+        
+	$options[] = array(
+		'name' => __('Jsdelivr CDN', 'sakura'),/*图片库*/
+		'desc' => __('Fill in the cdn path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>', 'sakura'),/*填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
+		'id' => 'jsdelivr_cdn',
+		'std' => 'https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3',
 		'type' => 'text');  
         
     $options[] = array(

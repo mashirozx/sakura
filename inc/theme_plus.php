@@ -43,11 +43,7 @@ function get_avatar_profile_url(){
  * 随机图
  */
 function get_random_bg_url(){
-    if ( empty( akina_option('default_feature_image' )) ) {
-        return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
-    } else {
-        return akina_option('default_feature_image').'?'.rand(1,1000);
-    }
+  return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
 }
 
 
@@ -120,7 +116,8 @@ function comment_add_at( $comment_text, $comment = '') {
   if( $comment->comment_parent > 0) {
       if(substr($comment_text, 0, 3) === "<p>") 
         $comment_text = str_replace(substr($comment_text, 0, 3), '<p><a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;', $comment_text);
-      else $comment_text = '<a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;' . $comment_text;
+      else
+        $comment_text = '<a href="#comment-' . $comment->comment_parent . '" class="comment-at">@'.get_comment_author( $comment->comment_parent ) . '</a>&nbsp;' . $comment_text;
   }
   return $comment_text;
 }
