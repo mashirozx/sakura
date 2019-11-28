@@ -31,7 +31,7 @@ pip install Pillow --user
 # 切换到 main.py 所在目录：
 cd /path/to/manifest/
 python main.py
-# 如果也安装了 Python 2，需要指定 pip 版本：
+# 如果也安装了 Python 2，需要指定 Python 版本：
 python3 main.py
 ```
 
