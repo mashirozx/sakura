@@ -7,6 +7,7 @@ PIL (Pillow)
 
 ### 安装依赖
 安装 Python： <https://docs.python.org/zh-cn/3.7/using/index.html>
+
 安装 PIL：
 
 ```bash
