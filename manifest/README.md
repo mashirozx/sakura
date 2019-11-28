@@ -35,4 +35,4 @@ python3 main.py
 ```
 
 ### TODO
-自动删除过期文件、压缩图片、GitHub API push、release
+shell/batch 自动安装依赖、自动删除过期文件、压缩图片、GitHub API push、release
