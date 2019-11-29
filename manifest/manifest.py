@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 '''
 Created on Apr 23, 2018
 Desc: Webp convertor
@@ -23,23 +23,32 @@ class Single(object):
     self.hash = hasher.hexdigest()
     self.jpeg = 'jpeg/' + self.hash + '.jpeg'
     self.webp = 'webp/' + self.hash + '.webp'
+    self.th_jpeg = 'jpeg/' + self.hash + '.th.jpeg'
+    self.th_webp = 'webp/' + self.hash + '.th.webp'
 
   def optimize(self):
     im = Image.open('gallary/' + self.file).convert('RGB')
     im.save(self.jpeg, 'JPEG') # todo: TinyPNG API
     im.save(self.webp, 'WEBP')
 
+  def thumbnail(self):
+    im = Image.open('gallary/' + self.file).convert('RGB')
+    im.thumbnail((450, 300))
+    im.save(self.th_jpeg, 'JPEG')  # todo: TinyPNG API
+    im.save(self.th_webp, 'WEBP')
+
   def manifest(self):
     self.mani[self.hash] = {
       'source': self.file,
-      'jpeg': 'jpeg/' + self.hash + '.jpeg',
-      'webp': 'webp/' + self.hash + '.webp'
+      'jpeg': ['jpeg/' + self.hash + '.jpeg', 'jpeg/' + self.hash + '.th.jpeg'],
+      'webp': ['webp/' + self.hash + '.webp', 'webp/' + self.hash + '.th.webp']
     }
 
   def main(self):
     self.hash()
     # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
     self.optimize()
+    self.thumbnail()
     self.manifest()
     return self.mani
 
