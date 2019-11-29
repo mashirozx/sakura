@@ -1557,6 +1557,44 @@ function html_tag_parser($content) {
             ',
             $content
         );
+    } 
+    //html tag parser for rss
+    if(is_feed()) {          
+        //Fancybox
+        $url_regex ='((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))';
+        if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
+        $i=0;
+        if ($i<sizeof($matches)) {
+            $content=str_replace($matches[$i],preg_replace(
+                    '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
+                    '<a data-fancybox="gallery" 
+                        data-caption="$1"
+                        class="fancybox" 
+                        href="$2" 
+                        alt="$1" 
+                        title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
+                    $matches[$i]),
+                $content);
+            $i++;
+            }
+        }
+        $content=preg_replace(
+            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i',
+            '<a data-fancybox="gallery" 
+                data-caption="$1"
+                class="fancybox"
+                href="$2"
+                alt="$1" 
+                title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
+            $content
+        );
+        
+        //Github cards
+        $content=preg_replace(
+            '/\[github repo=[\'"]([^\'"]+)[\'"]\]/i',
+            '<a href="https://github.com/$1">',
+            $content
+        );
     }  
     return $content; 
 }

@@ -1067,14 +1067,14 @@ function optionsframework_options() {
         
     $options[] = array(
 		'name' => __('Enable live search', 'sakura'),/*启用实时搜索*/
-		'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php'),/*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
+		'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php', 'sakura'),/*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
 		'id' => 'live_search',
 		'std' => '0',
 		'type' => 'checkbox');
         
     $options[] = array(
 		'name' => __('Include comments in live search', 'sakura'),/*实时搜索包含评论*/
-		'desc' => __('Search for comments in real-time search (not recommended if there are too many comments on the site)'),/*在实时搜索中搜索评论（如果网站评论数量太多不建议开启）*/
+		'desc' => __('Search for comments in real-time search (not recommended if there are too many comments on the site)', 'sakura'),/*在实时搜索中搜索评论（如果网站评论数量太多不建议开启）*/
 		'id' => 'live_search_comment',
 		'std' => '0',
 		'type' => 'checkbox');
