@@ -311,31 +311,37 @@ function feature_gallery() {
  * update manifest.json rest api
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/json
  */
-function update_manifest_json(WP_REST_Request $request) {
-    if (is_admin()) {
-        $sakura_table_name = $wpdb->base_prefix.'sakura';
-        $manifest = array(
-            "key" => "manifest_json",
-            "value" => file_get_contents($_FILES["manifest_json"]["tmp_name"])
-        );
-        $time = array(
-            "key" => "json_time",
-            "value" => date("Y-m-d H:i:s",time())
-        );
+function update_manifest_json() {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $password = $_SERVER['PHP_AUTH_PW'];
+    $user = wp_authenticate($username, $password);
+    if (is_a($user, 'WP_User')) {
+        if (in_array('administrator', (array) $user->roles)) {
+            global $wpdb;
+            $sakura_table_name = $wpdb->base_prefix.'sakura';
+            $manifest = array(
+                "key" => "manifest_json",
+                "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
+            );
+            $time = array(
+                "key" => "json_time",
+                "value" => date("Y-m-d H:i:s",time())
+            );
 
-        $wpdb->query("DELETE FROM `wp_sakura` WHERE `key`='manifest_json'");
-        $wpdb->query("DELETE FROM `wp_sakura` WHERE `key`='json_time'");
-        $wpdb->insert($sakura_table_name,$manifest);
-        $wpdb->insert($sakura_table_name,$time);
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='manifest_json'");
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='json_time'");
+            $wpdb->insert($sakura_table_name,$manifest);
+            $wpdb->insert($sakura_table_name,$time);
 
-        $output = array(
-            'status' => 200,
-            'success' => true,
-            'message' => 'manifest.json has been stored into database'
-        );
-        $result = new WP_REST_Response($output, 200);
-        $result->set_headers(array('Content-Type' => 'application/json'));
-        return $result;
+            $output = array(
+                'status' => 200,
+                'success' => true,
+                'message' => 'manifest.json has been stored into database'
+            );
+            $result = new WP_REST_Response($output, 200);
+            $result->set_headers(array('Content-Type' => 'application/json'));
+            return $result;
+        }
     } else {
         $output = array(
             'status' => 401,
