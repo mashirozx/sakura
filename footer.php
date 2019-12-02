@@ -57,8 +57,7 @@
 			<?php $ava = akina_option('focus_logo') ? akina_option('focus_logo') : get_template_directory_uri().'/images/avatar.jpg'; ?>
 			<img src="<?php echo $ava ?>">
 		</div>
-<p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">Contact me</p>
-<p style="text-align: center; word-spacing: 20px;"> <a href="https://t.me/EkklesN" class="social-lofter" target="_blank" style="color: #00aced" rel="noopener noreferrer nofollow"></a> <a onclick="mail_me()" class="fa fa-envelope" style="color: #ffbf00" rel="nofollow"></a></p>
+<p style="text-align: center; word-spacing: 20px;"> <a href="https://t.me/EkklesN" class="social-lofter" target="_blank" style="color: #00aced" rel="noopener noreferrer nofollow"></a> <a onclick="mail_me()" class="fa fa-envelope" style="color: #ffbf00" rel="nofollow"></a></p><p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">Contact me</p>
 		<div class="m-search">
 			<form class="m-search-form" method="get" action="<?php echo home_url(); ?>" role="search">
 				<input class="m-search-input" type="search" name="s" placeholder="<?php _e('Search...', 'sakura') /*搜索...*/?>" required>
