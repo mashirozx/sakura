@@ -7,6 +7,8 @@ Desc: Webp convertor
 import os
 import sys
 import json
+import requests
+import base64
 import hashlib
 from PIL import Image
 
@@ -44,6 +46,20 @@ class Single(object):
       'webp': ['webp/' + self.hash + '.webp', 'webp/' + self.hash + '.th.webp']
     }
 
+  def upload_manifest(self):
+    username = input('Enter your username: ')
+    password = input('Enter your password: ')
+    url = input('Enter your rest api url: ')
+    data_string = username + ':' + password
+    token = base64.b64encode(data_string.encode()).decode('utf-8')
+    headers = {
+      'Authorization': 'Basic ' + token,
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97"
+    }
+    files = {'manifest': open('manifest.json', mode="rb")}
+    reply = requests.post(url, headers=headers, files=files)
+    print(json.loads(reply.content)['message'])
+
   def main(self):
     self.hash()
     # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
@@ -65,6 +81,9 @@ def main():
 
   with open('manifest.json', 'w+') as json_file:
     json.dump(Manifest, json_file)
+
+  up_json = Single(f, Manifest)
+  up_json.upload_manifest()
 
 if __name__ == '__main__':
   main()
