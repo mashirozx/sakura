@@ -57,6 +57,7 @@ function get_qq_info(WP_REST_Request $request)
             $output = array(
                 'status' => 200,
                 'success' => true,
+                'message' => 'success',
                 'avatar' => 'https://q.qlogo.cn/headimg_dl?dst_uin=' . $qq . '&spec=100',
                 'name' => $name[$qq][6],
             );
