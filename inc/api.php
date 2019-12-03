@@ -12,12 +12,71 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'cache_search_json',
     ));
+    register_rest_route('sakura/v1', '/qqinfo/json', array(
+        'methods' => 'GET',
+        'callback' => 'get_qq_info',
+    ));
 });
+
+/**
+ * QQ info
+ */
+function get_qq_info(WP_REST_Request $request)
+{
+    if (!check_ajax_referer('wp_rest', '_wpnonce', false)) {
+        $output = array(
+            'status' => 403,
+            'success' => false,
+            'message' => 'Unauthorized client.',
+            'avatar' => 'https://q2.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
+            'name' => '',
+        );
+    } elseif ($_GET['qq']) {
+        $qq = $_GET['qq'];
+        /** 
+         * TODO: 设置host，国外服务器默认解析的不是国内IP，可能无法获取数据
+         * 182.254.92.32 r.qzone.qq.com
+         * 参考：https://www.php.net/manual/zh/function.file-get-contents.php#108309
+         */
+        $get_info = file_get_contents('http://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?get_nick=1&uins=' . $qq);
+        $get_info = mb_convert_encoding($get_info, "UTF-8", "GBK");
+        $name = json_decode(substr($get_info, 17, -1), true);
+        if ($name) {
+            $output = array(
+                'status' => 200,
+                'success' => true,
+                'avatar' => 'https://q.qlogo.cn/headimg_dl?dst_uin=' . $qq . '&spec=100',
+                'name' => $name[$qq][6],
+            );
+        } else {
+            $output = array(
+                'status' => 404,
+                'success' => false,
+                'message' => 'QQ number not exist.',
+                'avatar' => 'https://q.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
+                'name' => '',
+            );
+        }
+    } else {
+        $output = array(
+            'status' => 400,
+            'success' => false,
+            'message' => 'Bad Request',
+            'avatar' => 'https://q2.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
+            'name' => '',
+        );
+    }
+
+    $result = new WP_REST_Response($output, $output['status']);
+    $result->set_headers(array('Content-Type' => 'application/json'));
+    return $result;
+}
 
 /**
  * Image uploader response
  */
-function upload_image(WP_REST_Request $request) {
+function upload_image(WP_REST_Request $request)
+{
     // see: https://developer.wordpress.org/rest-api/requests/
 
     // handle file params $file === $_FILES
@@ -29,8 +88,7 @@ function upload_image(WP_REST_Request $request) {
      */
     // $file = $request->get_file_params();
     if (!check_ajax_referer('wp_rest', '_wpnonce', false)) {
-        $output = array(
-            'status' => 403,
+        $output = array('status' => 403,
             'success' => false,
             'message' => 'Unauthorized client.',
             'link' => "https://view.moezx.cc/images/2019/11/14/step04.md.png",
@@ -56,7 +114,7 @@ function upload_image(WP_REST_Request $request) {
             break;
     }
 
-    $result = new WP_REST_Response($API_Request, $API_Request->status);
+    $result = new WP_REST_Response($API_Request, $API_Request['status']);
     $result->set_headers(array('Content-Type' => 'application/json'));
     return $result;
 }
@@ -64,13 +122,14 @@ function upload_image(WP_REST_Request $request) {
 /**
  * Chevereto upload interface
  */
-function Chevereto_API($image) {
-    $upload_url = akina_option('cheverto_url').'/api/1/upload';
+function Chevereto_API($image)
+{
+    $upload_url = akina_option('cheverto_url') . '/api/1/upload';
     $args = array(
         'body' => array(
             'source' => base64_encode($image),
-            'key' => akina_option('chevereto_api_key')
-        )
+            'key' => akina_option('chevereto_api_key'),
+        ),
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -102,16 +161,17 @@ function Chevereto_API($image) {
 /**
  * Imgur upload interface
  */
-function Imgur_API($image) {
+function Imgur_API($image)
+{
     $client_id = akina_option('imgur_client_id');
     $upload_url = akina_option('imgur_upload_image_proxy');
     $args = array(
         'headers' => array(
-            'Authorization' => 'Client-ID ' . $client_id
+            'Authorization' => 'Client-ID ' . $client_id,
         ),
         'body' => array(
-            'image' => base64_encode($image)
-        )
+            'image' => base64_encode($image),
+        ),
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -143,7 +203,8 @@ function Imgur_API($image) {
 /**
  * smms upload interface
  */
-function SMMS_API($image) {
+function SMMS_API($image)
+{
     $client_id = akina_option('smms_client_id');
     $upload_url = "https://sm.ms/api/v2/upload";
     $filename = $image['cmt_img_file']['name'];
@@ -170,7 +231,7 @@ function SMMS_API($image) {
 
     $args = array(
         'headers' => $headers,
-        'body' => $fields
+        'body' => $fields,
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -210,7 +271,8 @@ function SMMS_API($image) {
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/cache_search/json
  * @可在cache_search_json()函数末尾通过设置 HTTP header 控制 json 缓存时间
  */
-function cache_search_json() {
+function cache_search_json()
+{
     $vowels = array("[", "{", "]", "}", "<", ">", "\r\n", "\r", "\n", "-", "'", '"', '`', " ", ":", ";", '\\', "  ", "toc");
     $regex = <<<EOS
 /<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
@@ -218,7 +280,7 @@ EOS;
 
     $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
     while ($posts->have_posts()): $posts->the_post();
-    $output .= '{"type":"post","link":"' . get_post_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
+        $output .= '{"type":"post","link":"' . get_post_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
     endwhile;
     wp_reset_postdata();
 
@@ -256,7 +318,7 @@ EOS;
     $result->set_headers(
         array(
             'Content-Type' => 'application/json',
-            'Cache-Control' => 'max-age=3600'// json 缓存控制
+            'Cache-Control' => 'max-age=3600', // json 缓存控制
         )
     );
 

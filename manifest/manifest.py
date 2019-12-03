@@ -25,27 +25,25 @@ class Single(object):
     self.hash = hasher.hexdigest()
     self.jpeg = 'jpeg/' + self.hash + '.jpeg'
     self.webp = 'webp/' + self.hash + '.webp'
-    self.th_jpeg = 'jpeg/' + self.hash + '.th.jpeg'
-    self.th_webp = 'webp/' + self.hash + '.th.webp'
+    self.jpeg_th = 'jpeg/' + self.hash + '.th.jpeg'
+    self.webp_th = 'webp/' + self.hash + '.th.webp'
 
   def optimize(self):
     im = Image.open('gallary/' + self.file).convert('RGB')
     im.save(self.jpeg, 'JPEG') # todo: TinyPNG API
     im.save(self.webp, 'WEBP')
-
-  def thumbnail(self):
-    im = Image.open('gallary/' + self.file).convert('RGB')
     im.thumbnail((450, 300))
-    im.save(self.th_jpeg, 'JPEG')  # todo: TinyPNG API
-    im.save(self.th_webp, 'WEBP')
+    im.save(self.jpeg_th, 'JPEG')  # todo: TinyPNG API
+    im.save(self.webp_th, 'WEBP')
 
   def manifest(self):
     self.mani[self.hash] = {
       'source': self.file,
-      'jpeg': ['jpeg/' + self.hash + '.jpeg', 'jpeg/' + self.hash + '.th.jpeg'],
-      'webp': ['webp/' + self.hash + '.webp', 'webp/' + self.hash + '.th.webp']
+      'jpeg': [self.jpeg, self.jpeg_th],
+      'webp': [self.webp, self.webp_th]
     }
 
+  #这个最好新建一个类
   def upload_manifest(self):
     username = input('Enter your username: ')
     password = input('Enter your password: ')

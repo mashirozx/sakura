@@ -1,0 +1,11 @@
+--2019-12-03 20:47:44--  https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?get_nick=1
+Resolving r.qzone.qq.com (r.qzone.qq.com)... 182.254.92.32
+Connecting to r.qzone.qq.com (r.qzone.qq.com)|182.254.92.32|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 84 [text/html]
+Saving to: ‘cgi_get_portrait.fcg?get_nick=1’
+
+cgi_get_portrait.fcg?get_nick=1     0%[                                                            ]       0  --.-KB/s               cgi_get_portrait.fcg?get_nick=1   100%[===========================================================>]      84  --.-KB/s    in 0s      
+
+2019-12-03 20:47:44 (12.0 MB/s) - ‘cgi_get_portrait.fcg?get_nick=1’ saved [84/84]
+
