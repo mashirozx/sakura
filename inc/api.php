@@ -39,9 +39,7 @@ function get_qq_info(WP_REST_Request $request)
         $output = array(
             'status' => 403,
             'success' => false,
-            'message' => 'Unauthorized client.',
-            'avatar' => 'https://q2.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
-            'name' => '',
+            'message' => 'Unauthorized client.'
         );
     } elseif ($_GET['qq']) {
         $qq = $_GET['qq'];
@@ -65,18 +63,14 @@ function get_qq_info(WP_REST_Request $request)
             $output = array(
                 'status' => 404,
                 'success' => false,
-                'message' => 'QQ number not exist.',
-                'avatar' => 'https://q.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
-                'name' => '',
+                'message' => 'QQ number not exist.'
             );
         }
     } else {
         $output = array(
             'status' => 400,
             'success' => false,
-            'message' => 'Bad Request',
-            'avatar' => 'https://q2.qlogo.cn/headimg_dl?dst_uin=0&spec=100',
-            'name' => '',
+            'message' => 'Bad Request'
         );
     }
 
