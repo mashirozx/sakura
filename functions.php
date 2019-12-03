@@ -1565,29 +1565,15 @@ function html_tag_parser($content) {
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
         $i=0;
         if ($i<sizeof($matches)) {
-            $content=str_replace($matches[$i],preg_replace(
-                    '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
-                    '<a data-fancybox="gallery" 
-                        data-caption="$1"
-                        class="fancybox" 
-                        href="$2" 
-                        alt="$1" 
-                        title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
-                    $matches[$i]),
-                $content);
+            $content=str_replace(
+                $matches[$i],
+                preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i','<a href="$2"><img src="$7" alt="$1" title="$1"></a>',$matches[$i]),
+                $content
+            );
             $i++;
             }
         }
-        $content=preg_replace(
-            '/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i',
-            '<a data-fancybox="gallery" 
-                data-caption="$1"
-                class="fancybox"
-                href="$2"
-                alt="$1" 
-                title="$1"><img src="$2" target="_blank" rel="nofollow" class="fancybox"></a>',
-            $content
-        );
+        $content=preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i','<a href="$2"><img src="$2" alt="$1" title="$1"></a>',$content);
         
         //Github cards
         $content=preg_replace(
@@ -1645,12 +1631,7 @@ function change_avatar($avatar){
 
 // default feature image
 function DEFAULT_FEATURE_IMAGE() {
-    if ( empty( akina_option('default_feature_image' )) ) {
-        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
-        //return 'https://api.mashiro.top/feature/?'.rand(1,1000);
-    } else {
-        return akina_option('default_feature_image').'?'.rand(1,1000);
-    }
+    return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
 }
 
 //防止设置置顶文章造成的图片同侧bug
@@ -1733,4 +1714,31 @@ function allow_more_tag_in_comment() {
 	$allowedtags['span'] = array('class'=>array());
 }
 add_action('pre_comment_on_post', 'allow_more_tag_in_comment');
+
+/*
+ * 随机图
+ */
+function create_sakura_table(){
+    global $wpdb;
+    $sakura_table_name = $wpdb->base_prefix.'sakura';
+    require_once(ABSPATH . "wp-admin/includes/upgrade.php"); 
+    dbDelta("CREATE TABLE IF NOT EXISTS `" . $sakura_table_name . "` (
+        `key` varchar(50) COLLATE utf8_bin NOT NULL,
+        `value` text COLLATE utf8_bin NOT NULL,
+        PRIMARY KEY (`key`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+    //default data
+    $manifest = array(
+        "key" => "manifest_json",
+        "value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
+    );
+    $time = array(
+        "key" => "json_time",
+        "value" => date("Y-m-d H:i:s",time())
+    );
+    $wpdb->insert($sakura_table_name,$manifest);
+    $wpdb->insert($sakura_table_name,$time);
+}
+add_action( 'after_setup_theme', 'create_sakura_table' );
+
 //code end 

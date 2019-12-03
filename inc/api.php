@@ -12,6 +12,18 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'cache_search_json',
     ));
+    register_rest_route('sakura/v1', '/image/cover', array(
+        'methods' => 'GET',
+        'callback' => 'cover_gallery',
+    ));
+    register_rest_route('sakura/v1', '/image/feature', array(
+        'methods' => 'GET',
+        'callback' => 'feature_gallery',
+    ));
+    register_rest_route('sakura/v1', '/image/manifest', array(
+        'methods' => 'POST',
+        'callback' => 'update_manifest_json',
+    ));
     register_rest_route('sakura/v1', '/qqinfo/json', array(
         'methods' => 'GET',
         'callback' => 'get_qq_info',
@@ -323,4 +335,83 @@ EOS;
     );
 
     return $result;
+}
+
+/*
+ * 随机封面图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/cover
+ */
+function cover_gallery() {
+    global $wpdb;
+    $img_array = json_decode($wpdb->get_var("SELECT `value` FROM `wp_sakura` WHERE `key`='manifest_json'"), true);
+    $img = array_rand($img_array);
+    $imgurl = akina_option('jsdelivr_cdn') . "/manifest/" . $img_array[$img]["webp"][0];
+    $data = array('cover image');
+    $response = new WP_REST_Response($data);
+    $response->set_status(302);
+    $response->header('Location', $imgurl);
+    return $response;
+}
+
+/*
+ * 随机文章特色图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/feature
+ */
+function feature_gallery() {
+    global $wpdb;
+    $img_array = json_decode($wpdb->get_var("SELECT `value` FROM `wp_sakura` WHERE `key`='manifest_json'"), true);
+    $img = array_rand($img_array);
+    $imgurl = akina_option('jsdelivr_cdn') . "/manifest/" . $img_array[$img]["webp"][1];
+    $data = array('cover image');
+    $response = new WP_REST_Response($data);
+    $response->set_status(302);
+    $response->header('Location', $imgurl);
+    return $response;
+}
+
+/*
+ * update manifest.json rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/json
+ */
+function update_manifest_json() {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $password = $_SERVER['PHP_AUTH_PW'];
+    $user = wp_authenticate($username, $password);
+    if (is_a($user, 'WP_User')) {
+        if (in_array('administrator', (array) $user->roles)) {
+            global $wpdb;
+            $sakura_table_name = $wpdb->base_prefix.'sakura';
+            $manifest = array(
+                "key" => "manifest_json",
+                "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
+            );
+            $time = array(
+                "key" => "json_time",
+                "value" => date("Y-m-d H:i:s",time())
+            );
+
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='manifest_json'");
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='json_time'");
+            $wpdb->insert($sakura_table_name,$manifest);
+            $wpdb->insert($sakura_table_name,$time);
+
+            $output = array(
+                'status' => 200,
+                'success' => true,
+                'message' => 'manifest.json has been stored into database'
+            );
+            $result = new WP_REST_Response($output, 200);
+            $result->set_headers(array('Content-Type' => 'application/json'));
+            return $result;
+        }
+    } else {
+        $output = array(
+            'status' => 401,
+            'success' => false,
+            'message' => 'Not Authorized.'
+        );
+        $result = new WP_REST_Response($output, 401);
+        $result->set_headers(array('Content-Type' => 'application/json'));
+        return $result;
+    }
 }

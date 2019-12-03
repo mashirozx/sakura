@@ -71,13 +71,7 @@ mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/mashirozx/Sakura@
 mashiro_option.float_player_on = true;
 <?php endif; ?>
 
-<?php
-if (akina_option('cover_img')) {
-    $imgurl = akina_option('cover_img');
-} else {
-    $imgurl = get_site_url()."/wp-content/themes/Sakura/cover/index.php";
-} ?>
-mashiro_option.cover_api = "<?php echo $imgurl; ?>";
+mashiro_option.cover_api = "<?php echo rest_url('sakura/v1/image/cover'); ?>";
 
 /*End of Initial Variables*/
 </script>
