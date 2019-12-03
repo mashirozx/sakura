@@ -338,9 +338,14 @@ EOS;
  */
 function cover_gallery() {
     global $wpdb;
-    $img_array = json_decode($wpdb->get_var("SELECT `value` FROM `wp_sakura` WHERE `key`='manifest_json'"), true);
+    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
     $img = array_rand($img_array);
-    $imgurl = akina_option('jsdelivr_cdn') . "/manifest/" . $img_array[$img]["webp"][0];
+    $img_domain = akina_option('jsdelivr_cdn') ? akina_option('jsdelivr_cdn') : get_template_directory_uri();
+    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
+    } else {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+    }
     $data = array('cover image');
     $response = new WP_REST_Response($data);
     $response->set_status(302);
@@ -354,9 +359,14 @@ function cover_gallery() {
  */
 function feature_gallery() {
     global $wpdb;
-    $img_array = json_decode($wpdb->get_var("SELECT `value` FROM `wp_sakura` WHERE `key`='manifest_json'"), true);
+    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
     $img = array_rand($img_array);
-    $imgurl = akina_option('jsdelivr_cdn') . "/manifest/" . $img_array[$img]["webp"][1];
+    $img_domain = akina_option('jsdelivr_cdn') ? akina_option('jsdelivr_cdn') : get_template_directory_uri();
+    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][1];
+    } else {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][1];
+    }
     $data = array('cover image');
     $response = new WP_REST_Response($data);
     $response->set_status(302);
@@ -385,8 +395,8 @@ function update_manifest_json() {
                 "value" => date("Y-m-d H:i:s",time())
             );
 
-            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='manifest_json'");
-            $wpdb->query("DELETE FROM `wp_sakura` WHERE `key` ='json_time'");
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
             $wpdb->insert($sakura_table_name,$manifest);
             $wpdb->insert($sakura_table_name,$time);
 

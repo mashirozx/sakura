@@ -1723,21 +1723,25 @@ function create_sakura_table(){
     $sakura_table_name = $wpdb->base_prefix.'sakura';
     require_once(ABSPATH . "wp-admin/includes/upgrade.php"); 
     dbDelta("CREATE TABLE IF NOT EXISTS `" . $sakura_table_name . "` (
-        `key` varchar(50) COLLATE utf8_bin NOT NULL,
-        `value` text COLLATE utf8_bin NOT NULL,
-        PRIMARY KEY (`key`)
+        `mate_key` varchar(50) COLLATE utf8_bin NOT NULL,
+        `mate_value` text COLLATE utf8_bin NOT NULL,
+        PRIMARY KEY (`mate_key`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
     //default data
     $manifest = array(
-        "key" => "manifest_json",
-        "value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
+        "mate_key" => "manifest_json",
+        "mate_value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
     );
     $time = array(
-        "key" => "json_time",
-        "value" => date("Y-m-d H:i:s",time())
+        "mate_key" => "json_time",
+        "mate_value" => date("Y-m-d H:i:s",time())
     );
-    $wpdb->insert($sakura_table_name,$manifest);
-    $wpdb->insert($sakura_table_name,$time);
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'manifest_json'") ){
+        $wpdb->insert($sakura_table_name,$manifest);
+    }
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'json_time'") ){
+        $wpdb->insert($sakura_table_name,$time);
+    }
 }
 add_action( 'after_setup_theme', 'create_sakura_table' );
 
