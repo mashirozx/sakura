@@ -43,7 +43,7 @@ class Single(object):
       'webp': [self.webp, self.webp_th]
     }
 
-  #这个最好新建一个类
+  #杩欎釜鏈�濂芥柊寤轰竴涓被
   def upload_manifest(self):
     username = input('Enter your username: ')
     password = input('Enter your password: ')
