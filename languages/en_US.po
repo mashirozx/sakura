@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-28 23:19+0800\n"
-"PO-Revision-Date: 2019-11-28 23:19+0800\n"
+"POT-Creation-Date: 2019-12-04 15:07+0800\n"
+"PO-Revision-Date: 2019-12-04 15:15+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -214,7 +214,7 @@ msgstr ""
 msgid "page %s "
 msgstr ""
 
-#: inc/api.php:256 inc/theme_plus.php:727
+#: inc/api.php:313 inc/theme_plus.php:727
 msgid "The comment is private"
 msgstr ""
 
@@ -239,39 +239,40 @@ msgstr ""
 msgid "no image"
 msgstr ""
 
-#: inc/options-framework.php:28
+#: inc/options-framework.php:182 inc/options-framework.php:183
+#: inc/options-framework.php:412
 msgid "Sakura Options"
 msgstr ""
 
-#: inc/options-framework.php:230
+#: inc/options-framework.php:228
 msgid "Clear"
 msgstr ""
 
-#: inc/options-framework.php:231
+#: inc/options-framework.php:229
 msgid "Default"
 msgstr ""
 
-#: inc/options-framework.php:232
+#: inc/options-framework.php:230
 msgid "Select Color"
 msgstr ""
 
-#: inc/options-framework.php:278
+#: inc/options-framework.php:275
 msgid "Save"
 msgstr ""
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "Restore default"
 msgstr ""
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "All setting will be lost, sure?"
 msgstr ""
 
-#: inc/options-framework.php:311
+#: inc/options-framework.php:308
 msgid "Default options restored."
 msgstr ""
 
-#: inc/options-framework.php:365
+#: inc/options-framework.php:362
 msgid "Options saved."
 msgstr ""
 
@@ -460,7 +461,7 @@ msgstr ""
 
 #: options.php:112
 msgid "Basic settings"
-msgstr ""
+msgstr "Basic"
 
 #: options.php:116
 msgid "Site title"
@@ -780,7 +781,7 @@ msgstr ""
 
 #: options.php:352
 msgid "First screen"
-msgstr ""
+msgstr "Above The Fold"
 
 #: options.php:356
 msgid "Main switch"
@@ -961,7 +962,7 @@ msgstr ""
 
 #: options.php:539
 msgid "Post page"
-msgstr ""
+msgstr "Post"
 
 #: options.php:543
 msgid "Post style"
@@ -1009,7 +1010,7 @@ msgstr ""
 
 #: options.php:607
 msgid "Social network"
-msgstr ""
+msgstr "Social"
 
 #: options.php:611
 msgid "Wechat"
@@ -1156,16 +1157,16 @@ msgid "The domain.com part of name@domain.com"
 msgstr ""
 
 #: options.php:737
-msgid "Background configuration"
-msgstr ""
+msgid "Dashboard configuration"
+msgstr "Dashboard"
 
 #: options.php:742
-msgid "Background panel custom color scheme"
+msgid "Dashboard panel custom color scheme"
 msgstr ""
 
 #: options.php:743
 msgid ""
-"You can design the background panel (/wp-admin/) style yourself below, but "
+"You can design the dashboard panel (/wp-admin/) style yourself below, but "
 "before you start, please go to <a href=\"/wp-admin/profile.php\">here</a> to "
 "change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match "
 "colors? Maybe <a href=\"https://mashiro.top/color-thief/\">this</a> can help "
@@ -1302,7 +1303,7 @@ msgid ""
 msgstr ""
 
 #: options.php:879
-msgid "Jsdelivr CDN"
+msgid "Cover CDN"
 msgstr ""
 
 #: options.php:880

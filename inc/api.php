@@ -340,7 +340,7 @@ function cover_gallery() {
     global $wpdb;
     $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
     $img = array_rand($img_array);
-    $img_domain = akina_option('jsdelivr_cdn') ? akina_option('jsdelivr_cdn') : get_template_directory_uri();
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
     if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
         $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
     } else {
@@ -361,7 +361,7 @@ function feature_gallery() {
     global $wpdb;
     $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
     $img = array_rand($img_array);
-    $img_domain = akina_option('jsdelivr_cdn') ? akina_option('jsdelivr_cdn') : get_template_directory_uri();
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
     if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
         $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][1];
     } else {

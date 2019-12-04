@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-28 23:19+0800\n"
+"POT-Creation-Date: 2019-12-04 15:07+0800\n"
 "PO-Revision-Date: 2019-11-01 14:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -213,7 +213,7 @@ msgstr ""
 msgid "page %s "
 msgstr ""
 
-#: inc/api.php:256 inc/theme_plus.php:727
+#: inc/api.php:313 inc/theme_plus.php:727
 msgid "The comment is private"
 msgstr ""
 
@@ -237,39 +237,39 @@ msgstr ""
 msgid "no image"
 msgstr ""
 
-#: inc/options-framework.php:28
+#: inc/options-framework.php:182 inc/options-framework.php:183 inc/options-framework.php:412
 msgid "Sakura Options"
 msgstr ""
 
-#: inc/options-framework.php:230
+#: inc/options-framework.php:228
 msgid "Clear"
 msgstr ""
 
-#: inc/options-framework.php:231
+#: inc/options-framework.php:229
 msgid "Default"
 msgstr ""
 
-#: inc/options-framework.php:232
+#: inc/options-framework.php:230
 msgid "Select Color"
 msgstr ""
 
-#: inc/options-framework.php:278
+#: inc/options-framework.php:275
 msgid "Save"
 msgstr ""
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "Restore default"
 msgstr ""
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "All setting will be lost, sure?"
 msgstr ""
 
-#: inc/options-framework.php:311
+#: inc/options-framework.php:308
 msgid "Default options restored."
 msgstr ""
 
-#: inc/options-framework.php:365
+#: inc/options-framework.php:362
 msgid "Options saved."
 msgstr ""
 
@@ -1145,16 +1145,16 @@ msgid "The domain.com part of name@domain.com"
 msgstr ""
 
 #: options.php:737
-msgid "Background configuration"
+msgid "Dashboard configuration"
 msgstr ""
 
 #: options.php:742
-msgid "Background panel custom color scheme"
+msgid "Dashboard panel custom color scheme"
 msgstr ""
 
 #: options.php:743
 msgid ""
-"You can design the background panel (/wp-admin/) style yourself below, but before you start, "
+"You can design the dashboard panel (/wp-admin/) style yourself below, but before you start, "
 "please go to <a href=\"/wp-admin/profile.php\">here</a> to change the color scheme to custom."
 "(Custom).<br><b>Tip: </b>How to match colors? Maybe <a href=\"https://mashiro.top/color-thief/"
 "\">this</a> can help you."
@@ -1287,7 +1287,7 @@ msgid ""
 msgstr ""
 
 #: options.php:879
-msgid "Jsdelivr CDN"
+msgid "Cover CDN"
 msgstr ""
 
 #: options.php:880

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-11-28 23:19+0800\n"
-"PO-Revision-Date: 2019-11-28 23:19+0800\n"
+"POT-Creation-Date: 2019-12-04 15:07+0800\n"
+"PO-Revision-Date: 2019-12-04 15:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -216,7 +216,7 @@ msgstr "侧栏"
 msgid "page %s "
 msgstr "第 %s 页 "
 
-#: inc/api.php:256 inc/theme_plus.php:727
+#: inc/api.php:313 inc/theme_plus.php:727
 msgid "The comment is private"
 msgstr "该评论为私密评论"
 
@@ -241,39 +241,40 @@ msgstr "图像"
 msgid "no image"
 msgstr "暂无"
 
-#: inc/options-framework.php:28
+#: inc/options-framework.php:182 inc/options-framework.php:183
+#: inc/options-framework.php:412
 msgid "Sakura Options"
 msgstr "Sakura主题设置"
 
-#: inc/options-framework.php:230
+#: inc/options-framework.php:228
 msgid "Clear"
 msgstr "清除"
 
-#: inc/options-framework.php:231
+#: inc/options-framework.php:229
 msgid "Default"
 msgstr "默认"
 
-#: inc/options-framework.php:232
+#: inc/options-framework.php:230
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: inc/options-framework.php:278
+#: inc/options-framework.php:275
 msgid "Save"
 msgstr "保存"
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "Restore default"
 msgstr "重置为默认"
 
-#: inc/options-framework.php:279
+#: inc/options-framework.php:276
 msgid "All setting will be lost, sure?"
 msgstr "将会重置所有设置，继续吗？"
 
-#: inc/options-framework.php:311
+#: inc/options-framework.php:308
 msgid "Default options restored."
 msgstr "主题设置已重置。"
 
-#: inc/options-framework.php:365
+#: inc/options-framework.php:362
 msgid "Options saved."
 msgstr "设置已保存。"
 
@@ -1167,16 +1168,16 @@ msgid "The domain.com part of name@domain.com"
 msgstr "name@domain.com 的 domain.com部分"
 
 #: options.php:737
-msgid "Background configuration"
+msgid "Dashboard configuration"
 msgstr "后台配置"
 
 #: options.php:742
-msgid "Background panel custom color scheme"
+msgid "Dashboard panel custom color scheme"
 msgstr "后台面板自定义配色方案"
 
 #: options.php:743
 msgid ""
-"You can design the background panel (/wp-admin/) style yourself below, but "
+"You can design the dashboard panel (/wp-admin/) style yourself below, but "
 "before you start, please go to <a href=\"/wp-admin/profile.php\">here</a> to "
 "change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match "
 "colors? Maybe <a href=\"https://mashiro.top/color-thief/\">this</a> can help "
@@ -1323,8 +1324,8 @@ msgstr ""
 "名/2018/05/xx.png 加载"
 
 #: options.php:879
-msgid "Jsdelivr CDN"
-msgstr "随机图片"
+msgid "Cover CDN"
+msgstr "封面图图片库"
 
 #: options.php:880
 msgid ""
@@ -1814,6 +1815,9 @@ msgstr "注 册"
 msgid "Registration is not open yet."
 msgstr "暂未开放注册。"
 
+#~ msgid "Jsdelivr CDN"
+#~ msgstr "随机图片"
+
 #~ msgid "Default article feature image"
 #~ msgstr "默认文章特色图"
 
@@ -1824,9 +1828,6 @@ msgstr "暂未开放注册。"
 #~ msgstr ""
 #~ "在未设置文章特色图的情况下展示的默认图像，此处留空则使用内置API（将需要随"
 #~ "机展示的图片url写入 /feature/img.txt 文件）"
-
-#~ msgid "Cover image"
-#~ msgstr "封面图"
 
 #~ msgid ""
 #~ "Leave blank here to use the built-in API (please read <a href=\"https://"

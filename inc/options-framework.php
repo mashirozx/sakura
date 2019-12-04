@@ -25,8 +25,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* If the user can't edit theme options, no use running this plugin */
 
-define( 'SAKURA_OPTIONS', __('Sakura Options', 'sakura') );
-
 add_action( 'init', 'optionsframework_rolescheck' );
 
 function optionsframework_rolescheck () {
@@ -181,8 +179,8 @@ function optionsframework_setdefaults() {
 function optionsframework_menu_settings() {
 
 	$menu = array(
-		'page_title' => __( SAKURA_OPTIONS, 'optionsframework'),
-		'menu_title' => __( SAKURA_OPTIONS, 'optionsframework'),
+		'page_title' => __('Sakura Options', 'sakura'),
+		'menu_title' => __('Sakura Options', 'sakura'),
 		'capability' => 'edit_theme_options',
 		'menu_slug' => 'options-framework',
 		'callback' => 'optionsframework_page'
@@ -411,7 +409,7 @@ function optionsframework_adminbar() {
 	$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id' => 'of_theme_options',
-			'title' => __( SAKURA_OPTIONS, 'options_framework_theme' ),
+			'title' => __('Sakura Options', 'sakura'),
 			'href' => admin_url( 'themes.php?page=options-framework' )
 		));
 }
