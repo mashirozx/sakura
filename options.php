@@ -1136,6 +1136,13 @@ function optionsframework_options() {
 		'type' => 'checkbox');
 
 	$options[] = array(
+		'name' => __('QQ avatar link encryption', 'sakura'),/*QQ头像链接加密*/
+		'desc' => __('Check to enable, do not display the user\'s qq avatar links directly.', 'sakura'),/*勾选开启，不直接暴露用户qq头像链接*/
+		'id' => 'qq_avatar_link',
+		'std' => '0',
+		'type' => 'checkbox');
+
+	$options[] = array(
 		'name' => __('Comment UA infomation', 'sakura'),/*评论UA信息*/
 		'desc' => __('Check to enable, display the user\'s browser, operating system information', 'sakura'),/*勾选开启，显示用户的浏览器，操作系统信息*/
 		'id' => 'open_useragent',

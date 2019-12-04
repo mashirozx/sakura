@@ -1616,11 +1616,17 @@ function output_comments_qq_columns( $column_name, $comment_id ){
  */
 add_filter( 'get_avatar', 'change_avatar', 10, 3 );
 function change_avatar($avatar){
-    global $comment;
+    global $comment,$sakura_pubkey;
     if ($comment) {
         if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true )){
             $qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
-            return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            if(akina_option('qq_avatar_link')){
+                openssl_public_encrypt($qq_number, $encrypted, openssl_pkey_get_public($sakura_pubkey));
+                $qq_number = urlencode(base64_encode($encrypted));
+                return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$qq_number.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            }else{
+                return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            }
         }else{
             return $avatar ;
         }
@@ -1728,20 +1734,39 @@ function create_sakura_table(){
         PRIMARY KEY (`mate_key`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
     //default data
-    $manifest = array(
-        "mate_key" => "manifest_json",
-        "mate_value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
-    );
-    $time = array(
-        "mate_key" => "json_time",
-        "mate_value" => date("Y-m-d H:i:s",time())
-    );
     if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'manifest_json'") ){
+        $manifest = array(
+            "mate_key" => "manifest_json",
+            "mate_value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
+        );
         $wpdb->insert($sakura_table_name,$manifest);
     }
     if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'json_time'") ){
+        $time = array(
+            "mate_key" => "json_time",
+            "mate_value" => date("Y-m-d H:i:s",time())
+        );
         $wpdb->insert($sakura_table_name,$time);
     }
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'privkey'") ){
+        $privkey = array(
+            "mate_key" => "privkey",
+            "mate_value" => file_get_contents(get_template_directory()."/manifest/private.key")
+        );
+        $wpdb->insert($sakura_table_name,$privkey);
+    }
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'pubkey'") ){
+        $pubkey = array(
+            "mate_key" => "pubkey",
+            "mate_value" => file_get_contents(get_template_directory()."/manifest/public.key")
+        );
+        $wpdb->insert($sakura_table_name,$pubkey);
+    }
+    //reduce sql query
+    global $sakura_image_array,$sakura_privkey,$sakura_pubkey;
+    $sakura_image_array = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'");
+    $sakura_privkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='privkey'");
+    $sakura_pubkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='pubkey'");
 }
 add_action( 'after_setup_theme', 'create_sakura_table' );
 
