@@ -449,6 +449,7 @@ function update_database() {
 
 /**
  * QQ头像链接解密
+ * https://sakura.2heng.xin/wp-json/sakura/v1/qqinfo/avatar
  */
 function get_qq_avatar(){
     global $sakura_privkey;
@@ -457,8 +458,15 @@ function get_qq_avatar(){
     openssl_private_decrypt($encrypted, $qq_number, openssl_pkey_get_private($sakura_privkey));
     preg_match('/^\d{3,}$/', $qq_number, $matches);
     $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
-    $response = new WP_REST_Response();
-    $response->set_status(302);
-    $response->header('Location', $imgurl);
-    return $response;
+    if(akina_option('qq_avatar_link')=='off'){
+        $imgdata = file_get_contents($imgurl);
+        header("Content-type: image/jpeg");
+        echo $imgdata;
+    }else{
+        $response = new WP_REST_Response();
+        $response->set_status(302);
+        $response->header('Location', $imgurl);
+        return $response;
+    }
+    
 }
