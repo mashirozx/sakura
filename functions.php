@@ -1616,7 +1616,7 @@ function output_comments_qq_columns( $column_name, $comment_id ){
  */
 add_filter( 'get_avatar', 'change_avatar', 10, 3 );
 function change_avatar($avatar){
-    global $comment,$sakura_pubkey;
+    global $comment,$sakura_privkey;
     if ($comment) {
         if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true )){
             $qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
@@ -1627,9 +1627,9 @@ function change_avatar($avatar){
                 preg_match('/:\"([^\"]*)\"/i',$qqavatar,$matches);
                 return '<img src="'.$matches[1].'" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }else{
-                openssl_public_encrypt($qq_number, $encrypted, openssl_pkey_get_public($sakura_pubkey));
-                $qq_number = urlencode(base64_encode($encrypted));
-                return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$qq_number.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0);
+                $encrypted = urlencode(base64_encode($encrypted));
+                return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$encrypted.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }
         }else{
             return $avatar ;
@@ -1729,7 +1729,7 @@ add_action('pre_comment_on_post', 'allow_more_tag_in_comment');
  * 随机图
  */
 function create_sakura_table(){
-    global $wpdb;
+    global $wpdb,$sakura_image_array,$sakura_privkey;
     $sakura_table_name = $wpdb->base_prefix.'sakura';
     require_once(ABSPATH . "wp-admin/includes/upgrade.php"); 
     dbDelta("CREATE TABLE IF NOT EXISTS `" . $sakura_table_name . "` (
@@ -1755,22 +1755,13 @@ function create_sakura_table(){
     if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'privkey'") ){
         $privkey = array(
             "mate_key" => "privkey",
-            "mate_value" => file_get_contents(get_template_directory()."/manifest/private.key")
+            "mate_value" => wp_generate_password(8)
         );
         $wpdb->insert($sakura_table_name,$privkey);
     }
-    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'pubkey'") ){
-        $pubkey = array(
-            "mate_key" => "pubkey",
-            "mate_value" => file_get_contents(get_template_directory()."/manifest/public.key")
-        );
-        $wpdb->insert($sakura_table_name,$pubkey);
-    }
     //reduce sql query
-    global $sakura_image_array,$sakura_privkey,$sakura_pubkey;
     $sakura_image_array = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'");
     $sakura_privkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='privkey'");
-    $sakura_pubkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='pubkey'");
 }
 add_action( 'after_setup_theme', 'create_sakura_table' );
 

@@ -10,7 +10,6 @@ import json
 import requests
 import base64
 import hashlib
-from Crypto.PublicKey import RSA
 from PIL import Image
 
 class Single(object):
@@ -52,7 +51,7 @@ class Single(object):
     return self.mani
 
 
-class Upload2Wordpress:
+class Upload2Wordpress(object):
   def __init__(self, username, password, url):
     self.username = username
     self.password = password
@@ -69,19 +68,9 @@ class Upload2Wordpress:
     reply = requests.post(self.url, headers=headers, files=files)
     print(json.loads(reply.content)['message'])
 
-  def upload_manifest(self):
+  def main(self):
     print('start uploading `manifest.json`...')
     self.upload('manifest.json', 'manifest')
-
-  def upload_key(self):
-    print('start uploading `private.key`...')
-    self.upload('private.key', 'rsa')
-    print('start uploading `public.key`...')
-    self.upload('public.key', 'rsa')
-
-  def main(self):
-    self.upload_manifest()
-    self.upload_key()
 
 
 def gen_manifest_json():
@@ -97,21 +86,8 @@ def gen_manifest_json():
     json.dump(Manifest, json_file)
 
 
-def gen_key_pairs():
-  key = RSA.generate(1024)
-  pv_key_string = key.exportKey()
-  with open("private.key", "w+") as prv_file:
-    print("{}".format(pv_key_string.decode()), file=prv_file)
-  pb_key_string = key.publickey().exportKey()
-  with open("public.key", "w+") as pub_file:
-    print("{}".format(pb_key_string.decode()), file=pub_file)
-
-
 def main():
   gen_manifest_json()
-  if not os.path.exists("public.key") or not os.path.exists("private.key"):
-    print("start generating key pairs...")
-    gen_key_pairs()
   username = input('Enter your username: ')
   password = input('Enter your password: ')
   url = input('Enter your rest api url: ')

@@ -407,25 +407,6 @@ function update_database() {
                 $wpdb->insert($sakura_table_name,$time);
                 $message = "manifest.json has been stored into database.";
             }
-            if(isset($_FILES["rsa"])){
-                if($_FILES["rsa"]["name"]=="public.key"){
-                    $pubkey = array(
-                        "mate_key" => "pubkey",
-                        "mate_value" => file_get_contents($_FILES["rsa"]["tmp_name"])
-                    );
-                    $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='pubkey'");
-                    $wpdb->insert($sakura_table_name,$pubkey);
-                }
-                if($_FILES["rsa"]["name"]=="private.key"){
-                    $privkey = array(
-                        "mate_key" => "privkey",
-                        "mate_value" => file_get_contents($_FILES["rsa"]["tmp_name"])
-                    );
-                    $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='privkey'");
-                    $wpdb->insert($sakura_table_name,$privkey);
-                }
-                $message = "key pairs has been stored into database.";
-            }
             $output = array(
                 'status' => 200,
                 'success' => true,
@@ -453,20 +434,21 @@ function update_database() {
  */
 function get_qq_avatar(){
     global $sakura_privkey;
-    $qq_number=$_GET["qq"];
-    $encrypted = urldecode(base64_decode($qq_number));
-    openssl_private_decrypt($encrypted, $qq_number, openssl_pkey_get_private($sakura_privkey));
-    preg_match('/^\d{3,}$/', $qq_number, $matches);
-    $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
-    if(akina_option('qq_avatar_link')=='off'){
-        $imgdata = file_get_contents($imgurl);
-        header("Content-type: image/jpeg");
-        echo $imgdata;
-    }else{
-        $response = new WP_REST_Response();
-        $response->set_status(302);
-        $response->header('Location', $imgurl);
-        return $response;
-    }
-    
+    $encrypted=$_GET["qq"];
+    if(isset($encrypted)){
+        $encrypted = urldecode(base64_decode($encrypted));
+        $qq_number = openssl_decrypt($encrypted, 'aes-128-cbc', $sakura_privkey, 0);
+        preg_match('/^\d{3,}$/', $qq_number, $matches);
+        $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
+        if(akina_option('qq_avatar_link')=='type_1'){
+            $imgdata = file_get_contents($imgurl);
+            header("Content-type: image/jpeg");
+            echo $imgdata;
+        }else{
+            $response = new WP_REST_Response();
+            $response->set_status(302);
+            $response->header('Location', $imgurl);
+            return $response;
+        }
+    } 
 }
