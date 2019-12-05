@@ -440,13 +440,14 @@ function get_qq_avatar(){
         $qq_number = openssl_decrypt($encrypted, 'aes-128-cbc', $sakura_privkey, 0);
         preg_match('/^\d{3,}$/', $qq_number, $matches);
         $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
-        if(akina_option('qq_avatar_link')=='type_1'){
+        if(akina_option('qq_avatar_link')=='type_2'){
             $imgdata = file_get_contents($imgurl);
             header("Content-type: image/jpeg");
+            header("Cache-Control: max-age=86400");
             echo $imgdata;
         }else{
             $response = new WP_REST_Response();
-            $response->set_status(302);
+            $response->set_status(301);
             $response->header('Location', $imgurl);
             return $response;
         }
