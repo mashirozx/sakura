@@ -12,12 +12,78 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'cache_search_json',
     ));
+    register_rest_route('sakura/v1', '/image/cover', array(
+        'methods' => 'GET',
+        'callback' => 'cover_gallery',
+    ));
+    register_rest_route('sakura/v1', '/image/feature', array(
+        'methods' => 'GET',
+        'callback' => 'feature_gallery',
+    ));
+    register_rest_route('sakura/v1', '/image/manifest', array(
+        'methods' => 'POST',
+        'callback' => 'update_manifest_json',
+    ));
+    register_rest_route('sakura/v1', '/qqinfo/json', array(
+        'methods' => 'GET',
+        'callback' => 'get_qq_info',
+    ));
 });
+
+/**
+ * QQ info
+ */
+function get_qq_info(WP_REST_Request $request)
+{
+    if (!check_ajax_referer('wp_rest', '_wpnonce', false)) {
+        $output = array(
+            'status' => 403,
+            'success' => false,
+            'message' => 'Unauthorized client.'
+        );
+    } elseif ($_GET['qq']) {
+        $qq = $_GET['qq'];
+        /** 
+         * TODO: 设置host，国外服务器默认解析的不是国内IP，可能无法获取数据
+         * 182.254.92.32 r.qzone.qq.com
+         * 参考：https://www.php.net/manual/zh/function.file-get-contents.php#108309
+         */
+        $get_info = file_get_contents('http://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?get_nick=1&uins=' . $qq);
+        $get_info = mb_convert_encoding($get_info, "UTF-8", "GBK");
+        $name = json_decode(substr($get_info, 17, -1), true);
+        if ($name) {
+            $output = array(
+                'status' => 200,
+                'success' => true,
+                'message' => 'success',
+                'avatar' => 'https://q.qlogo.cn/headimg_dl?dst_uin=' . $qq . '&spec=100',
+                'name' => $name[$qq][6],
+            );
+        } else {
+            $output = array(
+                'status' => 404,
+                'success' => false,
+                'message' => 'QQ number not exist.'
+            );
+        }
+    } else {
+        $output = array(
+            'status' => 400,
+            'success' => false,
+            'message' => 'Bad Request'
+        );
+    }
+
+    $result = new WP_REST_Response($output, $output['status']);
+    $result->set_headers(array('Content-Type' => 'application/json'));
+    return $result;
+}
 
 /**
  * Image uploader response
  */
-function upload_image(WP_REST_Request $request) {
+function upload_image(WP_REST_Request $request)
+{
     // see: https://developer.wordpress.org/rest-api/requests/
 
     // handle file params $file === $_FILES
@@ -29,8 +95,7 @@ function upload_image(WP_REST_Request $request) {
      */
     // $file = $request->get_file_params();
     if (!check_ajax_referer('wp_rest', '_wpnonce', false)) {
-        $output = array(
-            'status' => 403,
+        $output = array('status' => 403,
             'success' => false,
             'message' => 'Unauthorized client.',
             'link' => "https://view.moezx.cc/images/2019/11/14/step04.md.png",
@@ -56,7 +121,7 @@ function upload_image(WP_REST_Request $request) {
             break;
     }
 
-    $result = new WP_REST_Response($API_Request, $API_Request->status);
+    $result = new WP_REST_Response($API_Request, $API_Request['status']);
     $result->set_headers(array('Content-Type' => 'application/json'));
     return $result;
 }
@@ -64,13 +129,14 @@ function upload_image(WP_REST_Request $request) {
 /**
  * Chevereto upload interface
  */
-function Chevereto_API($image) {
-    $upload_url = akina_option('cheverto_url').'/api/1/upload';
+function Chevereto_API($image)
+{
+    $upload_url = akina_option('cheverto_url') . '/api/1/upload';
     $args = array(
         'body' => array(
             'source' => base64_encode($image),
-            'key' => akina_option('chevereto_api_key')
-        )
+            'key' => akina_option('chevereto_api_key'),
+        ),
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -102,16 +168,17 @@ function Chevereto_API($image) {
 /**
  * Imgur upload interface
  */
-function Imgur_API($image) {
+function Imgur_API($image)
+{
     $client_id = akina_option('imgur_client_id');
     $upload_url = akina_option('imgur_upload_image_proxy');
     $args = array(
         'headers' => array(
-            'Authorization' => 'Client-ID ' . $client_id
+            'Authorization' => 'Client-ID ' . $client_id,
         ),
         'body' => array(
-            'image' => base64_encode($image)
-        )
+            'image' => base64_encode($image),
+        ),
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -143,7 +210,8 @@ function Imgur_API($image) {
 /**
  * smms upload interface
  */
-function SMMS_API($image) {
+function SMMS_API($image)
+{
     $client_id = akina_option('smms_client_id');
     $upload_url = "https://sm.ms/api/v2/upload";
     $filename = $image['cmt_img_file']['name'];
@@ -170,7 +238,7 @@ function SMMS_API($image) {
 
     $args = array(
         'headers' => $headers,
-        'body' => $fields
+        'body' => $fields,
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -210,7 +278,8 @@ function SMMS_API($image) {
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/cache_search/json
  * @可在cache_search_json()函数末尾通过设置 HTTP header 控制 json 缓存时间
  */
-function cache_search_json() {
+function cache_search_json()
+{
     $vowels = array("[", "{", "]", "}", "<", ">", "\r\n", "\r", "\n", "-", "'", '"', '`', " ", ":", ";", '\\', "  ", "toc");
     $regex = <<<EOS
 /<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
@@ -218,7 +287,7 @@ EOS;
 
     $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
     while ($posts->have_posts()): $posts->the_post();
-    $output .= '{"type":"post","link":"' . get_post_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
+        $output .= '{"type":"post","link":"' . get_post_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
     endwhile;
     wp_reset_postdata();
 
@@ -256,9 +325,98 @@ EOS;
     $result->set_headers(
         array(
             'Content-Type' => 'application/json',
-            'Cache-Control' => 'max-age=3600'// json 缓存控制
+            'Cache-Control' => 'max-age=3600', // json 缓存控制
         )
     );
 
     return $result;
+}
+
+/*
+ * 随机封面图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/cover
+ */
+function cover_gallery() {
+    global $wpdb;
+    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
+    $img = array_rand($img_array);
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
+    } else {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+    }
+    $data = array('cover image');
+    $response = new WP_REST_Response($data);
+    $response->set_status(302);
+    $response->header('Location', $imgurl);
+    return $response;
+}
+
+/*
+ * 随机文章特色图 rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/feature
+ */
+function feature_gallery() {
+    global $wpdb;
+    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
+    $img = array_rand($img_array);
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][1];
+    } else {
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][1];
+    }
+    $data = array('cover image');
+    $response = new WP_REST_Response($data);
+    $response->set_status(302);
+    $response->header('Location', $imgurl);
+    return $response;
+}
+
+/*
+ * update manifest.json rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/json
+ */
+function update_manifest_json() {
+    $username = $_SERVER['PHP_AUTH_USER'];
+    $password = $_SERVER['PHP_AUTH_PW'];
+    $user = wp_authenticate($username, $password);
+    if (is_a($user, 'WP_User')) {
+        if (in_array('administrator', (array) $user->roles)) {
+            global $wpdb;
+            $sakura_table_name = $wpdb->base_prefix.'sakura';
+            $manifest = array(
+                "key" => "manifest_json",
+                "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
+            );
+            $time = array(
+                "key" => "json_time",
+                "value" => date("Y-m-d H:i:s",time())
+            );
+
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
+            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
+            $wpdb->insert($sakura_table_name,$manifest);
+            $wpdb->insert($sakura_table_name,$time);
+
+            $output = array(
+                'status' => 200,
+                'success' => true,
+                'message' => 'manifest.json has been stored into database'
+            );
+            $result = new WP_REST_Response($output, 200);
+            $result->set_headers(array('Content-Type' => 'application/json'));
+            return $result;
+        }
+    } else {
+        $output = array(
+            'status' => 401,
+            'success' => false,
+            'message' => 'Not Authorized.'
+        );
+        $result = new WP_REST_Response($output, 401);
+        $result->set_headers(array('Content-Type' => 'application/json'));
+        return $result;
+    }
 }
