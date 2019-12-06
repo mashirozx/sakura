@@ -621,7 +621,7 @@ $(document).on("click", ".sm", function () {
     if (confirm(msg) == true) {
         $(this).commentPrivate();
     } else {
-        aler("已取消");
+        alert("已取消");
     }
 });
 $.fn.commentPrivate = function () {
