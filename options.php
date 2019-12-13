@@ -903,7 +903,7 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('About', 'sakura'),/*关于*/
-    'desc' => __('Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">Theme document</a>  |  <a href="https://github.com/mashirozx/Sakura/">Source code</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>', 'sakura'),/*Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>*/
+    'desc' => sprintf(__('Theme Sakura v %s  |  <a href="https://2heng.xin/theme-sakura/">Theme document</a>  |  <a href="https://github.com/mashirozx/Sakura/">Source code</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>', 'sakura'), SAKURA_VERSION),/*Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>*/
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
@@ -1134,6 +1134,19 @@ function optionsframework_options() {
 		'id' => 'norobot',
 		'std' => '0',
 		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('QQ avatar link encryption', 'sakura'),/*QQ头像链接加密*/
+		'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'),/*不直接暴露用户qq头像链接*/
+		'id' => 'qq_avatar_link',
+		'std' => "off",
+		'type' => "select",
+		'options' => array(
+			'off' => __('Off (default)', 'sakura'),/*关闭（默认）*/
+			'type_1' => __('use redirect (general security)', 'sakura'),/*使用 重定向（安全性一般）'*/
+			'type_2' => __('fetch data at backend (high security)', 'sakura'),/*后端获取数据（安全性高）*/
+			'type_3' => __('fetch data at backend (high security，slow)', 'sakura'),/*后端获取数据（安全性高, 慢）*/
+		));
 
 	$options[] = array(
 		'name' => __('Comment UA infomation', 'sakura'),/*评论UA信息*/

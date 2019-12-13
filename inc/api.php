@@ -20,18 +20,23 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'feature_gallery',
     ));
-    register_rest_route('sakura/v1', '/image/manifest', array(
+    register_rest_route('sakura/v1', '/database/update', array(
         'methods' => 'POST',
-        'callback' => 'update_manifest_json',
+        'callback' => 'update_database',
     ));
     register_rest_route('sakura/v1', '/qqinfo/json', array(
         'methods' => 'GET',
         'callback' => 'get_qq_info',
     ));
+    register_rest_route('sakura/v1', '/qqinfo/avatar', array(
+        'methods' => 'GET',
+        'callback' => 'get_qq_avatar',
+    ));
 });
 
 /**
  * QQ info
+ * https://sakura.2heng.xin/wp-json/sakura/v1/qqinfo/json
  */
 function get_qq_info(WP_REST_Request $request)
 {
@@ -219,26 +224,9 @@ function SMMS_API($image)
     $Boundary = wp_generate_password();
     $bits = file_get_contents($filedata);
 
-    $headers = array();
-    array_push($headers, "Content-Type: multipart/form-data; boundary=$Boundary");
-    array_push($headers, '');
-    array_push($headers, "Authorization: Basic " . $client_id);
-    array_push($headers, '');
-    array_push($headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97");
-    $headers = implode("\r\n", $headers);
-
-    $fields = array();
-    array_push($fields, "--" . $Boundary);
-    array_push($fields, "Content-Disposition: form-data; name=\"smfile\"; filename=\"$filename\"");
-    array_push($fields, '');
-    array_push($fields, $bits);
-    array_push($fields, '');
-    array_push($fields, "--" . $Boundary . "--");
-    $fields = implode("\r\n", $fields);
-
     $args = array(
-        'headers' => $headers,
-        'body' => $fields,
+        "headers" => "Content-Type: multipart/form-data; boundary=$Boundary\r\n\r\nAuthorization: Basic $client_id\r\n\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97",
+        "body" => "--$Boundary\r\nContent-Disposition: form-data; name=\"smfile\"; filename=\"$filename\"\r\n\r\n$bits\r\n\r\n--$Boundary--"
     );
 
     $response = wp_remote_post($upload_url, $args);
@@ -337,8 +325,8 @@ EOS;
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/cover
  */
 function cover_gallery() {
-    global $wpdb;
-    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
+    global $wpdb,$sakura_image_array;
+    $img_array = json_decode($sakura_image_array, true);
     $img = array_rand($img_array);
     $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
     if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
@@ -358,8 +346,8 @@ function cover_gallery() {
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/feature
  */
 function feature_gallery() {
-    global $wpdb;
-    $img_array = json_decode($wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'"), true);
+    global $wpdb,$sakura_image_array;
+    $img_array = json_decode($sakura_image_array, true);
     $img = array_rand($img_array);
     $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
     if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
@@ -375,10 +363,10 @@ function feature_gallery() {
 }
 
 /*
- * update manifest.json rest api
- * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/json
+ * update database rest api
+ * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/database/update
  */
-function update_manifest_json() {
+function update_database() {
     $username = $_SERVER['PHP_AUTH_USER'];
     $password = $_SERVER['PHP_AUTH_PW'];
     $user = wp_authenticate($username, $password);
@@ -386,24 +374,26 @@ function update_manifest_json() {
         if (in_array('administrator', (array) $user->roles)) {
             global $wpdb;
             $sakura_table_name = $wpdb->base_prefix.'sakura';
-            $manifest = array(
-                "key" => "manifest_json",
-                "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
-            );
-            $time = array(
-                "key" => "json_time",
-                "value" => date("Y-m-d H:i:s",time())
-            );
+            if(isset($_FILES["manifest"])) {
+                $manifest = array(
+                    "key" => "manifest_json",
+                    "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
+                );
+                $time = array(
+                    "key" => "json_time",
+                    "value" => date("Y-m-d H:i:s",time())
+                );
 
-            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
-            $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
-            $wpdb->insert($sakura_table_name,$manifest);
-            $wpdb->insert($sakura_table_name,$time);
-
+                $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
+                $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
+                $wpdb->insert($sakura_table_name,$manifest);
+                $wpdb->insert($sakura_table_name,$time);
+                $message = "manifest.json has been stored into database.";
+            }
             $output = array(
                 'status' => 200,
                 'success' => true,
-                'message' => 'manifest.json has been stored into database'
+                'message' => $message
             );
             $result = new WP_REST_Response($output, 200);
             $result->set_headers(array('Content-Type' => 'application/json'));
@@ -419,4 +409,30 @@ function update_manifest_json() {
         $result->set_headers(array('Content-Type' => 'application/json'));
         return $result;
     }
+}
+
+/**
+ * QQ头像链接解密
+ * https://sakura.2heng.xin/wp-json/sakura/v1/qqinfo/avatar
+ */
+function get_qq_avatar(){
+    global $sakura_privkey;
+    $encrypted=$_GET["qq"];
+    if(isset($encrypted)){
+        $encrypted = urldecode(base64_decode($encrypted));
+        $qq_number = openssl_decrypt($encrypted, 'aes-128-cbc', $sakura_privkey, 0);
+        preg_match('/^\d{3,}$/', $qq_number, $matches);
+        $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
+        if(akina_option('qq_avatar_link')=='type_2'){
+            $imgdata = file_get_contents($imgurl);
+            header("Content-type: image/jpeg");
+            header("Cache-Control: max-age=86400");
+            echo $imgdata;
+        }else{
+            $response = new WP_REST_Response();
+            $response->set_status(301);
+            $response->header('Location', $imgurl);
+            return $response;
+        }
+    } 
 }

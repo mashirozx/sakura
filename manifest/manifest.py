@@ -43,47 +43,59 @@ class Single(object):
       'webp': [self.webp, self.webp_th]
     }
 
-  #这个最好新建一个类
-  def upload_manifest(self):
-    username = input('Enter your username: ')
-    password = input('Enter your password: ')
-    url = input('Enter your rest api url: ')
-    data_string = username + ':' + password
+  def main(self):
+    self.hash()
+    # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
+    self.optimize()
+    self.manifest()
+    return self.mani
+
+
+class Upload2Wordpress(object):
+  def __init__(self, username, password, url):
+    self.username = username
+    self.password = password
+    self.url = url
+
+  def upload(self, file, field):
+    data_string = self.username + ':' + self.password
     token = base64.b64encode(data_string.encode()).decode('utf-8')
     headers = {
       'Authorization': 'Basic ' + token,
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97"
     }
-    files = {'manifest': open('manifest.json', mode="rb")}
-    reply = requests.post(url, headers=headers, files=files)
+    files = {field: open(file, mode="rb")}
+    reply = requests.post(self.url, headers=headers, files=files)
     print(json.loads(reply.content)['message'])
 
   def main(self):
-    self.hash()
-    # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
-    self.optimize()
-    self.thumbnail()
-    self.manifest()
-    return self.mani
+    print('start uploading `manifest.json`...')
+    self.upload('manifest.json', 'manifest')
 
-def main():
+
+def gen_manifest_json():
   onlyfiles = [f for f in os.listdir('gallary') if os.path.isfile(os.path.join('gallary', f))]
   id = 1
   Manifest = {}
-
   for f in onlyfiles:
-      worker = Single(f, Manifest)
-      Manifest = worker.main()
-      print(str(id) + '/' + str(len(onlyfiles)))
-      id += 1
-
+    worker = Single(f, Manifest)
+    Manifest = worker.main()
+    print(str(id) + '/' + str(len(onlyfiles)))
+    id += 1
   with open('manifest.json', 'w+') as json_file:
     json.dump(Manifest, json_file)
 
-  up_json = Single(f, Manifest)
-  up_json.upload_manifest()
+
+def main():
+  gen_manifest_json()
+  username = input('Enter your username: ')
+  password = input('Enter your password: ')
+  url = input('Enter your rest api url: ')
+  upload = Upload2Wordpress(username, password, url)
+  upload.main()
+
 
 if __name__ == '__main__':
   main()
-  key = input('`manifest.json` saved. Press any key to quit.') 
+  key = input('`manifest.json` saved. Press any key to quit.')
   quit()
