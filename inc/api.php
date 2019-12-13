@@ -225,8 +225,8 @@ function SMMS_API($image)
     $bits = file_get_contents($filedata);
 
     $args = array(
-        'headers' => 'Content-Type: multipart/form-data; boundary=' . $Boundary . '\r\n\r\nAuthorization: Basic ' . $client_id . '\r\n\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97',
-        'body' => '--' . $Boundary . '\r\nContent-Disposition: form-data; name="smfile"; filename="' . $filename . '"\r\n\r\n'.$bits.'\r\n\r\n--' . $Boundary . '--'
+        "headers" => "Content-Type: multipart/form-data; boundary=$Boundary\r\n\r\nAuthorization: Basic $client_id\r\n\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97",
+        "body" => "--$Boundary\r\nContent-Disposition: form-data; name=\"smfile\"; filename=\"$filename\"\r\n\r\n$bits\r\n\r\n--$Boundary--"
     );
 
     $response = wp_remote_post($upload_url, $args);
