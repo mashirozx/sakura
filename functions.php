@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.2' );
+define( 'SAKURA_VERSION', '3.3.3' );
 define( 'BUILD_VERSION', '3' );
 
 //ini_set('display_errors', true);
@@ -466,17 +466,18 @@ function restyle_text($number) {
 }
 
 function set_post_views() {
-    global $post;
-    $post_id = intval($post->ID);
-    $count_key = 'views';
-    $views = get_post_custom($post_id);
-    $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
-    if(is_single() || is_page()) {
-        if(!update_post_meta($post_id, 'views', ($views + 1))) {
-            add_post_meta($post_id, 'views', 1, true);
+    if (is_singular()) {
+        global $post;
+        $post_id = intval($post->ID);
+        if($post_id) {
+            $views = get_post_meta($post_id, 'views', true);
+            if(!update_post_meta($post_id, 'views', ($views + 1))) {
+                add_post_meta($post_id, 'views', 1, true);
+            }
         }
     }
 }
+
 add_action('get_header', 'set_post_views');
 
 function get_post_views($post_id) {
@@ -487,10 +488,7 @@ function get_post_views($post_id) {
             return restyle_text(wp_statistics_pages('total','uri',$post_id));
         }
     } else {
-        $count_key = 'views';
-        $views = get_post_custom($post_id);
-        $views = array_key_exists("views",$views) ? intval($views['views'][0]) : 0;
-        $post_views = intval(post_custom('views'));
+        $views = get_post_meta($post_id, 'views', true);
         if($views == '') {
             return 0;
         }else{
@@ -1521,8 +1519,8 @@ function html_tag_parser($content) {
         //With Thumbnail: !{alt}(url)[th_url]
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
         $i=0;
-        foreach ($matches as $val) {
-            $content=str_replace($val[$i],preg_replace(
+        if ($i<sizeof($matches)) {
+            $content=str_replace($matches[$i],preg_replace(
                     '/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i',
                     '<a data-fancybox="gallery" 
                         data-caption="$1"
@@ -1530,7 +1528,7 @@ function html_tag_parser($content) {
                         href="$2" 
                         alt="$1" 
                         title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
-                    $val[$i]),
+                    $matches[$i]),
                 $content);
             $i++;
             }
@@ -1557,6 +1555,30 @@ function html_tag_parser($content) {
                     width="400" height="153"
                     style="margin-left: 50%; transform: translateX(-50%);"></iframe>
             ',
+            $content
+        );
+    } 
+    //html tag parser for rss
+    if(is_feed()) {          
+        //Fancybox
+        $url_regex ='((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))';
+        if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content,$matches)){
+        $i=0;
+        if ($i<sizeof($matches)) {
+            $content=str_replace(
+                $matches[$i],
+                preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)\['.$url_regex.'\]/i','<a href="$2"><img src="$7" alt="$1" title="$1"></a>',$matches[$i]),
+                $content
+            );
+            $i++;
+            }
+        }
+        $content=preg_replace('/!\{([^\{\}]+)*\}\('.$url_regex.'\)/i','<a href="$2"><img src="$2" alt="$1" title="$1"></a>',$content);
+        
+        //Github cards
+        $content=preg_replace(
+            '/\[github repo=[\'"]([^\'"]+)[\'"]\]/i',
+            '<a href="https://github.com/$1">',
             $content
         );
     }  
@@ -1594,11 +1616,21 @@ function output_comments_qq_columns( $column_name, $comment_id ){
  */
 add_filter( 'get_avatar', 'change_avatar', 10, 3 );
 function change_avatar($avatar){
-    global $comment;
+    global $comment,$sakura_privkey;
     if ($comment) {
         if( get_comment_meta( $comment->comment_ID, 'new_field_qq', true )){
             $qq_number =  get_comment_meta( $comment->comment_ID, 'new_field_qq', true );
-            return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            if(akina_option('qq_avatar_link')=='off'){
+                return '<img src="https://q2.qlogo.cn/headimg_dl?dst_uin='.$qq_number.'&spec=100" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            }elseif(akina_option('qq_avatar_link')=='type_3'){
+                $qqavatar = file_get_contents('http://ptlogin2.qq.com/getface?appid=1006102&imgtype=3&uin='.$qq_number);
+                preg_match('/:\"([^\"]*)\"/i',$qqavatar,$matches);
+                return '<img src="'.$matches[1].'" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            }else{
+                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0);
+                $encrypted = urlencode(base64_encode($encrypted));
+                return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$encrypted.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
+            }
         }else{
             return $avatar ;
         }
@@ -1609,12 +1641,7 @@ function change_avatar($avatar){
 
 // default feature image
 function DEFAULT_FEATURE_IMAGE() {
-    if ( empty( akina_option('default_feature_image' )) ) {
-        return get_template_directory_uri().'/feature/index.php?'.rand(1,1000);
-        //return 'https://api.mashiro.top/feature/?'.rand(1,1000);
-    } else {
-        return akina_option('default_feature_image').'?'.rand(1,1000);
-    }
+    return rest_url('sakura/v1/image/feature').'?'.rand(1,1000);
 }
 
 //防止设置置顶文章造成的图片同侧bug
@@ -1649,12 +1676,12 @@ function markdown_parser($incoming_comment) {
     global $wpdb,$comment_markdown_content;
     $re = '/```([\s\S]*?)```[\s]*|`{1,2}[^`](.*?)`{1,2}|\[.*?\]\([\s\S]*?\)/m';
     if(preg_replace($re,'temp',$incoming_comment['comment_content']) != strip_tags(preg_replace($re,'temp',$incoming_comment['comment_content']))){
-    siren_ajax_comment_err('评论只支持Markdown啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa fa-code" aria-hidden="true"></i> Forbidden');
-    return( $incoming_comment );
+        siren_ajax_comment_err('评论只支持Markdown啦，见谅╮(￣▽￣)╭<br>Markdown Supported while <i class="fa fa-code" aria-hidden="true"></i> Forbidden');
+        return( $incoming_comment );
     }
     $myCustomer = $wpdb->get_row("SELECT * FROM wp_comments");
     //Add column if not present.
-    if (!isset($myCustomer->say_state)) {
+    if (!isset($myCustomer->comment_markdown)) {
         $wpdb->query("ALTER TABLE wp_comments ADD comment_markdown text");
     }
     $comment_markdown_content = $incoming_comment['comment_content'];
@@ -1697,4 +1724,45 @@ function allow_more_tag_in_comment() {
 	$allowedtags['span'] = array('class'=>array());
 }
 add_action('pre_comment_on_post', 'allow_more_tag_in_comment');
+
+/*
+ * 随机图
+ */
+function create_sakura_table(){
+    global $wpdb,$sakura_image_array,$sakura_privkey;
+    $sakura_table_name = $wpdb->base_prefix.'sakura';
+    require_once(ABSPATH . "wp-admin/includes/upgrade.php"); 
+    dbDelta("CREATE TABLE IF NOT EXISTS `" . $sakura_table_name . "` (
+        `mate_key` varchar(50) COLLATE utf8_bin NOT NULL,
+        `mate_value` text COLLATE utf8_bin NOT NULL,
+        PRIMARY KEY (`mate_key`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;");
+    //default data
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'manifest_json'") ){
+        $manifest = array(
+            "mate_key" => "manifest_json",
+            "mate_value" => file_get_contents(get_template_directory()."/manifest/manifest.json")
+        );
+        $wpdb->insert($sakura_table_name,$manifest);
+    }
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'json_time'") ){
+        $time = array(
+            "mate_key" => "json_time",
+            "mate_value" => date("Y-m-d H:i:s",time())
+        );
+        $wpdb->insert($sakura_table_name,$time);
+    }
+    if ( !$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'privkey'") ){
+        $privkey = array(
+            "mate_key" => "privkey",
+            "mate_value" => wp_generate_password(8)
+        );
+        $wpdb->insert($sakura_table_name,$privkey);
+    }
+    //reduce sql query
+    $sakura_image_array = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'");
+    $sakura_privkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='privkey'");
+}
+add_action( 'after_setup_theme', 'create_sakura_table' );
+
 //code end 

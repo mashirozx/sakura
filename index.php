@@ -64,7 +64,7 @@ get_header();
 		<?php else : get_template_part( 'tpl/content', 'none' ); endif; ?>
 		</main><!-- #main -->
 		<?php if ( akina_option('pagenav_style') == 'ajax') { ?>
-		<div id="pagination"><?php next_posts_link('Previous'); ?></div>
+		<div id="pagination"><?php next_posts_link(' Previous'); ?></div>
 		<div id="add_post"><span id="add_post_time" style="visibility: hidden;" title="<?php echo akina_option('auto_load_post',''); ?>"  ></span></div>
 		<?php }else{ ?>
 		<nav class="navigator">

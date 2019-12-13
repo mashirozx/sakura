@@ -621,7 +621,7 @@ $(document).on("click", ".sm", function () {
     if (confirm(msg) == true) {
         $(this).commentPrivate();
     } else {
-        aler("已取消");
+        alert("已取消");
     }
 });
 $.fn.commentPrivate = function () {
@@ -875,12 +875,10 @@ function getqqinfo() {
         var qq = cached.filter('#author').val();
         $.ajax({
             type: 'get',
-            url: mashiro_option.qq_api_url + '?type=getqqnickname&qq=' + qq,
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            jsonpCallback: 'portraitCallBack',
+            url: mashiro_option.qq_api_url + '?qq=' + qq + '&_wpnonce=' + Poi.nonce,
+            dataType: 'json',
             success: function (data) {
-                cached.filter('#author').val(data[qq][6]);
+                cached.filter('#author').val(data.name);
                 cached.filter('#email').val($.trim(qq) + '@qq.com');
                 if (mashiro_option.qzone_autocomplete) {
                     cached.filter('#url').val('https://user.qzone.qq.com/' + $.trim(qq));
@@ -892,12 +890,15 @@ function getqqinfo() {
                     $('.qq-check').css('display', 'block');
                     $('.gravatar-check').css('display', 'none');
                 }
-                setCookie('user_author', data[qq][6], 30);
+                setCookie('user_author', data.name, 30);
                 setCookie('user_qq', qq, 30);
                 setCookie('is_user_qq', 'yes', 30);
                 setCookie('user_qq_email', qq + '@qq.com', 30);
                 setCookie('user_email', qq + '@qq.com', 30);
                 emailAddressFlag = cached.filter('#email').val();
+                /***/
+                $('div.comment-user-avatar img').attr('src', data.avatar);
+                setCookie('user_avatar', data.avatar, 30);
             },
             error: function () {
                 cached.filter('#qq').val('');
@@ -907,19 +908,7 @@ function getqqinfo() {
                 setCookie('user_qq', '', 30);
                 setCookie('user_email', cached.filter('#email').val(), 30);
                 setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
-            }
-        });
-        $.ajax({
-            type: 'get',
-            url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
-            dataType: 'jsonp',
-            jsonp: 'callback',
-            jsonpCallback: 'qqavatarCallBack',
-            success: function (data) {
-                $('div.comment-user-avatar img').attr('src', data[qq]);
-                setCookie('user_avatar', data[qq], 30);
-            },
-            error: function () {
+                /***/
                 cached.filter('#qq,#email,#url').val('');
                 if (!cached.filter('#qq').val()) {
                     $('.qq-check').css('display', 'none');
@@ -930,6 +919,27 @@ function getqqinfo() {
                 }
             }
         });
+        // $.ajax({
+        //     type: 'get',
+        //     url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
+        //     dataType: 'jsonp',
+        //     jsonp: 'callback',
+        //     jsonpCallback: 'qqavatarCallBack',
+        //     success: function (data) {
+        //         $('div.comment-user-avatar img').attr('src', data[qq]);
+        //         setCookie('user_avatar', data[qq], 30);
+        //     },
+        //     error: function () {
+        //         cached.filter('#qq,#email,#url').val('');
+        //         if (!cached.filter('#qq').val()) {
+        //             $('.qq-check').css('display', 'none');
+        //             $('.gravatar-check').css('display', 'block');
+        //             setCookie('user_qq', '', 30);
+        //             $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
+        //             setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
+        //         }
+        //     }
+        // });
     });
     if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
         $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'));

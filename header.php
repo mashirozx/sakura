@@ -79,7 +79,6 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 </head>
 <body <?php body_class(); ?>>
     <?php if(get_template_directory_uri() != get_site_url().'/wp-content/themes/Sakura') echo '<div style="position:fixed;height:100%;width:100%;top:0;left:0;font-size:20px;z-index:999999;background-color: #fff;">Plz rename the theme folder name as <span style="color:red">Sakura</span>!<br>请将主题文件夹名改为 <span style="color:red">Sakura</span>！</div>'; ?>
-    <?php if(!function_exists('curl_exec')) echo '<div style="position:fixed;height:100%;width:100%;top:0;left:0;font-size:20px;z-index:999999;background-color: #fff;">主题需要 PHP 的 curl 支持！请在 `php.ini` 里开启或者联系你的主机商。<br>The theme requires PHP\'s curl support! Please turn on in `php.ini` or contact your hosting provider.</div>'; ?>
 		<div class="scrollbar" id="bar"></div>
 	<section id="main-container">
 		<?php 

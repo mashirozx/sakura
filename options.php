@@ -262,13 +262,6 @@ function optionsframework_options() {
 			'right' => __('Right', 'sakura'),/*向右对齐*/
 			'alternate' => __('Alternate', 'sakura')/*左右交替*/
 		));	
-        
-    $options[] = array(
-		'name' => __('Default article feature image', 'sakura'),/*默认文章特色图*/
-		'desc' => __('The default image displayed without the article feature image set, use random cover if left blank (the image to be displayed is placed in the /wp-content/themes/Sakura/feature/gallery/ directory)', 'sakura'),/*在未设置文章特色图的情况下展示的默认图像，留空则调用本地随机封面（要展示的图片放入 /wp-content/themes/Sakura/feature/gallery/ 目录）*/
-		'id' => 'default_feature_image',
-		'std' => 'https://api.mashiro.top/feature/',
-		'type' => 'text');
 		
 	$options[] = array(
 		'name' => __('Comment shrink', 'sakura'),/*评论收缩*/
@@ -418,13 +411,6 @@ function optionsframework_options() {
 		'std' => '',
 		'type' => 'text');
 
-    $options[] = array(
- 		'name' => __('Cover image', 'sakura'),/*封面图*/
- 		'desc' => __('Leave this blank to use the built-in API (put the images that need to be randomly displayed into the /cover/gallery/ directory)', 'sakura'),/*此处留空则使用内置API（将需要随机展示的图片放入 /cover/gallery/ 目录）*/
- 		'id' => 'cover_img',
- 		'std' => '',
- 		'type' => 'text');
-        
 	$options[] = array(
 		'name' => __('Background image filter', 'sakura'),/*背景图滤镜*/
 		'id' => 'focus_img_filter',
@@ -748,13 +734,13 @@ function optionsframework_options() {
 
 	//后台配置
 	$options[] = array(
-		'name' => __('Background configuration', 'sakura'),/*后台配置*/
+		'name' => __('Dashboard configuration', 'sakura'),/*后台配置*/
 		'type' => 'heading' );
         
     //后台面板自定义配色方案
     $options[] = array(
-    'name' => __('Background panel custom color scheme', 'sakura'),/*后台面板自定义配色方案*/
-    'desc' => __('You can design the background panel (/wp-admin/) style yourself below, but before you start, please go to <a href="/wp-admin/profile.php">here</a> to change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match colors? Maybe <a href="https://mashiro.top/color-thief/">this</a> can help you.', 'sakura'),/*你可以在下面自行设计后台面板（/wp-admin/）样式，不过在开始之前请到<a href="/wp-admin/profile.php">这里</a>将配色方案改为自定义（Custom）。<br><b>Tip: </b>如何搭配颜色？或许<a href="https://mashiro.top/color-thief/">这个</a>可以帮到你。*/
+    'name' => __('Dashboard panel custom color scheme', 'sakura'),/*后台面板自定义配色方案*/
+    'desc' => __('You can design the dashboard panel (/wp-admin/) style yourself below, but before you start, please go to <a href="/wp-admin/profile.php">here</a> to change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match colors? Maybe <a href="https://mashiro.top/color-thief/">this</a> can help you.', 'sakura'),/*你可以在下面自行设计后台面板（/wp-admin/）样式，不过在开始之前请到<a href="/wp-admin/profile.php">这里</a>将配色方案改为自定义（Custom）。<br><b>Tip: </b>如何搭配颜色？或许<a href="https://mashiro.top/color-thief/">这个</a>可以帮到你。*/
     'id' => 'scheme_tip',
     'std' => '',
     'type' => 'typography ');
@@ -889,6 +875,13 @@ function optionsframework_options() {
 		'std' => '',
 		'type' => 'text');  
         
+	$options[] = array(
+		'name' => __('Cover CDN', 'sakura'),/*封面图片库*/
+		'desc' => __('Fill in the cdn path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>', 'sakura'),/*填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
+		'id' => 'cover_cdn',
+		'std' => 'https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3',
+		'type' => 'text');  
+        
     $options[] = array(
 		'name' => __('Use the front-end library locally (lib.js、lib.css)', 'sakura'),/*本地调用前端库（lib.js、lib.css）*/
 		'desc' => __('The front-end library don\'t load from jsDelivr, not recommand', 'sakura'),/*前端库不走 jsDelivr，不建议启用*/
@@ -910,7 +903,7 @@ function optionsframework_options() {
         
     $options[] = array(
     'name' => __('About', 'sakura'),/*关于*/
-    'desc' => __('Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">Theme document</a>  |  <a href="https://github.com/mashirozx/Sakura/">Source code</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>', 'sakura'),/*Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>*/
+    'desc' => sprintf(__('Theme Sakura v %s  |  <a href="https://2heng.xin/theme-sakura/">Theme document</a>  |  <a href="https://github.com/mashirozx/Sakura/">Source code</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>', 'sakura'), SAKURA_VERSION),/*Theme Sakura v'.SAKURA_VERSION.'  |  <a href="https://2heng.xin/theme-sakura/">主题说明</a>  |  <a href="https://github.com/mashirozx/Sakura/">源码</a><a href="https://github.com/mashirozx/Sakura/releases/latest"><img src="https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square" alt="GitHub release"></a>*/
     'id' => 'theme_intro',
     'std' => '',
     'type' => 'typography ');
@@ -1039,7 +1032,7 @@ function optionsframework_options() {
 
 		$options[] = array(
 			'name' => __('Chevereto API v1 key', 'sakura'),
-			'desc' => __('Get your API key here '.akina_option('cheverto_url').'/dashboard/settings/api', 'sakura'),
+			'desc' => __('Get your API key here: '.akina_option('cheverto_url').'/dashboard/settings/api', 'sakura'),
 			'id' => 'chevereto_api_key',
 			'std' => '',
 			'type' => 'text');
@@ -1067,14 +1060,14 @@ function optionsframework_options() {
         
     $options[] = array(
 		'name' => __('Enable live search', 'sakura'),/*启用实时搜索*/
-		'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php'),/*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
+		'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php', 'sakura'),/*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
 		'id' => 'live_search',
 		'std' => '0',
 		'type' => 'checkbox');
         
     $options[] = array(
 		'name' => __('Include comments in live search', 'sakura'),/*实时搜索包含评论*/
-		'desc' => __('Search for comments in real-time search (not recommended if there are too many comments on the site)'),/*在实时搜索中搜索评论（如果网站评论数量太多不建议开启）*/
+		'desc' => __('Search for comments in real-time search (not recommended if there are too many comments on the site)', 'sakura'),/*在实时搜索中搜索评论（如果网站评论数量太多不建议开启）*/
 		'id' => 'live_search_comment',
 		'std' => '0',
 		'type' => 'checkbox');
@@ -1141,6 +1134,19 @@ function optionsframework_options() {
 		'id' => 'norobot',
 		'std' => '0',
 		'type' => 'checkbox');
+
+	$options[] = array(
+		'name' => __('QQ avatar link encryption', 'sakura'),/*QQ头像链接加密*/
+		'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'),/*不直接暴露用户qq头像链接*/
+		'id' => 'qq_avatar_link',
+		'std' => "off",
+		'type' => "select",
+		'options' => array(
+			'off' => __('Off (default)', 'sakura'),/*关闭（默认）*/
+			'type_1' => __('use redirect (general security)', 'sakura'),/*使用 重定向（安全性一般）'*/
+			'type_2' => __('fetch data at backend (high security)', 'sakura'),/*后端获取数据（安全性高）*/
+			'type_3' => __('fetch data at backend (high security，slow)', 'sakura'),/*后端获取数据（安全性高, 慢）*/
+		));
 
 	$options[] = array(
 		'name' => __('Comment UA infomation', 'sakura'),/*评论UA信息*/
