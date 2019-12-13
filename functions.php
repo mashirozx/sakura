@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.2' );
+define( 'SAKURA_VERSION', '3.3.3' );
 define( 'BUILD_VERSION', '3' );
 
 //ini_set('display_errors', true);

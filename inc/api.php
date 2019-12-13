@@ -224,26 +224,9 @@ function SMMS_API($image)
     $Boundary = wp_generate_password();
     $bits = file_get_contents($filedata);
 
-    $headers = array();
-    array_push($headers, "Content-Type: multipart/form-data; boundary=$Boundary");
-    array_push($headers, '');
-    array_push($headers, "Authorization: Basic " . $client_id);
-    array_push($headers, '');
-    array_push($headers, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97");
-    $headers = implode("\r\n", $headers);
-
-    $fields = array();
-    array_push($fields, "--" . $Boundary);
-    array_push($fields, "Content-Disposition: form-data; name=\"smfile\"; filename=\"$filename\"");
-    array_push($fields, '');
-    array_push($fields, $bits);
-    array_push($fields, '');
-    array_push($fields, "--" . $Boundary . "--");
-    $fields = implode("\r\n", $fields);
-
     $args = array(
-        'headers' => $headers,
-        'body' => $fields,
+        'headers' => 'Content-Type: multipart/form-data; boundary=' . $Boundary . '\r\n\r\nAuthorization: Basic ' . $client_id . '\r\n\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97',
+        'body' => '--' . $Boundary . '\r\nContent-Disposition: form-data; name="smfile"; filename="' . $filename . '"\r\n\r\n'.$bits.'\r\n\r\n--' . $Boundary . '--'
     );
 
     $response = wp_remote_post($upload_url, $args);

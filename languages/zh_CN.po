@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-12-04 15:07+0800\n"
-"PO-Revision-Date: 2019-12-04 15:07+0800\n"
+"POT-Creation-Date: 2019-12-13 14:51+0800\n"
+"PO-Revision-Date: 2019-12-13 14:51+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -207,7 +207,7 @@ msgstr ""
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1654
+#: functions.php:1664
 msgid "Sidebar"
 msgstr "侧栏"
 
@@ -216,7 +216,7 @@ msgstr "侧栏"
 msgid "page %s "
 msgstr "第 %s 页 "
 
-#: inc/api.php:313 inc/theme_plus.php:727
+#: inc/api.php:301 inc/theme_plus.php:727
 msgid "The comment is private"
 msgstr "该评论为私密评论"
 
@@ -1365,8 +1365,19 @@ msgid "About"
 msgstr "关于"
 
 #: options.php:906
-msgid "Theme Sakura v"
+#, php-format
+msgid ""
+"Theme Sakura v %s  |  <a href=\"https://2heng.xin/theme-sakura/\">Theme "
+"document</a>  |  <a href=\"https://github.com/mashirozx/Sakura/\">Source "
+"code</a><a href=\"https://github.com/mashirozx/Sakura/releases/latest\"><img "
+"src=\"https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-"
+"square\" alt=\"GitHub release\"></a>"
 msgstr ""
+"Theme Sakura v %s  |  <a href=\"https://2heng.xin/theme-sakura/\">主题说明</"
+"a>  |  <a href=\"https://github.com/mashirozx/Sakura/\">源码</a><a href="
+"\"https://github.com/mashirozx/Sakura/releases/latest\"><img src=\"https://"
+"img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square\" alt="
+"\"GitHub release\"></a>"
 
 #: options.php:912
 msgid "Check for Updates"
@@ -1667,27 +1678,51 @@ msgid "Enable human verification"
 msgstr "开启机器人验证"
 
 #: options.php:1139
+msgid "QQ avatar link encryption"
+msgstr "QQ头像链接加密"
+
+#: options.php:1140
+msgid "Do not display the user's qq avatar links directly."
+msgstr "不直接暴露用户QQ头像链接"
+
+#: options.php:1145
+msgid "Off (default)"
+msgstr "关闭（默认）"
+
+#: options.php:1146
+msgid "use redirect (general security)"
+msgstr "使用重定向（安全性低）"
+
+#: options.php:1147
+msgid "fetch data at backend (high security)"
+msgstr "后端获取头像数据（安全性高）"
+
+#: options.php:1148
+msgid "fetch data at backend (high security，slow)"
+msgstr "后端解析QQ头像接口（安全性高，慢）"
+
+#: options.php:1152
 msgid "Comment UA infomation"
 msgstr "评论UA信息"
 
-#: options.php:1140
+#: options.php:1153
 msgid ""
 "Check to enable, display the user's browser, operating system information"
 msgstr "勾选开启，显示用户的浏览器，操作系统信息"
 
-#: options.php:1146
+#: options.php:1159
 msgid "Enable disqus"
 msgstr "开启多说插件支持"
 
-#: options.php:1147
+#: options.php:1160
 msgid "Enable disqus for comment"
 msgstr "多说已经凉了～～"
 
-#: options.php:1153
+#: options.php:1166
 msgid "Time Zone adjustment"
 msgstr "时区调整"
 
-#: options.php:1154
+#: options.php:1167
 msgid ""
 "If the comment has a time difference problem adjust here, fill in an "
 "integer, the calculation method: actual_time = display_error_time - "
