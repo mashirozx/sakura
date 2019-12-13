@@ -1136,6 +1136,19 @@ function optionsframework_options() {
 		'type' => 'checkbox');
 
 	$options[] = array(
+		'name' => __('QQ avatar link encryption', 'sakura'),/*QQ头像链接加密*/
+		'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'),/*不直接暴露用户qq头像链接*/
+		'id' => 'qq_avatar_link',
+		'std' => "off",
+		'type' => "radio",
+		'options' => array(
+			'off' => __('Off (default)', 'sakura'),/*关闭（默认）*/
+			'type_1' => __('use redirect (general security)', 'sakura'),/*使用 重定向（安全性一般）'*/
+			'type_2' => __('fetch data at backend (high security)', 'sakura'),/*后端获取数据（安全性高）*/
+			'type_3' => __('fetch data at backend (high security，slow)', 'sakura'),/*后端获取数据（安全性高, 慢）*/
+		));
+
+	$options[] = array(
 		'name' => __('Comment UA infomation', 'sakura'),/*评论UA信息*/
 		'desc' => __('Check to enable, display the user\'s browser, operating system information', 'sakura'),/*勾选开启，显示用户的浏览器，操作系统信息*/
 		'id' => 'open_useragent',
