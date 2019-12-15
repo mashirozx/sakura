@@ -877,7 +877,7 @@ function optionsframework_options() {
         
 	$options[] = array(
 		'name' => __('Cover CDN', 'sakura'),/*封面图片库*/
-		'desc' => __('Fill in the cdn path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>', 'sakura'),/*填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
+		'desc' => sprintf(__('Fill in the cdn path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>. Click <a href = "%s">here</a> to update manifest', 'sakura'), rest_url('sakura/v1/database/update')),/*填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
 		'id' => 'cover_cdn',
 		'std' => 'https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3',
 		'type' => 'text');  

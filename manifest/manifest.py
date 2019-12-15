@@ -7,8 +7,6 @@ Desc: Webp convertor
 import os
 import sys
 import json
-import requests
-import base64
 import hashlib
 from PIL import Image
 
@@ -50,29 +48,6 @@ class Single(object):
     self.manifest()
     return self.mani
 
-
-class Upload2Wordpress(object):
-  def __init__(self, username, password, url):
-    self.username = username
-    self.password = password
-    self.url = url
-
-  def upload(self, file, field):
-    data_string = self.username + ':' + self.password
-    token = base64.b64encode(data_string.encode()).decode('utf-8')
-    headers = {
-      'Authorization': 'Basic ' + token,
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97"
-    }
-    files = {field: open(file, mode="rb")}
-    reply = requests.post(self.url, headers=headers, files=files)
-    print(json.loads(reply.content)['message'])
-
-  def main(self):
-    print('start uploading `manifest.json`...')
-    self.upload('manifest.json', 'manifest')
-
-
 def gen_manifest_json():
   onlyfiles = [f for f in os.listdir('gallary') if os.path.isfile(os.path.join('gallary', f))]
   id = 1
@@ -88,11 +63,6 @@ def gen_manifest_json():
 
 def main():
   gen_manifest_json()
-  username = input('Enter your username: ')
-  password = input('Enter your password: ')
-  url = input('Enter your rest api url: ')
-  upload = Upload2Wordpress(username, password, url)
-  upload.main()
 
 
 if __name__ == '__main__':

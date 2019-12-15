@@ -21,7 +21,7 @@ add_action('rest_api_init', function () {
         'callback' => 'feature_gallery',
     ));
     register_rest_route('sakura/v1', '/database/update', array(
-        'methods' => 'POST',
+        'methods' => 'GET',
         'callback' => 'update_database',
     ));
     register_rest_route('sakura/v1', '/qqinfo/json', array(
@@ -367,48 +367,30 @@ function feature_gallery() {
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/database/update
  */
 function update_database() {
-    $username = $_SERVER['PHP_AUTH_USER'];
-    $password = $_SERVER['PHP_AUTH_PW'];
-    $user = wp_authenticate($username, $password);
-    if (is_a($user, 'WP_User')) {
-        if (in_array('administrator', (array) $user->roles)) {
-            global $wpdb;
-            $sakura_table_name = $wpdb->base_prefix.'sakura';
-            if(isset($_FILES["manifest"])) {
-                $manifest = array(
-                    "key" => "manifest_json",
-                    "value" => file_get_contents($_FILES["manifest"]["tmp_name"])
-                );
-                $time = array(
-                    "key" => "json_time",
-                    "value" => date("Y-m-d H:i:s",time())
-                );
-
-                $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
-                $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
-                $wpdb->insert($sakura_table_name,$manifest);
-                $wpdb->insert($sakura_table_name,$time);
-                $message = "manifest.json has been stored into database.";
-            }
-            $output = array(
-                'status' => 200,
-                'success' => true,
-                'message' => $message
-            );
-            $result = new WP_REST_Response($output, 200);
-            $result->set_headers(array('Content-Type' => 'application/json'));
-            return $result;
-        }
-    } else {
-        $output = array(
-            'status' => 401,
-            'success' => false,
-            'message' => 'Not Authorized.'
+    global $wpdb;
+    $sakura_table_name = $wpdb->base_prefix.'sakura';
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+    $manifest = file_get_contents($img_domain . "/manifest/manifest.json");
+    if($manifest) {
+        $manifest = array(
+            "key" => "manifest_json",
+            "value" => $manifest
         );
-        $result = new WP_REST_Response($output, 401);
-        $result->set_headers(array('Content-Type' => 'application/json'));
-        return $result;
+        $time = array(
+            "key" => "json_time",
+            "value" => date("Y-m-d H:i:s",time())
+        );
+
+        $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
+        $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
+        $wpdb->insert($sakura_table_name,$manifest);
+        $wpdb->insert($sakura_table_name,$time);
+        $output = "manifest.json has been stored into database.";
+    }else{
+        $output = "manifest.json not found, please ensure your url is corrent.";
     }
+    $result = new WP_REST_Response($output, 200);
+    return $result;
 }
 
 /**
