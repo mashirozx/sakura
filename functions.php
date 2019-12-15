@@ -1687,7 +1687,7 @@ function markdown_parser($incoming_comment) {
     $comment_markdown_content = $incoming_comment['comment_content'];
     include 'inc/Parsedown.php';
     $Parsedown = new Parsedown();
-    $incoming_comment['comment_content'] = $Parsedown->text($incoming_comment['comment_content']);
+    $incoming_comment['comment_content'] = $Parsedown->setUrlsLinked(false)->text($incoming_comment['comment_content']);
     return $incoming_comment;
 }
 add_filter('preprocess_comment' , 'markdown_parser');
