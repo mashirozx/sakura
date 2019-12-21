@@ -401,8 +401,9 @@ function get_qq_avatar(){
     global $sakura_privkey;
     $encrypted=$_GET["qq"];
     if(isset($encrypted)){
+        $iv = SAKURA_VERSION;
         $encrypted = urldecode(base64_decode($encrypted));
-        $qq_number = openssl_decrypt($encrypted, 'aes-128-cbc', $sakura_privkey, 0);
+        $qq_number = openssl_decrypt($encrypted, 'aes-128-cbc', $sakura_privkey, 0, $iv);
         preg_match('/^\d{3,}$/', $qq_number, $matches);
         $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
         if(akina_option('qq_avatar_link')=='type_2'){

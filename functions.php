@@ -1627,7 +1627,8 @@ function change_avatar($avatar){
                 preg_match('/:\"([^\"]*)\"/i',$qqavatar,$matches);
                 return '<img src="'.$matches[1].'" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }else{
-                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0);
+                $iv = SAKURA_VERSION;
+                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0, $iv);
                 $encrypted = urlencode(base64_encode($encrypted));
                 return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$encrypted.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }

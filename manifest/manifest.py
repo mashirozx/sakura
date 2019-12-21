@@ -44,10 +44,7 @@ class Single(object):
   def main(self):
     self.hash()
     # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
-    try:
-      self.optimize()
-    except OSError:
-      print("Falied to optimize the picture: " + self.file)
+    self.optimize()
     self.manifest()
     return self.mani
 
@@ -56,10 +53,13 @@ def gen_manifest_json():
   id = 1
   Manifest = {}
   for f in onlyfiles:
-    worker = Single(f, Manifest)
-    Manifest = worker.main()
-    print(str(id) + '/' + str(len(onlyfiles)))
-    id += 1
+    try:
+      worker = Single(f, Manifest)
+      Manifest = worker.main()
+      print(str(id) + '/' + str(len(onlyfiles)))
+      id += 1
+    except OSError:
+      print("Falied to optimize the picture: " + f)
   with open('manifest.json', 'w+') as json_file:
     json.dump(Manifest, json_file)
 
