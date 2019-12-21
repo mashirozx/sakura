@@ -44,7 +44,10 @@ class Single(object):
   def main(self):
     self.hash()
     # if os.path.exists(self.jpeg) and os.path.exists(self.webp):
-    self.optimize()
+    try:
+      self.optimize()
+    except OSError:
+      print("Falied to optimize the picture: " + self.file)
     self.manifest()
     return self.mani
 

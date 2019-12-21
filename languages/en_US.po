@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-12-15 14:40+0800\n"
-"PO-Revision-Date: 2019-12-15 14:40+0800\n"
+"POT-Creation-Date: 2019-12-21 20:24+0800\n"
+"PO-Revision-Date: 2019-12-21 20:24+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -1303,14 +1303,14 @@ msgid ""
 msgstr ""
 
 #: options.php:879
-msgid "Cover CDN"
+msgid "Cover manifest"
 msgstr ""
 
 #: options.php:880
 #, php-format
 msgid ""
-"Fill in the cdn path for random picture display, without adding a slash at "
-"the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
+"Fill in the manifest path for random picture display, without adding a slash "
+"at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
 "please refer to <a href = \"https: //github.com/mashirozx/Sakura/wiki/options"
 "\">Wiki </a>. Click <a href = \"%s\">here</a> to update manifest"
 msgstr ""

@@ -351,9 +351,9 @@ function feature_gallery() {
     $img = array_rand($img_array);
     $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
     if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][1];
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
     } else {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][1];
+        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
     }
     $data = array('cover image');
     $response = new WP_REST_Response($data);
