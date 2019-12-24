@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
 "POT-Creation-Date: 2019-12-21 20:23+0800\n"
-"PO-Revision-Date: 2019-12-21 20:24+0800\n"
+"PO-Revision-Date: 2019-12-24 13:28+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -955,7 +955,7 @@ msgstr "聚焦图二链接"
 
 #: options.php:509
 msgid "Top-feature 3 image"
-msgstr "聚焦图二链接"
+msgstr "聚焦图三"
 
 #: options.php:516 options.php:517
 msgid "Top-feature 3 title"

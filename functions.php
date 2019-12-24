@@ -470,7 +470,7 @@ function set_post_views() {
         global $post;
         $post_id = intval($post->ID);
         if($post_id) {
-            $views = get_post_meta($post_id, 'views', true);
+            $views = (int)get_post_meta($post_id, 'views', true);
             if(!update_post_meta($post_id, 'views', ($views + 1))) {
                 add_post_meta($post_id, 'views', 1, true);
             }

@@ -275,7 +275,7 @@ EOS;
 
     $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
     while ($posts->have_posts()): $posts->the_post();
-        $output .= '{"type":"post","link":"' . get_post_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
+        $output .= '{"type":"post","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
     endwhile;
     wp_reset_postdata();
 
@@ -373,12 +373,12 @@ function update_database() {
     $manifest = file_get_contents($img_domain . "/manifest/manifest.json");
     if($manifest) {
         $manifest = array(
-            "key" => "manifest_json",
-            "value" => $manifest
+            "mate_key" => "manifest_json",
+            "mate_value" => $manifest
         );
         $time = array(
-            "key" => "json_time",
-            "value" => date("Y-m-d H:i:s",time())
+            "mate_key" => "json_time",
+            "mate_value" => date("Y-m-d H:i:s",time())
         );
 
         $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
