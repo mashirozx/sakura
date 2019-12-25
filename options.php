@@ -916,7 +916,7 @@ function optionsframework_options() {
 		'type' => "images",
 		'options' => array(
 			'tag' => 'https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square',
-            'tag2' => 'https://img.shields.io/github/commits-since/mashirozx/Sakura/v'.SAKURA_VERSION.'.svg?style=flat-square'
+            'tag2' => 'https://img.shields.io/github/commits-since/mashirozx/Sakura/v'.SAKURA_VERSION.'/dev.svg?style=flat-square'
         )
 	);
 
@@ -970,7 +970,7 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
-		'name' => __('The categories of articles that don\t not show on homepage', 'sakura'),/*首页不显示的分类文章*/
+		'name' => __('The categories of articles that don\'t not show on homepage', 'sakura'),/*首页不显示的分类文章*/
 		'desc' => __('Fill in category ID, multiple IDs are divided by a comma ","', 'sakura'),/*填写分类ID，多个用英文“ , ”分开*/
 		'id' => 'classify_display',
 		'std' => '',
