@@ -6809,7 +6809,8 @@ input[type=radio]:checked:before {
 .changeSkin-gear {
     position: fixed;
     bottom: 0;
-    left: 5px;
+    left: auto;
+    right: 5px;
     width: auto;
     height: auto;
     z-index: 99;
@@ -8294,7 +8295,8 @@ td.hljs-ln-numbers {
 .skin-menu {
     position: fixed;
     bottom: 50px;
-    left: 10px;
+    left: auto;
+    right: 10px;
     height: auto;
     width: 220px;
     border-radius: 5px;

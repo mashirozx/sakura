@@ -689,14 +689,14 @@ function optionsframework_options() {
 		'id' => 'facebook',
 		'std' => '',
 		'type' => 'text');
-
+	/*
 	$options[] = array(
 		'name' => __('Google+', 'sakura'),
-		'desc' => __('G+ address', 'sakura'),/*G+地址*/
+		'desc' => __('G+ address', 'sakura'),
 		'id' => 'googleplus',
 		'std' => '',
 		'type' => 'text');
-
+	*/
 	$options[] = array(
 		'name' => __('Jianshu', 'sakura'),/*简书*/
 		'desc' => __('Jianshu address', 'sakura'),/*简书地址*/
