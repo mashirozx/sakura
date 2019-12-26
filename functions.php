@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.3' );
+define( 'SAKURA_VERSION', '3.3.5' );
 define( 'BUILD_VERSION', '3' );
 
 //ini_set('display_errors', true);
@@ -470,7 +470,7 @@ function set_post_views() {
         global $post;
         $post_id = intval($post->ID);
         if($post_id) {
-            $views = get_post_meta($post_id, 'views', true);
+            $views = (int)get_post_meta($post_id, 'views', true);
             if(!update_post_meta($post_id, 'views', ($views + 1))) {
                 add_post_meta($post_id, 'views', 1, true);
             }
@@ -1627,7 +1627,8 @@ function change_avatar($avatar){
                 preg_match('/:\"([^\"]*)\"/i',$qqavatar,$matches);
                 return '<img src="'.$matches[1].'" data-src="'.stripslashes($m[1]).'" class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }else{
-                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0);
+                $iv = str_repeat($sakura_privkey, 2);
+                $encrypted = openssl_encrypt($qq_number, 'aes-128-cbc', $sakura_privkey, 0, $iv);
                 $encrypted = urlencode(base64_encode($encrypted));
                 return '<img src="'.rest_url("sakura/v1/qqinfo/avatar").'?qq='.$encrypted.'"class="lazyload avatar avatar-24 photo" alt="😀" width="24" height="24" onerror="imgError(this,1)">';
             }
@@ -1687,7 +1688,7 @@ function markdown_parser($incoming_comment) {
     $comment_markdown_content = $incoming_comment['comment_content'];
     include 'inc/Parsedown.php';
     $Parsedown = new Parsedown();
-    $incoming_comment['comment_content'] = $Parsedown->text($incoming_comment['comment_content']);
+    $incoming_comment['comment_content'] = $Parsedown->setUrlsLinked(false)->text($incoming_comment['comment_content']);
     return $incoming_comment;
 }
 add_filter('preprocess_comment' , 'markdown_parser');

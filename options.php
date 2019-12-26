@@ -689,14 +689,14 @@ function optionsframework_options() {
 		'id' => 'facebook',
 		'std' => '',
 		'type' => 'text');
-
+	/*
 	$options[] = array(
 		'name' => __('Google+', 'sakura'),
-		'desc' => __('G+ address', 'sakura'),/*G+地址*/
+		'desc' => __('G+ address', 'sakura'),
 		'id' => 'googleplus',
 		'std' => '',
 		'type' => 'text');
-
+	*/
 	$options[] = array(
 		'name' => __('Jianshu', 'sakura'),/*简书*/
 		'desc' => __('Jianshu address', 'sakura'),/*简书地址*/
@@ -876,8 +876,8 @@ function optionsframework_options() {
 		'type' => 'text');  
         
 	$options[] = array(
-		'name' => __('Cover CDN', 'sakura'),/*封面图片库*/
-		'desc' => __('Fill in the cdn path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>', 'sakura'),/*填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
+		'name' => __('Cover manifest', 'sakura'),/*封面图片库*/
+		'desc' => sprintf(__('Fill in the manifest path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>. Click <a href = "%s">here</a> to update manifest', 'sakura'), rest_url('sakura/v1/database/update')),/*填写 manifest 路径 ，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
 		'id' => 'cover_cdn',
 		'std' => 'https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3',
 		'type' => 'text');  
@@ -916,7 +916,7 @@ function optionsframework_options() {
 		'type' => "images",
 		'options' => array(
 			'tag' => 'https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square',
-            'tag2' => 'https://img.shields.io/github/commits-since/mashirozx/Sakura/v'.SAKURA_VERSION.'.svg?style=flat-square'
+            'tag2' => 'https://img.shields.io/github/commits-since/mashirozx/Sakura/v'.SAKURA_VERSION.'/dev.svg?style=flat-square'
         )
 	);
 
@@ -970,7 +970,7 @@ function optionsframework_options() {
 		'type' => 'text');
 
 	$options[] = array(
-		'name' => __('The categories of articles that don\t not show on homepage', 'sakura'),/*首页不显示的分类文章*/
+		'name' => __('The categories of articles that don\'t not show on homepage', 'sakura'),/*首页不显示的分类文章*/
 		'desc' => __('Fill in category ID, multiple IDs are divided by a comma ","', 'sakura'),/*填写分类ID，多个用英文“ , ”分开*/
 		'id' => 'classify_display',
 		'std' => '',

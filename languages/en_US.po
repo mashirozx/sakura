@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-12-13 14:51+0800\n"
-"PO-Revision-Date: 2019-12-13 14:51+0800\n"
+"POT-Creation-Date: 2019-12-25 10:43+0800\n"
+"PO-Revision-Date: 2019-12-25 10:43+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -107,7 +107,7 @@ msgid "Name* "
 msgstr ""
 
 #: comments.php:95
-msgid "You\\' receive notification by email"
+msgid "You will receive notification by email"
 msgstr ""
 
 #: comments.php:95
@@ -205,7 +205,7 @@ msgstr ""
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1664
+#: functions.php:1665
 msgid "Sidebar"
 msgstr ""
 
@@ -1303,15 +1303,16 @@ msgid ""
 msgstr ""
 
 #: options.php:879
-msgid "Cover CDN"
+msgid "Cover manifest"
 msgstr ""
 
 #: options.php:880
+#, php-format
 msgid ""
-"Fill in the cdn path for random picture display, without adding a slash at "
-"the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
+"Fill in the manifest path for random picture display, without adding a slash "
+"at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
 "please refer to <a href = \"https: //github.com/mashirozx/Sakura/wiki/options"
-"\">Wiki </a>"
+"\">Wiki </a>. Click <a href = \"%s\">here</a> to update manifest"
 msgstr ""
 
 #: options.php:886
@@ -1409,7 +1410,7 @@ msgid ""
 msgstr ""
 
 #: options.php:973
-msgid "The categories of articles that don\\t not show on homepage"
+msgid "The categories of articles that don't not show on homepage"
 msgstr ""
 
 #: options.php:974 options.php:981

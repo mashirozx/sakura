@@ -24,8 +24,6 @@ pip3 install Pillow
 pip install Pillow --user
 ```
 
-用同样的方法安装`requests`
-
 ### 运行
 把图片文件放到 `gallary` 目录，Windows 可直接双击 manifest.py，或者和其他操作系统一样，在 Terminal、Powershell、CMD 中运行：
 

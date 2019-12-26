@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2019-12-13 14:51+0800\n"
-"PO-Revision-Date: 2019-12-13 14:51+0800\n"
+"POT-Creation-Date: 2019-12-25 10:43+0800\n"
+"PO-Revision-Date: 2019-12-25 10:44+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -107,7 +107,7 @@ msgid "Name* "
 msgstr "昵称 "
 
 #: comments.php:95
-msgid "You\\' receive notification by email"
+msgid "You will receive notification by email"
 msgstr "你将收到回复通知"
 
 #: comments.php:95
@@ -207,7 +207,7 @@ msgstr ""
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1664
+#: functions.php:1665
 msgid "Sidebar"
 msgstr "侧栏"
 
@@ -955,7 +955,7 @@ msgstr "聚焦图二链接"
 
 #: options.php:509
 msgid "Top-feature 3 image"
-msgstr "聚焦图二链接"
+msgstr "聚焦图三"
 
 #: options.php:516 options.php:517
 msgid "Top-feature 3 title"
@@ -1324,19 +1324,21 @@ msgstr ""
 "名/2018/05/xx.png 加载"
 
 #: options.php:879
-msgid "Cover CDN"
-msgstr "封面图图片库"
+msgid "Cover manifest"
+msgstr ""
 
 #: options.php:880
+#, php-format
 msgid ""
-"Fill in the cdn path for random picture display, without adding a slash at "
-"the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
+"Fill in the manifest path for random picture display, without adding a slash "
+"at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, "
 "please refer to <a href = \"https: //github.com/mashirozx/Sakura/wiki/options"
-"\">Wiki </a>"
+"\">Wiki </a>. Click <a href = \"%s\">here</a> to update manifest"
 msgstr ""
-"填写 cdn 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr."
-"net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href=\"https://github.com/"
-"mashirozx/Sakura/wiki/options\">Wiki</a>"
+"填写 manifest 路径，用于随机图片展示，最后不用加斜杠，例：https://cdn."
+"jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href=\"https://"
+"github.com/mashirozx/Sakura/wiki/options\">Wiki</a>。点击<a href =\"%s\">这里"
+"</a>更新manifest"
 
 #: options.php:886
 msgid "Use the front-end library locally (lib.js、lib.css)"
@@ -1442,7 +1444,7 @@ msgstr ""
 "个字母 = 1字节，自己计算吧"
 
 #: options.php:973
-msgid "The categories of articles that don\\t not show on homepage"
+msgid "The categories of articles that don't not show on homepage"
 msgstr "首页不显示的分类文章"
 
 #: options.php:974 options.php:981
@@ -1849,6 +1851,9 @@ msgstr "注 册"
 #: user/page-register.php:92
 msgid "Registration is not open yet."
 msgstr "暂未开放注册。"
+
+#~ msgid "Cover CDN"
+#~ msgstr "封面图图片库"
 
 #~ msgid "Jsdelivr CDN"
 #~ msgstr "随机图片"
