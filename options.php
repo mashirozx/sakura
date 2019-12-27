@@ -374,8 +374,21 @@ function optionsframework_options()
         ));
 
     $options[] = array(
-        'name' => __('Cover manifest', 'sakura'), /*封面图片库*/
-        'desc' => sprintf(__('Fill in the manifest path for random picture display, without adding a slash at the end, for example: https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>. Click <a href = "%s">here</a> to update manifest', 'sakura'), rest_url('sakura/v1/database/update')), /*填写 manifest 路径 ，用于随机图片展示，最后不用加斜杠，例：https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3 ，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>*/
+        'name' => __('Cover manifest', 'sakura'), /*封面图片库选项*/
+        'desc' => __('Select how to call the cover random image', 'sakura'), /*选择封面随机图的调用方式*/
+        'id' => 'cover_cdn_options',
+        'std' => "type_1",
+        'type' => "select",
+        'options' => array(
+            'type_1' => __('webp images (optimization)', 'sakura'), /*webp优化随机图*/
+            'type_2' => __('built-in api (easiest)', 'sakura'), /*内置原图随机图*/
+            'type_3' => __('custom api (advanced)', 'sakura'), /*外部随机图API*/
+        )
+    );
+
+    $options[] = array(
+        'name' => __('Cover images url', 'sakura'), /*图片库url*/
+        'desc' => sprintf(__('Fill in the manifest path for random picture display, please refer to <a href = "https: //github.com/mashirozx/Sakura/wiki/options">Wiki </a>. If you select webp images above, click <a href = "%s">here</a> to update manifest', 'sakura'), rest_url('sakura/v1/database/update')), /*填写 manifest 路径，更多信息请参考<a href="https://github.com/mashirozx/Sakura/wiki/options">Wiki</a>,，如果你在上面选择了webp优化，点击<a href = "%s">这里</a>更新 manifest*/
         'id' => 'cover_cdn',
         'std' => 'https://cdn.jsdelivr.net/gh/mashirozx/sakura@3.3.3',
         'type' => 'text');

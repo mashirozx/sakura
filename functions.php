@@ -1626,8 +1626,7 @@ function html_tag_parser($content)
 
         //With Thumbnail: !{alt}(url)[th_url]
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content, $matches)) {
-            $i = 0;
-            if ($i < sizeof($matches)) {
+            for ($i = 0; $i < sizeof($matches); $i++) {
                 $content = str_replace($matches[$i], preg_replace(
                     '/!\{([^\{\}]+)*\}\(' . $url_regex . '\)\[' . $url_regex . '\]/i',
                     '<a data-fancybox="gallery"
@@ -1638,7 +1637,6 @@ function html_tag_parser($content)
                         title="$1"><img src="$7" target="_blank" rel="nofollow" class="fancybox"></a>',
                     $matches[$i]),
                     $content);
-                $i++;
             }
         }
 
@@ -1671,14 +1669,12 @@ function html_tag_parser($content)
         //Fancybox
         $url_regex = '((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))';
         if (preg_match_all('/\!\{.*?\)\[.*?\]/i', $content, $matches)) {
-            $i = 0;
-            if ($i < sizeof($matches)) {
+            for ($i = 0; $i < sizeof($matches); $i++) {
                 $content = str_replace(
                     $matches[$i],
                     preg_replace('/!\{([^\{\}]+)*\}\(' . $url_regex . '\)\[' . $url_regex . '\]/i', '<a href="$2"><img src="$7" alt="$1" title="$1"></a>', $matches[$i]),
                     $content
                 );
-                $i++;
             }
         }
         $content = preg_replace('/!\{([^\{\}]+)*\}\(' . $url_regex . '\)/i', '<a href="$2"><img src="$2" alt="$1" title="$1"></a>', $content);
@@ -1864,7 +1860,7 @@ function create_sakura_table()
     if (!$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'manifest_json'")) {
         $manifest = array(
             "mate_key" => "manifest_json",
-            "mate_value" => file_get_contents(get_template_directory() . "/manifest/manifest.json"),
+            "mate_value" => file_get_contents(get_stylesheet_directory() . "/manifest/manifest.json"),
         );
         $wpdb->insert($sakura_table_name, $manifest);
     }

@@ -325,14 +325,23 @@ EOS;
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/cover
  */
 function cover_gallery() {
-    global $wpdb,$sakura_image_array;
-    $img_array = json_decode($sakura_image_array, true);
-    $img = array_rand($img_array);
-    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
-    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
-    } else {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+    if(akina_option('cover_cdn_options')=="type_2"){
+        $img_array = glob(get_template_directory() . "/manifest/gallary/*.{gif,jpg,png}",GLOB_BRACE);
+        $img = array_rand($img_array);
+        $imgurl = trim($img_array[$img]);
+        $imgurl = str_replace(get_template_directory(), get_template_directory_uri(), $imgurl);
+    }elseif(akina_option('cover_cdn_options')=="type_3"){
+        $imgurl = akina_option('cover_cdn');
+    }else{
+        global $sakura_image_array;
+        $img_array = json_decode($sakura_image_array, true);
+        $img = array_rand($img_array);
+        $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+        if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+            $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
+        } else {
+            $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+        }
     }
     $data = array('cover image');
     $response = new WP_REST_Response($data);
@@ -346,14 +355,23 @@ function cover_gallery() {
  * @rest api接口路径：https://sakura.2heng.xin/wp-json/sakura/v1/image/feature
  */
 function feature_gallery() {
-    global $wpdb,$sakura_image_array;
-    $img_array = json_decode($sakura_image_array, true);
-    $img = array_rand($img_array);
-    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
-    if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
-    } else {
-        $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+    if(akina_option('cover_cdn_options')=="type_2"){
+        $img_array = glob(get_template_directory() . "/manifest/gallery/*.{gif,jpg,png}",GLOB_BRACE);
+        $img = array_rand($img_array);
+        $imgurl = trim($img_array[$img]);
+        $imgurl = str_replace(get_template_directory(), get_template_directory_uri(), $imgurl);
+    }elseif(akina_option('cover_cdn_options')=="type_3"){
+        $imgurl = akina_option('cover_cdn');
+    }else{
+        global $sakura_image_array;
+        $img_array = json_decode($sakura_image_array, true);
+        $img = array_rand($img_array);
+        $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+        if(strpos($_SERVER['HTTP_ACCEPT'], 'image/webp')) {
+            $imgurl = $img_domain . "/manifest/" . $img_array[$img]["webp"][0];
+        } else {
+            $imgurl = $img_domain . "/manifest/" . $img_array[$img]["jpeg"][0];
+        }
     }
     $data = array('cover image');
     $response = new WP_REST_Response($data);
@@ -369,7 +387,7 @@ function feature_gallery() {
 function update_database() {
     global $wpdb;
     $sakura_table_name = $wpdb->base_prefix.'sakura';
-    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory_uri();
+    $img_domain = akina_option('cover_cdn') ? akina_option('cover_cdn') : get_template_directory();
     $manifest = file_get_contents($img_domain . "/manifest/manifest.json");
     if($manifest) {
         $manifest = array(
@@ -387,7 +405,7 @@ function update_database() {
         $wpdb->insert($sakura_table_name,$time);
         $output = "manifest.json has been stored into database.";
     }else{
-        $output = "manifest.json not found, please ensure your url is corrent.";
+        $output = "manifest.json not found, please ensure your url ($img_domain) is corrent.";
     }
     $result = new WP_REST_Response($output, 200);
     return $result;
