@@ -7,7 +7,7 @@
  * @package Sakura
  */
  
-define( 'SAKURA_VERSION', '3.3.5' );
+define( 'SAKURA_VERSION', wp_get_theme()->get('Version') );
 define( 'BUILD_VERSION', '3' );
 
 //ini_set('display_errors', true);
@@ -736,7 +736,7 @@ function bolo_QTnextpage_arg1() {
 //Login Page style
 function custom_login() {
 	//echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
-	echo '<link rel="stylesheet" type="text/css" href="'.get_site_url().'/wp-content/themes/Sakura/inc/login.css?'.SAKURA_VERSION.'" />'."\n";
+	echo '<link rel="stylesheet" type="text/css" href="'.get_template_directory_uri().'/inc/login.css?'.SAKURA_VERSION.'" />'."\n";
 	//echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
 	echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>'."\n";
 }
@@ -762,7 +762,7 @@ function custom_html() {
 	}else{
 		$loginbg = 'https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.2.7/images/hd.png';
 	}
-	echo '<script type="text/javascript" src="'.get_site_url().'/wp-content/themes/Sakura/js/login.js"></script>'."\n";
+	echo '<script type="text/javascript" src="'.get_template_directory_uri().'/js/login.js"></script>'."\n";
 	echo '<script type="text/javascript">'."\n";
 	echo 'jQuery("body").prepend("<div class=\"loading\"><img src=\"https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/login_loading.gif\" width=\"58\" height=\"10\"></div><div id=\"bg\"><img /></div>");'."\n";
 	echo 'jQuery(\'#bg\').children(\'img\').attr(\'src\', \''.$loginbg.'\').load(function(){'."\n";
@@ -1124,7 +1124,7 @@ function get_wp_root_path() {
 $bilismiliestrans = array();
 function push_bili_smilies(){
   global $bilismiliestrans;
-  $smiles_path = get_wp_root_path(). "/themes/Sakura/images/smilies/bili/";
+  $smiles_path = __DIR__. "/images/smilies/bili/";
   $name = array( 'baiyan','fadai','koubi','qinqin','weiqu','bishi','fanu','kun','se','weixiao','bizui','ganga','lengmo','shengbing','wunai','chan','guilian','liubixue','shengqi','xiaoku','daku','guzhang','liuhan','shuizhao','xieyanxiao','dalao','haixiu','liulei','sikao','yiwen','dalian','heirenwenhao','miantian','tiaokan','yun','dianzan','huaixiao','mudengkoudai','tiaopi','zaijian','doge','jingxia','nanguo','touxiao','zhoumei','facai','keai','outu','tuxue','zhuakuang' );
   $return_smiles = '';
   for( $i=0;$i<count($name);$i++ ){ 
@@ -1359,7 +1359,7 @@ add_filter('site_url',  'wpadmin_filter', 10, 3);
 
 function admin_ini() {
   wp_enqueue_style('admin-styles-fix-icon', get_site_url() . '/wp-includes/css/dashicons.css');
-  wp_enqueue_style('cus-styles-fit', get_site_url() . '/wp-content/themes/Sakura/inc/css/dashboard-fix.css');
+  wp_enqueue_style('cus-styles-fit', get_template_directory_uri() . '/inc/css/dashboard-fix.css');
   wp_enqueue_script( 'lazyload', 'https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js' );
 }
 add_action('admin_enqueue_scripts', 'admin_ini');
