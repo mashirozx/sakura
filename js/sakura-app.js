@@ -753,7 +753,7 @@ if (mashiro_option.float_player_on) {
                         autoplay: !1,
                         mutex: !0,
                         lrcType: 3,
-                        listFolded: !1,
+                        listFolded: 1,
                         preload: 'auto',
                         theme: '#2980b9',
                         loop: 'all',
@@ -789,23 +789,13 @@ if (mashiro_option.float_player_on) {
                         lrcTag = 2;
                     });
                     var apSwitchTag = 0;
-                    var aplayerlist = $(".aplayer-list");
-                    aplayerlist.removeClass("aplayer-list-hide").css({
-                        maxHeight: '0px'
-                    });
                     $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
                     $(".aplayer-miniswitcher").click(function () {
                         if (apSwitchTag == 0) {
-                            aplayerlist.removeClass("aplayer-list-hide").animate({
-                                maxHeight: '250px'
-                            });
                             $(".aplayer.aplayer-fixed .aplayer-body").removeClass("ap-hover");
                             $("#secondary").addClass("active");
                             apSwitchTag = 1;
                         } else {
-                            aplayerlist.css({
-                                maxHeight: '0px'
-                            });
                             $(".aplayer.aplayer-fixed .aplayer-body").addClass("ap-hover");
                             $("#secondary").removeClass("active");
                             apSwitchTag = 0;
