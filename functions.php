@@ -1879,8 +1879,8 @@ function create_sakura_table()
         $wpdb->insert($sakura_table_name, $privkey);
     }
     //reduce sql query
-    $sakura_image_array = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='manifest_json'");
-    $sakura_privkey = $wpdb->get_var("SELECT `mate_value` FROM `wp_sakura` WHERE `mate_key`='privkey'");
+    $sakura_image_array = $wpdb->get_var("SELECT `mate_value` FROM  $sakura_table_name WHERE `mate_key`='manifest_json'");
+    $sakura_privkey = $wpdb->get_var("SELECT `mate_value` FROM  $sakura_table_name WHERE `mate_key`='privkey'");
 }
 add_action('after_setup_theme', 'create_sakura_table');
 

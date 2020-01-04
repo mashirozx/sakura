@@ -399,8 +399,8 @@ function update_database() {
             "mate_value" => date("Y-m-d H:i:s",time())
         );
 
-        $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='manifest_json'");
-        $wpdb->query("DELETE FROM `wp_sakura` WHERE `mate_key` ='json_time'");
+        $wpdb->query("DELETE FROM  $sakura_table_name WHERE `mate_key` ='manifest_json'");
+        $wpdb->query("DELETE FROM  $sakura_table_name WHERE `mate_key` ='json_time'");
         $wpdb->insert($sakura_table_name,$manifest);
         $wpdb->insert($sakura_table_name,$time);
         $output = "manifest.json has been stored into database.";
