@@ -989,7 +989,9 @@ function activate_widget(){
         $("#secondary").remove();
     }
 }
-activate_widget();
+setTimeout(function () {
+    activate_widget();
+}, 100);
 
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);

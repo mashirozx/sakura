@@ -1884,4 +1884,13 @@ function create_sakura_table()
 }
 add_action('after_setup_theme', 'create_sakura_table');
 
+//rest api支持
+function permalink_tip()
+{
+    if ( !get_option('permalink_structure') ){
+        $msg = __('<b> For a better experience, please do not set <a href="/wp-admin/options-permalink.php"> permalink </a> as plain. To do this, you may need to configure <a href="https://www.wpdaxue.com/wordpress-rewriterule.html" target="_blank"> pseudo-static </a>. </ b>','sakura'); /*<b>为了更好的使用体验，请不要将<a href="/wp-admin/options-permalink.php">固定链接</a>设置为朴素。为此，您可能需要配置<a href="https://www.wpdaxue.com/wordpress-rewriterule.html" target="_blank">伪静态</a>。</b>*/
+        echo '<div class="notice notice-success is-dismissible" id="scheme-tip"><p><b>' . $msg . '</b></p></div>';
+    }
+}
+add_action('admin_notices', 'permalink_tip');
 //code end
