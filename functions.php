@@ -1860,7 +1860,7 @@ function create_sakura_table()
     if (!$wpdb->get_var("SELECT COUNT(*) FROM $sakura_table_name WHERE mate_key = 'manifest_json'")) {
         $manifest = array(
             "mate_key" => "manifest_json",
-            "mate_value" => file_get_contents(get_stylesheet_directory() . "/manifest/manifest.json"),
+            "mate_value" => file_get_contents(get_template_directory() . "/manifest/manifest.json"),
         );
         $wpdb->insert($sakura_table_name, $manifest);
     }

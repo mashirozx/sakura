@@ -377,11 +377,11 @@ function optionsframework_options()
         'name' => __('Cover manifest', 'sakura'), /*封面图片库选项*/
         'desc' => __('Select how to call the cover random image', 'sakura'), /*选择封面随机图的调用方式*/
         'id' => 'cover_cdn_options',
-        'std' => "type_1",
+        'std' => "type_2",
         'type' => "select",
         'options' => array(
             'type_1' => __('webp images (optimization)', 'sakura'), /*webp优化随机图*/
-            'type_2' => __('built-in api (easiest)', 'sakura'), /*内置原图随机图*/
+            'type_2' => __('built-in api (default)', 'sakura'), /*内置原图随机图*/
             'type_3' => __('custom api (advanced)', 'sakura'), /*外部随机图API*/
         )
     );
@@ -704,14 +704,7 @@ function optionsframework_options()
         'id' => 'facebook',
         'std' => '',
         'type' => 'text');
-    /*
-    $options[] = array(
-    'name' => __('Google+', 'sakura'),
-    'desc' => __('G+ address', 'sakura'),
-    'id' => 'googleplus',
-    'std' => '',
-    'type' => 'text');
-     */
+
     $options[] = array(
         'name' => __('Jianshu', 'sakura'), /*简书*/
         'desc' => __('Jianshu address', 'sakura'), /*简书地址*/

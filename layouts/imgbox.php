@@ -117,9 +117,6 @@
 		<?php if (akina_option('facebook')){ ?>
 		<li><a href="<?php echo akina_option('facebook', ''); ?>" target="_blank" class="social-wangyiyun" title="Facebook"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/facebook.png"/></a></li>
 		<?php } ?>	
-		<?php if (akina_option('googleplus')){ ?>
-		<li><a href="<?php echo akina_option('googleplus', ''); ?>" target="_blank" class="social-wangyiyun" title="Google+"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/googleplus.png"/></a></li>
-		<?php } ?>
 		<?php if (akina_option('jianshu')){ ?>
 		<li><a href="<?php echo akina_option('jianshu', ''); ?>" target="_blank" class="social-wangyiyun" title="Jianshu"><img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/sns/jianshu.png"/></a></li>
 		<?php } ?>
