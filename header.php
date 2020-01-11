@@ -32,7 +32,7 @@ Theme by Mashiro
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <title itemprop="name"><?php global $page, $paged;wp_title( '-', true, 'right' );
 bloginfo( 'name' );$site_description = get_bloginfo( 'description', 'display' );
-if ( $site_description && ( is_home() || is_front_page() ) ) echo " - $site_description";if ( $paged >= 2 || $page >= 2 ) echo ' - ' . sprintf( __( '第 %s 页'), max( $paged, $page ) );?>
+if ( $site_description && ( is_home() || is_front_page() ) ) echo " - $site_description";if ( $paged >= 2 || $page >= 2 ) echo ' - ' . sprintf( __( 'page %s ','sakura'), max( $paged, $page ) );/*第 %s 页*/?>
 </title>
 <?php
 if (akina_option('akina_meta') == true) {
@@ -78,8 +78,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 <?php endif; ?>
 </head>
 <body <?php body_class(); ?>>
-    <?php if(get_template_directory_uri() != get_site_url().'/wp-content/themes/Sakura') echo '<div style="position:fixed;height:100%;width:100%;top:0;left:0;font-size:20px;z-index:999999;background-color: #fff;">Plz rename the theme folder name as <span style="color:red">Sakura</span>!<br>请将主题文件夹名改为 <span style="color:red">Sakura</span>！</div>'; ?>
-    <div class="scrollbar" id="bar"></div>
+	<div class="scrollbar" id="bar"></div>
 	<section id="main-container">
 		<?php 
 		if(!akina_option('head_focus')){ 
