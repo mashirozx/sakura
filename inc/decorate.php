@@ -61,6 +61,9 @@ if ( akina_option('theme_skin') ) { ?>
 }
 <?php } ?>
 
+.post-list-thumb{opacity: 0}
+.post-list-show {opacity: 1}
+
 <?php } // theme-skin ?>
 <?php // Custom style
 if ( akina_option('site_custom_style') ) {
