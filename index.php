@@ -16,7 +16,7 @@ get_header();
    
    <?php if ( akina_option('head_notice') != '0'){ 
    		$text = akina_option('notice_title');
-   		if ( $text = '' ){
+   		if ( $text == '' ){
 			$text = file_get_contents("https://v1.hitokoto.cn/?encode=text&charset=utf-8");
 		}
    	?>
