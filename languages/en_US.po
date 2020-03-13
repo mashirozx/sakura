@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-01-07 17:27+0800\n"
-"PO-Revision-Date: 2020-01-07 17:27+0800\n"
+"POT-Creation-Date: 2020-02-13 23:59+0800\n"
+"PO-Revision-Date: 2020-02-13 23:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -181,35 +181,35 @@ msgstr ""
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1327
+#: functions.php:1329
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1348 options.php:834
+#: functions.php:1350 options.php:834
 msgid " "
 msgstr ""
 
-#: functions.php:1352
+#: functions.php:1354
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1375 functions.php:1378 inc/theme_plus.php:478
+#: functions.php:1377 functions.php:1380 inc/theme_plus.php:478
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1604
+#: functions.php:1606
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1709
+#: functions.php:1711
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1779
+#: functions.php:1781
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:1891
+#: functions.php:1893
 msgid ""
 "<b> For a better experience, please do not set <a href=\"/wp-admin/options-"
 "permalink.php\"> permalink </a> as plain. To do this, you may need to "
@@ -1710,17 +1710,17 @@ msgstr "Search result: %s"
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
 #: tpl/content.php:34
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:53
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
 #: tpl/content.php:34
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:52
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:55
 #: tpl/content.php:37
 msgid "Hit"
 msgid_plural "Hits"
@@ -1728,7 +1728,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: tpl/content-none.php:14
-msgid "There is noyhing here！"
+msgid "There is nothing here！"
 msgstr ""
 
 #: tpl/content-none.php:21

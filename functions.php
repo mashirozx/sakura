@@ -609,7 +609,9 @@ function get_link_items()
 function gravatar_cn($url)
 {
     $gravatar_url = array('0.gravatar.com', '1.gravatar.com', '2.gravatar.com', 'secure.gravatar.com');
-    return str_replace($gravatar_url, 'cn.gravatar.com', $url);
+    //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
+    //官方服务器近期大陆访问 429，建议使用镜像
+    return str_replace( $gravatar_url, 'gravatar.2heng.xin', $url );
 }
 add_filter('get_avatar_url', 'gravatar_cn', 4);
 

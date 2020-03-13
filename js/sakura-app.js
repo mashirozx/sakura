@@ -5,6 +5,7 @@
  * @date 2019.8.3
  */
 mashiro_global.variables = new function () {
+    this.has_hls = false;
     this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
@@ -523,25 +524,34 @@ function killCoverVideo() {
     }
 }
 
+function loadHls(){
+    var video = addComment.I('coverVideo');
+    var video_src = $('#coverVideo').attr('data-src');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(video_src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = video_src;
+        video.addEventListener('loadedmetadata', function () {
+            video.play();
+        });
+    }
+}
+
 function coverVideoIni() {
     if ($('video').hasClass('hls')) {
-        $.getScript("https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.3.3/cdn/js/src/16.hls.js", function(){
-            var video = addComment.I('coverVideo');
-            var video_src = $('#coverVideo').attr('data-src');
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(video_src);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = video_src;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-            }
-          });
+        if (mashiro_global.variables.has_hls){
+            loadHls();
+        }else{
+            $.getScript("https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.3.3/cdn/js/src/16.hls.js", function(){
+                loadHls();
+                mashiro_global.variables.has_hls = true;
+              });
+        }
         //console.info('ini:coverVideoIni()');
     }
 }
