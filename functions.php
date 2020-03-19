@@ -215,6 +215,7 @@ function sakura_scripts()
         'reply_link_version' => $reply_link_version,
         'api' => esc_url_raw(rest_url()),
         'nonce' => wp_create_nonce('wp_rest'),
+        'google_analytics_id' => akina_option('google_analytics_id', '')
     ));
 }
 add_action('wp_enqueue_scripts', 'sakura_scripts');
