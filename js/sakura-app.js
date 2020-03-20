@@ -1751,6 +1751,11 @@ var home = location.href,
                         $('#loading-comments').after(result.fadeIn(500));
                         $('ul.commentwrap').after(nextlink);
                         lazyload();
+                        if (window.gtag) {
+                            gtag('config', Poi.google_analytics_id, {
+                                'page_path': path
+                            });
+                        }
                         code_highlight_style();
                         click_to_view_image();
                     }
@@ -1837,6 +1842,12 @@ $(function () {
                 } else {
                     $.getScript("//static.duoshuo.com/embed.js");
                 }
+            }
+        }).on('pjax:end', function() {
+            if (window.gtag){
+                gtag('config', Poi.google_analytics_id, {
+                    'page_path': window.location.pathname
+                });
             }
         }).on('submit', '.search-form,.s-search', function (event) {
             event.preventDefault();
