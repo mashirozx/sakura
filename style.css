@@ -1870,7 +1870,6 @@ h1.page-title.mb- {
 }
 
 #moblieGoTop {
-    display: none;
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -1884,9 +1883,9 @@ h1.page-title.mb- {
     border-radius: 10px;
     border-radius: 12px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
-    transition: box-shadow .2s ease
+    transform: scale(0);
+    transition:transform .3s
 }
-
 #moblieGoTop:hover {
     background-color: #fff;
     opacity: .8
@@ -4260,7 +4259,7 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .s-search input {
     font-size: 1rem;
-    background: #none;
+    background: none;
     padding: 12px 24px 12px 64px;
     width: 100%;
     outline: 0;

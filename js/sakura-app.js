@@ -417,22 +417,15 @@ $(document).ready(function () {
         preBG();
     });
 });
-if (document.body.clientWidth <= 860) {
-    window.onscroll = function () {
-        scrollFunction()
-    };
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            addComment.I("moblieGoTop").style.display = "block";
-        } else {
-            addComment.I("moblieGoTop").style.display = "none";
-        }
-    }
-
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+function topFunction() {
+    if ('scrollBehavior' in document.documentElement.style) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    } else {
+        window.scrollSmoothTo(0)
     }
 }
 
@@ -1758,36 +1751,46 @@ var home = location.href,
             document.body.addEventListener('input', POWERMODE)
         },
         GT: function () {
-            var offset = 100,
-                offset_opacity = 1200,
-                scroll_top_duration = 700,
-                $back_to_top = $('.cd-top');
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > offset) {
-                    $back_to_top.addClass('cd-is-visible');
-                    $(".changeSkin-gear").css("bottom", "0");
-                    if ($(window).height() > 950) {
-                        $(".cd-top.cd-is-visible").css("top", "0");
+            var cwidth = document.body.clientWidth,
+                cheight = window.innerHeight,
+                pc_to_top = document.querySelector(".cd-top"),
+                mb_to_top = document.querySelector("#moblieGoTop"),
+                changeskin = document.querySelector(".changeSkin-gear");
+
+            $(window).scroll(function() {
+                if (cwidth <= 860) {
+                    if ($(this).scrollTop() > 20) {
+                        mb_to_top.style.display = "block";
                     } else {
-                        $(".cd-top.cd-is-visible").css("top", ($(window).height() - 950) + "px");
+                        mb_to_top.style.display = "none";
                     }
                 } else {
-                    $(".changeSkin-gear").css("bottom", "-999px");
-                    $(".cd-top.cd-is-visible").css("top", "-900px");
-                    $back_to_top.removeClass('cd-is-visible cd-fade-out');
-                }
-                if ($(this).scrollTop() > offset_opacity) {
-                    $back_to_top.addClass('cd-fade-out');
+                    if ($(this).scrollTop() > 100) {
+                        pc_to_top.classList.add("cd-is-visible");
+                        changeskin.style.bottom = "0";
+                        if (cheight > 950) {
+                            pc_to_top.style.top = "0";
+                        } else {
+                            pc_to_top.style.top = cheight - 950 + "px";
+                        }
+                    } else {
+                        changeskin.style.bottom = "-999px";
+                        pc_to_top.style.top = "-999px";
+                        pc_to_top.classList.remove("cd-fade-out", "cd-is-visible");
+                    }
+                    if ($(this).scrollTop() > 1200) {
+                        pc_to_top.classList.add("cd-fade-out");
+                    }
                 }
             });
+
             //smooth scroll to top
-            $back_to_top.on('click', function (event) {
-                event.preventDefault();
-                $('body,html').animate({
-                    scrollTop: 0,
-                }, scroll_top_duration);
-                return false;
-            });
+            mb_to_top.onclick = function() {
+                topFunction();
+            }
+            pc_to_top.onclick = function() {
+                topFunction();
+            }
         }
     }
 $(function () {
