@@ -1334,25 +1334,15 @@ var home = location.href,
             });
         },
         AH: function () {
-            if (Poi.windowheight == 'auto') {
+            if (Poi.windowheight == 'auto' && mashiro_option.windowheight == 'auto') {
                 if ($('h1.main-title').length > 0) {
                     var _height = $(window).height() + "px";
                     $('#centerbg').css({
-                        'height': _height
+                        'height': '100vh'
                     });
                     $('#bgvideo').css({
-                        'min-height': _height
+                        'min-height': '100vh'
                     });
-                    window.resizeFlag = null;
-                    $(window).resize(function () {
-                        //直接resize性能爆炸，改成延时
-                        if (resizeFlag = null) {
-                            clearTimeout(resizeFlag);
-                        }
-                        resizeFlag = setTimeout(function () {
-                            Siren.AH();
-                        }, 1000);
-                    })
                 }
             } else {
                 $('.headertop').addClass('headertop-bar');

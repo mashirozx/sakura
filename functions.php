@@ -199,9 +199,9 @@ function sakura_scripts()
     $movies = akina_option('focus_amv') ? array('url' => akina_option('amv_url'), 'name' => akina_option('amv_title'), 'live' => $mv_live) : 'close';
     $auto_height = akina_option('focus_height') ? 'fixed' : 'auto';
     $code_lamp = 'close';
-    if (wp_is_mobile()) {
-        $auto_height = 'fixed';
-    }
+    // if (wp_is_mobile()) {
+    //     $auto_height = 'fixed';
+    // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
     wp_localize_script('app', 'Poi', array(
