@@ -5,7 +5,7 @@ Theme URI: https://github.com/mashirozx/Sakura/
 Author: Mashiro, Spirit, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: A wonderful branch of theme Akina
-Version: 3.3.6
+Version: 3.3.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sakura
@@ -1150,6 +1150,7 @@ a:hover {
         float: right;
         animation: searchbox .2s;
         min-width: 860px;
+        z-index: -1
     }
     .site-top .lower nav.navbar {
         right: calc(-50px - 100%);
@@ -4728,6 +4729,11 @@ i.iconfont.js-toggle-search.iconsearch {
     margin-top: 0;
     padding: 0
 }
+.wp-smiley {
+    height: 2em !important;
+    max-height: 2em !important;
+    vertical-align: bottom;
+}
 
 embed,
 iframe,
@@ -7584,6 +7590,11 @@ a.toc-link {
 }
 
 @media (max-width:860px) {
+    .wp-smiley {
+        height:20px !important;
+        max-height:20px !important;
+        vertical-align:middle
+    }
     .bili-container,
     .tieba-container {
         padding-left: 0

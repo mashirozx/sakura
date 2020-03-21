@@ -1722,6 +1722,7 @@ var home = location.href,
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
             $('body').on('click', '#comments-navi a', function (e) {
                 e.preventDefault();
+                var path = $(this)[0].pathname;
                 $.ajax({
                     type: "GET",
                     url: $(this).attr('href'),
