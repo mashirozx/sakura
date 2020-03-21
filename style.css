@@ -1086,6 +1086,7 @@ a:hover {
     display: block
 }
 
+
 .m-nav {
     display: none
 }
@@ -1140,6 +1141,22 @@ a:hover {
 
 .site-top ul li a:hover:after {
     max-width: 100%
+}
+
+@media(max-width:1200px) {
+    .site-top .lower nav{
+        right: calc(-150px - 100%);
+        position: absolute;
+        float: right;
+        animation: searchbox .2s;
+        min-width: 860px;
+    }
+    .site-top .lower nav.navbar {
+        right: calc(-50px - 100%);
+    }
+    .site-top .lower nav.navbar ul {
+        background: #fff;
+    }
 }
 
 #show-nav {
@@ -1443,6 +1460,7 @@ i.iconfont.hotpost {
 }
 
 .post-list-thumb {
+    will-change: transform;
     float: left;
     width: 100%;
     height: 300px;
@@ -1456,7 +1474,7 @@ i.iconfont.hotpost {
 
 @media (max-width:860px) {
     .post-list-thumb {
-        margin: 0;
+        margin: 10px 0 10px;
         height: auto
     }
 }
@@ -6839,9 +6857,9 @@ input[type=radio]:checked:before {
     margin-right: 22px
 }
 
-@media (max-width:800px) {
+@media (max-width:860px) {
     .changeSkin-gear {
-        visibility: hidden
+        visibility: hidden !important
     }
     .changeSkin-gear span::before {
         content: ""

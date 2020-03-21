@@ -78,10 +78,12 @@ function post_list_show_animation() {
         function callback(entries) {
             entries.forEach((article) => {
                 if (article.target.classList.contains("post-list-show")) {
+                    article.target.style.willChange = 'auto';
                     io.unobserve(article.target)
                 } else {
                     if (article.isIntersecting) {
                         article.target.classList.add("post-list-show");
+                        article.target.style.willChange = 'auto';
                         io.unobserve(article.target)
                     }
                 }
