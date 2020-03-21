@@ -268,21 +268,24 @@ function SMMS_API($image)
  */
 function cache_search_json()
 {
+    global $more;
     $vowels = array("[", "{", "]", "}", "<", ">", "\r\n", "\r", "\n", "-", "'", '"', '`', " ", ":", ";", '\\', "  ", "toc");
     $regex = <<<EOS
 /<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
 EOS;
+    $more = 1;
 
     $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
     while ($posts->have_posts()): $posts->the_post();
-        $output .= '{"type":"post","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', get_the_content()))) . '},';
+        $output .= '{"type":"post","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))) . '},';
     endwhile;
     wp_reset_postdata();
 
-    $pages = get_pages();
-    foreach ($pages as $page) {
-        $output .= '{"type":"page","link":"' . get_page_link($page) . '","title":' . json_encode($page->post_title) . ',"comments":"' . $page->comment_count . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', $page->post_content))) . '},';
-    }
+    $pages = new WP_Query('posts_per_page=-1&post_status=publish&post_type=page');
+    while ($pages->have_posts()): $pages->the_post();
+        $output .= '{"type":"page","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))) . '},';
+    endwhile;
+    wp_reset_postdata();
 
     $tags = get_tags();
     foreach ($tags as $tag) {

@@ -73,6 +73,7 @@ mashiro_option.float_player_on = true;
 
 mashiro_option.cover_api = "<?php echo rest_url('sakura/v1/image/cover'); ?>";
 
+mashiro_option.windowheight = /Mobile|Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? 'fixed' : 'auto';
 /*End of Initial Variables*/
 </script>
 <?php }
