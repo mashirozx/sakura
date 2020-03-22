@@ -8,7 +8,7 @@ function get_gravatar(email, size) {
 
     var size = size || 80;
 
-    return 'https://gravatar.shino.cc/avatar/' + MD5(email) + '.jpg?s=' + size + '&d=mm';
+    return 'https://gravatar.2heng.xin/avatar/' + MD5(email) + '.jpg?s=' + size + '&d=mm';
 }
 
 // sync css

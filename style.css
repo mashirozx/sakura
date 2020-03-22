@@ -5,7 +5,7 @@ Theme URI: https://github.com/mashirozx/Sakura/
 Author: Mashiro, Spirit, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: A wonderful branch of theme Akina
-Version: 3.3.6
+Version: 3.3.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sakura
@@ -1086,6 +1086,7 @@ a:hover {
     display: block
 }
 
+
 .m-nav {
     display: none
 }
@@ -1140,6 +1141,23 @@ a:hover {
 
 .site-top ul li a:hover:after {
     max-width: 100%
+}
+
+@media(max-width:1200px) {
+    .site-top .lower nav{
+        right: calc(-150px - 100%);
+        position: absolute;
+        float: right;
+        animation: searchbox .2s;
+        min-width: 860px;
+        z-index: -1
+    }
+    .site-top .lower nav.navbar {
+        right: calc(-50px - 100%);
+    }
+    .site-top .lower nav.navbar ul {
+        background: #fff;
+    }
 }
 
 #show-nav {
@@ -1443,6 +1461,7 @@ i.iconfont.hotpost {
 }
 
 .post-list-thumb {
+    will-change: transform;
     float: left;
     width: 100%;
     height: 300px;
@@ -1456,7 +1475,7 @@ i.iconfont.hotpost {
 
 @media (max-width:860px) {
     .post-list-thumb {
-        margin: 0;
+        margin: 10px 0 10px;
         height: auto
     }
 }
@@ -1870,7 +1889,6 @@ h1.page-title.mb- {
 }
 
 #moblieGoTop {
-    display: none;
     position: fixed;
     bottom: 10px;
     right: 10px;
@@ -1884,9 +1902,9 @@ h1.page-title.mb- {
     border-radius: 10px;
     border-radius: 12px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
-    transition: box-shadow .2s ease
+    transform: scale(0);
+    transition:transform .3s
 }
-
 #moblieGoTop:hover {
     background-color: #fff;
     opacity: .8
@@ -4260,7 +4278,7 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .s-search input {
     font-size: 1rem;
-    background: #none;
+    background: none;
     padding: 12px 24px 12px 64px;
     width: 100%;
     outline: 0;
@@ -4710,6 +4728,11 @@ i.iconfont.js-toggle-search.iconsearch {
     margin-bottom: 0;
     margin-top: 0;
     padding: 0
+}
+.wp-smiley {
+    height: 2em !important;
+    max-height: 2em !important;
+    vertical-align: bottom;
 }
 
 embed,
@@ -6840,9 +6863,9 @@ input[type=radio]:checked:before {
     margin-right: 22px
 }
 
-@media (max-width:800px) {
+@media (max-width:860px) {
     .changeSkin-gear {
-        visibility: hidden
+        visibility: hidden !important
     }
     .changeSkin-gear span::before {
         content: ""
@@ -7567,6 +7590,11 @@ a.toc-link {
 }
 
 @media (max-width:860px) {
+    .wp-smiley {
+        height:20px !important;
+        max-height:20px !important;
+        vertical-align:middle
+    }
     .bili-container,
     .tieba-container {
         padding-left: 0

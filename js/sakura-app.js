@@ -5,6 +5,7 @@
  * @date 2019.8.3
  */
 mashiro_global.variables = new function () {
+    this.has_hls = false;
     this.skinSecter = true;
 }
 mashiro_global.ini = new function () {
@@ -77,10 +78,12 @@ function post_list_show_animation() {
         function callback(entries) {
             entries.forEach((article) => {
                 if (article.target.classList.contains("post-list-show")) {
+                    article.target.style.willChange = 'auto';
                     io.unobserve(article.target)
                 } else {
                     if (article.isIntersecting) {
                         article.target.classList.add("post-list-show");
+                        article.target.style.willChange = 'auto';
                         io.unobserve(article.target)
                     }
                 }
@@ -416,22 +419,15 @@ $(document).ready(function () {
         preBG();
     });
 });
-if (document.body.clientWidth <= 860) {
-    window.onscroll = function () {
-        scrollFunction()
-    };
 
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            addComment.I("moblieGoTop").style.display = "block";
-        } else {
-            addComment.I("moblieGoTop").style.display = "none";
-        }
-    }
-
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+function topFunction() {
+    if ('scrollBehavior' in document.documentElement.style) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    } else {
+        window.scrollSmoothTo(0)
     }
 }
 
@@ -476,10 +472,20 @@ function timeSeriesReload(flag) {
             var al_expand_collapse_click = 0;
             $('#al_expand_collapse').click(function () {
                 if (al_expand_collapse_click == 0) {
-                    $al_post_list.show(400);
+                    $al_post_list.each(function(index){
+                        var $this = $(this),
+                        s = setTimeout(function() {
+                            $this.show(400);
+                        }, 50 * index);
+                    });
                     al_expand_collapse_click++;
                 } else if (al_expand_collapse_click == 1) {
-                    $al_post_list.hide(400);
+                    $al_post_list.each(function(index){
+                        var $this = $(this),
+                        h = setTimeout(function() {
+                            $this.hide(400);
+                        }, 50 * index);
+                    });
                     al_expand_collapse_click--;
                 }
             });
@@ -523,25 +529,34 @@ function killCoverVideo() {
     }
 }
 
+function loadHls(){
+    var video = addComment.I('coverVideo');
+    var video_src = $('#coverVideo').attr('data-src');
+    if (Hls.isSupported()) {
+        var hls = new Hls();
+        hls.loadSource(video_src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = video_src;
+        video.addEventListener('loadedmetadata', function () {
+            video.play();
+        });
+    }
+}
+
 function coverVideoIni() {
     if ($('video').hasClass('hls')) {
-        $.getScript("https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.3.3/cdn/js/src/16.hls.js", function(){
-            var video = addComment.I('coverVideo');
-            var video_src = $('#coverVideo').attr('data-src');
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource(video_src);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = video_src;
-                video.addEventListener('loadedmetadata', function () {
-                    video.play();
-                });
-            }
-          });
+        if (mashiro_global.variables.has_hls){
+            loadHls();
+        }else{
+            $.getScript("https://cdn.jsdelivr.net/gh/mashirozx/Sakura@3.3.3/cdn/js/src/16.hls.js", function(){
+                loadHls();
+                mashiro_global.variables.has_hls = true;
+              });
+        }
         //console.info('ini:coverVideoIni()');
     }
 }
@@ -864,53 +879,56 @@ function getqqinfo() {
     }
     var emailAddressFlag = cached.filter('#email').val();
     cached.filter('#author').on('blur', function () {
-        var qq = cached.filter('#author').val();
-        $.ajax({
-            type: 'get',
-            url: mashiro_option.qq_api_url + '?qq=' + qq + '&_wpnonce=' + Poi.nonce,
-            dataType: 'json',
-            success: function (data) {
-                cached.filter('#author').val(data.name);
-                cached.filter('#email').val($.trim(qq) + '@qq.com');
-                if (mashiro_option.qzone_autocomplete) {
-                    cached.filter('#url').val('https://user.qzone.qq.com/' + $.trim(qq));
-                }
-                $('div.comment-user-avatar img').attr('src', 'https://q2.qlogo.cn/headimg_dl?dst_uin=' + qq + '&spec=100');
-                is_get_by_qq = true;
-                cached.filter('#qq').val($.trim(qq));
-                if (cached.filter('#qq').val()) {
-                    $('.qq-check').css('display', 'block');
-                    $('.gravatar-check').css('display', 'none');
-                }
-                setCookie('user_author', data.name, 30);
-                setCookie('user_qq', qq, 30);
-                setCookie('is_user_qq', 'yes', 30);
-                setCookie('user_qq_email', qq + '@qq.com', 30);
-                setCookie('user_email', qq + '@qq.com', 30);
-                emailAddressFlag = cached.filter('#email').val();
-                /***/
-                $('div.comment-user-avatar img').attr('src', data.avatar);
-                setCookie('user_avatar', data.avatar, 30);
-            },
-            error: function () {
-                cached.filter('#qq').val('');
-                $('.qq-check').css('display', 'none');
-                $('.gravatar-check').css('display', 'block');
-                $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
-                setCookie('user_qq', '', 30);
-                setCookie('user_email', cached.filter('#email').val(), 30);
-                setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
-                /***/
-                cached.filter('#qq,#email,#url').val('');
-                if (!cached.filter('#qq').val()) {
+        var qq = cached.filter('#author').val(),
+            $reg = /^[1-9]\d{4,9}$/;
+        if ($reg.test(qq)) {
+            $.ajax({
+                type: 'get',
+                url: mashiro_option.qq_api_url + '?qq=' + qq + '&_wpnonce=' + Poi.nonce,
+                dataType: 'json',
+                success: function (data) {
+                    cached.filter('#author').val(data.name);
+                    cached.filter('#email').val($.trim(qq) + '@qq.com');
+                    if (mashiro_option.qzone_autocomplete) {
+                        cached.filter('#url').val('https://user.qzone.qq.com/' + $.trim(qq));
+                    }
+                    $('div.comment-user-avatar img').attr('src', 'https://q2.qlogo.cn/headimg_dl?dst_uin=' + qq + '&spec=100');
+                    is_get_by_qq = true;
+                    cached.filter('#qq').val($.trim(qq));
+                    if (cached.filter('#qq').val()) {
+                        $('.qq-check').css('display', 'block');
+                        $('.gravatar-check').css('display', 'none');
+                    }
+                    setCookie('user_author', data.name, 30);
+                    setCookie('user_qq', qq, 30);
+                    setCookie('is_user_qq', 'yes', 30);
+                    setCookie('user_qq_email', qq + '@qq.com', 30);
+                    setCookie('user_email', qq + '@qq.com', 30);
+                    emailAddressFlag = cached.filter('#email').val();
+                    /***/
+                    $('div.comment-user-avatar img').attr('src', data.avatar);
+                    setCookie('user_avatar', data.avatar, 30);
+                },
+                error: function () {
+                    cached.filter('#qq').val('');
                     $('.qq-check').css('display', 'none');
                     $('.gravatar-check').css('display', 'block');
-                    setCookie('user_qq', '', 30);
                     $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
+                    setCookie('user_qq', '', 30);
+                    setCookie('user_email', cached.filter('#email').val(), 30);
                     setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
+                    /***/
+                    cached.filter('#qq,#email,#url').val('');
+                    if (!cached.filter('#qq').val()) {
+                        $('.qq-check').css('display', 'none');
+                        $('.gravatar-check').css('display', 'block');
+                        setCookie('user_qq', '', 30);
+                        $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
+                        setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
+                    }
                 }
-            }
-        });
+            });
+        }
         // $.ajax({
         //     type: 'get',
         //     url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
@@ -1216,13 +1234,6 @@ var home = location.href,
     Siren = {
         MN: function () {
             $('.iconflat').on('click', function () {
-                if ($("#main-container").hasClass("open")) {
-                    $('.iconflat').css('width', '50px').css('height', '50px');
-                    $('.openNav').css('height', '50px');
-                } else {
-                    $('.iconflat').css('width', '100%').css('height', '100%');
-                    $('.openNav').css('height', '100%');
-                }
                 $('body').toggleClass('navOpen');
                 $('#main-container,#mo-nav,.openNav').toggleClass('open');
             });
@@ -1321,25 +1332,15 @@ var home = location.href,
             });
         },
         AH: function () {
-            if (Poi.windowheight == 'auto') {
+            if (Poi.windowheight == 'auto' && mashiro_option.windowheight == 'auto') {
                 if ($('h1.main-title').length > 0) {
                     var _height = $(window).height() + "px";
                     $('#centerbg').css({
-                        'height': _height
+                        'height': '100vh'
                     });
                     $('#bgvideo').css({
-                        'min-height': _height
+                        'min-height': '100vh'
                     });
-                    window.resizeFlag = null;
-                    $(window).resize(function () {
-                        //直接resize性能爆炸，改成延时
-                        if (resizeFlag = null) {
-                            clearTimeout(resizeFlag);
-                        }
-                        resizeFlag = setTimeout(function () {
-                            Siren.AH();
-                        }, 1000);
-                    })
                 }
             } else {
                 $('.headertop').addClass('headertop-bar');
@@ -1534,17 +1535,19 @@ var home = location.href,
             });
         },
         NH: function () {
-            var h1 = 0;
-            $(window).scroll(function () {
-                var s = $(document).scrollTop(),
-                    cached = $('.site-header');
-                if (s == h1) {
-                    cached.removeClass('yya');
-                }
-                if (s > h1) {
-                    cached.addClass('yya');
-                }
+            if(document.body.clientWidth > 860){
+                var h1 = 0;
+                $(window).scroll(function () {
+                    var s = $(document).scrollTop(),
+                        cached = $('.site-header');
+                    if (s == h1) {
+                        cached.removeClass('yya');
+                    }
+                    if (s > h1) {
+                        cached.addClass('yya');
+                    }
             });
+            }
         },
         XLS: function () {
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
@@ -1719,6 +1722,7 @@ var home = location.href,
             $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
             $('body').on('click', '#comments-navi a', function (e) {
                 e.preventDefault();
+                var path = $(this)[0].pathname;
                 $.ajax({
                     type: "GET",
                     url: $(this).attr('href'),
@@ -1738,6 +1742,11 @@ var home = location.href,
                         $('#loading-comments').after(result.fadeIn(500));
                         $('ul.commentwrap').after(nextlink);
                         lazyload();
+                        if (window.gtag) {
+                            gtag('config', Poi.google_analytics_id, {
+                                'page_path': path
+                            });
+                        }
                         code_highlight_style();
                         click_to_view_image();
                     }
@@ -1750,36 +1759,43 @@ var home = location.href,
             document.body.addEventListener('input', POWERMODE)
         },
         GT: function () {
-            var offset = 100,
-                offset_opacity = 1200,
-                scroll_top_duration = 700,
-                $back_to_top = $('.cd-top');
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > offset) {
-                    $back_to_top.addClass('cd-is-visible');
-                    $(".changeSkin-gear").css("bottom", "0");
-                    if ($(window).height() > 950) {
-                        $(".cd-top.cd-is-visible").css("top", "0");
+            var cwidth = document.body.clientWidth,
+                cheight = window.innerHeight,
+                pc_to_top = document.querySelector(".cd-top"),
+                mb_to_top = document.querySelector("#moblieGoTop"),
+                changeskin = document.querySelector(".changeSkin-gear");
+
+            $(window).scroll(function() {
+                if (cwidth <= 860) {
+                    if ($(this).scrollTop() > 20) {
+                        mb_to_top.style.transform = "scale(1)";
                     } else {
-                        $(".cd-top.cd-is-visible").css("top", ($(window).height() - 950) + "px");
+                        mb_to_top.style.transform = "scale(0)";
                     }
                 } else {
-                    $(".changeSkin-gear").css("bottom", "-999px");
-                    $(".cd-top.cd-is-visible").css("top", "-900px");
-                    $back_to_top.removeClass('cd-is-visible cd-fade-out');
-                }
-                if ($(this).scrollTop() > offset_opacity) {
-                    $back_to_top.addClass('cd-fade-out');
+                    if ($(this).scrollTop() > 100) {
+                        pc_to_top.classList.add("cd-is-visible");
+                        changeskin.style.bottom = "0";
+                        if (cheight > 950) {
+                            pc_to_top.style.top = "0";
+                        } else {
+                            pc_to_top.style.top = cheight - 950 + "px";
+                        }
+                    } else {
+                        changeskin.style.bottom = "-999px";
+                        pc_to_top.style.top = "-999px";
+                        pc_to_top.classList.remove("cd-fade-out", "cd-is-visible");
+                    }
+                    if ($(this).scrollTop() > 1200) {
+                        pc_to_top.classList.add("cd-fade-out");
+                    }
                 }
             });
+
             //smooth scroll to top
-            $back_to_top.on('click', function (event) {
-                event.preventDefault();
-                $('body,html').animate({
-                    scrollTop: 0,
-                }, scroll_top_duration);
-                return false;
-            });
+            pc_to_top.onclick = function() {
+                topFunction();
+            }
         }
     }
 $(function () {
@@ -1824,6 +1840,12 @@ $(function () {
                 } else {
                     $.getScript("//static.duoshuo.com/embed.js");
                 }
+            }
+        }).on('pjax:end', function() {
+            if (window.gtag){
+                gtag('config', Poi.google_analytics_id, {
+                    'page_path': window.location.pathname
+                });
             }
         }).on('submit', '.search-form,.s-search', function (event) {
             event.preventDefault();

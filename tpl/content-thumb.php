@@ -24,6 +24,9 @@ switch (akina_option('feature_align')) {
     default:
         $class = ($i%2 == 0) ? 'post-list-thumb-left' : '';
 }
+if( $i == 1 ){
+    $class .= ' post-list-show';
+}
 if(has_post_thumbnail()){
 	$large_image_url = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large');
 	$post_img = $large_image_url[0];
