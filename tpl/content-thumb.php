@@ -11,6 +11,7 @@
 //}
 //add_filter('the_excerpt', 'custom_short_excerpt');
 $i=0; while ( have_posts() ) : the_post(); $i++;
+if(is_sticky()) $i++;
 switch (akina_option('feature_align')) {
     case "left":
         $class = 'post-list-thumb-left';
