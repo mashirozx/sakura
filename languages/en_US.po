@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-03-28 10:35+0800\n"
-"PO-Revision-Date: 2020-03-28 10:35+0800\n"
+"POT-Creation-Date: 2020-03-29 00:39+0800\n"
+"PO-Revision-Date: 2020-03-29 00:39+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -205,11 +205,11 @@ msgstr ""
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1774
+#: functions.php:1784
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:1886
+#: functions.php:1896
 msgid ""
 "<b> For a better experience, please do not set <a href=\"/wp-admin/options-"
 "permalink.php\"> permalink </a> as plain. To do this, you may need to "
@@ -1710,17 +1710,17 @@ msgstr "Search result: %s"
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:57
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
 #: tpl/content.php:34
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:57
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
 #: tpl/content.php:34
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:56
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:55
 #: tpl/content.php:37
 msgid "Hit"
 msgid_plural "Hits"
