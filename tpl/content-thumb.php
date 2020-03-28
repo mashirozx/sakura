@@ -10,8 +10,8 @@
 //	return substr($excerpt, 0, 120);
 //}
 //add_filter('the_excerpt', 'custom_short_excerpt');
-$i=0; while ( have_posts() ) : the_post(); $i++;
-if(is_sticky()) $i++;
+$i=0; $sticky_count=sizeof(get_option( 'sticky_posts' )); while ( have_posts() ) : the_post(); $i++;
+if( $sticky_count %2 != 0 && !is_paged() && is_sticky() && ($i == 1) ) $i++;
 switch (akina_option('feature_align')) {
     case "left":
         $class = 'post-list-thumb-left';
