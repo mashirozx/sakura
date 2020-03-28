@@ -1325,7 +1325,8 @@ a:hover {
     border-radius: 50%;
     padding: 2px;
     border: 1px solid #DADADA;
-    position: relative
+    position: relative;
+    object-fit: cover
 }
 
 .feature :hover .overlay i {

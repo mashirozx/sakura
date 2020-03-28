@@ -182,7 +182,7 @@ function optionsframework_options()
         'name' => __('Favicon', 'sakura'),
         'desc' => __('It is the small logo on the browser tab, fill in the url', 'sakura'), /*就是浏览器标签栏上那个小 logo，填写url*/
         'id' => 'favicon_link',
-        'std' => '/wp-content/themes/Sakura/images/favicon.ico',
+        'std' => get_template_directory_uri().'/images/favicon.ico',
         'type' => 'text');
 
     $options[] = array(
