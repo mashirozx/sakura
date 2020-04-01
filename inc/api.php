@@ -453,7 +453,7 @@ function get_bgm_items($page = 1){
     }
     $lists = $bgm["list"];
     foreach ((array)$lists as $list) {
-        if(preg_match('/已看完/m',$list["new_ep"]['index_show'], $matches_finish)){
+        if(preg_match('/看完/m',$list["progress"], $matches_finish)){
             $percent = 100;
         }else{
             preg_match('/第(\d+)./m',$list['progress'], $matches_progress);
