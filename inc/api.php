@@ -456,8 +456,8 @@ function get_bgm_items($page = 1){
         if(preg_match('/已看完/m',$list["new_ep"]['index_show'], $matches_finish)){
             $percent = 100;
         }else{
-            preg_match('/第(\d+)话/m',$list['progress'], $matches_progress);
-            preg_match('/第(\d+)话/m',$list["new_ep"]['index_show'], $matches_new);
+            preg_match('/第(\d+)./m',$list['progress'], $matches_progress);
+            preg_match('/第(\d+)./m',$list["new_ep"]['index_show'], $matches_new);
             $progress = is_numeric($matches_progress[1]) ? $matches_progress[1] : 0;
             $total = is_numeric($matches_new[1]) ? $matches_new[1] : $list['total_count'];
             $percent = $progress / $total * 100;

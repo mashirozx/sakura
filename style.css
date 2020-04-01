@@ -8629,7 +8629,9 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     width: 100%;
     height: 100%;
 }
-
+.bangumi {
+    margin-top: 40px;
+}
 .bangumi .row {
     display: flex;
     margin: 0 -10px -20px;

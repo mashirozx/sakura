@@ -1014,20 +1014,22 @@ setTimeout(function () {
 }, 100);
 
 function load_bangumi() {
-    $('body').on('click', '#bangumi-pagination a', function () {
-        $("#bangumi-pagination a").addClass("loading").text("");
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', this.href, true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var html = JSON.parse(xhr.responseText);
-                $("#bangumi-pagination").remove();
-                $(".row").append(html);
-            }
-        };
-        xhr.send();
-        return false;
-    });
+    if ($("section").hasClass("bangumi")) {
+        $('body').on('click', '#bangumi-pagination a', function () {
+            $("#bangumi-pagination a").addClass("loading").text("");
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.href, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var html = JSON.parse(xhr.responseText);
+                    $("#bangumi-pagination").remove();
+                    $(".row").append(html);
+                }
+            };
+            xhr.send();
+            return false;
+        });
+    }
 }
 
 mashiro_global.ini.normalize();
