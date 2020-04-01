@@ -32,6 +32,10 @@ add_action('rest_api_init', function () {
         'methods' => 'GET',
         'callback' => 'get_qq_avatar',
     ));
+    register_rest_route('sakura/v1', '/bangumi/bilibili', array(
+        'methods' => 'POST',
+        'callback' => 'bgm_bilibili',
+    ));
 });
 
 /**
@@ -421,4 +425,56 @@ function get_qq_avatar(){
             return $response;
         }
     } 
+}
+
+
+function get_the_bgm_items($page = 1){
+    $cookies = akina_option('bilibili_cookie');
+    $url = 'https://api.bilibili.com/x/space/bangumi/follow/list?type=1&pn=' . $page . '&ps=15&follow_status=0&vmid=' . akina_option('bilibili_id');
+    $args = array(
+        'headers' => array(
+            'Cookie' => $cookies,
+            'Host' => 'api.bilibili.com',
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97'
+        )
+    );
+    $response = wp_remote_get($url, $args);
+    $bgmdata = json_decode($response["body"])->data;
+    return json_encode($bgmdata);
+}
+
+function get_bgm_items($page = 1){
+    $bgm = json_decode(get_the_bgm_items($page),true);
+    $totalpage = $bgm["total"] / 15;
+    if($totalpage - $page < 0){
+        $next = '<span>共追番' . $bgm["total"] .'部，继续加油吧！٩(ˊᗜˋ*)و</span>';
+    }else{
+        $next = '<a class="bangumi-next" href="' . rest_url('sakura/v1/bangumi/bilibili') . '?page=' . ++$page . '"><i class="fa fa-bolt" aria-hidden="true"></i> NEXT </a>';
+    }
+    $lists = $bgm["list"];
+    foreach ((array)$lists as $list) {
+        preg_match('/看到第(\d+)话/m',$list['progress'], $matches);
+        $progress = is_numeric($matches[1]) ? $matches[1] : 0;
+        $html .=  '<div class="column">
+            <a class="bangumi-item" href="https://bangumi.bilibili.com/anime/' . $list['season_id'] . '/" target="_blank" rel="nofollow">
+                <img class="bangumi-image" src="' . str_replace('http://', 'https://', $list['cover']) . '"/>
+                <div class="bangumi-info">
+                    <h3 class="bangumi-title" title="' . $list['title']  . '">' . $list['title']  . '</h2>
+                    <div class="bangumi-summary"> '. $list['evaluate'] .' </div>
+                    <div class="bangumi-status">
+                        <div class="bangumi-status-bar" style="width: '. $progress / $list['total_count'] * 100 .'%"></div>
+                        <p>' . $list['new_ep']['index_show'] . '</p>         
+                    </div>
+                </div>
+            </a>
+        </div>';
+    }
+    $html .= '</div><br><div id="bangumi-pagination">' . $next .'</div>';
+    return $html;
+}
+
+function bgm_bilibili(){
+    $page = $_GET["page"] ?: 2;
+    $html = preg_replace("/\s+|\n+|\r/", ' ', get_bgm_items($page));
+    echo $html;
 }

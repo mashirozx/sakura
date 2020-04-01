@@ -969,7 +969,19 @@ function optionsframework_options()
         'id' => 'notice_title',
         'std' => '',
         'type' => 'text');
-
+    $options[] = array(
+        'name' => __('Bilibili UID', 'sakura'), /*bilibiliUID*/
+        'desc' => __('Fill in your UID, eg.https://space.bilibili.com/13972644/, only fill in with the number part.', 'sakura'),
+        'id' => 'bilibili_id',
+        'std' => '13972644',
+        'type' => 'text');
+    
+    $options[] = array(
+        'name' => __('Bilibili Cookie', 'sakura'), /*Bilibili Cookie*/
+        'desc' => __('Fill in your Cookies, go to your bilibili homepage, you can get cookies in brownser network pannel with pressing F12. If left this blank, you\'ll not get the progress.', 'sakura'),
+        'id' => 'bilibili_cookie',
+        'std' => 'LIVE_BUVID=',
+        'type' => 'textarea');
     $options[] = array(
         'name' => __('The categories of articles that don\'t not show on homepage', 'sakura'), /*首页不显示的分类文章*/
         'desc' => __('Fill in category ID, multiple IDs are divided by a comma ","', 'sakura'), /*填写分类ID，多个用英文“ , ”分开*/
