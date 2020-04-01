@@ -453,8 +453,10 @@ function get_bgm_items($page = 1){
     }
     $lists = $bgm["list"];
     foreach ((array)$lists as $list) {
-        preg_match('/看到第(\d+)话/m',$list['progress'], $matches);
-        $progress = is_numeric($matches[1]) ? $matches[1] : 0;
+        preg_match('/第(\d+)话/m',$list['progress'], $matches_progress);
+        preg_match('/第(\d+)话/m',$list["new_ep"]['index_show'], $matches_new);
+        $progress = is_numeric($matches_progress[1]) ? $matches_progress[1] : 0;
+        $total = is_numeric($matches_new[1]) ? $matches_new[1] : $list['total_count'];
         $html .=  '<div class="column">
             <a class="bangumi-item" href="https://bangumi.bilibili.com/anime/' . $list['season_id'] . '/" target="_blank" rel="nofollow">
                 <img class="bangumi-image" src="' . str_replace('http://', 'https://', $list['cover']) . '"/>
@@ -462,7 +464,7 @@ function get_bgm_items($page = 1){
                     <h3 class="bangumi-title" title="' . $list['title']  . '">' . $list['title']  . '</h2>
                     <div class="bangumi-summary"> '. $list['evaluate'] .' </div>
                     <div class="bangumi-status">
-                        <div class="bangumi-status-bar" style="width: '. $progress / $list['total_count'] * 100 .'%"></div>
+                        <div class="bangumi-status-bar" style="width: '. $progress / $total * 100 .'%"></div>
                         <p>' . $list['new_ep']['index_show'] . '</p>         
                     </div>
                 </div>
@@ -476,5 +478,5 @@ function get_bgm_items($page = 1){
 function bgm_bilibili(){
     $page = $_GET["page"] ?: 2;
     $html = preg_replace("/\s+|\n+|\r/", ' ', get_bgm_items($page));
-    echo $html;
+    return $response = new WP_REST_Response($html,200);
 }

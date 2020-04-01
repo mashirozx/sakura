@@ -8771,6 +8771,7 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 }
 
 .bangumi-next{
+    font-family: sans-serif;
     color: #e67474;
     position: relative;
     padding: 13px 35px;

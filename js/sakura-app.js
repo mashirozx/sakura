@@ -1020,8 +1020,9 @@ function load_bangumi() {
         xhr.open('POST', this.href, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
+                var html = JSON.parse(xhr.responseText);
                 $("#bangumi-pagination").remove();
-                $(".row").append(xhr.responseText);
+                $(".row").append(html);
             }
         };
         xhr.send();
