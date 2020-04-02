@@ -278,45 +278,68 @@ function cache_search_json()
 /<\/?[a-zA-Z]+("[^"]*"|'[^']*'|[^'">])*>|begin[\S\s]*\/begin|hermit[\S\s]*\/hermit|img[\S\s]*\/img|{{.*?}}|:.*?:/m
 EOS;
     $more = 1;
+    $output = array();
 
     $posts = new WP_Query('posts_per_page=-1&post_status=publish&post_type=post');
     while ($posts->have_posts()): $posts->the_post();
-        $output .= '{"type":"post","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))) . '},';
+        $output[] = array(
+                "type" => "post",
+                "link" => get_permalink(),
+                "title" => get_the_title(),
+                "comments" => get_comments_number('0', '1', '%'),
+                "text" => str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))
+            );
     endwhile;
     wp_reset_postdata();
 
     $pages = new WP_Query('posts_per_page=-1&post_status=publish&post_type=page');
     while ($pages->have_posts()): $pages->the_post();
-        $output .= '{"type":"page","link":"' . get_permalink() . '","title":' . json_encode(get_the_title()) . ',"comments":"' . get_comments_number('0', '1', '%') . '","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))) . '},';
+        $output[] = array(
+                "type" => "page",
+                "link" => get_permalink(),
+                "title" => get_the_title(),
+                "comments" => get_comments_number('0', '1', '%'),
+                "text" => str_replace($vowels, " ", preg_replace($regex, ' ', apply_filters( 'the_content', get_the_content())))
+            );
     endwhile;
     wp_reset_postdata();
 
     $tags = get_tags();
     foreach ($tags as $tag) {
-        $output .= '{"type":"tag","link":"' . get_term_link($tag) . '","title":' . json_encode($tag->name) . ',"comments":"","text":""},';
+        $output[] = array(
+                "type" => "tag",
+                "link" => get_term_link($tag),
+                "title" => $tag->name,
+                "comments" => "",
+                "text" => ""
+            );
     }
 
     $categories = get_categories();
     foreach ($categories as $category) {
-        $output .= '{"type":"category","link":"' . get_term_link($category) . '","title":' . json_encode($category->name) . ',"comments":"","text":""},';
+        $output[] = array(
+                "type" => "category",
+                "link" => get_term_link($category),
+                "title" => $category->name,
+                "comments" => "",
+                "text" => ""
+            );
     }
     if (akina_option('live_search_comment')) {
         $comments = get_comments();
         foreach ($comments as $comment) {
             $is_private = get_comment_meta($comment->comment_ID, '_private', true);
-            if ($is_private) {
-                $output .= '{"type":"comment","link":"' . get_comment_link($comment) . '","title":' . json_encode(get_the_title($comment->comment_post_ID)) . ',"comments":"","text":' . json_encode($comment->comment_author . "：" . __("The comment is private", "sakura") /*该评论为私密评论*/) . '},';
-                continue;
-            } else {
-                $output .= '{"type":"comment","link":"' . get_comment_link($comment) . '","title":' . json_encode(get_the_title($comment->comment_post_ID)) . ',"comments":"","text":' . json_encode(str_replace($vowels, " ", preg_replace($regex, " ", $comment->comment_author . "：" . $comment->comment_content))) . '},';
-            }
+            $output[] = array(
+                    "type" => "comment",
+                    "link" => get_comment_link($comment),
+                    "title" => get_the_title($comment->comment_post_ID),
+                    "comments" => "",
+                    "text" => $is_private ? ($comment->comment_author . ": " .  __('The comment is private', 'sakura')) : str_replace($vowels, ' ', preg_replace($regex, ' ', $comment->comment_author . "：" . $comment->comment_content))
+                );
         }
     }
 
-    $output = substr($output, 0, strlen($output) - 1);
-
-    $data = '[' . $output . ']';
-    $result = new WP_REST_Response(json_decode($data), 200);
+    $result = new WP_REST_Response($output, 200);
     $result->set_headers(
         array(
             'Content-Type' => 'application/json',
@@ -415,9 +438,13 @@ function get_qq_avatar(){
         $imgurl='https://q2.qlogo.cn/headimg_dl?dst_uin='.$matches[0].'&spec=100';
         if(akina_option('qq_avatar_link')=='type_2'){
             $imgdata = file_get_contents($imgurl);
-            header("Content-type: image/jpeg");
-            header("Cache-Control: max-age=86400");
+            $response = new WP_REST_Response();
+            $response->set_headers(array(
+                'Content-Type' => 'image/jpeg',
+                'Cache-Control' => 'max-age=86400'
+                ));
             echo $imgdata;
+            return $response;
         }else{
             $response = new WP_REST_Response();
             $response->set_status(301);

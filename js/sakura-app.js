@@ -931,27 +931,6 @@ function getqqinfo() {
                 }
             });
         }
-        // $.ajax({
-        //     type: 'get',
-        //     url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
-        //     dataType: 'jsonp',
-        //     jsonp: 'callback',
-        //     jsonpCallback: 'qqavatarCallBack',
-        //     success: function (data) {
-        //         $('div.comment-user-avatar img').attr('src', data[qq]);
-        //         setCookie('user_avatar', data[qq], 30);
-        //     },
-        //     error: function () {
-        //         cached.filter('#qq,#email,#url').val('');
-        //         if (!cached.filter('#qq').val()) {
-        //             $('.qq-check').css('display', 'none');
-        //             $('.gravatar-check').css('display', 'block');
-        //             setCookie('user_qq', '', 30);
-        //             $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
-        //             setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
-        //         }
-        //     }
-        // });
     });
     if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
         $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'));
@@ -1024,6 +1003,8 @@ function load_bangumi() {
                     var html = JSON.parse(xhr.responseText);
                     $("#bangumi-pagination").remove();
                     $(".row").append(html);
+                }else{
+                    $("#bangumi-pagination a").removeClass("loading").html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ERROR ');
                 }
             };
             xhr.send();
@@ -1615,7 +1596,7 @@ var home = location.href,
                             var tempScrollTop = $(window).scrollTop();
                             $(window).scrollTop(tempScrollTop);
                             $body.animate({
-                                scrollTop: tempScrollTop + 300
+                                scrollTop: tempScrollTop + 100
                             }, 666)
                         } else {
                             $("#pagination").html("<span>很高兴你翻到这里，但是真的没有了...</span>");

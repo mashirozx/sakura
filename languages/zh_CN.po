@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-04-01 17:11+0800\n"
-"PO-Revision-Date: 2020-04-01 17:13+0800\n"
+"POT-Creation-Date: 2020-04-02 11:56+0800\n"
+"PO-Revision-Date: 2020-04-02 11:56+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -227,7 +227,7 @@ msgstr ""
 msgid "page %s "
 msgstr "第 %s 页 "
 
-#: inc/api.php:308 inc/theme_plus.php:727
+#: inc/api.php:337 inc/theme_plus.php:727
 msgid "The comment is private"
 msgstr "该评论为私密评论"
 
