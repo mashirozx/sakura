@@ -1019,6 +1019,13 @@ function optionsframework_options()
         ));
 
     $options[] = array(
+        'name' => __('Gravatar avatar proxy', 'sakura'),
+        'desc' => __('A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it blank if you do not need.', 'sakura'),
+        'id' => 'gravatar_proxy',
+        'std' => "gravatar.2heng.xin/avatar",
+        'type' => "text");
+
+    $options[] = array(
         'name' => __('Comment image upload API', 'sakura'), /*评论图片上传接口*/
         'id' => 'img_upload_api',
         'std' => "imgur",
@@ -1073,7 +1080,7 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => __('Enable live search', 'sakura'), /*启用实时搜索*/
-        'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php', 'sakura'), /*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
+        'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in api.php', 'sakura'), /*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
         'id' => 'live_search',
         'std' => '0',
         'type' => 'checkbox');
