@@ -148,11 +148,11 @@
 	<div class="show-hide-wrap"><button class="show-hide"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32"><path d="M22 16l-10.105-10.6-1.895 1.987 8.211 8.613-8.211 8.612 1.895 1.988 8.211-8.613z"></path></svg></button></div>
     </aside>
 <?php endif; ?>
-<?php if (akina_option('playlist_id', '')): ?>
+<?php if (akina_option('aplayer_server') != 'off'): ?>
     <div id="aplayer-float" style="z-index: 100;"
 	    class="aplayer"
-        data-id="<?php echo akina_option('playlist_id', ''); ?>"
-        data-server="netease"
+        data-id="<?php echo akina_option('aplayer_playlistid', ''); ?>"
+        data-server="<?php echo akina_option('aplayer_server'); ?>"
         data-type="playlist"
         data-fixed="true"
         data-theme="orange">

@@ -36,6 +36,10 @@ add_action('rest_api_init', function () {
         'methods' => 'POST',
         'callback' => 'bgm_bilibili',
     ));
+    register_rest_route('sakura/v1', '/meting/aplyer', array(
+        'methods' => 'GET',
+        'callback' => 'meting_aplyer',
+    ));
 });
 
 /**
