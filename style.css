@@ -5,7 +5,7 @@ Theme URI: https://github.com/mashirozx/Sakura/
 Author: Mashiro, Spirit, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: A wonderful branch of theme Akina
-Version: 3.3.7
+Version: 3.3.8
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sakura
@@ -8721,8 +8721,11 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
         max-width: 33.3333%;
         flex: 0 0 33.3333%;
     }
+    .bangumi-title {
+        height: 30%;
+    }
     .bangumi-item .bangumi-info{
-        height: 50%;
+        height: 45%;
         transform: translateY(140%);
     }
 }
