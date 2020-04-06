@@ -69,7 +69,7 @@ mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/mashirozx/Sakura@
 <?php } ?>
 <?php if (akina_option('aplayer_server') != 'off'): ?>
 mashiro_option.float_player_on = true;
-mashiro_option.meting_api_url = <?php echo rest_url('sakura/v1/meting/aplyer');?>;
+mashiro_option.meting_api_url = "<?php echo rest_url('sakura/v1/meting/aplayer'); ?>";
 <?php endif; ?>
 
 mashiro_option.cover_api = "<?php echo rest_url('sakura/v1/image/cover'); ?>";
