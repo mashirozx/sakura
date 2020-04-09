@@ -66,6 +66,7 @@
 	</div><!-- m-nav-center end -->
 	<a class="cd-top faa-float animated "></a>
 	<button id="moblieGoTop" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+	<button id="moblieDarkLight"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
 	<!-- search start -->
 	<form class="js-search search-form search-form--modal" method="get" action="<?php echo home_url(); ?>" role="search">
 		<div class="search-form__inner">
