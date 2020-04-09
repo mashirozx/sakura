@@ -1283,7 +1283,7 @@ a:hover {
     padding: 0 10px;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgba(255, 255, 255, .8)
+    background-color: #fff
 }
 
 .post-list {
@@ -1889,9 +1889,9 @@ h1.page-title.mb- {
     }
 }
 
-#moblieGoTop {
+#moblieGoTop,#moblieDarkLight {
     position: fixed;
-    bottom: 10px;
+    bottom: 60px;
     right: 10px;
     z-index: 99;
     border: 0;
@@ -1906,11 +1906,14 @@ h1.page-title.mb- {
     transform: scale(0);
     transition:transform .3s
 }
-#moblieGoTop:hover {
+#moblieGoTop:hover,#moblieDarkLight:hover {
     background-color: #fff;
     opacity: .8
 }
 
+#moblieDarkLight{
+    bottom: 10px;
+}
 .post-footer {
     padding: 20px 0;
     border-bottom: 1px dashed #ddd;
@@ -4369,7 +4372,9 @@ i.iconfont.js-toggle-search.iconsearch {
 	margin-top: -3px;
 	line-height: unset;
 }
-
+body.dark .ins-section .fa{
+    color: #ccc;
+}
 .ins-section .ins-section-header,.ins-section .ins-search-item {
 	padding: 8px 15px;
 	cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur),auto;
@@ -5222,7 +5227,7 @@ i.iconfont.down {
 
 @media (max-width:860px) {
     #main-container {
-        transition-duration: .5s;
+        transition: background,transform .5s !important;
         position: relative;
         overflow: hidden;
         z-index: 2
@@ -5309,7 +5314,7 @@ i.iconfont.down {
         top: 8px
     }
     .openNav.open .icon {
-        background-color: transparent
+        background-color: transparent !important
     }
     .openNav.open .icon:after,
     .openNav.open .icon:before {
@@ -5815,7 +5820,8 @@ i.iconfont.down {
 }
 
 .header-user-avatar:hover .header-user-menu {
-    display: block
+    display: block;
+    background: #fff;
 }
 
 .header-user-menu {
@@ -5846,7 +5852,6 @@ i.iconfont.down {
 
 .herder-user-name {
     font-size: 12px;
-    background: #fff;
     padding: 10px 10px;
     border-radius: 4px 4px 0 0
 }
@@ -5862,7 +5867,6 @@ i.iconfont.down {
 
 .header-user-menu .user-menu-option {
     padding: 5px 0;
-    background: #fff;
     border-radius: 0 0 4px 4px;
     width: 130px
 }
@@ -8282,6 +8286,8 @@ td.hljs-ln-numbers {
     --widthB: calc(var(--widthA) - 30px);
     height: var(--widthB);
     min-height: 99%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     overflow-y: hidden;
     overflow-x: auto;
     height: auto
@@ -8743,6 +8749,9 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
     }
     .bangumi-item:hover img{
         filter: blur(3px);
+    }
+    body.dark .bangumi-item:hover img{
+        filter: brightness(0.8) blur(3px);
     }
     .bangumi-title {
         height: 15%;

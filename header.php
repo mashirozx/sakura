@@ -62,6 +62,7 @@ if (akina_option('akina_meta') == true) {
 <meta name="keywords" content="<?php echo $keywords; ?>" />
 <?php } ?>
 <link rel="shortcut icon" href="<?php echo akina_option('favicon_link', ''); ?>"/> 
+<meta name="theme-color" content="#31363b">
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <?php wp_head(); ?>
 <script type="text/javascript">

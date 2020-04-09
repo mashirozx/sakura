@@ -322,10 +322,67 @@ function checkBgImgCookie() {
         $("#" + bgurl).click();
     }
 }
-if (document.body.clientWidth > 860) {
-    setTimeout(function () {
-        checkBgImgCookie();
-    }, 100);
+
+function checkDarkModeCookie() {
+    var night = getCookie("night"),
+        today = new Date()
+        cWidth = document.body.clientWidth;
+    if (!night) {
+        if ((today.getHours() > 21 || today.getHours() < 7) && cWidth > 1200) {
+            $("#dark-bg").click();
+            console.log('夜间模式开启');
+        } else {
+            if (cWidth > 860) {
+                setTimeout(function () {
+                    checkBgImgCookie();
+                }, 1000);
+                console.log('夜间模式关闭');
+            } else {
+                $("html").css("background", "unset");
+                $("body").removeClass("dark");
+                $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
+                setCookie("dark", "0", 0.33);
+            }
+        }
+    } else {
+        if (night == '1' && (today.getHours() >= 22 || today.getHours() <= 6) && cWidth > 1200) {
+            $("#dark-bg").click();
+            console.log('夜间模式开启');
+        } else if (night == '0' || today.getHours() < 22 || today.getHours() > 6) {
+            if (cWidth > 860) {
+                setTimeout(function () {
+                    checkBgImgCookie();
+                }, 1000);
+                console.log('夜间模式关闭');
+            } else {
+                $("html").css("background", "unset");
+                $("body").removeClass("dark");
+                $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
+                setCookie("dark", "0", 0.33);
+            }
+        }
+    }
+}
+if (!getCookie("darkcache") && (new Date().getHours() > 21 || new Date().getHours() < 7)) {
+    removeCookie("dark");
+    setCookie("darkcache", "cached", 0.4);
+}
+setTimeout(function() {
+    checkDarkModeCookie();
+}, 100);
+
+function mobile_dark_light() {
+    if ($("body").hasClass("dark")) {
+        $("html").css("background", "unset");
+        $("body").removeClass("dark");
+        $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
+        setCookie("dark", "0", 0.33);
+    } else {
+        $("html").css("background", "#31363b");
+        $("#moblieDarkLight").html('<i class="fa fa-sun-o" aria-hidden="true"></i>');
+        $("body").addClass("dark");
+        setCookie("dark", "1", 0.33);
+    }
 }
 
 function no_right_click() {
@@ -338,13 +395,12 @@ $(document).ready(function () {
     function checkskin_bg(a) {
         return a == "none" ? "" : a
     }
-
     function changeBG() {
         var cached = $(".menu-list");
         cached.find("li").each(function () {
             var tagid = this.id;
             cached.on("click", "#" + tagid, function () {
-                if (tagid == "white-bg") {
+                if (tagid == "white-bg" || tagid == "dark-bg") {
                     mashiro_global.variables.skinSecter = true;
                     checkskinSecter();
                 } else {
@@ -352,36 +408,50 @@ $(document).ready(function () {
                     checkskinSecter();
                 }
                 if (tagid == "dark-bg") {
-                    $("#night-mode-cover").css("visibility", "visible");
-                } else
-                    $("#night-mode-cover").css("visibility", "hidden");
+                    $("html").css("background", "#31363b");
+                    $(".site-content").css("background-color", "#fff");
+                    $("body").addClass("dark");
+                    setCookie("dark", "1", 0.33);
+                } else{
+                    $("html").css("background", "unset");
+                    $("body").removeClass("dark");
+                    $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
+                    setCookie("dark", "0", 0.33);
+                    setCookie("bgImgSetting", tagid, 30);
+                }
                 switch (tagid) {
                     case "white-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
+                        $(".site-content").css("background-color", "#fff");
                         break;
                     case "sakura-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "gribs-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "pixiv-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "KAdots-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "totem-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "bing-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
-                    case "dark-bg":
-                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
-                        break;
+                    // case "dark-bg":
+                    //     $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
+                    //     break;
                 }
-                setCookie("bgImgSetting", tagid, 30);
                 closeSkinMenu();
             });
         });
@@ -423,13 +493,11 @@ $(document).ready(function () {
 });
 
 function topFunction() {
-    if ('scrollBehavior' in document.documentElement.style) {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    } else {
-        window.scrollSmoothTo(0)
+    window.scrollBy(0, -100)
+    scrolldelay = setTimeout('topFunction()', 10)
+    var sTop = document.documentElement.scrollTop + document.body.scrollTop
+    if (sTop === 0) {
+        clearTimeout(scrolldelay)
     }
 }
 
@@ -1765,14 +1833,17 @@ var home = location.href,
                 cheight = window.innerHeight,
                 pc_to_top = document.querySelector(".cd-top"),
                 mb_to_top = document.querySelector("#moblieGoTop"),
+                mb_dark_light = document.querySelector("#moblieDarkLight"),
                 changeskin = document.querySelector(".changeSkin-gear");
 
             $(window).scroll(function() {
                 if (cwidth <= 860) {
                     if ($(this).scrollTop() > 20) {
                         mb_to_top.style.transform = "scale(1)";
+                        mb_dark_light.style.transform = "scale(1)";
                     } else {
                         mb_to_top.style.transform = "scale(0)";
+                        mb_dark_light.style.transform = "scale(0)";
                     }
                 } else {
                     if ($(this).scrollTop() > 100) {
@@ -1800,6 +1871,9 @@ var home = location.href,
             }
             mb_to_top.onclick = function() {
                 topFunction();
+            }
+            mb_dark_light.onclick = function() {
+                mobile_dark_light();
             }
         }
     }
