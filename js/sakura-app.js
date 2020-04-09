@@ -324,18 +324,20 @@ function checkBgImgCookie() {
 }
 
 function checkDarkModeCookie() {
-    var night = getCookie("night"),
+    var dark = getCookie("dark"),
         today = new Date()
         cWidth = document.body.clientWidth;
-    if (!night) {
-        if ((today.getHours() > 21 || today.getHours() < 7) && cWidth > 1200) {
-            $("#dark-bg").click();
+    if (!dark) {
+        if ((today.getHours() > 21 || today.getHours() < 7)) {
+            setTimeout(function () {
+                $("#dark-bg").click();
+            }, 100);
             console.log('夜间模式开启');
         } else {
             if (cWidth > 860) {
                 setTimeout(function () {
                     checkBgImgCookie();
-                }, 1000);
+                }, 100);
                 console.log('夜间模式关闭');
             } else {
                 $("html").css("background", "unset");
@@ -345,14 +347,16 @@ function checkDarkModeCookie() {
             }
         }
     } else {
-        if (night == '1' && (today.getHours() >= 22 || today.getHours() <= 6) && cWidth > 1200) {
-            $("#dark-bg").click();
+        if (dark == '1' && (today.getHours() >= 22 || today.getHours() <= 6)) {
+            setTimeout(function () {
+                $("#dark-bg").click();
+            }, 100);
             console.log('夜间模式开启');
-        } else if (night == '0' || today.getHours() < 22 || today.getHours() > 6) {
+        } else if (dark == '0' || today.getHours() < 22 || today.getHours() > 6) {
             if (cWidth > 860) {
                 setTimeout(function () {
                     checkBgImgCookie();
-                }, 1000);
+                }, 100);
                 console.log('夜间模式关闭');
             } else {
                 $("html").css("background", "unset");

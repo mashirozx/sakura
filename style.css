@@ -1877,19 +1877,8 @@ h1.page-title.mb- {
     text-align: center
 }
 
-@media screen and (max-width:860px) {
-    .cd-top {
-        display: none;
-        height: 60px;
-        width: 50px
-    }
-    .cd-top span {
-        height: 10px;
-        width: 50px
-    }
-}
-
 #moblieGoTop,#moblieDarkLight {
+    visibility: hidden;
     position: fixed;
     bottom: 60px;
     right: 10px;
@@ -1913,6 +1902,21 @@ h1.page-title.mb- {
 
 #moblieDarkLight{
     bottom: 10px;
+}
+
+@media screen and (max-width:860px) {
+    .cd-top {
+        display: none;
+        height: 60px;
+        width: 50px
+    }
+    .cd-top span {
+        height: 10px;
+        width: 50px
+    }
+    #moblieGoTop,#moblieDarkLight{
+        visibility: visible;
+    }
 }
 .post-footer {
     padding: 20px 0;
