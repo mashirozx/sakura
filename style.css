@@ -1709,6 +1709,10 @@ i.iconfont.hotpost {
     background: #FBFBFB
 }
 
+body.dark .s-content{
+    background: unset;
+}
+
 .s-time i {
     font-size: 13px;
     margin-right: 5px
@@ -5890,6 +5894,11 @@ i.iconfont.down {
     background-color: #f1f1f1
 }
 
+body.dark .user-menu-option a:hover {
+    color: #3daee9;
+    background-color: #232629
+}
+
 .no-logged {
     font-size: 13px;
     padding: 15px 10px;
@@ -5899,7 +5908,7 @@ i.iconfont.down {
 
 .no-logged a {
     display: initial;
-    color: #69d2e7;
+    color: #69d2e7 !important;
     font-size: 14px;
     padding: 0 5px;
     text-decoration: underline

@@ -79,14 +79,21 @@ function post_list_show_animation() {
 
         function callback(entries) {
             entries.forEach((article) => {
-                if (article.target.classList.contains("post-list-show")) {
+                if (!window.IntersectionObserver) {
                     article.target.style.willChange = 'auto';
-                    io.unobserve(article.target)
-                } else {
-                    if (article.isIntersecting) {
+                    if( article.target.classList.contains("post-list-show") === false){
                         article.target.classList.add("post-list-show");
+                    }
+                } else {
+                    if (article.target.classList.contains("post-list-show")) {
                         article.target.style.willChange = 'auto';
                         io.unobserve(article.target)
+                    } else {
+                        if (article.isIntersecting) {
+                            article.target.classList.add("post-list-show");
+                            article.target.style.willChange = 'auto';
+                            io.unobserve(article.target)
+                        }
                     }
                 }
             })
@@ -325,46 +332,26 @@ function checkBgImgCookie() {
 
 function checkDarkModeCookie() {
     var dark = getCookie("dark"),
-        today = new Date()
-        cWidth = document.body.clientWidth;
-    if (!dark) {
-        if ((today.getHours() > 21 || today.getHours() < 7)) {
+        today = new Date(),
+        hour = today.getHours();
+        if ((!dark && (hour > 21 || hour < 7) ) || (dark == '1' && (hour >= 22 || hour <= 6))) {
             setTimeout(function () {
                 $("#dark-bg").click();
             }, 100);
+            $("#moblieDarkLight").html('<i class="fa fa-sun-o" aria-hidden="true"></i>');
             console.log('夜间模式开启');
         } else {
-            if (cWidth > 860) {
+            if (document.body.clientWidth > 860) {
                 setTimeout(function () {
                     checkBgImgCookie();
                 }, 100);
-                console.log('夜间模式关闭');
             } else {
                 $("html").css("background", "unset");
                 $("body").removeClass("dark");
                 $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
                 setCookie("dark", "0", 0.33);
             }
-        }
-    } else {
-        if (dark == '1' && (today.getHours() >= 22 || today.getHours() <= 6)) {
-            setTimeout(function () {
-                $("#dark-bg").click();
-            }, 100);
-            console.log('夜间模式开启');
-        } else if (dark == '0' || today.getHours() < 22 || today.getHours() > 6) {
-            if (cWidth > 860) {
-                setTimeout(function () {
-                    checkBgImgCookie();
-                }, 100);
-                console.log('夜间模式关闭');
-            } else {
-                $("html").css("background", "unset");
-                $("body").removeClass("dark");
-                $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
-                setCookie("dark", "0", 0.33);
-            }
-        }
+            console.log('夜间模式关闭');
     }
 }
 if (!getCookie("darkcache") && (new Date().getHours() > 21 || new Date().getHours() < 7)) {
@@ -497,12 +484,9 @@ $(document).ready(function () {
 });
 
 function topFunction() {
-    window.scrollBy(0, -100)
-    scrolldelay = setTimeout('topFunction()', 10)
-    var sTop = document.documentElement.scrollTop + document.body.scrollTop
-    if (sTop === 0) {
-        clearTimeout(scrolldelay)
-    }
+    $('body,html').animate({
+        scrollTop: 0
+    })
 }
 
 function timeSeriesReload(flag) {
