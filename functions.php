@@ -204,6 +204,7 @@ function sakura_scripts()
     // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
+    $gravatar_url = akina_option('gravatar_proxy') ?: 'secure.gravatar.com/avatar';
     wp_localize_script('app', 'Poi', array(
         'pjax' => akina_option('poi_pjax'),
         'movies' => $movies,
@@ -215,7 +216,8 @@ function sakura_scripts()
         'reply_link_version' => $reply_link_version,
         'api' => esc_url_raw(rest_url()),
         'nonce' => wp_create_nonce('wp_rest'),
-        'google_analytics_id' => akina_option('google_analytics_id', '')
+        'google_analytics_id' => akina_option('google_analytics_id', ''),
+        'gravatar_url' => $gravatar_url
     ));
 }
 add_action('wp_enqueue_scripts', 'sakura_scripts');
@@ -608,13 +610,15 @@ function get_link_items()
  * Gravatar头像使用中国服务器
  */
 function gravatar_cn($url)
-{
-    $gravatar_url = array('0.gravatar.com', '1.gravatar.com', '2.gravatar.com', 'secure.gravatar.com');
+{    
+    $gravatar_url = array('0.gravatar.com/avatar','1.gravatar.com/avatar','2.gravatar.com/avatar','secure.gravatar.com/avatar');
     //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
     //官方服务器近期大陆访问 429，建议使用镜像
-    return str_replace( $gravatar_url, 'gravatar.2heng.xin', $url );
+    return str_replace( $gravatar_url, akina_option('gravatar_proxy'), $url );
 }
-add_filter('get_avatar_url', 'gravatar_cn', 4);
+if(akina_option('gravatar_proxy')){
+    add_filter('get_avatar_url', 'gravatar_cn', 4);
+}
 
 /*
  * 自定义默认头像
@@ -662,6 +666,7 @@ function akina_body_classes($classes)
     /*if(!wp_is_mobile()) {
     $classes[] = 'serif';
     }*/
+    $classes[] = $_COOKIE['dark'.akina_option('cookie_version', '')] == '1' ? 'dark' : ' ';
     return $classes;
 }
 add_filter('body_class', 'akina_body_classes');
@@ -1758,11 +1763,13 @@ function DEFAULT_FEATURE_IMAGE()
 }
 
 //防止设置置顶文章造成的图片同侧bug
-add_action('pre_get_posts', function ($q) {
-    if ($q->is_home() && $q->is_main_query() && $q->get('paged') > 1) {
-        $q->set('post__not_in', get_option('sticky_posts'));
+add_action( 'pre_get_posts', function( $q ){
+    if ( $q->is_home() && $q->is_main_query() ){
+        $q->set( 'posts_per_page', 10 - sizeof(get_option( 'sticky_posts' )) );
+        if ( $q->get( 'paged' ) > 1 )
+            $q->set( 'post__not_in', get_option( 'sticky_posts' ) );
     }
-
+    
 });
 
 //评论回复

@@ -65,7 +65,8 @@
 		<?php wp_nav_menu( array( 'depth' => 2, 'theme_location' => 'primary', 'container' => false ) ); ?>
 	</div><!-- m-nav-center end -->
 	<a class="cd-top faa-float animated "></a>
-	<button onclick="topFunction()" id="moblieGoTop" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+	<button id="moblieGoTop" title="Go to top"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+	<button id="moblieDarkLight"><i class="fa fa-moon-o" aria-hidden="true"></i></button>
 	<!-- search start -->
 	<form class="js-search search-form search-form--modal" method="get" action="<?php echo home_url(); ?>" role="search">
 		<div class="search-form__inner">
@@ -148,11 +149,11 @@
 	<div class="show-hide-wrap"><button class="show-hide"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32"><path d="M22 16l-10.105-10.6-1.895 1.987 8.211 8.613-8.211 8.612 1.895 1.988 8.211-8.613z"></path></svg></button></div>
     </aside>
 <?php endif; ?>
-<?php if (akina_option('playlist_id', '')): ?>
+<?php if (akina_option('aplayer_server') != 'off'): ?>
     <div id="aplayer-float" style="z-index: 100;"
 	    class="aplayer"
-        data-id="<?php echo akina_option('playlist_id', ''); ?>"
-        data-server="netease"
+        data-id="<?php echo akina_option('aplayer_playlistid', ''); ?>"
+        data-server="<?php echo akina_option('aplayer_server'); ?>"
         data-type="playlist"
         data-fixed="true"
         data-theme="orange">

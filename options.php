@@ -182,7 +182,7 @@ function optionsframework_options()
         'name' => __('Favicon', 'sakura'),
         'desc' => __('It is the small logo on the browser tab, fill in the url', 'sakura'), /*就是浏览器标签栏上那个小 logo，填写url*/
         'id' => 'favicon_link',
-        'std' => '/wp-content/themes/Sakura/images/favicon.ico',
+        'std' => get_template_directory_uri().'/images/favicon.ico',
         'type' => 'text');
 
     $options[] = array(
@@ -923,10 +923,32 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => __('Footer float music player', 'sakura'), /*页脚悬浮播放器*/
-        'desc' => __('If you don\'t need the player just leave it blank.Fill in the "song list" ID of Netease Cloud Music, eg: https://music.163.com/#/playlist?id=2288037900 The ID is 2288037900', 'sakura'), /*如果不需要播放器留空即可。填写网易云音乐的「歌单」ID，eg：https://music.163.com/#/playlist?id=2288037900的ID是2288037900*/
-        'id' => 'playlist_id',
+        'desc' => __('Choose which platform you\'ll use.', 'sakura'),
+        'id' => 'aplayer_server',
+        'std' => "netease",
+        'type' => "select",
+        'options' => array(
+            'netease' => __('Netease Cloud Music (default)', 'sakura'),
+            'xiami' => __('Xiami Music', 'sakura'),
+            'kugou' => __('KuGou Music', 'sakura'),
+            'baidu' => __('Baidu Music', 'sakura'),
+            'tencent' => __('QQ Music (may fail) ', 'sakura'),
+            'off' => __('Off', 'sakura'),
+        ));
+
+    $options[] = array(
+        'name' => __('Song list ID', 'sakura'),
+        'desc' => __('Fill in the "song list" ID, eg: https://music.163.com/#/playlist?id=2288037900 The ID is 2288037900', 'sakura'),
+        'id' => 'aplayer_playlistid',
         'std' => '2288037900',
         'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Netease Cloud Music cookie', 'sakura'),
+        'desc' => __('For Netease Cloud Music, fill in your vip account\'s cookies if you want to play special tracks.<b>If you don\'t know what does mean, left it blank.</b>', 'sakura'),
+        'id' => 'aplayer_cookie',
+        'std' => '',
+        'type' => 'textarea');
 
     $options[] = array(
         'name' => __('Version Control', 'sakura'), /*版本控制*/
@@ -969,7 +991,19 @@ function optionsframework_options()
         'id' => 'notice_title',
         'std' => '',
         'type' => 'text');
-
+    $options[] = array(
+        'name' => __('Bilibili UID', 'sakura'), /*bilibiliUID*/
+        'desc' => __('Fill in your UID, eg.https://space.bilibili.com/13972644/, only fill in with the number part.', 'sakura'),
+        'id' => 'bilibili_id',
+        'std' => '13972644',
+        'type' => 'text');
+    
+    $options[] = array(
+        'name' => __('Bilibili Cookie', 'sakura'), /*Bilibili Cookie*/
+        'desc' => __('Fill in your Cookies, go to your bilibili homepage, you can get cookies in brownser network pannel with pressing F12. If left this blank, you\'ll not get the progress.', 'sakura'),
+        'id' => 'bilibili_cookie',
+        'std' => 'LIVE_BUVID=',
+        'type' => 'textarea');
     $options[] = array(
         'name' => __('The categories of articles that don\'t not show on homepage', 'sakura'), /*首页不显示的分类文章*/
         'desc' => __('Fill in category ID, multiple IDs are divided by a comma ","', 'sakura'), /*填写分类ID，多个用英文“ , ”分开*/
@@ -1005,6 +1039,13 @@ function optionsframework_options()
             'type_3' => __('23 333 Views (french)', 'sakura'), /*23 333 次访问（法式）*/
             'type_4' => __('23k Views (chinese)', 'sakura'), /*23k 次访问（中式）*/
         ));
+
+    $options[] = array(
+        'name' => __('Gravatar avatar proxy', 'sakura'),
+        'desc' => __('A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it blank if you do not need.', 'sakura'),
+        'id' => 'gravatar_proxy',
+        'std' => "gravatar.2heng.xin/avatar",
+        'type' => "text");
 
     $options[] = array(
         'name' => __('Comment image upload API', 'sakura'), /*评论图片上传接口*/
@@ -1061,7 +1102,7 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => __('Enable live search', 'sakura'), /*启用实时搜索*/
-        'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in functions.php', 'sakura'), /*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
+        'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in api.php', 'sakura'), /*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
         'id' => 'live_search',
         'std' => '0',
         'type' => 'checkbox');

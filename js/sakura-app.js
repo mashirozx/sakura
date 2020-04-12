@@ -17,6 +17,7 @@ mashiro_global.ini = new function () {
         coverVideoIni();
         checkskinSecter();
         scrollBar();
+        load_bangumi();
     }
     this.pjax = function () { // pjax reload functions (pjax 重载函数)
         pjaxInit();
@@ -25,6 +26,7 @@ mashiro_global.ini = new function () {
         copy_code_block();
         coverVideoIni();
         checkskinSecter();
+        load_bangumi();
     }
 }
 
@@ -77,14 +79,21 @@ function post_list_show_animation() {
 
         function callback(entries) {
             entries.forEach((article) => {
-                if (article.target.classList.contains("post-list-show")) {
+                if (!window.IntersectionObserver) {
                     article.target.style.willChange = 'auto';
-                    io.unobserve(article.target)
-                } else {
-                    if (article.isIntersecting) {
+                    if( article.target.classList.contains("post-list-show") === false){
                         article.target.classList.add("post-list-show");
+                    }
+                } else {
+                    if (article.target.classList.contains("post-list-show")) {
                         article.target.style.willChange = 'auto';
                         io.unobserve(article.target)
+                    } else {
+                        if (article.isIntersecting) {
+                            article.target.classList.add("post-list-show");
+                            article.target.style.willChange = 'auto';
+                            io.unobserve(article.target)
+                        }
                     }
                 }
             })
@@ -320,10 +329,51 @@ function checkBgImgCookie() {
         $("#" + bgurl).click();
     }
 }
-if (document.body.clientWidth > 860) {
-    setTimeout(function () {
-        checkBgImgCookie();
-    }, 100);
+
+function checkDarkModeCookie() {
+    var dark = getCookie("dark"),
+        today = new Date(),
+        hour = today.getHours();
+        if ((!dark && (hour > 21 || hour < 7) ) || (dark == '1' && (hour >= 22 || hour <= 6))) {
+            setTimeout(function () {
+                $("#dark-bg").click();
+            }, 100);
+            $("#moblieDarkLight").html('<i class="fa fa-sun-o" aria-hidden="true"></i>');
+            console.log('夜间模式开启');
+        } else {
+            if (document.body.clientWidth > 860) {
+                setTimeout(function () {
+                    checkBgImgCookie();
+                }, 100);
+            } else {
+                $("html").css("background", "unset");
+                $("body").removeClass("dark");
+                $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
+                setCookie("dark", "0", 0.33);
+            }
+            console.log('夜间模式关闭');
+    }
+}
+if (!getCookie("darkcache") && (new Date().getHours() > 21 || new Date().getHours() < 7)) {
+    removeCookie("dark");
+    setCookie("darkcache", "cached", 0.4);
+}
+setTimeout(function() {
+    checkDarkModeCookie();
+}, 100);
+
+function mobile_dark_light() {
+    if ($("body").hasClass("dark")) {
+        $("html").css("background", "unset");
+        $("body").removeClass("dark");
+        $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
+        setCookie("dark", "0", 0.33);
+    } else {
+        $("html").css("background", "#31363b");
+        $("#moblieDarkLight").html('<i class="fa fa-sun-o" aria-hidden="true"></i>');
+        $("body").addClass("dark");
+        setCookie("dark", "1", 0.33);
+    }
 }
 
 function no_right_click() {
@@ -336,13 +386,12 @@ $(document).ready(function () {
     function checkskin_bg(a) {
         return a == "none" ? "" : a
     }
-
     function changeBG() {
         var cached = $(".menu-list");
         cached.find("li").each(function () {
             var tagid = this.id;
             cached.on("click", "#" + tagid, function () {
-                if (tagid == "white-bg") {
+                if (tagid == "white-bg" || tagid == "dark-bg") {
                     mashiro_global.variables.skinSecter = true;
                     checkskinSecter();
                 } else {
@@ -350,36 +399,50 @@ $(document).ready(function () {
                     checkskinSecter();
                 }
                 if (tagid == "dark-bg") {
-                    $("#night-mode-cover").css("visibility", "visible");
-                } else
-                    $("#night-mode-cover").css("visibility", "hidden");
+                    $("html").css("background", "#31363b");
+                    $(".site-content").css("background-color", "#fff");
+                    $("body").addClass("dark");
+                    setCookie("dark", "1", 0.33);
+                } else{
+                    $("html").css("background", "unset");
+                    $("body").removeClass("dark");
+                    $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
+                    setCookie("dark", "0", 0.33);
+                    setCookie("bgImgSetting", tagid, 30);
+                }
                 switch (tagid) {
                     case "white-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
+                        $(".site-content").css("background-color", "#fff");
                         break;
                     case "sakura-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "gribs-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "pixiv-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "KAdots-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "totem-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "bing-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
+                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
-                    case "dark-bg":
-                        $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
-                        break;
+                    // case "dark-bg":
+                    //     $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
+                    //     break;
                 }
-                setCookie("bgImgSetting", tagid, 30);
                 closeSkinMenu();
             });
         });
@@ -421,14 +484,9 @@ $(document).ready(function () {
 });
 
 function topFunction() {
-    if ('scrollBehavior' in document.documentElement.style) {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        })
-    } else {
-        window.scrollSmoothTo(0)
-    }
+    $('body,html').animate({
+        scrollTop: 0
+    })
 }
 
 function timeSeriesReload(flag) {
@@ -817,7 +875,7 @@ if (mashiro_option.float_player_on) {
                         }
                     });
                 }
-                var b = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r';
+                var b = mashiro_option.meting_api_url + '?server=:server&type=:type&id=:id&_wpnonce=' + Poi.nonce;
                 'undefined' != typeof meting_api && (b = meting_api);
                 for (var f = 0; f < aplayers.length; f++) try {
                     aplayers[f].destroy()
@@ -830,7 +888,7 @@ if (mashiro_option.float_player_on) {
                             f = d.dataset.id;
                         if (f) {
                             var g = d.dataset.api || b;
-                            g = g.replace(':server', d.dataset.server), g = g.replace(':type', d.dataset.type), g = g.replace(':id', d.dataset.id), g = g.replace(':auth', d.dataset.auth), g = g.replace(':r', Math.random());
+                            g = g.replace(':server', d.dataset.server), g = g.replace(':type', d.dataset.type), g = g.replace(':id', d.dataset.id);
                             var h = new XMLHttpRequest;
                             h.onreadystatechange = function () {
                                 if (4 === h.readyState && (200 <= h.status && 300 > h.status || 304 === h.status)) {
@@ -929,27 +987,6 @@ function getqqinfo() {
                 }
             });
         }
-        // $.ajax({
-        //     type: 'get',
-        //     url: mashiro_option.qq_avatar_api_url + '?type=getqqavatar&qq=' + qq,
-        //     dataType: 'jsonp',
-        //     jsonp: 'callback',
-        //     jsonpCallback: 'qqavatarCallBack',
-        //     success: function (data) {
-        //         $('div.comment-user-avatar img').attr('src', data[qq]);
-        //         setCookie('user_avatar', data[qq], 30);
-        //     },
-        //     error: function () {
-        //         cached.filter('#qq,#email,#url').val('');
-        //         if (!cached.filter('#qq').val()) {
-        //             $('.qq-check').css('display', 'none');
-        //             $('.gravatar-check').css('display', 'block');
-        //             setCookie('user_qq', '', 30);
-        //             $('div.comment-user-avatar img').attr('src', get_gravatar(cached.filter('#email').val(), 80));
-        //             setCookie('user_avatar', get_gravatar(cached.filter('#email').val(), 80), 30);
-        //         }
-        //     }
-        // });
     });
     if (getCookie('user_avatar') && getCookie('user_email') && getCookie('is_user_qq') == 'no' && !getCookie('user_qq_email')) {
         $('div.comment-user-avatar img').attr('src', getCookie('user_avatar'));
@@ -1010,6 +1047,27 @@ function activate_widget(){
 setTimeout(function () {
     activate_widget();
 }, 100);
+
+function load_bangumi() {
+    if ($("section").hasClass("bangumi")) {
+        $('body').on('click', '#bangumi-pagination a', function () {
+            $("#bangumi-pagination a").addClass("loading").text("");
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.href + "&_wpnonce=" + Poi.nonce, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var html = JSON.parse(xhr.responseText);
+                    $("#bangumi-pagination").remove();
+                    $(".row").append(html);
+                }else{
+                    $("#bangumi-pagination a").removeClass("loading").html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ERROR ');
+                }
+            };
+            xhr.send();
+            return false;
+        });
+    }
+}
 
 mashiro_global.ini.normalize();
 loadCSS(mashiro_option.jsdelivr_css_src);
@@ -1394,7 +1452,7 @@ var home = location.href,
                 $('html').css('overflow-y', 'hidden');
                 if (mashiro_option.live_search) {
                     var QueryStorage = [];
-                    search_a(Poi.api + "sakura/v1/cache_search/json");
+                    search_a(Poi.api + "sakura/v1/cache_search/json?_wpnonce=" + Poi.nonce);
 
                     var otxt = addComment.I("search-input"),
                         list = addComment.I("PostlistBox"),
@@ -1594,7 +1652,7 @@ var home = location.href,
                             var tempScrollTop = $(window).scrollTop();
                             $(window).scrollTop(tempScrollTop);
                             $body.animate({
-                                scrollTop: tempScrollTop + 300
+                                scrollTop: tempScrollTop + 100
                             }, 666)
                         } else {
                             $("#pagination").html("<span>很高兴你翻到这里，但是真的没有了...</span>");
@@ -1763,14 +1821,17 @@ var home = location.href,
                 cheight = window.innerHeight,
                 pc_to_top = document.querySelector(".cd-top"),
                 mb_to_top = document.querySelector("#moblieGoTop"),
+                mb_dark_light = document.querySelector("#moblieDarkLight"),
                 changeskin = document.querySelector(".changeSkin-gear");
 
             $(window).scroll(function() {
                 if (cwidth <= 860) {
                     if ($(this).scrollTop() > 20) {
                         mb_to_top.style.transform = "scale(1)";
+                        mb_dark_light.style.transform = "scale(1)";
                     } else {
                         mb_to_top.style.transform = "scale(0)";
+                        mb_dark_light.style.transform = "scale(0)";
                     }
                 } else {
                     if ($(this).scrollTop() > 100) {
@@ -1795,6 +1856,12 @@ var home = location.href,
             //smooth scroll to top
             pc_to_top.onclick = function() {
                 topFunction();
+            }
+            mb_to_top.onclick = function() {
+                topFunction();
+            }
+            mb_dark_light.onclick = function() {
+                mobile_dark_light();
             }
         }
     }
