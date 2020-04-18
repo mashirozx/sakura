@@ -134,23 +134,10 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => __('Theme scheme tool transparency', 'sakura'), /*切换主题菜单透明度*/
-        'desc' => __('Adjust the theme scheme menu transparency, the smaller the value, the more transparent. The default value is 0.8', 'sakura'), /*调整切换主题菜单透明度，值越小越透明。默认透明度0.8*/
+        'desc' => __('Adjust the theme scheme menu transparency, fill  in decimals between 0 and 1, the smaller the value, the more transparent. The default value is 0.8', 'sakura'), /*调整切换主题菜单透明度，值越小越透明。默认透明度0.8*/
         'id' => 'sakura_skin_alpha',
         'std' => '0.8',
-        'type' => 'select',
-        'options' => array(
-            '0' => __('Transparent', 'sakura'), /*全透明*/
-            '0.1' => __('Transparency 0.1', 'sakura'), /*透明度0.1*/
-            '0.2' => __('Transparency 0.2', 'sakura'), /*透明度0.2*/
-            '0.3' => __('Transparency 0.3', 'sakura'), /*透明度0.3*/
-            '0.4' => __('Transparency 0.4', 'sakura'), /*透明度0.4*/
-            '0.5' => __('Transparency 0.5', 'sakura'), /*透明度0.5*/
-            '0.6' => __('Transparency 0.6', 'sakura'), /*透明度0.6*/
-            '0.7' => __('Transparency 0.7', 'sakura'), /*透明度0.7*/
-            '0.8' => __('Transparency 0.8', 'sakura'), /*透明度0.8*/
-            '0.9' => __('Transparency 0.9', 'sakura'), /*透明度0.9*/
-            '1' => __('Opaque', 'sakura'), /*不透明*/
-        ));
+        'type' => 'text');
 
     $options[] = array(
         'name' => __('Change web background', 'sakura'), /*切换网页背景*/
@@ -158,6 +145,13 @@ function optionsframework_options()
         'id' => 'sakura_skin_bg',
         'std' => 'none,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/sakura.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/plaid2dbf8.jpg,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/star02.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/kyotoanimation.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/dot_orange.gif,https://api.mashiro.top/bing/,https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png',
         'type' => 'textarea');
+
+    $options[] = array(
+        'name' => __('Darkmode', 'sakura'),
+        'desc' => __('Automatically turn on dark mode from 10:00 p.m. to 06:00 a.m.', 'sakura'),
+        'id' => 'darkmode',
+        'std' => '1',
+        'type' => 'checkbox');
 
     $options[] = array(
         'name' => __('Personal avatar', 'sakura'), /*个人头像*/

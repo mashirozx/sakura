@@ -37,6 +37,8 @@ mashiro_option.skin_bg6 = "https://api.mashiro.top/bing/";
 mashiro_option.skin_bg7 = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png";
 <?php } ?>
 
+mashiro_option.darkmode = <?php if ( akina_option('darkmode') ){ echo 'true'; } else { echo 'false'; } ?>;
+
 <?php if( is_home() ){ ?>
 mashiro_option.land_at_home = true;
 <?php }else {?>

@@ -1278,12 +1278,20 @@ a:hover {
     padding: 40px 0 0
 }
 
+.site-content.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
 .site-content {
     max-width: 800px;
     padding: 0 10px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #fff
+    background-color: rgba(255, 255, 255, .8)
 }
 
 .post-list {
