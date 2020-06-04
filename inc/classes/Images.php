@@ -149,6 +149,12 @@ class Images
             $imgurl = str_replace(get_template_directory(), get_template_directory_uri(), $imgurl);
         } elseif (akina_option('cover_cdn_options') == "type_3") {
             $imgurl = akina_option('cover_cdn');
+        } elseif (akina_option('cover_cdn_options') == "type_4") {
+            // bing 图片
+            $xml = file_get_contents('https://cn.bing.com/HPImageArchive.aspx?n=1&idx='.$mdx_img_bing);
+            if(preg_match("/<url>(.+?)<\/url>/is",$xml,$matches)){
+                $imgurl='https://cn.bing.com'.str_replace('1366x768','1920x1080',$matches[1]);
+            }
         } else {
             global $sakura_image_array;
             $img_array = json_decode($sakura_image_array, true);

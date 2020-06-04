@@ -383,6 +383,7 @@ function optionsframework_options()
             'type_1' => __('webp images (optimization)', 'sakura'), /*webp优化随机图*/
             'type_2' => __('built-in api (default)', 'sakura'), /*内置原图随机图*/
             'type_3' => __('custom api (advanced)', 'sakura'), /*外部随机图API*/
+            'type_4' => __('bing one pic everyday', 'sakura'), /*Bing每日一图API*/
         )
     );
 
