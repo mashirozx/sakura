@@ -27,8 +27,6 @@
 
 希望你喜欢！
 
-### 打赏支持~
-[微信支付](https://view.moezx.cc/images/2018/05/28/WeChanQR.png) | [支付宝](https://view.moezx.cc/images/2018/05/28/AliPayQR.jpg) | [PayPal](https://paypal.me/mashirozx)
+### New Feature
+    - 新增Bing每日封面壁纸
 
-### 需要服务器吗？
-[![](https://www.vultr.com/media/banners/banner_728x90.png)](https://www.vultr.com/?ref=7674346)
