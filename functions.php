@@ -801,7 +801,7 @@ function custom_login()
     //echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
     echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/inc/login.css?' . SAKURA_VERSION . '" />' . "\n";
     //echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
-    echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.9.0/jquery.min.js"></script>' . "\n";
+    echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>' . "\n";
 }
 
 add_action('login_head', 'custom_login');
@@ -969,11 +969,11 @@ function comment_mail_notify($comment_id)
         <h3>您有一条来自<a style="text-decoration: none;color: orange " target="_blank" href="' . home_url() . '/">' . get_option("blogname") . '</a>的回复</h3>
         <br>
         <p style="font-size: 14px;">您在文章《' . get_the_title($comment->comment_post_ID) . '》上发表的评论：</p>
-        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
-        . trim(get_comment($parent_id)->comment_content) . '</p>
+        <div style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim(get_comment($parent_id)->comment_content) . '</div>
         <p style="font-size: 14px;">' . trim($comment->comment_author) . ' 给您的回复如下：</p>
-        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
-        . trim($comment->comment_content) . '</p>
+        <div style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim($comment->comment_content) . '</div>
 
       <div style="text-align: center;">
           <img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.4/img/other/hr.png" alt="hr" style="width:100%;
@@ -1765,7 +1765,7 @@ function DEFAULT_FEATURE_IMAGE()
 //防止设置置顶文章造成的图片同侧bug
 add_action( 'pre_get_posts', function( $q ){
     if ( $q->is_home() && $q->is_main_query() ){
-        $q->set( 'posts_per_page', 10 - sizeof(get_option( 'sticky_posts' )) );
+        $q->set( 'posts_per_page', get_option('posts_per_page') - sizeof(get_option( 'sticky_posts' )) );
         if ( $q->get( 'paged' ) > 1 )
             $q->set( 'post__not_in', get_option( 'sticky_posts' ) );
     }
