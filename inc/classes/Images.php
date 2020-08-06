@@ -162,4 +162,13 @@ class Images
         }
         return $imgurl;
     }
+
+    public static function feature_gallery() {
+        if (akina_option('post_cover_options') == "type_2") {
+            $imgurl = akina_option('post_cover');
+        } else {
+            $imgurl = self::cover_gallery();
+        }
+        return $imgurl;
+    }
 }

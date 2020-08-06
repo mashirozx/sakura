@@ -235,6 +235,25 @@ function optionsframework_options()
         ));
 
     $options[] = array(
+        'name' => __('Cover manifest', 'sakura'), /*首页文章特色图选项*/
+        'desc' => __('Select how to call the post featue image, only for the post without feature image', 'sakura'), /*选择文章特色图的调用方式，只对没有设置特色图像的文章生效*/
+        'id' => 'post_cover_options',
+        'std' => "type_1",
+        'type' => "select",
+        'options' => array(
+            'type_1' => __('same as the cover of the first screen (default)', 'sakura'), /*跟随第一屏封面图*/
+            'type_2' => __('custom api (advanced)', 'sakura'), /*外部随机图API*/
+        )
+    );
+
+    $options[] = array(
+        'name' => __('Cover images url', 'sakura'), /*图片库url*/
+        'desc' => __('Fill in the custom image api url.', 'sakura'),
+        'id' => 'post_cover',
+        'std' => '',
+        'type' => 'text');
+
+    $options[] = array(
         'name' => __('Home article feature images (only valid for standard mode)', 'sakura'), /*首页文章特色图（仅对标准风格生效）*/
         'id' => 'list_type',
         'std' => "round",
