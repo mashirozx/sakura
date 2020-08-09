@@ -8,7 +8,7 @@ body {
 
 .nav-tab-wrapper {
 	position: relative;
-    max-width: 860px;
+    max-width: 900px;
     margin: auto !important;
 }
 
@@ -37,7 +37,7 @@ body {
 .nav-tab {
 	background: none;
 	border:none;
-	padding: 10px 20px;
+	padding: 10px 15px;
 	font-weight: 300;
     font-size: 15px;
     color: darkgoldenrod;
@@ -74,17 +74,23 @@ a#options-group-4-tab:before {
 
 a#options-group-5-tab:before {
     font-family: "dashicons";
-    content: "\f110";
+    content: "\f101";
     float: left;
 }
 
 a#options-group-6-tab:before {
     font-family: "dashicons";
+    content: "\f110";
+    float: left;
+}
+
+a#options-group-7-tab:before {
+    font-family: "dashicons";
     content: "\f325";
     float: left;
 }
 
-a#options-group-7-tab:before { 
+a#options-group-8-tab:before { 
     font-family: "dashicons";
     content: "\f487";
     float: left;
