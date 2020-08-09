@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-04-06 17:56+0800\n"
-"PO-Revision-Date: 2020-04-06 17:56+0800\n"
+"POT-Creation-Date: 2020-08-06 17:39+0800\n"
+"PO-Revision-Date: 2020-08-06 17:39+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -21,24 +21,24 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: 404.php:17
+#: 404.php:18
 #, php-format
 msgid "page %s"
 msgstr ""
 
-#: 404.php:46
+#: 404.php:47
 msgid "return to previous page"
 msgstr "Return to previous page"
 
-#: 404.php:47
+#: 404.php:48
 msgid "return to home page"
 msgstr "Return to home page"
 
-#: 404.php:50
+#: 404.php:51
 msgid "Don't worry, search in site?"
 msgstr ""
 
-#: 404.php:53 footer.php:62 search.php:42
+#: 404.php:54 footer.php:62 search.php:42
 msgid "Search..."
 msgstr "Search..."
 
@@ -126,15 +126,15 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: footer.php:75 footer.php:83
+#: footer.php:76 footer.php:84
 msgid "Want to find something?"
 msgstr ""
 
-#: footer.php:85
+#: footer.php:86
 msgid "Search"
 msgstr ""
 
-#: footer.php:144
+#: footer.php:145
 msgid "Widgets"
 msgstr ""
 
@@ -181,35 +181,35 @@ msgstr ""
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr ""
 
-#: functions.php:1334
+#: functions.php:1335
 msgid "All expand/collapse"
 msgstr ""
 
-#: functions.php:1355 options.php:834
+#: functions.php:1356 options.php:980
 msgid " "
 msgstr ""
 
-#: functions.php:1359
+#: functions.php:1360
 msgid " post(s)"
 msgstr ""
 
-#: functions.php:1382 functions.php:1385 inc/theme_plus.php:478
+#: functions.php:1383 functions.php:1386 inc/theme_plus.php:478
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:1611
+#: functions.php:1612
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1716
+#: functions.php:1717
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1788
+#: functions.php:1779
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:1900
+#: functions.php:1892
 msgid ""
 "<b> For a better experience, please do not set <a href=\"/wp-admin/options-"
 "permalink.php\"> permalink </a> as plain. To do this, you may need to "
@@ -439,31 +439,31 @@ msgstr ""
 msgid "View comments"
 msgstr ""
 
-#: options.php:34 options.php:45 options.php:299
+#: options.php:34 options.php:45 options.php:312
 msgid "1"
 msgstr ""
 
-#: options.php:35 options.php:46 options.php:300
+#: options.php:35 options.php:46 options.php:313
 msgid "2"
 msgstr ""
 
-#: options.php:36 options.php:47 options.php:301
+#: options.php:36 options.php:47 options.php:314
 msgid "3"
 msgstr ""
 
-#: options.php:37 options.php:48 options.php:302
+#: options.php:37 options.php:48 options.php:315
 msgid "4"
 msgstr ""
 
-#: options.php:38 options.php:49 options.php:303
+#: options.php:38 options.php:49 options.php:316
 msgid "5"
 msgstr ""
 
-#: options.php:39 options.php:304
+#: options.php:39 options.php:317
 msgid "6"
 msgstr ""
 
-#: options.php:40 options.php:305
+#: options.php:40 options.php:318
 msgid "7"
 msgstr ""
 
@@ -497,59 +497,15 @@ msgstr ""
 
 #: options.php:137
 msgid ""
-"Adjust the theme scheme menu transparency, the smaller the value, the more "
-"transparent. The default value is 0.8"
-msgstr ""
-
-#: options.php:142
-msgid "Transparent"
+"Adjust the theme scheme menu transparency, fill  in decimals between 0 and "
+"1, the smaller the value, the more transparent. The default value is 0.8"
 msgstr ""
 
 #: options.php:143
-msgid "Transparency 0.1"
-msgstr ""
-
-#: options.php:144
-msgid "Transparency 0.2"
-msgstr ""
-
-#: options.php:145
-msgid "Transparency 0.3"
-msgstr ""
-
-#: options.php:146
-msgid "Transparency 0.4"
-msgstr ""
-
-#: options.php:147
-msgid "Transparency 0.5"
-msgstr ""
-
-#: options.php:148
-msgid "Transparency 0.6"
-msgstr ""
-
-#: options.php:149
-msgid "Transparency 0.7"
-msgstr ""
-
-#: options.php:150
-msgid "Transparency 0.8"
-msgstr ""
-
-#: options.php:151
-msgid "Transparency 0.9"
-msgstr ""
-
-#: options.php:152
-msgid "Opaque"
-msgstr ""
-
-#: options.php:156
 msgid "Change web background"
 msgstr ""
 
-#: options.php:157
+#: options.php:144
 msgid ""
 "The foreground switches the background of the webpage. There are 8 urls "
 "separated by commas. The order corresponds to the foreground scheme tool "
@@ -560,290 +516,312 @@ msgid ""
 "configuration page to any new value!</strong>"
 msgstr ""
 
-#: options.php:163
+#: options.php:150
+msgid "Darkmode"
+msgstr ""
+
+#: options.php:151
+msgid "Automatically turn on dark mode from 10:00 p.m. to 06:00 a.m."
+msgstr ""
+
+#: options.php:157
 msgid "Personal avatar"
 msgstr ""
 
-#: options.php:164
+#: options.php:158
 msgid "The best size is 130px*130px."
 msgstr ""
 
-#: options.php:169
+#: options.php:163
 msgid "Text LOGO"
 msgstr ""
 
-#: options.php:170
+#: options.php:164
 msgid ""
 "The home page does not display the avatar above, but displays a paragraph of "
 "text (use the avatar above if left blank).The text is recommended not to be "
 "too long, about 16 bytes is appropriate."
 msgstr ""
 
-#: options.php:176
+#: options.php:170
 msgid "logo"
 msgstr ""
 
-#: options.php:177
+#: options.php:171
 msgid "The best height size is 40px。"
 msgstr ""
 
-#: options.php:182
+#: options.php:176
 msgid "Favicon"
 msgstr ""
 
-#: options.php:183
+#: options.php:177
 msgid "It is the small logo on the browser tab, fill in the url"
 msgstr ""
 
-#: options.php:189
+#: options.php:183
 msgid "Custom keywords and descriptions "
 msgstr ""
 
-#: options.php:190
+#: options.php:184
 msgid "Customize keywords and descriptions after opening"
 msgstr ""
 
-#: options.php:196
+#: options.php:190
 msgid "Site keywords"
 msgstr ""
 
-#: options.php:197
+#: options.php:191
 msgid "Each keyword is divided by a comma \",\" and the number is within 5."
 msgstr ""
 
-#: options.php:203
+#: options.php:197
 msgid "Site descriptions"
 msgstr ""
 
-#: options.php:204
+#: options.php:198
 msgid "Describe the site in concise text, with a maximum of 120 words."
 msgstr ""
 
-#: options.php:210
+#: options.php:204
 msgid "Expand the nav menu"
 msgstr ""
 
-#: options.php:211
+#: options.php:205
 msgid "Check to enable, default shrink"
 msgstr ""
 
-#: options.php:217
+#: options.php:211
 msgid "Head decoration"
 msgstr ""
 
-#: options.php:218
+#: options.php:212
 msgid ""
 "Enable by default, check off, display on the article page, separate page and "
 "category page"
 msgstr ""
 
-#: options.php:224
+#: options.php:218
 msgid "Search button"
 msgstr ""
 
-#: options.php:229 options.php:270 options.php:574 options.php:584
-#: options.php:594 options.php:604
+#: options.php:223 options.php:283 options.php:587 options.php:597
+#: options.php:607 options.php:617
 msgid "Open"
 msgstr ""
 
-#: options.php:230 options.php:271 options.php:575 options.php:585
-#: options.php:595 options.php:605
+#: options.php:224 options.php:284 options.php:588 options.php:598
+#: options.php:608 options.php:618
 msgid "Close"
 msgstr ""
 
-#: options.php:234
+#: options.php:228
 msgid "Home article style"
 msgstr ""
 
-#: options.php:239
+#: options.php:233
 msgid "Standard"
 msgstr ""
 
-#: options.php:240
+#: options.php:234
 msgid "Graphic"
 msgstr ""
 
+#: options.php:238 options.php:390
+msgid "Cover manifest"
+msgstr ""
+
+#: options.php:239
+msgid ""
+"Select how to call the post featue image, only for the post without feature "
+"image"
+msgstr ""
+
 #: options.php:244
+msgid "same as the cover of the first screen (default)"
+msgstr ""
+
+#: options.php:245 options.php:398
+msgid "custom api (advanced)"
+msgstr ""
+
+#: options.php:250 options.php:403
+msgid "Cover images url"
+msgstr "Remove image"
+
+#: options.php:251
+msgid "Fill in the custom image api url."
+msgstr ""
+
+#: options.php:257
 msgid "Home article feature images (only valid for standard mode)"
 msgstr ""
 
-#: options.php:249
+#: options.php:262
 msgid "Round"
 msgstr ""
 
-#: options.php:250
+#: options.php:263
 msgid "Square"
 msgstr ""
 
-#: options.php:254
+#: options.php:267
 msgid ""
 "Home article feature images alignment (only for graphic mode, default left "
 "and right alternate)"
 msgstr ""
 
-#: options.php:259
+#: options.php:272
 msgid "Left"
 msgstr ""
 
-#: options.php:260
+#: options.php:273
 msgid "Right"
 msgstr ""
 
-#: options.php:261
+#: options.php:274
 msgid "Alternate"
 msgstr ""
 
-#: options.php:265
+#: options.php:278
 msgid "Comment shrink"
 msgstr ""
 
-#: options.php:275
+#: options.php:288
 msgid "Display author information at the end of the article?"
 msgstr ""
 
-#: options.php:276
+#: options.php:289
 msgid "Check to enable"
 msgstr ""
 
-#: options.php:282
+#: options.php:295
 msgid "Paging mode"
 msgstr ""
 
-#: options.php:287
+#: options.php:300
 msgid "Ajax load"
 msgstr ""
 
-#: options.php:288
+#: options.php:301
 msgid "Previous and next page"
 msgstr ""
 
-#: options.php:292
+#: options.php:305
 msgid "Automatically load the next page"
 msgstr ""
 
-#: options.php:293
+#: options.php:306
 msgid ""
 "(seconds) Set to automatically load the next page time, the default is not "
 "automatically loaded"
 msgstr ""
 
-#: options.php:298
+#: options.php:311
 msgid "0"
 msgstr ""
 
-#: options.php:306
+#: options.php:319
 msgid "8"
 msgstr ""
 
-#: options.php:307
+#: options.php:320
 msgid "9"
 msgstr ""
 
-#: options.php:308
+#: options.php:321
 msgid "10"
 msgstr ""
 
-#: options.php:309
+#: options.php:322
 msgid "Do not load automatically"
 msgstr ""
 
-#: options.php:313
+#: options.php:326
 msgid "Blogger description"
 msgstr ""
 
-#: options.php:314
+#: options.php:327
 msgid "A self-described statement"
 msgstr ""
 
-#: options.php:320
+#: options.php:333
 msgid "Footer info"
 msgstr ""
 
-#: options.php:321
+#: options.php:334
 msgid "Footer description, support for HTML code"
 msgstr ""
 
-#: options.php:327
+#: options.php:340
 msgid "Google analytics"
 msgstr ""
 
-#: options.php:328
+#: options.php:341
 msgid "UA-xxxxx-x"
 msgstr ""
 
-#: options.php:334
+#: options.php:347
 msgid "CNZZ Statistics (not recommand)"
 msgstr ""
 
-#: options.php:335
+#: options.php:348
 msgid "Statistics code, which will be invisible in web page."
 msgstr ""
 
-#: options.php:341
+#: options.php:354
 msgid "Customize CSS styles"
 msgstr ""
 
-#: options.php:342
+#: options.php:355
 msgid "Fill in the CSS code directly, no need to write style tags"
 msgstr ""
 
-#: options.php:349
+#: options.php:362
 msgid "First screen"
 msgstr "Above The Fold"
 
-#: options.php:353
+#: options.php:366
 msgid "Main switch"
 msgstr ""
 
-#: options.php:354 options.php:398
+#: options.php:367 options.php:411
 msgid "Default on, check off"
 msgstr ""
 
-#: options.php:360
+#: options.php:373
 msgid "Social information"
 msgstr ""
 
-#: options.php:361
+#: options.php:374
 msgid "Enable by default, check off, display avatar, signature, SNS"
 msgstr ""
 
-#: options.php:367
+#: options.php:380
 msgid "Social information style"
 msgstr ""
 
-#: options.php:372
+#: options.php:385
 msgid "Merge with signature"
 msgstr ""
 
-#: options.php:373
+#: options.php:386
 msgid "Independent line"
 msgstr ""
 
-#: options.php:377
-msgid "Cover manifest"
-msgstr ""
-
-#: options.php:378
+#: options.php:391
 msgid "Select how to call the cover random image"
 msgstr ""
 
-#: options.php:383
+#: options.php:396
 msgid "webp images (optimization)"
 msgstr ""
 
-#: options.php:384
+#: options.php:397
 msgid "built-in api (default)"
 msgstr ""
 
-#: options.php:385
-msgid "custom api (advanced)"
-msgstr ""
-
-#: options.php:390
-msgid "Cover images url"
-msgstr "Remove image"
-
-#: options.php:391
+#: options.php:404
 #, php-format
 msgid ""
 "Fill in the manifest path for random picture display, please refer to <a "
@@ -852,767 +830,424 @@ msgid ""
 "manifest"
 msgstr ""
 
-#: options.php:397
+#: options.php:410
 msgid "full-screen display"
 msgstr ""
 
-#: options.php:404
+#: options.php:417
 msgid "Enable video"
 msgstr ""
 
-#: options.php:405
+#: options.php:418
 msgid "Check on"
 msgstr ""
 
-#: options.php:411
+#: options.php:424
 msgid "Live"
 msgstr ""
 
-#: options.php:412
+#: options.php:425
 msgid ""
 "Check to enable, the video will continue to play automatically, you need to "
 "enable Pjax"
 msgstr ""
 
-#: options.php:418
+#: options.php:431
 msgid "Video address"
 msgstr ""
 
-#: options.php:419
+#: options.php:432
 msgid ""
 "The source address of the video, the address is spliced below the video "
 "name, the slash is not required at the end of the address"
 msgstr ""
 
-#: options.php:425
+#: options.php:438
 msgid "Video name"
 msgstr ""
 
-#: options.php:426
+#: options.php:439
 msgid ""
 "abc.mp4, just fill in the video file name abc, multiple videos separated by "
 "commas such as abc, efg, do not care about the order, because the loading is "
 "random extraction"
 msgstr ""
 
-#: options.php:432
+#: options.php:445
 msgid "Background image filter"
 msgstr ""
 
-#: options.php:437
+#: options.php:450
 msgid "Nothing"
 msgstr ""
 
-#: options.php:438
+#: options.php:451
 msgid "Undertint"
 msgstr ""
 
-#: options.php:439
+#: options.php:452
 msgid "Dim"
 msgstr ""
 
-#: options.php:440
+#: options.php:453
 msgid "Grid"
 msgstr ""
 
-#: options.php:441
+#: options.php:454
 msgid "Dot"
 msgstr ""
 
-#: options.php:445
+#: options.php:458
 msgid "Whether to turn on the top-feature"
 msgstr ""
 
-#: options.php:446 options.php:1126
+#: options.php:459 options.php:1212
 msgid "Default on"
 msgstr ""
 
-#: options.php:452
+#: options.php:465
 msgid "Top-feature style"
 msgstr ""
 
-#: options.php:457
+#: options.php:470
 msgid "Alternate left and right"
 msgstr ""
 
-#: options.php:458
+#: options.php:471
 msgid "From bottom to top"
 msgstr ""
 
-#: options.php:462
+#: options.php:475
 msgid "Top-feature title"
 msgstr ""
 
-#: options.php:463
+#: options.php:476
 msgid ""
 "Default is Discovery, you can also change it to other, of course you can't "
 "use it as an advertisement!Not allowed!!"
 msgstr ""
 
-#: options.php:470
+#: options.php:483
 msgid "Top-feature 1 image"
 msgstr ""
 
-#: options.php:471 options.php:499 options.php:527
+#: options.php:484 options.php:512 options.php:540
 msgid "size 257px*160px"
 msgstr ""
 
-#: options.php:477 options.php:478
+#: options.php:490 options.php:491
 msgid "Top-feature 1 title"
 msgstr ""
 
-#: options.php:484 options.php:485
+#: options.php:497 options.php:498
 msgid "Top-feature 1 description"
 msgstr ""
 
-#: options.php:491 options.php:492
+#: options.php:504 options.php:505
 msgid "Top-feature 1 link"
 msgstr ""
 
-#: options.php:498
+#: options.php:511
 msgid "Top-feature 2 image"
 msgstr ""
 
-#: options.php:505 options.php:506
+#: options.php:518 options.php:519
 msgid "Top-feature 2 title"
 msgstr ""
 
-#: options.php:512 options.php:513
+#: options.php:525 options.php:526
 msgid "Top-feature 2 description"
 msgstr ""
 
-#: options.php:519 options.php:520
+#: options.php:532 options.php:533
 msgid "Top-feature 2 link"
 msgstr ""
 
-#: options.php:526
+#: options.php:539
 msgid "Top-feature 3 image"
 msgstr ""
 
-#: options.php:533 options.php:534
+#: options.php:546 options.php:547
 msgid "Top-feature 3 title"
 msgstr ""
 
-#: options.php:540 options.php:541
+#: options.php:553 options.php:554
 msgid "Top-feature 3 description"
 msgstr ""
 
-#: options.php:547 options.php:548
+#: options.php:560 options.php:561
 msgid "Top-feature 3 link"
 msgstr ""
 
-#: options.php:555
+#: options.php:568
 msgid "Post page"
 msgstr "Post"
 
-#: options.php:559
+#: options.php:572
 msgid "Post style"
 msgstr ""
 
-#: options.php:564
+#: options.php:577
 msgid "Sakura"
 msgstr ""
 
-#: options.php:565 options.php:660
+#: options.php:578 options.php:673
 msgid "GitHub"
 msgstr ""
 
-#: options.php:569
+#: options.php:582
 msgid "Post like"
 msgstr ""
 
-#: options.php:579
+#: options.php:592
 msgid "Post share"
 msgstr ""
 
-#: options.php:589
+#: options.php:602
 msgid "Previous and Next"
 msgstr "Previous"
 
-#: options.php:599
+#: options.php:612
 msgid "Author profile"
 msgstr ""
 
-#: options.php:609
+#: options.php:622
 msgid "Alipay reward"
 msgstr ""
 
-#: options.php:610
+#: options.php:623
 msgid "Alipay qrcode"
 msgstr ""
 
-#: options.php:615
+#: options.php:628
 msgid "Wechat reward"
 msgstr ""
 
-#: options.php:616
+#: options.php:629
 msgid "Wechat qrcode "
 msgstr ""
 
-#: options.php:622
+#: options.php:635
 msgid "Social network"
 msgstr "Social"
 
-#: options.php:626
+#: options.php:639
 msgid "Wechat"
 msgstr ""
 
-#: options.php:627
+#: options.php:640
 msgid "Wechat qrcode"
 msgstr ""
 
-#: options.php:632
+#: options.php:645
 msgid "Sina Weibo"
 msgstr ""
 
-#: options.php:633
+#: options.php:646
 msgid "Sina Weibo address"
 msgstr ""
 
-#: options.php:639
+#: options.php:652
 msgid "Tencent QQ"
 msgstr ""
 
-#: options.php:640
+#: options.php:653
 msgid ""
 "tencent://message/?uin={{QQ number}}. for example, tencent://message/?"
 "uin=123456"
 msgstr ""
 
-#: options.php:646
+#: options.php:659
 msgid "Telegram"
 msgstr ""
 
-#: options.php:647
+#: options.php:660
 msgid "Telegram link"
 msgstr ""
 
-#: options.php:653
+#: options.php:666
 msgid "Qzone"
 msgstr ""
 
-#: options.php:654
+#: options.php:667
 msgid "Qzone address"
 msgstr ""
 
-#: options.php:661
+#: options.php:674
 msgid "GitHub address"
 msgstr ""
 
-#: options.php:667
+#: options.php:680
 msgid "Lofter"
 msgstr ""
 
-#: options.php:668
+#: options.php:681
 msgid "Lofter address"
 msgstr ""
 
-#: options.php:674
+#: options.php:687
 msgid "BiliBili"
 msgstr ""
 
-#: options.php:675
+#: options.php:688
 msgid "BiliBili address"
 msgstr ""
 
-#: options.php:681
+#: options.php:694
 msgid "Youku video"
 msgstr ""
 
-#: options.php:682
+#: options.php:695
 msgid "Youku video address"
 msgstr ""
 
-#: options.php:688
+#: options.php:701
 msgid "Netease Cloud Music"
 msgstr ""
 
-#: options.php:689
+#: options.php:702
 msgid "Netease Cloud Music address"
 msgstr ""
 
-#: options.php:695
+#: options.php:708
 msgid "Twitter"
 msgstr ""
 
-#: options.php:696
+#: options.php:709
 msgid "Twitter address"
 msgstr ""
 
-#: options.php:702
+#: options.php:715
 msgid "Facebook"
 msgstr ""
 
-#: options.php:703
+#: options.php:716
 msgid "Facebook address"
 msgstr ""
 
-#: options.php:709
+#: options.php:722
 msgid "Jianshu"
 msgstr ""
 
-#: options.php:710
+#: options.php:723
 msgid "Jianshu address"
 msgstr ""
 
-#: options.php:716
+#: options.php:729
 msgid "CSDN"
 msgstr ""
 
-#: options.php:717
+#: options.php:730
 msgid "CSND community address"
 msgstr ""
 
-#: options.php:723
+#: options.php:736
 msgid "Zhihu"
 msgstr ""
 
-#: options.php:724
+#: options.php:737
 msgid "Zhihu address"
 msgstr ""
 
-#: options.php:730
+#: options.php:743
 msgid "Email-name"
 msgstr ""
 
-#: options.php:731
+#: options.php:744
 msgid ""
 "The name part of name@domain.com, only the frontend has js runtime "
 "environment can get the full address, you can rest assured to fill in"
 msgstr ""
 
-#: options.php:737
+#: options.php:750
 msgid "Email-domain"
 msgstr ""
 
-#: options.php:738
+#: options.php:751
 msgid "The domain.com part of name@domain.com"
 msgstr ""
 
-#: options.php:745
-msgid "Dashboard configuration"
-msgstr "Dashboard"
-
-#: options.php:750
-msgid "Dashboard panel custom color scheme"
-msgstr ""
-
-#: options.php:751
-msgid ""
-"You can design the dashboard panel (/wp-admin/) style yourself below, but "
-"before you start, please go to <a href=\"/wp-admin/profile.php\">here</a> to "
-"change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match "
-"colors? Maybe <a href=\"https://mashiro.top/color-thief/\">this</a> can help "
-"you."
-msgstr ""
-
-#: options.php:757
-msgid "Panel main color A"
-msgstr ""
-
-#: options.php:760 options.php:768 options.php:776 options.php:784
-msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions which are used "
-"to give the user a feel for the theme."
-msgstr ""
-
-#: options.php:765
-msgid "Panel main color B"
-msgstr ""
-
-#: options.php:773
-msgid "Panel main color C"
-msgstr ""
-
-#: options.php:781
-msgid "Panel main color D"
-msgstr ""
-
-#: options.php:789
-msgid "Panel icon color——base"
-msgstr ""
-
-#: options.php:792 options.php:800 options.php:808
-msgid ""
-"<i>(array) (optional)</i> An array of CSS color definitions used to color "
-"any SVG icons."
-msgstr ""
-
-#: options.php:797
-msgid "Panel icon color——focus"
-msgstr ""
-
-#: options.php:805
-msgid "Panel icon color——current"
-msgstr ""
-
-#: options.php:813
-msgid "Other custom panel styles(CSS)"
-msgstr ""
-
-#: options.php:814
-msgid "If you need to adjust other styles of the panel, put the style here."
-msgstr ""
-
-#: options.php:820
-msgid "Login interface background image"
-msgstr ""
-
-#: options.php:821
-msgid "Use the default image if left this blank"
-msgstr ""
-
-#: options.php:826
-msgid "Login interface logo"
-msgstr ""
-
-#: options.php:827
-msgid "Used for login interface display"
-msgstr ""
-
-#: options.php:833
-msgid "Login/registration related settings"
-msgstr ""
-
-#: options.php:840
-msgid "Specify login address"
-msgstr ""
-
-#: options.php:841
-msgid ""
-"Forcibly do not use the background address to log in, fill in the new "
-"landing page address, such as http://www.xxx.com/login [Note] Before you "
-"fill out, test your new page can be opened normally, so as not to enter the "
-"background or other problems happening"
-msgstr ""
-
-#: options.php:847
-msgid "Specify registered address"
-msgstr ""
-
-#: options.php:848
-msgid "This link is used on the login page as a registration entry"
-msgstr ""
-
-#: options.php:854
-msgid "Allow users to register"
-msgstr ""
-
-#: options.php:855
-msgid "Check to allow users to register at the frontend"
-msgstr ""
-
-#: options.php:861
-msgid "Automatically redirect after login"
-msgstr ""
-
-#: options.php:862
-msgid ""
-"After checken, the administrator redirects to the background and the user "
-"redirects to the home page."
-msgstr ""
-
-#: options.php:868
-msgid "Registration verification (frontend only, backend forced open)"
-msgstr ""
-
-#: options.php:869
-msgid "Check to enable slide verification"
-msgstr ""
-
-#: options.php:876
-msgid "CDN"
-msgstr ""
-
-#: options.php:880
-msgid "Images CDN"
-msgstr ""
-
-#: options.php:881
-msgid ""
-"Note: Fill in the format http(s)://your CDN domain name/. <br>In other "
-"words, the original path is http://your.domain/wp-content/uploads/2018/05/xx."
-"png and the picture will load from http://your CDN domain/2018/05/xx.png"
-msgstr ""
-
-#: options.php:887
-msgid "Use the front-end library locally (lib.js、lib.css)"
-msgstr ""
-
-#: options.php:888
-msgid "The front-end library don't load from jsDelivr, not recommand"
-msgstr ""
-
-#: options.php:894
-msgid "Use js and css file of the theme (sakura-app.js、style.css) locally"
-msgstr ""
-
-#: options.php:895
-msgid ""
-"The js and css files of the theme do not load from jsDelivr, please open "
-"when DIY"
-msgstr ""
-
-#: options.php:902
-msgid "Others"
-msgstr ""
-
-#: options.php:906
-msgid "About"
-msgstr ""
-
-#: options.php:907
-#, php-format
-msgid ""
-"Theme Sakura v %s  |  <a href=\"https://2heng.xin/theme-sakura/\">Theme "
-"document</a>  |  <a href=\"https://github.com/mashirozx/Sakura/\">Source "
-"code</a><a href=\"https://github.com/mashirozx/Sakura/releases/latest\"><img "
-"src=\"https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-"
-"square\" alt=\"GitHub release\"></a>"
-msgstr ""
-
-#: options.php:913
-msgid "Check for Updates"
-msgstr ""
-
-#: options.php:925
-msgid "Footer float music player"
-msgstr ""
-
-#: options.php:926
-msgid "Choose which platform you'll use."
-msgstr ""
-
-#: options.php:931
-msgid "Netease Cloud Music (default)"
-msgstr ""
-
-#: options.php:932
-msgid "Xiami Music"
-msgstr ""
-
-#: options.php:933
-msgid "KuGou Music"
-msgstr ""
-
-#: options.php:934
-msgid "Baidu Music"
-msgstr ""
-
-#: options.php:935
-msgid "QQ Music (may fail) "
-msgstr ""
-
-#: options.php:936
-msgid "Off"
-msgstr ""
-
-#: options.php:940
-msgid "Song list ID"
-msgstr ""
-
-#: options.php:941
-msgid ""
-"Fill in the \"song list\" ID, eg: https://music.163.com/#/playlist?"
-"id=2288037900 The ID is 2288037900"
-msgstr ""
-
-#: options.php:947
-msgid "Netease Cloud Music cookie"
-msgstr ""
-
-#: options.php:948
-msgid ""
-"For Netease Cloud Music, fill in your vip account's cookies if you want to "
-"play special tracks.<b>If you don't know what does mean, left it blank.</b>"
-msgstr ""
-
-#: options.php:954
-msgid "Version Control"
-msgstr ""
-
-#: options.php:955
-msgid ""
-"Used to update frontend cookies and browser caches, any string can be used"
-msgstr ""
-
-#: options.php:961
-msgid "Enable PJAX (recommand on)"
-msgstr ""
-
-#: options.php:962
-msgid "The principle is the same as Ajax"
-msgstr ""
-
-#: options.php:968
-msgid "Enable NProgress progress bar"
-msgstr ""
-
-#: options.php:969 options.php:976 options.php:983
-msgid "Default off, check on"
-msgstr ""
-
-#: options.php:975
-msgid "Enable sidebar widget"
-msgstr ""
-
-#: options.php:982
-msgid "Enable Announcement"
-msgstr ""
-
-#: options.php:989
-msgid "Announcement content"
-msgstr ""
-
-#: options.php:990
-msgid ""
-"Announcement content, the text exceeds 142 bytes will be scrolled display "
-"(mobile device is invalid)"
-msgstr ""
-
-#: options.php:995
-msgid "Bilibili UID"
-msgstr ""
-
-#: options.php:996
-msgid ""
-"Fill in your UID, eg.https://space.bilibili.com/13972644/, only fill in with "
-"the number part."
-msgstr ""
-
-#: options.php:1002
-msgid "Bilibili Cookie"
-msgstr ""
-
-#: options.php:1003
-msgid ""
-"Fill in your Cookies, go to your bilibili homepage, you can get cookies in "
-"brownser network pannel with pressing F12. If left this blank, you'll not "
-"get the progress."
-msgstr ""
-
-#: options.php:1008
-msgid "The categories of articles that don't not show on homepage"
-msgstr ""
-
-#: options.php:1009 options.php:1016
-msgid "Fill in category ID, multiple IDs are divided by a comma \",\""
-msgstr ""
-
-#: options.php:1015
-msgid "Images category"
-msgstr ""
-
-#: options.php:1022
-msgid "Statistics Interface"
-msgstr ""
-
-#: options.php:1027
-msgid ""
-"WP-Statistics plugin (Professional statistics, can exclude invalid access)"
-msgstr ""
-
-#: options.php:1028
-msgid "Theme built-in (simple statistics, calculate each page access request)"
-msgstr ""
-
-#: options.php:1032
-msgid "Statistical data display format"
-msgstr ""
-
-#: options.php:1037
-msgid "23333 Views (default)"
-msgstr ""
-
-#: options.php:1038
-msgid "23,333 Views (britain)"
-msgstr ""
-
-#: options.php:1039
-msgid "23 333 Views (french)"
-msgstr ""
-
-#: options.php:1040
-msgid "23k Views (chinese)"
-msgstr ""
-
-#: options.php:1044
+#: options.php:758
+msgid "Comment field"
+msgstr "Comment"
+
+#: options.php:762
 msgid "Gravatar avatar proxy"
 msgstr ""
 
-#: options.php:1045
+#: options.php:763
 msgid ""
 "A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it "
 "blank if you do not need."
 msgstr ""
 
-#: options.php:1051
+#: options.php:769
 msgid "Comment image upload API"
 msgstr ""
 
-#: options.php:1056
+#: options.php:774
 msgid "Imgur (https://imgur.com)"
 msgstr ""
 
-#: options.php:1057
+#: options.php:775
 msgid "SM.MS (https://sm.ms)"
 msgstr ""
 
-#: options.php:1058
+#: options.php:776
 msgid "Chevereto (https://chevereto.com)"
 msgstr ""
 
-#: options.php:1062
+#: options.php:780
 msgid "Imgur Client ID"
 msgstr ""
 
-#: options.php:1063
+#: options.php:781
 msgid ""
 "Register your application <a href=\"https://api.imgur.com/oauth2/addclient"
 "\">here</a>, note we only need the Client ID here."
 msgstr ""
 
-#: options.php:1069
+#: options.php:787
 msgid "SM.MS Secret Token"
 msgstr ""
 
-#: options.php:1070
+#: options.php:788
 msgid ""
 "Register your application <a href=\"https://sm.ms/home/apitoken\">here</a>."
 msgstr ""
 
-#: options.php:1076
+#: options.php:794
 msgid "Chevereto API v1 key"
 msgstr ""
 
-#: options.php:1077
+#: options.php:795
 msgid "Get your API key here: "
 msgstr ""
 
-#: options.php:1083
+#: options.php:801
 msgid "Chevereto URL"
 msgstr ""
 
-#: options.php:1084
+#: options.php:802
 msgid ""
 "Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto."
 "com"
 msgstr ""
 
-#: options.php:1090
+#: options.php:808
 msgid "Comment images proxy"
 msgstr ""
 
-#: options.php:1091
+#: options.php:809
 msgid ""
 "A front-ed proxy for the uploaded images. Leave it blank if you do not need."
 msgstr ""
 
-#: options.php:1097
+#: options.php:815
 msgid "Imgur upload proxy"
 msgstr ""
 
-#: options.php:1098
+#: options.php:816
 msgid ""
 "A back-ed proxy to upload images. You may set a self hosted proxy with "
 "Nginx, following my <a href=\"https://2heng.xin/2018/06/06/javascript-upload-"
@@ -1622,155 +1257,510 @@ msgid ""
 "a>】"
 msgstr ""
 
-#: options.php:1104
-msgid "Enable live search"
-msgstr ""
-
-#: options.php:1105
-msgid ""
-"Real-time search in the foreground, call the Rest API to update the cache "
-"every hour, you can manually set the cache time in api.php"
-msgstr ""
-
-#: options.php:1111
-msgid "Include comments in live search"
-msgstr ""
-
-#: options.php:1112
-msgid ""
-"Search for comments in real-time search (not recommended if there are too "
-"many comments on the site)"
-msgstr ""
-
-#: options.php:1118
-msgid "Enable baguetteBox"
-msgstr ""
-
-#: options.php:1119
-msgid ""
-"Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox"
-"\">please read wiki</a>"
-msgstr ""
-
-#: options.php:1125
-msgid "Enable lazyload in posts"
-msgstr ""
-
-#: options.php:1132
-msgid "lazyload spinner"
-msgstr ""
-
-#: options.php:1133
-msgid "The placeholder to display when the image loads, fill in the image url"
-msgstr ""
-
-#: options.php:1139
-msgid "Whether to enable the clipboard copyright"
-msgstr ""
-
-#: options.php:1140
-msgid ""
-"Automatically add a copyright to the clipboard when copying more than 30 "
-"bytes, which is enabled by default."
-msgstr ""
-
-#: options.php:1146
-msgid "Email address prefix"
-msgstr ""
-
-#: options.php:1147
-msgid ""
-"For sending system mail, the sender address displayed in the user's mailbox, "
-"do not use Chinese, the default system email address is bibi@your_domain_name"
-msgstr ""
-
-#: options.php:1153
+#: options.php:822
 msgid "Comments reply notification"
 msgstr ""
 
-#: options.php:1154
+#: options.php:823
 msgid ""
 "WordPress will use email to notify users when their comments receive a reply "
 "by default. Tick this item allows users to set their own comments reply "
 "notification"
 msgstr ""
 
-#: options.php:1160
+#: options.php:829
 msgid "Administrator comment notification"
 msgstr ""
 
-#: options.php:1161
+#: options.php:830
 msgid ""
 "Whether to use email notification when the administrator's comments receive "
 "a reply"
 msgstr ""
 
-#: options.php:1167
+#: options.php:836
 msgid "Enable private comment"
 msgstr ""
 
-#: options.php:1168
+#: options.php:837
 msgid "Allow users to set their own comments to be invisible to others"
 msgstr ""
 
-#: options.php:1174
+#: options.php:843
 msgid "Human verification"
 msgstr ""
 
-#: options.php:1175
+#: options.php:844
 msgid "Enable human verification"
 msgstr ""
 
-#: options.php:1181
+#: options.php:850
 msgid "QQ avatar link encryption"
 msgstr ""
 
-#: options.php:1182
+#: options.php:851
 msgid "Do not display the user's qq avatar links directly."
 msgstr ""
 
-#: options.php:1187
+#: options.php:856
 msgid "Off (default)"
 msgstr ""
 
-#: options.php:1188
+#: options.php:857
 msgid "use redirect (general security)"
 msgstr ""
 
-#: options.php:1189
+#: options.php:858
 msgid "fetch data at backend (high security)"
 msgstr ""
 
-#: options.php:1190
+#: options.php:859
 msgid "fetch data at backend (high security，slow)"
 msgstr ""
 
-#: options.php:1194
+#: options.php:863
 msgid "Comment UA infomation"
 msgstr ""
 
-#: options.php:1195
+#: options.php:864
 msgid ""
 "Check to enable, display the user's browser, operating system information"
 msgstr ""
 
-#: options.php:1201
+#: options.php:870
+msgid "Comment location infomation"
+msgstr ""
+
+#: options.php:871
+msgid "Check to enable, display the user's location info"
+msgstr ""
+
+#: options.php:877
 msgid "Enable disqus"
 msgstr ""
 
-#: options.php:1202
+#: options.php:878
 msgid "Enable disqus for comment"
 msgstr ""
 
-#: options.php:1208
+#: options.php:884
 msgid "Time Zone adjustment"
 msgstr ""
 
-#: options.php:1209
+#: options.php:885
 msgid ""
 "If the comment has a time difference problem adjust here, fill in an "
 "integer, the calculation method: actual_time = display_error_time - "
 "the_integer_you_entered (unit: hour)"
+msgstr ""
+
+#: options.php:891
+msgid "Dashboard configuration"
+msgstr "Dashboard"
+
+#: options.php:896
+msgid "Dashboard panel custom color scheme"
+msgstr ""
+
+#: options.php:897
+msgid ""
+"You can design the dashboard panel (/wp-admin/) style yourself below, but "
+"before you start, please go to <a href=\"/wp-admin/profile.php\">here</a> to "
+"change the color scheme to custom.(Custom).<br><b>Tip: </b>How to match "
+"colors? Maybe <a href=\"https://mashiro.top/color-thief/\">this</a> can help "
+"you."
+msgstr ""
+
+#: options.php:903
+msgid "Panel main color A"
+msgstr ""
+
+#: options.php:906 options.php:914 options.php:922 options.php:930
+msgid ""
+"<i>(array) (optional)</i> An array of CSS color definitions which are used "
+"to give the user a feel for the theme."
+msgstr ""
+
+#: options.php:911
+msgid "Panel main color B"
+msgstr ""
+
+#: options.php:919
+msgid "Panel main color C"
+msgstr ""
+
+#: options.php:927
+msgid "Panel main color D"
+msgstr ""
+
+#: options.php:935
+msgid "Panel icon color——base"
+msgstr ""
+
+#: options.php:938 options.php:946 options.php:954
+msgid ""
+"<i>(array) (optional)</i> An array of CSS color definitions used to color "
+"any SVG icons."
+msgstr ""
+
+#: options.php:943
+msgid "Panel icon color——focus"
+msgstr ""
+
+#: options.php:951
+msgid "Panel icon color——current"
+msgstr ""
+
+#: options.php:959
+msgid "Other custom panel styles(CSS)"
+msgstr ""
+
+#: options.php:960
+msgid "If you need to adjust other styles of the panel, put the style here."
+msgstr ""
+
+#: options.php:966
+msgid "Login interface background image"
+msgstr ""
+
+#: options.php:967
+msgid "Use the default image if left this blank"
+msgstr ""
+
+#: options.php:972
+msgid "Login interface logo"
+msgstr ""
+
+#: options.php:973
+msgid "Used for login interface display"
+msgstr ""
+
+#: options.php:979
+msgid "Login/registration related settings"
+msgstr ""
+
+#: options.php:986
+msgid "Specify login address"
+msgstr ""
+
+#: options.php:987
+msgid ""
+"Forcibly do not use the background address to log in, fill in the new "
+"landing page address, such as http://www.xxx.com/login [Note] Before you "
+"fill out, test your new page can be opened normally, so as not to enter the "
+"background or other problems happening"
+msgstr ""
+
+#: options.php:993
+msgid "Specify registered address"
+msgstr ""
+
+#: options.php:994
+msgid "This link is used on the login page as a registration entry"
+msgstr ""
+
+#: options.php:1000
+msgid "Allow users to register"
+msgstr ""
+
+#: options.php:1001
+msgid "Check to allow users to register at the frontend"
+msgstr ""
+
+#: options.php:1007
+msgid "Automatically redirect after login"
+msgstr ""
+
+#: options.php:1008
+msgid ""
+"After checken, the administrator redirects to the background and the user "
+"redirects to the home page."
+msgstr ""
+
+#: options.php:1014
+msgid "Registration verification (frontend only, backend forced open)"
+msgstr ""
+
+#: options.php:1015
+msgid "Check to enable slide verification"
+msgstr ""
+
+#: options.php:1022
+msgid "CDN"
+msgstr ""
+
+#: options.php:1026
+msgid "Images CDN"
+msgstr ""
+
+#: options.php:1027
+msgid ""
+"Note: Fill in the format http(s)://your CDN domain name/. <br>In other "
+"words, the original path is http://your.domain/wp-content/uploads/2018/05/xx."
+"png and the picture will load from http://your CDN domain/2018/05/xx.png"
+msgstr ""
+
+#: options.php:1033
+msgid "Use the front-end library locally (lib.js、lib.css)"
+msgstr ""
+
+#: options.php:1034
+msgid "The front-end library don't load from jsDelivr, not recommand"
+msgstr ""
+
+#: options.php:1040
+msgid "Use js and css file of the theme (sakura-app.js、style.css) locally"
+msgstr ""
+
+#: options.php:1041
+msgid ""
+"The js and css files of the theme do not load from jsDelivr, please open "
+"when DIY"
+msgstr ""
+
+#: options.php:1048
+msgid "Others"
+msgstr ""
+
+#: options.php:1052
+msgid "About"
+msgstr ""
+
+#: options.php:1053
+#, php-format
+msgid ""
+"Theme Sakura v %s  |  <a href=\"https://2heng.xin/theme-sakura/\">Theme "
+"document</a>  |  <a href=\"https://github.com/mashirozx/Sakura/\">Source "
+"code</a><a href=\"https://github.com/mashirozx/Sakura/releases/latest\"><img "
+"src=\"https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-"
+"square\" alt=\"GitHub release\"></a>"
+msgstr ""
+
+#: options.php:1059
+msgid "Check for Updates"
+msgstr ""
+
+#: options.php:1071
+msgid "Footer float music player"
+msgstr ""
+
+#: options.php:1072
+msgid "Choose which platform you'll use."
+msgstr ""
+
+#: options.php:1077
+msgid "Netease Cloud Music (default)"
+msgstr ""
+
+#: options.php:1078
+msgid "Xiami Music"
+msgstr ""
+
+#: options.php:1079
+msgid "KuGou Music"
+msgstr ""
+
+#: options.php:1080
+msgid "Baidu Music"
+msgstr ""
+
+#: options.php:1081
+msgid "QQ Music (may fail) "
+msgstr ""
+
+#: options.php:1082
+msgid "Off"
+msgstr ""
+
+#: options.php:1086
+msgid "Song list ID"
+msgstr ""
+
+#: options.php:1087
+msgid ""
+"Fill in the \"song list\" ID, eg: https://music.163.com/#/playlist?"
+"id=2288037900 The ID is 2288037900"
+msgstr ""
+
+#: options.php:1093
+msgid "Netease Cloud Music cookie"
+msgstr ""
+
+#: options.php:1094
+msgid ""
+"For Netease Cloud Music, fill in your vip account's cookies if you want to "
+"play special tracks.<b>If you don't know what does mean, left it blank.</b>"
+msgstr ""
+
+#: options.php:1100
+msgid "Version Control"
+msgstr ""
+
+#: options.php:1101
+msgid ""
+"Used to update frontend cookies and browser caches, any string can be used"
+msgstr ""
+
+#: options.php:1107
+msgid "Enable PJAX (recommand on)"
+msgstr ""
+
+#: options.php:1108
+msgid "The principle is the same as Ajax"
+msgstr ""
+
+#: options.php:1114
+msgid "Enable NProgress progress bar"
+msgstr ""
+
+#: options.php:1115 options.php:1122 options.php:1129
+msgid "Default off, check on"
+msgstr ""
+
+#: options.php:1121
+msgid "Enable sidebar widget"
+msgstr ""
+
+#: options.php:1128
+msgid "Enable Announcement"
+msgstr ""
+
+#: options.php:1135
+msgid "Announcement content"
+msgstr ""
+
+#: options.php:1136
+msgid ""
+"Announcement content, the text exceeds 142 bytes will be scrolled display "
+"(mobile device is invalid)"
+msgstr ""
+
+#: options.php:1141
+msgid "Bilibili UID"
+msgstr ""
+
+#: options.php:1142
+msgid ""
+"Fill in your UID, eg.https://space.bilibili.com/13972644/, only fill in with "
+"the number part."
+msgstr ""
+
+#: options.php:1148
+msgid "Bilibili Cookie"
+msgstr ""
+
+#: options.php:1149
+msgid ""
+"Fill in your Cookies, go to your bilibili homepage, you can get cookies in "
+"brownser network pannel with pressing F12. If left this blank, you'll not "
+"get the progress."
+msgstr ""
+
+#: options.php:1154
+msgid "The categories of articles that don't not show on homepage"
+msgstr ""
+
+#: options.php:1155 options.php:1162
+msgid "Fill in category ID, multiple IDs are divided by a comma \",\""
+msgstr ""
+
+#: options.php:1161
+msgid "Images category"
+msgstr ""
+
+#: options.php:1168
+msgid "Statistics Interface"
+msgstr ""
+
+#: options.php:1173
+msgid ""
+"WP-Statistics plugin (Professional statistics, can exclude invalid access)"
+msgstr ""
+
+#: options.php:1174
+msgid "Theme built-in (simple statistics, calculate each page access request)"
+msgstr ""
+
+#: options.php:1178
+msgid "Statistical data display format"
+msgstr ""
+
+#: options.php:1183
+msgid "23333 Views (default)"
+msgstr ""
+
+#: options.php:1184
+msgid "23,333 Views (britain)"
+msgstr ""
+
+#: options.php:1185
+msgid "23 333 Views (french)"
+msgstr ""
+
+#: options.php:1186
+msgid "23k Views (chinese)"
+msgstr ""
+
+#: options.php:1190
+msgid "Enable live search"
+msgstr ""
+
+#: options.php:1191
+msgid ""
+"Real-time search in the foreground, call the Rest API to update the cache "
+"every hour, you can manually set the cache time in api.php"
+msgstr ""
+
+#: options.php:1197
+msgid "Include comments in live search"
+msgstr ""
+
+#: options.php:1198
+msgid ""
+"Search for comments in real-time search (not recommended if there are too "
+"many comments on the site)"
+msgstr ""
+
+#: options.php:1204
+msgid "Enable baguetteBox"
+msgstr ""
+
+#: options.php:1205
+msgid ""
+"Default off，<a href=\"https://github.com/mashirozx/Sakura/wiki/Fancybox"
+"\">please read wiki</a>"
+msgstr ""
+
+#: options.php:1211
+msgid "Enable lazyload in posts"
+msgstr ""
+
+#: options.php:1218
+msgid "lazyload spinner"
+msgstr ""
+
+#: options.php:1219
+msgid "The placeholder to display when the image loads, fill in the image url"
+msgstr ""
+
+#: options.php:1225
+msgid "Whether to enable the clipboard copyright"
+msgstr ""
+
+#: options.php:1226
+msgid ""
+"Automatically add a copyright to the clipboard when copying more than 30 "
+"bytes, which is enabled by default."
+msgstr ""
+
+#: options.php:1232
+msgid "Email address prefix"
+msgstr ""
+
+#: options.php:1233
+msgid ""
+"For sending system mail, the sender address displayed in the user's mailbox, "
+"do not use Chinese, the default system email address is bibi@your_domain_name"
 msgstr ""
 
 #: search.php:19
@@ -1782,17 +1772,17 @@ msgstr "Search result: %s"
 msgid "NOTHING"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:43
 #: tpl/content.php:34
 msgid "Comment"
 msgstr ""
 
-#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:56
+#: tpl/content-image.php:35 tpl/content-status.php:31 tpl/content-thumb.php:43
 #: tpl/content.php:34
 msgid "Comments"
 msgstr ""
 
-#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:55
+#: tpl/content-image.php:38 tpl/content-status.php:34 tpl/content-thumb.php:42
 #: tpl/content.php:37
 msgid "Hit"
 msgid_plural "Hits"

@@ -146,7 +146,7 @@ function code_highlight_style() {
         }
         var ele_name = $('pre:eq(' + i + ')')[0].children[0].className;
         var lang = ele_name.substr(0, ele_name.indexOf(" ")).replace('language-', '');
-        if (lang.toLowerCase() == "hljs") var lang = "text";
+        if (lang.toLowerCase() == "hljs") var lang = $('pre:eq(' + i + ') code').attr("class").replace('hljs', '')?$('pre:eq(' + i + ') code').attr("class").replace('hljs', ''):"text";
         $('pre:eq(' + i + ')').addClass('highlight-wrap');
         for (var t in attributes) {
             $('pre:eq(' + i + ')').attr(t, attributes[t]);
@@ -334,12 +334,11 @@ function checkDarkModeCookie() {
     var dark = getCookie("dark"),
         today = new Date(),
         hour = today.getHours();
-        if ((!dark && (hour > 21 || hour < 7) ) || (dark == '1' && (hour >= 22 || hour <= 6))) {
+        if (mashiro_option.darkmode && ((!dark && (hour > 21 || hour < 7) ) || (dark == '1' && (hour >= 22 || hour <= 6)))) {
             setTimeout(function () {
                 $("#dark-bg").click();
             }, 100);
             $("#moblieDarkLight").html('<i class="fa fa-sun-o" aria-hidden="true"></i>');
-            console.log('夜间模式开启');
         } else {
             if (document.body.clientWidth > 860) {
                 setTimeout(function () {
@@ -351,7 +350,6 @@ function checkDarkModeCookie() {
                 $("#moblieDarkLight").html('<i class="fa fa-moon-o" aria-hidden="true"></i>');
                 setCookie("dark", "0", 0.33);
             }
-            console.log('夜间模式关闭');
     }
 }
 if (!getCookie("darkcache") && (new Date().getHours() > 21 || new Date().getHours() < 7)) {
@@ -399,45 +397,43 @@ $(document).ready(function () {
                     checkskinSecter();
                 }
                 if (tagid == "dark-bg") {
+                    addComment.I("content").classList.add('notransition');
+                    addComment.I("content").style.backgroundColor = "#fff";
+                    addComment.I("content").offsetHeight;
+                    addComment.I("content").classList.remove('notransition');
                     $("html").css("background", "#31363b");
-                    $(".site-content").css("background-color", "#fff");
                     $("body").addClass("dark");
                     setCookie("dark", "1", 0.33);
                 } else{
                     $("html").css("background", "unset");
                     $("body").removeClass("dark");
-                    $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                     setCookie("dark", "0", 0.33);
                     setCookie("bgImgSetting", tagid, 30);
+                    setTimeout(function () {
+                        addComment.I("content").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+                    }, 1000);
                 }
                 switch (tagid) {
                     case "white-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg0) + ")");
-                        $(".site-content").css("background-color", "#fff");
                         break;
                     case "sakura-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg1) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "gribs-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg2) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "pixiv-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg3) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "KAdots-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg4) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "totem-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg5) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     case "bing-bg":
                         $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg6) + ")");
-                        $(".site-content").css("background-color", "rgba(255, 255, 255, .8)");
                         break;
                     // case "dark-bg":
                     //     $("body").css("background-image", "url(" + checkskin_bg(mashiro_option.skin_bg7) + ")");
@@ -1055,12 +1051,14 @@ function load_bangumi() {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', this.href + "&_wpnonce=" + Poi.nonce, true);
             xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var html = JSON.parse(xhr.responseText);
-                    $("#bangumi-pagination").remove();
-                    $(".row").append(html);
-                }else{
-                    $("#bangumi-pagination a").removeClass("loading").html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ERROR ');
+                if (xhr.readyState == 4 ) {
+                    if(xhr.status == 200){
+                        var html = JSON.parse(xhr.responseText);
+                        $("#bangumi-pagination").remove();
+                        $(".row").append(html);
+                    }else{
+                        $("#bangumi-pagination a").removeClass("loading").html('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ERROR ');
+                    }
                 }
             };
             xhr.send();

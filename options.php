@@ -134,23 +134,10 @@ function optionsframework_options()
 
     $options[] = array(
         'name' => __('Theme scheme tool transparency', 'sakura'), /*切换主题菜单透明度*/
-        'desc' => __('Adjust the theme scheme menu transparency, the smaller the value, the more transparent. The default value is 0.8', 'sakura'), /*调整切换主题菜单透明度，值越小越透明。默认透明度0.8*/
+        'desc' => __('Adjust the theme scheme menu transparency, fill  in decimals between 0 and 1, the smaller the value, the more transparent. The default value is 0.8', 'sakura'), /*调整切换主题菜单透明度，值越小越透明。默认透明度0.8*/
         'id' => 'sakura_skin_alpha',
         'std' => '0.8',
-        'type' => 'select',
-        'options' => array(
-            '0' => __('Transparent', 'sakura'), /*全透明*/
-            '0.1' => __('Transparency 0.1', 'sakura'), /*透明度0.1*/
-            '0.2' => __('Transparency 0.2', 'sakura'), /*透明度0.2*/
-            '0.3' => __('Transparency 0.3', 'sakura'), /*透明度0.3*/
-            '0.4' => __('Transparency 0.4', 'sakura'), /*透明度0.4*/
-            '0.5' => __('Transparency 0.5', 'sakura'), /*透明度0.5*/
-            '0.6' => __('Transparency 0.6', 'sakura'), /*透明度0.6*/
-            '0.7' => __('Transparency 0.7', 'sakura'), /*透明度0.7*/
-            '0.8' => __('Transparency 0.8', 'sakura'), /*透明度0.8*/
-            '0.9' => __('Transparency 0.9', 'sakura'), /*透明度0.9*/
-            '1' => __('Opaque', 'sakura'), /*不透明*/
-        ));
+        'type' => 'text');
 
     $options[] = array(
         'name' => __('Change web background', 'sakura'), /*切换网页背景*/
@@ -158,6 +145,13 @@ function optionsframework_options()
         'id' => 'sakura_skin_bg',
         'std' => 'none,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/sakura.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/plaid2dbf8.jpg,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/star02.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/kyotoanimation.png,https://cdn.jsdelivr.net/gh/spirit1431007/cdn@1.6/img/dot_orange.gif,https://api.mashiro.top/bing/,https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png',
         'type' => 'textarea');
+
+    $options[] = array(
+        'name' => __('Darkmode', 'sakura'),
+        'desc' => __('Automatically turn on dark mode from 10:00 p.m. to 06:00 a.m.', 'sakura'),
+        'id' => 'darkmode',
+        'std' => '1',
+        'type' => 'checkbox');
 
     $options[] = array(
         'name' => __('Personal avatar', 'sakura'), /*个人头像*/
@@ -239,6 +233,25 @@ function optionsframework_options()
             'standard' => __('Standard', 'sakura'), /*标准*/
             'imageflow' => __('Graphic', 'sakura'), /*图文*/
         ));
+
+    $options[] = array(
+        'name' => __('Cover manifest', 'sakura'), /*首页文章特色图选项*/
+        'desc' => __('Select how to call the post featue image, only for the post without feature image', 'sakura'), /*选择文章特色图的调用方式，只对没有设置特色图像的文章生效*/
+        'id' => 'post_cover_options',
+        'std' => "type_1",
+        'type' => "select",
+        'options' => array(
+            'type_1' => __('same as the cover of the first screen (default)', 'sakura'), /*跟随第一屏封面图*/
+            'type_2' => __('custom api (advanced)', 'sakura'), /*外部随机图API*/
+        )
+    );
+
+    $options[] = array(
+        'name' => __('Cover images url', 'sakura'), /*图片库url*/
+        'desc' => __('Fill in the custom image api url.', 'sakura'),
+        'id' => 'post_cover',
+        'std' => '',
+        'type' => 'text');
 
     $options[] = array(
         'name' => __('Home article feature images (only valid for standard mode)', 'sakura'), /*首页文章特色图（仅对标准风格生效）*/
@@ -740,6 +753,139 @@ function optionsframework_options()
         'std' => '',
         'type' => 'text');
 
+    //评论区
+    $options[] = array(
+        'name' => __('Comment field', 'sakura'), /*评论区*/
+        'type' => 'heading');
+ 
+    $options[] = array(
+        'name' => __('Gravatar avatar proxy', 'sakura'),
+        'desc' => __('A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it blank if you do not need.', 'sakura'),
+        'id' => 'gravatar_proxy',
+        'std' => "gravatar.2heng.xin/avatar",
+        'type' => "text");
+
+    $options[] = array(
+        'name' => __('Comment image upload API', 'sakura'), /*评论图片上传接口*/
+        'id' => 'img_upload_api',
+        'std' => "imgur",
+        'type' => "radio",
+        'options' => array(
+            'imgur' => __('Imgur (https://imgur.com)', 'sakura'),
+            'smms' => __('SM.MS (https://sm.ms)', 'sakura'),
+            'chevereto' => __('Chevereto (https://chevereto.com)', 'sakura'),
+        ));
+
+    $options[] = array(
+        'name' => __('Imgur Client ID', 'sakura'),
+        'desc' => __('Register your application <a href="https://api.imgur.com/oauth2/addclient">here</a>, note we only need the Client ID here.', 'sakura'),
+        'id' => 'imgur_client_id',
+        'std' => '',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('SM.MS Secret Token', 'sakura'),
+        'desc' => __('Register your application <a href="https://sm.ms/home/apitoken">here</a>.', 'sakura'),
+        'id' => 'smms_client_id',
+        'std' => '',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Chevereto API v1 key', 'sakura'),
+        'desc' => __('Get your API key here: ' . akina_option('cheverto_url') . '/dashboard/settings/api', 'sakura'),
+        'id' => 'chevereto_api_key',
+        'std' => '',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Chevereto URL', 'sakura'),
+        'desc' => __('Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto.com', 'sakura'),
+        'id' => 'cheverto_url',
+        'std' => 'https://your.cherverto.com',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Comment images proxy', 'sakura'),
+        'desc' => __('A front-ed proxy for the uploaded images. Leave it blank if you do not need.', 'sakura'),
+        'id' => 'cmt_image_proxy',
+        'std' => 'https://images.weserv.nl/?url=',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Imgur upload proxy', 'sakura'),
+        'desc' => __('A back-ed proxy to upload images. You may set a self hosted proxy with Nginx, following my <a href="https://2heng.xin/2018/06/06/javascript-upload-images-with-imgur-api/">turtal</a>. This feature is mainly for Chinese who cannot access to Imgur due to the GFW. The default and official setting is 【<a href="https://api.imgur.com/3/image/">https://api.imgur.com/3/image/</a>】', 'sakura'),
+        'id' => 'imgur_upload_image_proxy',
+        'std' => 'https://api.imgur.com/3/image/',
+        'type' => 'text');
+
+    $options[] = array(
+        'name' => __('Comments reply notification', 'sakura'), /*邮件回复通知*/
+        'desc' => __('WordPress will use email to notify users when their comments receive a reply by default. Tick this item allows users to set their own comments reply notification', 'sakura'), /*WordPress默认会使用邮件通知用户评论收到回复，开启此项允许用户设置自己的评论收到回复时是否使用邮件通知*/
+        'id' => 'mail_notify',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Administrator comment notification', 'sakura'), /*邮件回复通知管理员*/
+        'desc' => __('Whether to use email notification when the administrator\'s comments receive a reply', 'sakura'), /*当管理员评论收到回复时是否使用邮件通知*/
+        'id' => 'admin_notify',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Enable private comment', 'sakura'), /*允许私密评论*/
+        'desc' => __('Allow users to set their own comments to be invisible to others', 'sakura'), /*允许用户设置自己的评论对其他人不可见*/
+        'id' => 'open_private_message',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Human verification', 'sakura'), /*机器人验证*/
+        'desc' => __('Enable human verification', 'sakura'), /*开启机器人验证*/
+        'id' => 'norobot',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('QQ avatar link encryption', 'sakura'), /*QQ头像链接加密*/
+        'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'), /*不直接暴露用户qq头像链接*/
+        'id' => 'qq_avatar_link',
+        'std' => "off",
+        'type' => "select",
+        'options' => array(
+            'off' => __('Off (default)', 'sakura'), /*关闭（默认）*/
+            'type_1' => __('use redirect (general security)', 'sakura'), /*使用 重定向（安全性一般）'*/
+            'type_2' => __('fetch data at backend (high security)', 'sakura'), /*后端获取数据（安全性高）*/
+            'type_3' => __('fetch data at backend (high security，slow)', 'sakura'), /*后端获取数据（安全性高, 慢）*/
+        ));
+
+    $options[] = array(
+        'name' => __('Comment UA infomation', 'sakura'), /*评论UA信息*/
+        'desc' => __('Check to enable, display the user\'s browser, operating system information', 'sakura'), /*勾选开启，显示用户的浏览器，操作系统信息*/
+        'id' => 'open_useragent',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Comment location infomation', 'sakura'), /*评论位置信息*/
+        'desc' => __('Check to enable, display the user\'s location info', 'sakura'), /*勾选开启，显示用户的位置信息*/
+        'id' => 'open_location',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Enable disqus', 'sakura'), /*开启多说插件支持*/
+        'desc' => __('Enable disqus for comment', 'sakura'), /*多说已经凉了*/
+        'id' => 'general_disqus_plugin_support',
+        'std' => '0',
+        'type' => 'checkbox');
+
+    $options[] = array(
+        'name' => __('Time Zone adjustment', 'sakura'), /*时区调整*/
+        'desc' => __('If the comment has a time difference problem adjust here, fill in an integer, the calculation method: actual_time = display_error_time - the_integer_you_entered (unit: hour)', 'sakura'), /*如果评论出现时差问题在这里调整，填入一个整数，计算方法：实际时间=显示错误的时间-你输入的整数（单位：小时）*/
+        'id' => 'time_zone_fix',
+        'std' => '0',
+        'type' => 'text');
     //后台配置
     $options[] = array(
         'name' => __('Dashboard configuration', 'sakura'), /*后台配置*/
@@ -1041,66 +1187,6 @@ function optionsframework_options()
         ));
 
     $options[] = array(
-        'name' => __('Gravatar avatar proxy', 'sakura'),
-        'desc' => __('A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it blank if you do not need.', 'sakura'),
-        'id' => 'gravatar_proxy',
-        'std' => "gravatar.2heng.xin/avatar",
-        'type' => "text");
-
-    $options[] = array(
-        'name' => __('Comment image upload API', 'sakura'), /*评论图片上传接口*/
-        'id' => 'img_upload_api',
-        'std' => "imgur",
-        'type' => "radio",
-        'options' => array(
-            'imgur' => __('Imgur (https://imgur.com)', 'sakura'),
-            'smms' => __('SM.MS (https://sm.ms)', 'sakura'),
-            'chevereto' => __('Chevereto (https://chevereto.com)', 'sakura'),
-        ));
-
-    $options[] = array(
-        'name' => __('Imgur Client ID', 'sakura'),
-        'desc' => __('Register your application <a href="https://api.imgur.com/oauth2/addclient">here</a>, note we only need the Client ID here.', 'sakura'),
-        'id' => 'imgur_client_id',
-        'std' => '',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('SM.MS Secret Token', 'sakura'),
-        'desc' => __('Register your application <a href="https://sm.ms/home/apitoken">here</a>.', 'sakura'),
-        'id' => 'smms_client_id',
-        'std' => '',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('Chevereto API v1 key', 'sakura'),
-        'desc' => __('Get your API key here: ' . akina_option('cheverto_url') . '/dashboard/settings/api', 'sakura'),
-        'id' => 'chevereto_api_key',
-        'std' => '',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('Chevereto URL', 'sakura'),
-        'desc' => __('Your Chevereto homepage url, no slash in the end, eg. https://your.cherverto.com', 'sakura'),
-        'id' => 'cheverto_url',
-        'std' => 'https://your.cherverto.com',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('Comment images proxy', 'sakura'),
-        'desc' => __('A front-ed proxy for the uploaded images. Leave it blank if you do not need.', 'sakura'),
-        'id' => 'cmt_image_proxy',
-        'std' => 'https://images.weserv.nl/?url=',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('Imgur upload proxy', 'sakura'),
-        'desc' => __('A back-ed proxy to upload images. You may set a self hosted proxy with Nginx, following my <a href="https://2heng.xin/2018/06/06/javascript-upload-images-with-imgur-api/">turtal</a>. This feature is mainly for Chinese who cannot access to Imgur due to the GFW. The default and official setting is 【<a href="https://api.imgur.com/3/image/">https://api.imgur.com/3/image/</a>】', 'sakura'),
-        'id' => 'imgur_upload_image_proxy',
-        'std' => 'https://api.imgur.com/3/image/',
-        'type' => 'text');
-
-    $options[] = array(
         'name' => __('Enable live search', 'sakura'), /*启用实时搜索*/
         'desc' => __('Real-time search in the foreground, call the Rest API to update the cache every hour, you can manually set the cache time in api.php', 'sakura'), /*前台实现实时搜索，调用 Rest API 每小时更新一次缓存，可在 functions.php 里手动设置缓存时间*/
         'id' => 'live_search',
@@ -1147,68 +1233,6 @@ function optionsframework_options()
         'desc' => __('For sending system mail, the sender address displayed in the user\'s mailbox, do not use Chinese, the default system email address is bibi@your_domain_name', 'sakura'), /*用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮件地址为 bibi@你的域名*/
         'id' => 'mail_user_name',
         'std' => 'bibi',
-        'type' => 'text');
-
-    $options[] = array(
-        'name' => __('Comments reply notification', 'sakura'), /*邮件回复通知*/
-        'desc' => __('WordPress will use email to notify users when their comments receive a reply by default. Tick this item allows users to set their own comments reply notification', 'sakura'), /*WordPress默认会使用邮件通知用户评论收到回复，开启此项允许用户设置自己的评论收到回复时是否使用邮件通知*/
-        'id' => 'mail_notify',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('Administrator comment notification', 'sakura'), /*邮件回复通知管理员*/
-        'desc' => __('Whether to use email notification when the administrator\'s comments receive a reply', 'sakura'), /*当管理员评论收到回复时是否使用邮件通知*/
-        'id' => 'admin_notify',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('Enable private comment', 'sakura'), /*允许私密评论*/
-        'desc' => __('Allow users to set their own comments to be invisible to others', 'sakura'), /*允许用户设置自己的评论对其他人不可见*/
-        'id' => 'open_private_message',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('Human verification', 'sakura'), /*机器人验证*/
-        'desc' => __('Enable human verification', 'sakura'), /*开启机器人验证*/
-        'id' => 'norobot',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('QQ avatar link encryption', 'sakura'), /*QQ头像链接加密*/
-        'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'), /*不直接暴露用户qq头像链接*/
-        'id' => 'qq_avatar_link',
-        'std' => "off",
-        'type' => "select",
-        'options' => array(
-            'off' => __('Off (default)', 'sakura'), /*关闭（默认）*/
-            'type_1' => __('use redirect (general security)', 'sakura'), /*使用 重定向（安全性一般）'*/
-            'type_2' => __('fetch data at backend (high security)', 'sakura'), /*后端获取数据（安全性高）*/
-            'type_3' => __('fetch data at backend (high security，slow)', 'sakura'), /*后端获取数据（安全性高, 慢）*/
-        ));
-
-    $options[] = array(
-        'name' => __('Comment UA infomation', 'sakura'), /*评论UA信息*/
-        'desc' => __('Check to enable, display the user\'s browser, operating system information', 'sakura'), /*勾选开启，显示用户的浏览器，操作系统信息*/
-        'id' => 'open_useragent',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('Enable disqus', 'sakura'), /*开启多说插件支持*/
-        'desc' => __('Enable disqus for comment', 'sakura'), /*多说已经凉了*/
-        'id' => 'general_disqus_plugin_support',
-        'std' => '0',
-        'type' => 'checkbox');
-
-    $options[] = array(
-        'name' => __('Time Zone adjustment', 'sakura'), /*时区调整*/
-        'desc' => __('If the comment has a time difference problem adjust here, fill in an integer, the calculation method: actual_time = display_error_time - the_integer_you_entered (unit: hour)', 'sakura'), /*如果评论出现时差问题在这里调整，填入一个整数，计算方法：实际时间=显示错误的时间-你输入的整数（单位：小时）*/
-        'id' => 'time_zone_fix',
-        'std' => '0',
         'type' => 'text');
 
     return $options;
