@@ -37,6 +37,8 @@ mashiro_option.skin_bg6 = "https://api.mashiro.top/bing/";
 mashiro_option.skin_bg7 = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.2/other-sites/api-index/images/me.png";
 <?php } ?>
 
+mashiro_option.darkmode = <?php if ( akina_option('darkmode') ){ echo 'true'; } else { echo 'false'; } ?>;
+
 <?php if( is_home() ){ ?>
 mashiro_option.land_at_home = true;
 <?php }else {?>
@@ -67,12 +69,14 @@ mashiro_option.jsdelivr_css_src = "<?php echo get_template_directory_uri() ?>/cd
 <?php } else { ?>
 mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/mashirozx/Sakura@<?php echo SAKURA_VERSION; ?>/cdn/css/lib.min.css";
 <?php } ?>
-<?php if (akina_option('playlist_id', '')): ?>
+<?php if (akina_option('aplayer_server') != 'off'): ?>
 mashiro_option.float_player_on = true;
+mashiro_option.meting_api_url = "<?php echo rest_url('sakura/v1/meting/aplayer'); ?>";
 <?php endif; ?>
 
 mashiro_option.cover_api = "<?php echo rest_url('sakura/v1/image/cover'); ?>";
 
+mashiro_option.windowheight = /Mobile|Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ? 'fixed' : 'auto';
 /*End of Initial Variables*/
 </script>
 <?php }

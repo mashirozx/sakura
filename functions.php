@@ -199,11 +199,12 @@ function sakura_scripts()
     $movies = akina_option('focus_amv') ? array('url' => akina_option('amv_url'), 'name' => akina_option('amv_title'), 'live' => $mv_live) : 'close';
     $auto_height = akina_option('focus_height') ? 'fixed' : 'auto';
     $code_lamp = 'close';
-    if (wp_is_mobile()) {
-        $auto_height = 'fixed';
-    }
+    // if (wp_is_mobile()) {
+    //     $auto_height = 'fixed';
+    // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
+    $gravatar_url = akina_option('gravatar_proxy') ?: 'secure.gravatar.com/avatar';
     wp_localize_script('app', 'Poi', array(
         'pjax' => akina_option('poi_pjax'),
         'movies' => $movies,
@@ -215,6 +216,8 @@ function sakura_scripts()
         'reply_link_version' => $reply_link_version,
         'api' => esc_url_raw(rest_url()),
         'nonce' => wp_create_nonce('wp_rest'),
+        'google_analytics_id' => akina_option('google_analytics_id', ''),
+        'gravatar_url' => $gravatar_url
     ));
 }
 add_action('wp_enqueue_scripts', 'sakura_scripts');
@@ -421,7 +424,7 @@ if (!function_exists('akina_comment_format')) {
 								</div>
 								<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth'])));?>
 								<div class="right">
-									<div class="info"><time datetime="<?php comment_date('Y-m-d');?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true); //comment_date(get_option('date_format'));  ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;<?php _e('Location', 'sakura'); /*来自*/?>: <?php echo convertip(get_comment_author_ip()); ?>
+									<div class="info"><time datetime="<?php comment_date('Y-m-d');?>"><?php echo poi_time_since(strtotime($comment->comment_date_gmt), true); //comment_date(get_option('date_format'));  ?></time><?php echo siren_get_useragent($comment->comment_agent); ?><?php echo mobile_get_useragent_icon($comment->comment_agent); ?>&nbsp;<?php if(akina_option('open_location')){ _e('Location', 'sakura'); /*来自*/?>: <?php echo convertip(get_comment_author_ip());} ?>
     									<?php if (current_user_can('manage_options') and (wp_is_mobile() == false)) {
             $comment_ID = $comment->comment_ID;
             $i_private = get_comment_meta($comment_ID, '_private', true);
@@ -607,11 +610,15 @@ function get_link_items()
  * Gravatar头像使用中国服务器
  */
 function gravatar_cn($url)
-{
-    $gravatar_url = array('0.gravatar.com', '1.gravatar.com', '2.gravatar.com', 'secure.gravatar.com');
-    return str_replace($gravatar_url, 'cn.gravatar.com', $url);
+{    
+    $gravatar_url = array('0.gravatar.com/avatar','1.gravatar.com/avatar','2.gravatar.com/avatar','secure.gravatar.com/avatar');
+    //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
+    //官方服务器近期大陆访问 429，建议使用镜像
+    return str_replace( $gravatar_url, akina_option('gravatar_proxy'), $url );
 }
-add_filter('get_avatar_url', 'gravatar_cn', 4);
+if(akina_option('gravatar_proxy')){
+    add_filter('get_avatar_url', 'gravatar_cn', 4);
+}
 
 /*
  * 自定义默认头像
@@ -659,6 +666,7 @@ function akina_body_classes($classes)
     /*if(!wp_is_mobile()) {
     $classes[] = 'serif';
     }*/
+    $classes[] = $_COOKIE['dark'.akina_option('cookie_version', '')] == '1' ? 'dark' : ' ';
     return $classes;
 }
 add_filter('body_class', 'akina_body_classes');
@@ -793,7 +801,7 @@ function custom_login()
     //echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('template_directory') . '/inc/login.css" />'."\n";
     echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/inc/login.css?' . SAKURA_VERSION . '" />' . "\n";
     //echo '<script type="text/javascript" src="'.get_bloginfo('template_directory').'/js/jquery.min.js"></script>'."\n";
-    echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.8.2/jquery.min.js"></script>' . "\n";
+    echo '<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/jquery/jquery@1.9.0/jquery.min.js"></script>' . "\n";
 }
 
 add_action('login_head', 'custom_login');
@@ -961,11 +969,11 @@ function comment_mail_notify($comment_id)
         <h3>您有一条来自<a style="text-decoration: none;color: orange " target="_blank" href="' . home_url() . '/">' . get_option("blogname") . '</a>的回复</h3>
         <br>
         <p style="font-size: 14px;">您在文章《' . get_the_title($comment->comment_post_ID) . '》上发表的评论：</p>
-        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
-        . trim(get_comment($parent_id)->comment_content) . '</p>
+        <div style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim(get_comment($parent_id)->comment_content) . '</div>
         <p style="font-size: 14px;">' . trim($comment->comment_author) . ' 给您的回复如下：</p>
-        <p style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
-        . trim($comment->comment_content) . '</p>
+        <div style="border-bottom:#ddd 1px solid;border-left:#ddd 1px solid;padding-bottom:20px;background-color:#eee;margin:15px 0px;padding-left:20px;padding-right:20px;border-top:#ddd 1px solid;border-right:#ddd 1px solid;padding-top:20px">'
+        . trim($comment->comment_content) . '</div>
 
       <div style="text-align: center;">
           <img src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.4/img/other/hr.png" alt="hr" style="width:100%;
@@ -1754,14 +1762,6 @@ function DEFAULT_FEATURE_IMAGE()
     return rest_url('sakura/v1/image/feature') . '?' . rand(1, 1000);
 }
 
-//防止设置置顶文章造成的图片同侧bug
-add_action('pre_get_posts', function ($q) {
-    if ($q->is_home() && $q->is_main_query() && $q->get('paged') > 1) {
-        $q->set('post__not_in', get_option('sticky_posts'));
-    }
-
-});
-
 //评论回复
 function sakura_comment_notify($comment_id)
 {
@@ -1807,6 +1807,7 @@ function markdown_parser($incoming_comment)
     return $incoming_comment;
 }
 add_filter('preprocess_comment', 'markdown_parser');
+remove_filter( 'comment_text', 'make_clickable', 9 );
 
 //保存Markdown评论
 function save_markdown_comment($comment_ID, $comment_approved)

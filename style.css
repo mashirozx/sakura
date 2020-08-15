@@ -5,7 +5,7 @@ Theme URI: https://github.com/mashirozx/Sakura/
 Author: Mashiro, Spirit, Louie, Fuzzz
 Author URI: http://2heng.xin
 Description: A wonderful branch of theme Akina
-Version: 3.3.6
+Version: 3.3.9
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: sakura
@@ -1086,6 +1086,7 @@ a:hover {
     display: block
 }
 
+
 .m-nav {
     display: none
 }
@@ -1140,6 +1141,23 @@ a:hover {
 
 .site-top ul li a:hover:after {
     max-width: 100%
+}
+
+@media(max-width:1200px) {
+    .site-top .lower nav{
+        right: calc(-150px - 100%);
+        position: absolute;
+        float: right;
+        animation: searchbox .2s;
+        min-width: 860px;
+        z-index: -1
+    }
+    .site-top .lower nav.navbar {
+        right: calc(-50px - 100%);
+    }
+    .site-top .lower nav.navbar ul {
+        background: #fff;
+    }
 }
 
 #show-nav {
@@ -1260,6 +1278,14 @@ a:hover {
     padding: 40px 0 0
 }
 
+.site-content.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
 .site-content {
     max-width: 800px;
     padding: 0 10px;
@@ -1307,7 +1333,8 @@ a:hover {
     border-radius: 50%;
     padding: 2px;
     border: 1px solid #DADADA;
-    position: relative
+    position: relative;
+    object-fit: cover
 }
 
 .feature :hover .overlay i {
@@ -1443,6 +1470,7 @@ i.iconfont.hotpost {
 }
 
 .post-list-thumb {
+    will-change: transform;
     float: left;
     width: 100%;
     height: 300px;
@@ -1456,7 +1484,7 @@ i.iconfont.hotpost {
 
 @media (max-width:860px) {
     .post-list-thumb {
-        margin: 0;
+        margin: 10px 0 10px;
         height: auto
     }
 }
@@ -1556,22 +1584,6 @@ i.iconfont.hotpost {
     overflow: hidden
 }
 
-.post-list-thumb-left .post-content-wrap {
-    float: left;
-    padding-left: 30px;
-    padding-right: 0;
-    text-align: right;
-    margin: 20px 10px 10px 0
-}
-
-.post-list-thumb-left .post-thumb {
-    float: left
-}
-
-.post-list-thumb-left .post-thumb a {
-    border-radius: 10px 0 0 10px
-}
-
 @media (max-width:768px) {
     .float-content p {
         height: auto;
@@ -1591,12 +1603,11 @@ i.iconfont.hotpost {
         width: 100%;
         left: 0
     }
-    .post-content-wrap,
-    .post-list-thumb-left .post-content-wrap {
-        text-align: left;
-        margin: 0;
-        padding: 20px;
-        float: none;
+    .post-list-thumb .post-content-wrap {
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        float: none !important;
         box-shadow: none;
         border-top: 0
     }
@@ -1687,6 +1698,10 @@ i.iconfont.hotpost {
     line-height: 30px;
     border: 1px dashed #E0E0E0;
     background: #FBFBFB
+}
+
+body.dark .s-content{
+    background: unset;
 }
 
 .s-time i {
@@ -1857,22 +1872,10 @@ h1.page-title.mb- {
     text-align: center
 }
 
-@media screen and (max-width:860px) {
-    .cd-top {
-        display: none;
-        height: 60px;
-        width: 50px
-    }
-    .cd-top span {
-        height: 10px;
-        width: 50px
-    }
-}
-
-#moblieGoTop {
-    display: none;
+#moblieGoTop,#moblieDarkLight {
+    visibility: hidden;
     position: fixed;
-    bottom: 10px;
+    bottom: 60px;
     right: 10px;
     z-index: 99;
     border: 0;
@@ -1884,14 +1887,32 @@ h1.page-title.mb- {
     border-radius: 10px;
     border-radius: 12px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .12), 0 2px 2px 0 rgba(0, 0, 0, .24);
-    transition: box-shadow .2s ease
+    transform: scale(0);
+    transition:transform .3s
 }
-
-#moblieGoTop:hover {
+#moblieGoTop:hover,#moblieDarkLight:hover {
     background-color: #fff;
     opacity: .8
 }
 
+#moblieDarkLight{
+    bottom: 10px;
+}
+
+@media screen and (max-width:860px) {
+    .cd-top {
+        display: none;
+        height: 60px;
+        width: 50px
+    }
+    .cd-top span {
+        height: 10px;
+        width: 50px
+    }
+    #moblieGoTop,#moblieDarkLight{
+        visibility: visible;
+    }
+}
 .post-footer {
     padding: 20px 0;
     border-bottom: 1px dashed #ddd;
@@ -3618,7 +3639,7 @@ a.page-numbers {
     font-size: 14px
 }
 
-.siren-checkbox-label input {
+.siren-checkbox-label input,#wp-comment-cookies-consent {
     padding: 0;
     margin: 0;
     float: none;
@@ -3846,6 +3867,10 @@ li.feature-2 {
     background-attachment: fixed;
     background-size: cover;
     z-index: -1
+}
+
+@supports (-webkit-touch-callout: none) {
+    #centerbg: { background-attachment: scroll !important; }
 }
 
 @media (max-width:860px) {
@@ -4260,7 +4285,7 @@ i.iconfont.js-toggle-search.iconsearch {
 
 .s-search input {
     font-size: 1rem;
-    background: #none;
+    background: none;
     padding: 12px 24px 12px 64px;
     width: 100%;
     outline: 0;
@@ -4346,7 +4371,9 @@ i.iconfont.js-toggle-search.iconsearch {
 	margin-top: -3px;
 	line-height: unset;
 }
-
+body.dark .ins-section .fa{
+    color: #ccc;
+}
 .ins-section .ins-section-header,.ins-section .ins-search-item {
 	padding: 8px 15px;
 	cursor: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/ayuda.cur),auto;
@@ -4711,6 +4738,11 @@ i.iconfont.js-toggle-search.iconsearch {
     margin-top: 0;
     padding: 0
 }
+.wp-smiley {
+    height: 2em !important;
+    max-height: 2em !important;
+    vertical-align: bottom;
+}
 
 embed,
 iframe,
@@ -4986,7 +5018,7 @@ i.iconfont.down {
     color: #ADADAD
 }
 
-#pagination span {
+#pagination span,#bangumi-pagination span {
     color: #989898;
     font-size: 15px
 }
@@ -4996,7 +5028,7 @@ i.iconfont.down {
     color: orange
 }
 
-#pagination .loading {
+#pagination .loading,#bangumi-pagination .loading {
     background: url(https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/wordpress-rotating-ball-o.svg);
     background-position: center;
     background-repeat: no-repeat;
@@ -5194,7 +5226,7 @@ i.iconfont.down {
 
 @media (max-width:860px) {
     #main-container {
-        transition-duration: .5s;
+        transition: background,transform .5s !important;
         position: relative;
         overflow: hidden;
         z-index: 2
@@ -5281,7 +5313,7 @@ i.iconfont.down {
         top: 8px
     }
     .openNav.open .icon {
-        background-color: transparent
+        background-color: transparent !important
     }
     .openNav.open .icon:after,
     .openNav.open .icon:before {
@@ -5787,7 +5819,8 @@ i.iconfont.down {
 }
 
 .header-user-avatar:hover .header-user-menu {
-    display: block
+    display: block;
+    background: #fff;
 }
 
 .header-user-menu {
@@ -5818,7 +5851,6 @@ i.iconfont.down {
 
 .herder-user-name {
     font-size: 12px;
-    background: #fff;
     padding: 10px 10px;
     border-radius: 4px 4px 0 0
 }
@@ -5834,7 +5866,6 @@ i.iconfont.down {
 
 .header-user-menu .user-menu-option {
     padding: 5px 0;
-    background: #fff;
     border-radius: 0 0 4px 4px;
     width: 130px
 }
@@ -5854,6 +5885,11 @@ i.iconfont.down {
     background-color: #f1f1f1
 }
 
+body.dark .user-menu-option a:hover {
+    color: #3daee9;
+    background-color: #232629
+}
+
 .no-logged {
     font-size: 13px;
     padding: 15px 10px;
@@ -5863,7 +5899,7 @@ i.iconfont.down {
 
 .no-logged a {
     display: initial;
-    color: #69d2e7;
+    color: #69d2e7 !important;
     font-size: 14px;
     padding: 0 5px;
     text-decoration: underline
@@ -6840,9 +6876,9 @@ input[type=radio]:checked:before {
     margin-right: 22px
 }
 
-@media (max-width:800px) {
+@media (max-width:860px) {
     .changeSkin-gear {
-        visibility: hidden
+        visibility: hidden !important
     }
     .changeSkin-gear span::before {
         content: ""
@@ -7567,6 +7603,11 @@ a.toc-link {
 }
 
 @media (max-width:860px) {
+    .wp-smiley {
+        height:20px !important;
+        max-height:20px !important;
+        vertical-align:middle
+    }
     .bili-container,
     .tieba-container {
         padding-left: 0
@@ -8249,6 +8290,8 @@ td.hljs-ln-numbers {
     --widthB: calc(var(--widthA) - 30px);
     height: var(--widthB);
     min-height: 99%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     overflow-y: hidden;
     overflow-x: auto;
     height: auto
@@ -8595,4 +8638,181 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 .widget-area .show-hide svg{
     width: 100%;
     height: 100%;
+}
+.bangumi {
+    margin-top: 40px;
+}
+.bangumi .row {
+    display: flex;
+    margin: 0 -10px -20px;
+    flex-wrap: wrap;
+}
+.bangumi .column {
+    max-width: 50%;
+    flex: 0 0 50%;
+    margin-bottom: 30px;
+    padding: 0 15px;
+    max-width: 100%;
+    flex: 0 0 100%;
+    transition: .5s;
+}
+
+.bangumi-item {
+    height: 0;
+    color: #fff;
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    padding-bottom: 130%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1), 0 5px 20px rgba(0, 0, 0, .2);
+}
+.bangumi-item:hover {
+    color: #fff;
+}
+.bangumi-item img {
+    width: 100%;
+    user-select: none;
+    object-fit: cover;
+    transition: filter 2s;
+}
+.bangumi-item .bangumi-info {
+    height: 30%;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    position: absolute;
+    background: rgba(0, 0, 0, .5);
+    transition: transform 1s;
+    transform: translateY(250%);
+}
+.bangumi-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 0;
+}
+.bangumi-summary {
+    height: 65%;
+    white-space: normal;
+    display: none;
+    font-weight: bold;
+}
+.bangumi-status-bar {
+    top: 0;
+    bottom: 0;
+    max-width: 100%;
+    position: absolute;
+    background: #dc143c;
+}
+.bangumi-status, .bangumi-status p {
+    position: relative;
+}
+.bangumi-status {
+    background: rgba(0, 0, 0, .6);
+}
+
+@media screen and (min-width: 400px) {
+    .bangumi .column {
+        max-width: 50%;
+        flex: 0 0 50%;
+    }
+    .bangumi-item .bangumi-info{
+        height: 50%;
+        transform: translateY(140%);
+    }
+    .bangumi-title {
+        height: 20%;
+    }
+}
+@media screen and (min-width: 600px) {
+    .bangumi .column {
+        max-width: 33.3333%;
+        flex: 0 0 33.3333%;
+    }
+    .bangumi-title {
+        height: 30%;
+    }
+    .bangumi-item .bangumi-info{
+        height: 45%;
+        transform: translateY(140%);
+    }
+}
+@media screen and (min-width: 900px) {
+    .bangumi .column {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+    .bangumi-item .bangumi-info{
+        height: 100%;
+        transform: translateY(85%);
+    }
+    .bangumi-item:hover .bangumi-info {
+        transform: translateY(0);
+    }
+    .bangumi-item:hover img{
+        filter: blur(3px);
+    }
+    body.dark .bangumi-item:hover img{
+        filter: brightness(0.8) blur(3px);
+    }
+    .bangumi-title {
+        height: 15%;
+    }
+    .bangumi-summary{
+        display: block;
+    }
+    .bangumi-status {
+        height: 10%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .bangumi-item .bangumi-info{
+        height: 75%;
+        transform: translateY(115%);
+    }
+    .bangumi-item:hover .bangumi-info {
+        transform: translateY(35%);
+    }
+    .bangumi-title {
+        height: 10%;
+    }
+}
+
+#bangumi-pagination {
+    width: 100%;
+    margin-top: 80px;
+    padding: 20px 0;
+    font-size: 36px;
+    text-align: center;
+}
+
+.bangumi-next{
+    font-family: sans-serif;
+    color: #e67474;
+    position: relative;
+    padding: 13px 35px;
+    overflow: hidden;
+}
+
+.bangumi-next:before {
+    content: ' ';
+    background-color: pink;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    transition: all 5s;
+    z-index: -1;
+}
+.bangumi-next.loading:before{
+    display: none !important;
+}
+.bangumi-next:hover:before {
+    height: 100%;
+}
+.bangumi-next i {
+    color: orange;
 }
