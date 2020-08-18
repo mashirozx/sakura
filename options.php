@@ -225,6 +225,13 @@ function optionsframework_options()
         ));
 
     $options[] = array(
+        'name' => __('Homewave', 'sakura'),
+        'desc' => __('Display wave in home page.', 'sakura'),
+        'id' => 'homewave',
+        'std' => '1',
+        'type' => 'checkbox');
+
+    $options[] = array(
         'name' => __('Home article style', 'sakura'), /*首页文章风格*/
         'id' => 'post_list_style',
         'std' => "imageflow",

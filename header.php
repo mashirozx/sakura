@@ -87,6 +87,15 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 		?>
 		<div class="headertop <?php echo $filter; ?>">
 			<?php get_template_part('layouts/imgbox'); ?>
+			<?php if (akina_option('homewave') == true) { ?>
+				<div id="banner_wave_1"></div>
+				<div id="banner_wave_2"></div>
+				<div class="headertop-down faa-float animated" onclick="headertop_down()">
+					<span>
+						<i class="fa fa-chevron-down" aria-hidden="true"></i>
+					</span>
+				</div>
+			<?php } ?>
 		</div>	
 		<?php } ?>
 		<div id="page" class="site wrapper">

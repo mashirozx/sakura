@@ -1274,6 +1274,85 @@ a:hover {
     color: #545454
 }
 
+#banner_wave_1 {
+    width: auto;
+    height: 65px;
+    background: url(https://cdn.qnight.ink/blogfile/wave1.png) repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 400%;
+    left: -236px;
+    z-index: 5;
+    opacity: 1;
+    transiton-property: opacity,bottom;
+    transition-duration: .4s,.4s;
+    animation-name: move2;
+    animation-duration: 240s;
+    animation-fill-mode: backwards;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#banner_wave_2 {
+    width: auto;
+    height: 80px;
+    background: url(https://cdn.qnight.ink/blogfile/wave2.png) repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 400%;
+    left: 0;
+    z-index: 4;
+    opacity: 1;
+    transiton-property: opacity,bottom;
+    transition-duration: .4s,.4s;
+    animation-name: move2;
+    animation-duration: 160s;
+    animation-fill-mode: backwards;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+ 
+@keyframes move1 {
+    100%{
+        background-position: 100% 0;
+    }
+}
+ 
+@keyframes move2 {
+    100%{
+        background-position: -100% 0;
+    }
+}
+
+.banner_wave_hide,.banner_wave_hide_fit_skin {
+    opacity:0 !important;
+    bottom:-999px !important
+}
+
+.headertop-down {
+    position:absolute;
+    bottom:50px;
+    left:calc(50% - 14px);
+    cursor:pointer;
+    z-index:5
+}
+
+@media(max-width:860px) {
+        .headertop-down {
+        display:none
+    }
+}
+
+.headertop-down i {
+    font-size:28px;
+    color:#fff;
+    -ms-transform:scale(1.5,1);
+    -webkit-transform:scale(1.5,1);
+    transform:scale(1.5,1)
+}
+
 .site-main {
     padding: 40px 0 0
 }

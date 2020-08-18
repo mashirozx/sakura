@@ -1976,3 +1976,31 @@ if ((isWebkit || isOpera || isIe) && document.getElementById && window.addEventL
         }
     }, false);
 }
+
+//首页 波浪 播放视频时自动隐藏
+var visible="visible";
+window.onload=function(){
+    document.getElementById('video-btn').onclick=function (){
+        if(visible=="visible")
+        {
+            visible="hidden";
+        }else{
+            visible="visible";
+        }
+        try{
+            banner_wave_1.style="visibility: "+visible+";";
+        }catch(Error){}
+        try{
+            banner_wave_2.style="visibility: "+visible+";";
+        }catch(Error){}
+    };   
+};
+
+//首页 向下箭头 onclick
+function headertop_down()
+{
+    var coverOffset = $('#content').offset().top;
+    $('html,body').animate({
+         scrollTop: coverOffset
+    }, 600);
+}
