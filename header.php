@@ -90,7 +90,7 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 		</div>	
 		<?php } ?>
 		<div id="page" class="site wrapper">
-			<header class="site-header no-select" role="banner">
+			<header class="site-header no-select is-homepage gizle sabit" role="banner">
 				<div class="site-top">
 					<div class="site-branding">
 						<?php if (akina_option('akina_logo')){ ?>
@@ -99,9 +99,29 @@ window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 						</div>
 						<?php }else{ ?>
 						<span class="site-title">
-							<span class="logolink serif">
+							<span class="logolink moe-mashiro serif">
 								<a href="<?php bloginfo('url');?>">
+									<?php
+										$flag = 0;
+										$l1 = explode(':', akina_option('site_name', ''));
+										if (count($l1) == 2){ 
+											$l2 = explode(',', $l1[0]);
+											if (count($l2) == 3){ 
+												$flag = 1;
+											}
+										}
+										if ($flag == 0) {
+
+									?>
 									<span class="site-name"><?php echo akina_option('site_name', ''); ?></span>
+									<?php }else{ ?>
+									<ruby>
+                                    								<span class="sakuraso"><?php echo $l2[0]; ?></span>
+                                    								<span class="no"><?php echo $l2[1]; ?></span>
+                                    								<span class="shironeko"><?php echo $l2[2]; ?></span>
+                                    								<rp></rp><rt class="chinese-font"><?php echo $l1[1]; ?></rt><rp></rp>
+									</ruby>
+									<?php } ?>
 								</a>
 							</span>
 						</span>	
