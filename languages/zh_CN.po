@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-08-06 17:39+0800\n"
-"PO-Revision-Date: 2020-08-18 09:06+0800\n"
+"POT-Creation-Date: 2020-08-18 16:07+0800\n"
+"PO-Revision-Date: 2020-08-18 16:08+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
-"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -481,9 +481,7 @@ msgstr "站点名称"
 
 #: options.php:115
 msgid "Mashiro's Blog"
-msgstr ""
-"樱花庄的白猫，支持三段式拼注站点标题，三段式使用英文逗号隔开，拼注使用英文冒"
-"号隔开，例: さくら荘,の,白猫:樱花庄的白猫"
+msgstr "樱花庄的白猫"
 
 #: options.php:122
 msgid "Mashiro"
@@ -618,15 +616,23 @@ msgstr "默认开启，勾选关闭，显示在文章页面，独立页面以及
 msgid "Search button"
 msgstr "搜索按钮"
 
-#: options.php:230 options.php:290 options.php:594 options.php:604
+#: options.php:223 options.php:290 options.php:594 options.php:604
 #: options.php:614 options.php:624
 msgid "Open"
 msgstr "启用"
 
-#: options.php:231 options.php:291 options.php:595 options.php:605
+#: options.php:224 options.php:291 options.php:595 options.php:605
 #: options.php:615 options.php:625
 msgid "Close"
 msgstr "关闭"
+
+#: options.php:228
+msgid "Homewave"
+msgstr "首页波浪"
+
+#: options.php:229
+msgid "Display wave in home page."
+msgstr "首页显示波浪动画"
 
 #: options.php:235
 msgid "Home article style"
@@ -1005,6 +1011,7 @@ msgstr "文章页"
 msgid "Post style"
 msgstr "文章样式"
 
+#. Theme Name of the plugin/theme
 #: options.php:584
 msgid "Sakura"
 msgstr "默认样式"
@@ -1954,6 +1961,34 @@ msgstr "注册成功！正在跳转......"
 msgid "Registration is not open yet."
 msgstr "暂未开放注册。"
 
+#. Theme URI of the plugin/theme
+msgid "https://github.com/mashirozx/Sakura/"
+msgstr ""
+
+#. Description of the plugin/theme
+#, fuzzy
+#| msgid "A branch of theme Akina"
+msgid "A wonderful branch of theme Akina"
+msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
+
+#. Author of the plugin/theme
+msgid "Mashiro, Spirit, Louie, Fuzzz"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://2heng.xin"
+msgstr ""
+
+#. Template Name of the plugin/theme
+#, fuzzy
+#| msgid "Search"
+msgid "archive"
+msgstr "搜索"
+
+#. Template Name of the plugin/theme
+msgid "links"
+msgstr ""
+
 #~ msgid "Transparent"
 #~ msgstr "全透明"
 
@@ -2024,10 +2059,6 @@ msgstr "暂未开放注册。"
 #~ msgid " Previous"
 #~ msgstr " 上一页"
 
-#~ msgid "A branch of theme Akina"
-#~ msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
-
-#, php-format
 #~ msgid "第 %s 页"
 #~ msgstr "第 %s 页"
 
