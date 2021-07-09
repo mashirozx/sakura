@@ -1,0 +1,19 @@
+@mixin skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    hsla(0, 0%, 74.5%, 0.2) 25%,
+    hsla(0, 0%, 50.6%, 0.24) 37%,
+    hsla(0, 0%, 74.5%, 0.2) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 100% 50%;
+    }
+    to {
+      background-position: 0 50%;
+    }
+  }
+}

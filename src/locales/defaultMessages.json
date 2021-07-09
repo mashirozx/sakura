@@ -1,0 +1,50 @@
+{
+  "messages.wordpress.applicationPasswordsEndpointNotAvailable": {
+    "defaultMessage": "ApplicationPasswords is not avaliabe in your WordPress installation, please upgrade WordPress to v5.6.0 above, or enable the ApplicationPasswords feature in v5.6.0 above installation."
+  },
+  "messages.wordpress.permalink.shouldIncludeFieldsInPost": {
+    "defaultMessage": "WordPress pages should use %slug% as the permalink."
+  },
+  "messages.wordpress.permalink.shouldIncludeFieldsInSingle": {
+    "defaultMessage": "WordPress permalink should include at least one of %post_id%, %postname%. You may set them here: {baseUrl}/wp-admin/options-permalink.php"
+  },
+  "posts.comment.composer.authorEmail.label": {
+    "defaultMessage": "Email *"
+  },
+  "posts.comment.composer.authorName.label": {
+    "defaultMessage": "Nickname *"
+  },
+  "posts.comment.composer.authorUrl.label": {
+    "defaultMessage": "Link"
+  },
+  "posts.comment.composer.captcha.toggleButton": {
+    "defaultMessage": "Captcha"
+  },
+  "posts.comment.composer.content.label": {
+    "defaultMessage": "You are a surprise that I will only meet once in my life"
+  },
+  "posts.comment.composer.submit.button": {
+    "defaultMessage": "Submit"
+  },
+  "posts.comment.composer.tips.markdownSupported": {
+    "defaultMessage": "Markdown Supported"
+  },
+  "posts.commentCount": {
+    "defaultMessage": "{commentCount, plural, =0 {No comment} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}"
+  },
+  "posts.postTimeOn": {
+    "defaultMessage": "Post on {publistTimeDate, date, long}"
+  },
+  "posts.postTimeSince": {
+    "defaultMessage": "Post {duration} ago"
+  },
+  "posts.readCount": {
+    "defaultMessage": "{readCount, plural, =0 {No one ever read} =1 {One read} other {{readCount, number, ::compact-short} Reads}}"
+  },
+  "posts.readMore": {
+    "defaultMessage": "Read More"
+  },
+  "posts.wordCount": {
+    "defaultMessage": "{wordCount, plural, =0 {No content} =1 {One word} other {{wordCount, number, ::compact-short} Words}}"
+  }
+}

@@ -1,0 +1,13 @@
+@mixin line-number-limit($limit) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $limit;
+  -webkit-box-orient: vertical;
+}
+
+@mixin text-shadow-offset {
+  // fixup for text-shadow cut by overflow
+  padding: 10px 10px;
+  transform: translate(-10px, 10px);
+}

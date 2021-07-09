@@ -1,0 +1,35 @@
+@mixin tag-style {
+  .tag {
+    height: 16px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    box-sizing: border-box;
+    .text {
+      line-height: 10px;
+      font-size: x-small;
+      font-weight: 400;
+    }
+    &.border {
+      border: 2px solid #5f6368;
+      .text {
+        color: #5f6368;
+      }
+    }
+    &.solid {
+      background: #ffe5e5;
+      .text {
+        color: #d7000f;
+      }
+    }
+    &.yolk {
+      background: #fff5a5;
+      .text {
+        color: #333333;
+      }
+    }
+  }
+}

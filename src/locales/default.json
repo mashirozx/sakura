@@ -1,0 +1,18 @@
+{
+  "messages.wordpress.applicationPasswordsEndpointNotAvailable": "ApplicationPasswords is not avaliabe in your WordPress installation, please upgrade WordPress to v5.6.0 above, or enable the ApplicationPasswords feature in v5.6.0 above installation.",
+  "messages.wordpress.permalink.shouldIncludeFieldsInPost": "WordPress pages should use %slug% as the permalink.",
+  "messages.wordpress.permalink.shouldIncludeFieldsInSingle": "WordPress permalink should include at least one of %post_id%, %postname%. You may set them here: {baseUrl}/wp-admin/options-permalink.php",
+  "posts.comment.composer.authorEmail.label": "Email *",
+  "posts.comment.composer.authorName.label": "Nickname *",
+  "posts.comment.composer.authorUrl.label": "Link",
+  "posts.comment.composer.captcha.toggleButton": "Captcha",
+  "posts.comment.composer.content.label": "You are a surprise that I will only meet once in my life",
+  "posts.comment.composer.submit.button": "Submit",
+  "posts.comment.composer.tips.markdownSupported": "Markdown Supported",
+  "posts.commentCount": "{commentCount, plural, =0 {No comment} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}",
+  "posts.postTimeOn": "Post on {publistTimeDate, date, long}",
+  "posts.postTimeSince": "Post {duration} ago",
+  "posts.readCount": "{readCount, plural, =0 {No one ever read} =1 {One read} other {{readCount, number, ::compact-short} Reads}}",
+  "posts.readMore": "Read More",
+  "posts.wordCount": "{wordCount, plural, =0 {No content} =1 {One word} other {{wordCount, number, ::compact-short} Words}}"
+}

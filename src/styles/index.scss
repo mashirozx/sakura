@@ -1,0 +1,16 @@
+@use "@material/textfield/mdc-text-field";
+@import 'normalize.css/normalize.css';
+@import '@material/elevation/styles';
+@import '@material/button/styles';
+@import '@material/chips/styles';
+@import '@material/chips/deprecated/mdc-chips';
+@import '@material/list/mdc-list';
+@import '@material/card/mdc-card';
+// @import '@material/textfield/mdc-text-field';
+// @import '@material/dialog/mdc-dialog';
+// @import '@material/typography/styles';
+@import '@material/ripple/styles';
+
+.grecaptcha-badge {
+  opacity: 0;
+}

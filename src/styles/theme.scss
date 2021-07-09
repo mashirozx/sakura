@@ -1,0 +1,49 @@
+// https://material.io/design/color/dark-theme.html#ui-application
+
+[data-theme='light'] {
+  $background-color: #f9fafa;
+  $block-background-color: #ffffff;
+
+  $text-primary-color: #333333;
+  $text-secondary-color: #555555;
+  $text-tertiary-color: #999999;
+
+  $text-reverse-color: #ffffff;
+  $text-warning-color: #d7000f;
+  $text-link-color: #007aff;
+
+  --background-color: $background-color;
+  --block-background-color: $block-background-color;
+
+  --text-primary-color: $text-primary-color;
+  --text-secondary-color: $text-secondary-color;
+  --text-tertiary-color: $text-tertiary-color;
+
+  --text-reverse-color: $text-reverse-color;
+  --text-warning-color: $text-warning-color;
+  --text-link-color: $text-link-color;
+}
+
+[data-theme='dark'] {
+  $background-color: #121212;
+  $block-background-color: #2d2d2d;
+
+  $text-primary-color: rgba(#ffffff, 0.85);
+  $text-secondary-color: rgba(#ffffff, 0.65);
+  $text-tertiary-color: rgba(#ffffff, 0.4);
+
+  $text-reverse-color: #222222;
+  $text-warning-color: #d7000f;
+  $text-link-color: #007aff;
+
+  --background-color: $background-color;
+  --block-background-color: $block-background-color;
+
+  --text-primary-color: $text-primary-color;
+  --text-secondary-color: $text-secondary-color;
+  --text-tertiary-color: $text-tertiary-color;
+
+  --text-reverse-color: $text-reverse-color;
+  --text-warning-color: $text-warning-color;
+  --text-link-color: $text-link-color;
+}

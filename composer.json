@@ -1,0 +1,28 @@
+{
+  "name": "mashirozx/sakura",
+  "description": "WordPress theme sakura",
+  "type": "project",
+  "require": {
+    "guzzlehttp/guzzle": "^7.3",
+    "twig/twig": "^3.0",
+    "filp/whoops": "^2.13",
+    "geoip2/geoip2": "^2.11",
+    "whichbrowser/parser": "^2.1",
+    "ritaswc/zx-ip-address": "^2.0"
+  },
+  "license": "GPLv3",
+  "autoload": {
+    "psr-4": {
+      "Sakura\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "mashirozx",
+      "email": "moezhx@outlook.com"
+    }
+  ],
+  "config": {
+    "vendor-dir": "app/vendor"
+  }
+}

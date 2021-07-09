@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+*.local
+# node
+yarn-error.log
+package-lock.json
+composer.phar
+# private config
+.env.development
+# mac
+.DS_Store
+# jest
+coverage

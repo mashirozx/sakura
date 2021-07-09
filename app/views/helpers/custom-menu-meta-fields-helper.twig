@@ -1,0 +1,14 @@
+{% block id_input %}
+	<input type="hidden" class="nav-menu-id" value="{{item_id}}"/>
+{% endblock %}
+
+{% block input_field %}
+	<p class="field-custom-{{key}} description description-wide">
+		<label for="custom-menu-meta-{{key}}-{{item_id}}">
+			{{label}}
+			<br>
+			<input type="text" name="custom_menu_meta_{{key}}[{{item_id}}]" id="custom-menu-meta-{{key}}-{{item_id}}" class="widefat edit-menu-item-custom-menu-meta-{{key}}" value="{{esc_attr_custom_menu_meta}}"/>
+		</label>
+		{{desc}}
+	</p>
+{% endblock %}

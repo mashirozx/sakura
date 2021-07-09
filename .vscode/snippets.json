@@ -1,0 +1,11 @@
+{
+  "html": {
+    "snippets": {
+      "divc": "div[class=${1}]",
+      "icon": "icon[name=${1}]",
+      "view": "div[class=${1}]",
+      "text": "span[class=\"text\"]",
+      "image": "Image[src=${1} placeholder=${2} :avatar=\"false\" alt=${2} :draggable=\"false\"]"
+    }
+  }
+}
