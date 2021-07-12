@@ -13,6 +13,7 @@ new \Sakura\Helpers\WhoopsHelper();
 new \Sakura\Helpers\ViteRequireHelper();
 new \Sakura\Helpers\CustomMenuMetaFieldsHelper();
 new \Sakura\Helpers\CommentHelper();
+new \Sakura\Helpers\PostQueryHelper('post');
 
 new \Sakura\Routers\ApiRouter();
 new \Sakura\Routers\PagesRouter();

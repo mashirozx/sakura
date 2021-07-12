@@ -13,6 +13,7 @@ use Sakura\Controllers\CategoryController;
 use Sakura\Controllers\TagController;
 use Sakura\Controllers\CommentController;
 use Sakura\Lib\ClassWpRestCommentsController;
+use Sakura\Lib\ClassWpRestPostsController;
 
 class ApiRouter extends WP_REST_Controller
 {
@@ -135,6 +136,29 @@ class ApiRouter extends WP_REST_Controller
           'schema' => array($this, 'get_public_item_schema'),
         )
       );
+
+      // @deprecated using PostQueryHelper instaed
+      // $rest_posts_controller = new ClassWpRestPostsController('post');
+      // custom get posts by category slugs
+      // register_rest_route(
+      //   $this->namespace,
+      //   '/posts',
+      //   array(
+      //     array(
+      //       'methods'             => WP_REST_Server::READABLE,
+      //       'callback'            => array($rest_posts_controller, 'get_items'),
+      //       'permission_callback' => array($rest_posts_controller, 'get_items_permissions_check'),
+      //       'args'                => $rest_posts_controller->get_collection_params_mod(),
+      //     ),
+      //     array(
+      //       'methods'             => WP_REST_Server::CREATABLE,
+      //       'callback'            => array($rest_posts_controller, 'create_item'),
+      //       'permission_callback' => array($rest_posts_controller, 'create_item_permissions_check'),
+      //       'args'                => $rest_posts_controller->get_endpoint_args_for_item_schema(WP_REST_Server::CREATABLE),
+      //     ),
+      //     'schema' => array($rest_posts_controller, 'get_public_item_schema_mod'),
+      //   )
+      // );
     });
   }
 

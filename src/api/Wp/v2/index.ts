@@ -1,8 +1,6 @@
 import request, { AxiosPromise } from '@/utils/http'
 import snakecaseKeys from 'snakecase-keys'
 
-type WpPostObjectFilter = number | string | number[] | string[]
-
 /**
  * GET /wp/v2/posts
  * https://developer.wordpress.org/rest-api/reference/posts/#arguments
@@ -16,8 +14,8 @@ export interface GetPostParams {
   author?: string | number
   authorExclude?: string | number
   before?: string // ISO8601
-  exclude?: WpPostObjectFilter // TODO: check this
-  include?: WpPostObjectFilter // TODO: check this
+  exclude?: number | number[]
+  include?: number | number[]
   offset?: number
   order?: 'asc' | 'desc' // default: desc
   orderby?:
@@ -31,13 +29,15 @@ export interface GetPostParams {
     | 'slug'
     | 'include_slugs'
     | 'title' // default: date
-  slug?: WpPostObjectFilter // TODO: check this
+  slug?: string
   status?: string // default: 'publish'
   taxRelation?: 'AND' | 'OR'
-  categories?: WpPostObjectFilter // TODO: check this
-  categoriesExclude?: WpPostObjectFilter // TODO: check this
-  tags?: WpPostObjectFilter // TODO: check this
-  tagsExclude?: WpPostObjectFilter // TODO: check this
+  categories?: number | number[]
+  categoriesExclude?: number | number[]
+  categoriesSlug?: string
+  tags?: number | number[]
+  tagsExclude?: number | number[]
+  tagsSlug?: string
   sticky?: boolean // TODO: check this
 }
 
@@ -48,8 +48,10 @@ export interface GetPageParams
     | 'taxRelation'
     | 'categories'
     | 'categoriesExclude'
+    | 'categoriesSlug'
     | 'tags'
     | 'tagsExclude'
+    | 'tagsSlug'
     | 'sticky'
   > {
   menuOrder: any // TODO: check this
@@ -79,8 +81,8 @@ export interface GetCommentParams {
   authorExclude?: string | number
   author_email?: string
   before?: string // ISO8601
-  exclude?: WpPostObjectFilter // TODO: check this
-  include?: WpPostObjectFilter // TODO: check this
+  exclude?: number | number[] // TODO: check this
+  include?: number | number[] // TODO: check this
   offset?: number
   order?: 'asc' | 'desc' // default: desc
   orderby?: 'date' | 'date_gmt' | 'id' | 'include' | 'post' | 'parent' | 'type' // default: date

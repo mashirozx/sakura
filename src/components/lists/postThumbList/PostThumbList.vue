@@ -29,6 +29,12 @@ export default defineComponent({
     page: { type: Number, default: 1 },
     perPage: { type: Number, default: 10 },
     autoLoad: { type: Boolean, default: true },
+    fetchParameters: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
   },
   setup(props) {
     const [listContainerRef, setListContainerRef] = useElementRef()
@@ -64,7 +70,12 @@ export default defineComponent({
       fetchPost({
         state: postsStore,
         namespace: props.namespace,
-        opts: { page: currentPage.value, perPage: props.perPage, context: 'embed' },
+        opts: {
+          page: currentPage.value,
+          perPage: props.perPage,
+          context: 'embed',
+          ...props.fetchParameters,
+        },
       }).then(() => {
         get()
         setFetchStatus('done')

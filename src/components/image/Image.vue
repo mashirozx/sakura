@@ -8,7 +8,13 @@
       @error="handleError"
       @load="handleLoad"
     />
-    <img v-if="placeholderImage" class="default" :src="placeholderImage" :alt="$props.alt" />
+    <img
+      v-if="placeholderImage"
+      class="default"
+      :src="placeholderImage"
+      :alt="$props.alt"
+      :draggable="$props.draggable"
+    />
   </div>
 </template>
 
