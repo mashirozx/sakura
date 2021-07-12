@@ -808,16 +808,16 @@
         },
         {
             "name": "ritaswc/zx-ip-address",
-            "version": "2.0.58",
+            "version": "2.0.59",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ritaswc/zx-ip-address.git",
-                "reference": "91c973425df57fd26e6b7a9191900a136c40f323"
+                "reference": "b0270f0f379212d363de472b3ae0572dbdca1f02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ritaswc/zx-ip-address/zipball/91c973425df57fd26e6b7a9191900a136c40f323",
-                "reference": "91c973425df57fd26e6b7a9191900a136c40f323",
+                "url": "https://api.github.com/repos/ritaswc/zx-ip-address/zipball/b0270f0f379212d363de472b3ae0572dbdca1f02",
+                "reference": "b0270f0f379212d363de472b3ae0572dbdca1f02",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +845,7 @@
             "description": "IPv4/IPv6 offline address database.IPv4/IPv6双栈地址离线数据库。IPv4 by 纯真网络，IPv6 by ZX Inc.",
             "support": {
                 "issues": "https://github.com/ritaswc/zx-ip-address/issues",
-                "source": "https://github.com/ritaswc/zx-ip-address/tree/2.0.58"
+                "source": "https://github.com/ritaswc/zx-ip-address/tree/2.0.59"
             },
             "funding": [
                 {
@@ -853,7 +853,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-07-01T08:15:27+00:00"
+            "time": "2021-07-09T03:11:42+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
