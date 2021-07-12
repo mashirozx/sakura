@@ -1605,10 +1605,10 @@
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.4.tgz#c14c461ec42ea2c1556e86f60b0354341d91adc3"
   integrity sha512-6O45kZAmkLvzGLToBxEz4lR2W6kXohCtebV2UxjH9GXjd8X9AhEn68FN9eNanFtWNzvgw1hqd6HkPRVQalqf7Q==
 
-"@vue/test-utils@^2.0.0-rc.9":
-  version "2.0.0-rc.9"
-  resolved "https://registry.nlark.com/@vue/test-utils/download/@vue/test-utils-2.0.0-rc.9.tgz?cache=0&sync_timestamp=1624509839123&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Ftest-utils%2Fdownload%2F%40vue%2Ftest-utils-2.0.0-rc.9.tgz#b3f817d710a1d0ae2084143520c9d8d3c552bfa6"
-  integrity sha1-s/gX1xCh0K4ghBQ1IMnY08VSv6Y=
+"@vue/test-utils@^2.0.0-rc.10":
+  version "2.0.0-rc.10"
+  resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-rc.10.tgz#9ed689cd7d5a1c9ef6693806010e464d2ecc13b2"
+  integrity sha512-Z8jY+askU08svsI37NcJSLmWrfkZ/1ATA1DENWezRUX2uv3QyEj7idwx+rfeNSOrlNNBh4NTzypBKOUOklxBRA==
 
 "@vueuse/core@^5.1.2":
   version "5.1.2"

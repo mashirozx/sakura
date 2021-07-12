@@ -69,7 +69,7 @@
     "@vue/compiler-sfc": "^3.1.4",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-rc.9",
+    "@vue/test-utils": "^2.0.0-rc.10",
     "autoprefixer": "^10.2.6",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
