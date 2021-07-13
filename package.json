@@ -44,7 +44,7 @@
     "camelcase-keys": "^7.0.0",
     "crypto-js": "^4.0.0",
     "gsap": "^3.7.0",
-    "highlight.js": "^11.0.1",
+    "highlight.js": "^11.1.0",
     "idb": "^6.1.2",
     "lodash": "^4.17.21",
     "marked": "^2.1.3",
