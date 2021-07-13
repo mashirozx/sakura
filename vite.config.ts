@@ -29,21 +29,28 @@ export default defineConfig({
       // host: '192.168.28.26',
       host: 'localhost',
       port: 9000,
-      // path?: string,
-      // timeout?: number,
-      // overlay?: boolean
     },
   },
   build: {
+    target: 'modules',
     manifest: true,
     sourcemap: true,
     outDir: 'app/assets/dist',
     chunkSizeWarningLimit: 2048,
-    // lib: {
-    //   entry: path.resolve(__dirname, 'src/main.ts'),
-    //   name: 'sakura-next',
-    //   formats: ['umd'],
-    // },
+    rollupOptions: {
+      // external: ['vue'],
+      input: {
+        main: path.resolve(__dirname, 'src/main.ts'),
+        admin: path.resolve(__dirname, 'src/admin/main.ts'),
+      },
+      output: {
+        // TODO: use ES5 bundle instead
+        // globals: {
+        //   vue: 'Vue',
+        // },
+        // manualChunks: undefined,
+      },
+    },
   },
   css: {
     preprocessorOptions: {
@@ -52,19 +59,4 @@ export default defineConfig({
       },
     },
   },
-  // optimizeDeps: {
-  //   exclude: ['@fortawesome/fontawesome-free'],
-  // },
-  // outputDir: path.resolve(__dirname, 'app/dist'),
-  // publicPath: process.env.NODE_ENV === 'production' ? './' : 'http://localhost:9000/',
-  // configureWebpack: (config) => {
-  //   config.output.filename = process.env.NODE_ENV === 'production' ? 'sakura-app.[chunkhash].js' : 'sakura-app.js'
-  // },
-  // devServer: {
-  //   host: 'localhost',
-  //   port: 9000,
-  //   hot: true,
-  //   disableHostCheck: true,
-  //   headers: { 'Access-Control-Allow-Origin': '*' },
-  // },
 })

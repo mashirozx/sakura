@@ -13,8 +13,8 @@ class ViteRequireHelper
   function __construct()
   {
     add_action('wp_enqueue_scripts', [$this, 'enqueue_common_scripts']);
-    add_action('wp_enqueue_scripts', [$this, 'enqueue_development_scripts']);
-    // add_action('wp_enqueue_scripts', [$this, 'enqueue_production_scripts']);
+    // add_action('wp_enqueue_scripts', [$this, 'enqueue_development_scripts']);
+    add_action('wp_enqueue_scripts', [$this, 'enqueue_production_scripts']);
     // add tag filters
     add_filter('script_loader_tag', [$this, 'script_tag_filter'], 10, 3);
     add_filter('style_loader_tag', [$this, 'style_tag_filter'], 10, 3);
@@ -32,15 +32,15 @@ class ViteRequireHelper
     $manifest = $this->get_manifest_file();
 
     // <script type="module" crossorigin src="http://localhost:9000/assets/index.36b06f45.js"></script>
-    wp_enqueue_script('[type:module]chunk-vendors.js', $assets_base_path . $manifest['index.html']['file'], array(), null, false);
+    wp_enqueue_script('[type:module]chunk-vendors.js', $assets_base_path . $manifest['src/main.ts']['file'], array(), null, false);
 
     // <link rel="modulepreload" href="http://localhost:9000/assets/vendor.b3a324ba.js">
-    foreach ($manifest['index.html']['imports'] as $index => $import) {
+    foreach ($manifest['src/main.ts']['imports'] as $index => $import) {
       wp_enqueue_style("[ref:modulepreload]chunk-vendors-{$index}.js", $assets_base_path . $manifest[$import]['file']);
     }
 
     // <link rel="stylesheet" href="http://localhost:9000/assets/index.2c78c25a.css">
-    foreach ($manifest['index.html']['css'] as $index => $path) {
+    foreach ($manifest['src/main.ts']['css'] as $index => $path) {
       wp_enqueue_style("sakura-chunk-{$index}.css", $assets_base_path . $path);
     }
   }
@@ -52,7 +52,7 @@ class ViteRequireHelper
     wp_enqueue_style('fontawesome-free', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css');
 
     // TODO: don't use vue.js as handler
-    wp_enqueue_script('vue.js', 'https://unpkg.com/vue@next', array(), false, true);
+    wp_enqueue_script('vue.js', 'https://unpkg.com/vue@next', array(), false, false);
 
     wp_localize_script('vue.js', 'InitState', (new Controllers\InitStateController())->get_initial_state());
 
