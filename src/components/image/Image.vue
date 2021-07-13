@@ -1,5 +1,5 @@
 <template>
-  <div class="image__container">
+  <div :class="['image__container', state]">
     <img
       :class="['image', state]"
       :src="$props.src"
@@ -10,7 +10,7 @@
     />
     <img
       v-if="placeholderImage"
-      class="default"
+      :class="['default', state]"
       :src="placeholderImage"
       :alt="$props.alt"
       :draggable="$props.draggable"
@@ -69,7 +69,10 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   position: relative;
-  @include skeleton.skeleton-loading;
+  &.loading,
+  &.error {
+    @include skeleton.skeleton-loading;
+  }
   .image,
   .default {
     width: 100%;
@@ -81,6 +84,11 @@ export default defineComponent({
     top: 0;
     left: 0;
     &.error {
+      visibility: hidden;
+    }
+  }
+  .default {
+    .load {
       visibility: hidden;
     }
   }

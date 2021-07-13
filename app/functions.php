@@ -10,7 +10,8 @@ require_once(__DIR__ . '/loader.php');
 
 new \Sakura\Helpers\SetupHelper();
 new \Sakura\Helpers\WhoopsHelper();
-new \Sakura\Helpers\ViteRequireHelper();
+new \Sakura\Helpers\ViteHelper();
+new \Sakura\Helpers\AdminPageHelper();
 new \Sakura\Helpers\CustomMenuMetaFieldsHelper();
 new \Sakura\Helpers\CommentHelper();
 new \Sakura\Helpers\PostQueryHelper('post');

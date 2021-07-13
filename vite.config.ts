@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+// import legacy from '@vitejs/plugin-legacy'
 import path from 'path'
 import svgicon from 'vite-plugin-svgicon'
 
@@ -17,6 +18,9 @@ export default defineConfig({
     svgicon({
       include: ['**/icons/**/*.svg'],
     }),
+    // legacy({
+    //   targets: ['defaults', 'not IE 11'],
+    // }),
   ],
   server: {
     host: '0.0.0.0',
