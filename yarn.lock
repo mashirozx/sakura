@@ -6860,10 +6860,10 @@ vite-plugin-svgicon@^1.0.0-alpha.0:
     "@yzfe/svgicon-gen" "^1.0.2"
     minimatch "^3.0.4"
 
-vite@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.4.1.tgz#2e48b8dbfc69e4edbf7f4d1c0798d621585cb8da"
-  integrity sha512-4BpKRis9uxIqPfIEcJ18LTBsamqnDFxTx45CXwagHjNltHa6PFEvf8Pe6OpgIHb0OyWT30OXOSSQvdOaX4OBiQ==
+vite@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.4.2.tgz#07d00615775c808530bc9f65641062b349b67929"
+  integrity sha512-2MifxD2I9fjyDmmEzbULOo3kOUoqX90A58cT6mECxoVQlMYFuijZsPQBuA14mqSwvV3ydUsqnq+BRWXyO9Qa+w==
   dependencies:
     esbuild "^0.12.8"
     postcss "^8.3.5"
