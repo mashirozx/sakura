@@ -1249,10 +1249,10 @@
   resolved "https://registry.nlark.com/@types/lodash/download/@types/lodash-4.14.170.tgz#0d67711d4bf7f4ca5147e9091b847479b87925d6"
   integrity sha1-DWdxHUv39MpRR+kJG4R0ebh5JdY=
 
-"@types/marked@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.nlark.com/@types/marked/download/@types/marked-2.0.3.tgz?cache=0&sync_timestamp=1621678249102&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fmarked%2Fdownload%2F%40types%2Fmarked-2.0.3.tgz#c8ea93684e530cc3b667d3e7226556dd0844ad1f"
-  integrity sha1-yOqTaE5TDMO2Z9PnImVW3QhErR8=
+"@types/marked@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-2.0.4.tgz#34a0ea548afe6e0c01095229d47b48b2af650613"
+  integrity sha512-L9VRSe0Id8xbPL99mUo/4aKgD7ZoRwFZqUQScNKHi2pFjF9ZYSMNShUHD6VlMT6J/prQq0T1mxuU25m3R7dFzg==
 
 "@types/node@*":
   version "15.12.5"
