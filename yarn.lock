@@ -1568,18 +1568,18 @@
   resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-rc.10.tgz#9ed689cd7d5a1c9ef6693806010e464d2ecc13b2"
   integrity sha512-Z8jY+askU08svsI37NcJSLmWrfkZ/1ATA1DENWezRUX2uv3QyEj7idwx+rfeNSOrlNNBh4NTzypBKOUOklxBRA==
 
-"@vueuse/core@^5.1.2":
-  version "5.1.2"
-  resolved "https://registry.nlark.com/@vueuse/core/download/@vueuse/core-5.1.2.tgz?cache=0&sync_timestamp=1625582114174&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vueuse%2Fcore%2Fdownload%2F%40vueuse%2Fcore-5.1.2.tgz#25ce7e266361926953cab61dd77c06897afd20b2"
-  integrity sha1-Jc5+JmNhkmlTyrYd13wGiXr9ILI=
+"@vueuse/core@^5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-5.1.3.tgz#a9edda9202513423a27fbac896dd7bc918d1ac6c"
+  integrity sha512-5CmF/epSo9L1Obz3A37UJOpDdno0BDw46zyXq0DHgvzEwL6gPb9GgJZcy4Hm5YSjQYIeQPo35uO8qsZyIjEZog==
   dependencies:
-    "@vueuse/shared" "5.1.2"
+    "@vueuse/shared" "5.1.3"
     vue-demi "*"
 
-"@vueuse/shared@5.1.2":
-  version "5.1.2"
-  resolved "https://registry.nlark.com/@vueuse/shared/download/@vueuse/shared-5.1.2.tgz#584650c7c1c85225a274afa65ed13f23ccf340c2"
-  integrity sha1-WEZQx8HIUiWidK+mXtE/I8zzQMI=
+"@vueuse/shared@5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-5.1.3.tgz#11faa3a1a2b4d3dc41eac7a825900a8894efe95e"
+  integrity sha512-p8n/69QMtSsLN5rri9c3sN5QJJXWA7cm9chgo3DowTBRYLBni1I9kGY2nz299Tur6XEFuf+63E5TvMTJVJeHHw==
   dependencies:
     vue-demi "*"
 
