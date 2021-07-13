@@ -447,14 +447,6 @@
     intl-messageformat "9.7.1"
     tslib "^2.1.0"
 
-"@formatjs/ts-transformer@3.4.4":
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/@formatjs/ts-transformer/-/ts-transformer-3.4.4.tgz#bc66e53bb4ae9ba8911b4f68a283a6c9a1992bf8"
-  integrity sha512-23QAwecL1emi0RWuV1w+FhsF7Xp6eJTSkXgWHSV94Ff0hfwfjLZMNNSiYQBT1CEHKzerRvuGi4rrbj4Zc46/pg==
-  dependencies:
-    "@formatjs/icu-messageformat-parser" "2.0.7"
-    tslib "^2.1.0"
-
 "@formatjs/ts-transformer@3.4.5":
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/@formatjs/ts-transformer/-/ts-transformer-3.4.5.tgz#53423dbb606f88e7e7637d941f9d19d508dd10c4"
@@ -2873,13 +2865,13 @@ eslint-plugin-file-progress@^1.1.0:
     chalk "^4.1.0"
     ora "^5.0.0"
 
-eslint-plugin-formatjs@^2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-formatjs/-/eslint-plugin-formatjs-2.17.0.tgz#14a5cdd98b4ea9ba1f19ede5a36a126ccedd9b0a"
-  integrity sha512-Raq2up309KHEUzbSccxZCeZpcrQ6i2t3R/lwNoFWi/JSAYz20yBtfvCEaku/LmYjFf8hf10ONbJgHhhVLyEKJQ==
+eslint-plugin-formatjs@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-formatjs/-/eslint-plugin-formatjs-2.17.1.tgz#50a5b340d47dbb6395e8c82424ae01439330812f"
+  integrity sha512-L/rYhVdz5niANbZciqFYdp+/y5A0xB+ySzfV8dJaAB0dJyOGK1m2MZYEHsqAusaOTR96QzoQxVQLiGo5JoJi2g==
   dependencies:
     "@formatjs/icu-messageformat-parser" "2.0.7"
-    "@formatjs/ts-transformer" "3.4.4"
+    "@formatjs/ts-transformer" "3.4.5"
     "@types/emoji-regex" "^8.0.0"
     "@types/eslint" "^7.2.0"
     "@typescript-eslint/typescript-estree" "^4.11.0"
