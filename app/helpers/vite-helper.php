@@ -63,7 +63,9 @@ class ViteHelper extends BaseClass
   {
     wp_enqueue_style('style.css', get_template_directory_uri() . '/style.css');
 
-    wp_enqueue_style('fontawesome-free', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css');
+    wp_enqueue_style('fontawesome-free.css', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css');
+
+    wp_enqueue_style('normalize.css', 'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css');
 
     // TODO: don't use vue.js as handler
     // wp_enqueue_script('vue.js', 'https://unpkg.com/vue@next', array(), false, false);

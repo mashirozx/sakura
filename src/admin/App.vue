@@ -14,11 +14,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@use './styles/index';
 .sakura-options-page__app {
   width: calc(100% - 20px);
   padding: 20px 20px 20px 0;
   > .app__wrapper {
-    background: yellowgreen;
+    width: 100%;
   }
 }
 </style>

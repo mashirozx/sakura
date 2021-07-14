@@ -4,6 +4,7 @@ namespace Sakura\Routers;
 
 use WP_REST_Controller;
 use WP_REST_Server;
+use Sakura\Controllers\ConfigurationController;
 use Sakura\Controllers\InitStateController;
 use Sakura\Controllers\MenuController;
 use Sakura\Controllers\PostController;
@@ -32,6 +33,7 @@ class ApiRouter extends WP_REST_Controller
    */
   public function register_rest_routes()
   {
+    add_action('rest_api_init', [new ConfigurationController(), 'register_routes']);
     add_action('rest_api_init', function () {
       // theme's initial states
       register_rest_route(

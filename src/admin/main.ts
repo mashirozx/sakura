@@ -5,9 +5,13 @@ import App from './App.vue'
 import { storeProviderPlugin } from '@/hooks/store'
 // import { auth, init, posts, comments } from './store'
 import { intlPlugin } from '../locales'
+import UiIcon from '@/components/icon/UiIcon.vue'
+import Image from '@/components/image/Image.vue'
 
 const app = createApp(App)
 // app.use(storeProviderPlugin, [auth, init, posts, comments])
 app.use(intlPlugin)
 app.use(VueSvgIconPlugin, { tagName: 'svg-icon' })
+app.component('UiIcon', UiIcon)
+app.component('Image', Image)
 app.mount('#app')

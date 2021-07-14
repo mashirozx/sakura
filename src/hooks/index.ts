@@ -4,10 +4,10 @@ import { useProvider, useProviders, useInjector } from './store'
 import { useIntlProvider, useIntl } from './intl'
 import useWindowResize from './useWindowResize'
 import useResizeObserver from './useResizeObserver'
-import { useMDCRipple, useMDCDialog, useMDCTextField } from './mdc'
 import useReachElementSide from './useReachElementSide'
 import { useElementRef, useElementRefs } from './useElementRef'
 import useOffsetDistance from './useOffsetDistance'
+import { useMDCRipple, useMDCDialog, useMDCTextField, useMDCTabBar } from './mdc'
 
 export {
   useState,
@@ -24,6 +24,7 @@ export {
   useMDCRipple,
   useMDCDialog,
   useMDCTextField,
+  useMDCTabBar,
   useReachElementSide,
   useElementRef,
   useElementRefs,

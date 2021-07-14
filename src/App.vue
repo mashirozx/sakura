@@ -21,6 +21,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import 'normalize.css/normalize.css';
-@import '@/styles/index.scss';
+@use '@/styles/index';
 </style>

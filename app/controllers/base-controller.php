@@ -2,7 +2,7 @@
 
 namespace  Sakura\Controllers;
 
-use Sakura\Lib\BaseClass;
+use WP_REST_Controller;
 
 /**
  * The controller abstract base
@@ -10,8 +10,11 @@ use Sakura\Lib\BaseClass;
  * @license GPLv3
  * @author mashirozx <moezhx@outlook.com>
  */
-class BaseController extends BaseClass
+class BaseController extends WP_REST_Controller
 {
+  public static $version = SAKURA_VERSION;
+  public static $text_domain = SAKURA_TEXT_DOMAIN;
+
   /**
    * The rest API request parameters
    * @since 0.0.1

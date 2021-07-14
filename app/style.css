@@ -3,6 +3,10 @@ Theme Name:  sakura-next
 Author:      Mashiro
 Author URI:  https://github.com/mashirozx
 Description: Next generation Sakura theme.
-Version:     0.0.1
+Version:     5.0.0
 Text Domain: sakura-next
 */
+
+.grecaptcha-badge {
+  opacity: 0;
+}

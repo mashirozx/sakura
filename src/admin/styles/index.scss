@@ -1,0 +1,13 @@
+@use '@material/ripple/mdc-ripple';
+@use '@material/elevation/mdc-elevation';
+@use '@material/button/mdc-button';
+@use "@material/textfield/mdc-text-field";
+@use '@material/chips/deprecated/mdc-chips';
+@use '@material/list/mdc-list';
+@use '@material/card/mdc-card';
+
+// local only
+@use "@material/tab-bar/mdc-tab-bar";
+@use "@material/tab-scroller/mdc-tab-scroller";
+@use "@material/tab-indicator/mdc-tab-indicator";
+@use "@material/tab/mdc-tab";

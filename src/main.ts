@@ -6,8 +6,8 @@ import router from './router'
 import { storeProviderPlugin } from './hooks/store'
 import { auth, init, posts, comments } from './store'
 import { intlPlugin } from './locales'
-import UiIcon from './components/icon/UiIcon.vue'
-import Image from './components/image/Image.vue'
+import UiIcon from '@/components/icon/UiIcon.vue'
+import Image from '@/components/image/Image.vue'
 
 const theWindow = window as any
 theWindow.router = router

@@ -2,6 +2,7 @@ import { ref, Ref, watch, onBeforeUnmount } from 'vue'
 import { MDCRipple } from '@material/ripple'
 import { MDCDialog } from '@material/dialog'
 import { MDCTextField } from '@material/textfield'
+import { MDCTabBar } from '@material/tab-bar'
 
 export const useMDCRipple = <El>(
   elementRef: El extends Element ? Element : Ref<Element | null>,
@@ -69,4 +70,26 @@ export const useMDCTextField = <El>(
   })
 
   return textFieldRef
+}
+
+export const useMDCTabBar = <El>(
+  elementRef: El extends Element ? Element : Ref<Element | null>
+) => {
+  const tabBarRef: Ref<MDCTabBar | null> = ref(null)
+
+  if (elementRef instanceof Element) {
+    tabBarRef.value = new MDCTabBar(elementRef)
+  } else {
+    watch(elementRef, (element) => {
+      if (element) {
+        tabBarRef.value = new MDCTabBar(element)
+      }
+    })
+  }
+
+  onBeforeUnmount(() => {
+    tabBarRef.value?.destroy()
+  })
+
+  return tabBarRef
 }
