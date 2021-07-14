@@ -5,6 +5,9 @@
 define('SAKURA_VERSION', wp_get_theme()->get('Version'));
 define('SAKURA_TEXT_DOMAIN', wp_get_theme()->get('TextDomain'));
 
+define('SAKURA_DEVEPLOMENT', false);
+define('SAKURA_DEVEPLOMENT_HOST', 'http://127.0.0.1:9000');
+
 // PHP loaders
 require_once(__DIR__ . '/loader.php');
 

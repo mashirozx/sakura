@@ -5,11 +5,8 @@ namespace Sakura\Helpers;
 use Sakura\Helpers\ViteHelper;
 use Sakura\Controllers\InitStateController;
 
-class AdminPageHelper
+class AdminPageHelper extends ViteHelper
 {
-  public static $version = SAKURA_VERSION;
-  public static $text_domain = SAKURA_TEXT_DOMAIN;
-
   public $page_title;
   public $menu_title;
   public $menu_slug;
@@ -35,16 +32,19 @@ class AdminPageHelper
   {
     if ("appearance_page_{$this->menu_slug}" === $hook) {
       $this->enqueue_common_scripts();
-      // $this->enqueue_development_scripts();
-      $this->enqueue_production_scripts();
+      if (SAKURA_DEVEPLOMENT) {
+        $this->enqueue_development_scripts();
+      } else {
+        $this->enqueue_production_scripts();
+      }
     }
   }
 
   public function enqueue_development_scripts()
   {
-    wp_enqueue_script('[type:module]vite-client', ViteHelper::$development_host . '/@vite/client', array(), null, false);
+    wp_enqueue_script('[type:module]vite-client', self::$development_host . '/@vite/client', array(), null, false);
 
-    wp_enqueue_script('[type:module]dev-main', ViteHelper::$development_host . '/src/admin/main.ts', array(), null, true);
+    wp_enqueue_script('[type:module]dev-main', self::$development_host . '/src/admin/main.ts', array(), null, true);
 
     wp_localize_script('[type:module]dev-main', 'InitState', (new InitStateController())->get_initial_state());
   }
@@ -52,8 +52,8 @@ class AdminPageHelper
   public function enqueue_production_scripts()
   {
     $entry_key = 'src/admin/main.ts';
-    $assets_base_path = get_template_directory_uri() . '/assets/dist/';
-    $manifest = ViteHelper::get_manifest_file();
+    $assets_base_path = get_template_directory_uri() . '/assets/admin/';
+    $manifest = self::get_manifest_file('admin');
 
     // <script type="module" crossorigin src="http://localhost:9000/assets/index.36b06f45.js"></script>
     wp_enqueue_script('[type:module]chunk-vendors.js', $assets_base_path . $manifest[$entry_key]['file'], array(), null, false);

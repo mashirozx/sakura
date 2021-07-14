@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import svgicon from 'vite-plugin-svgicon'
 
+const target = process.env.APP_TARGET
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: 'http://localhost:9000/',
@@ -39,14 +41,11 @@ export default defineConfig({
     target: 'modules',
     manifest: true,
     sourcemap: true,
-    outDir: 'app/assets/dist',
+    outDir: target === 'main' ? 'app/assets/main' : 'app/assets/admin',
     chunkSizeWarningLimit: 2048,
     rollupOptions: {
       // external: ['vue'],
-      input: {
-        main: path.resolve(__dirname, 'src/main.ts'),
-        admin: path.resolve(__dirname, 'src/admin/main.ts'),
-      },
+      input: [path.resolve(__dirname, target === 'main' ? 'src/main.ts' : 'src/admin/main.ts')],
       output: {
         // TODO: use ES5 bundle instead
         // globals: {

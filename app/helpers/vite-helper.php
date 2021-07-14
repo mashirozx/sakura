@@ -2,19 +2,21 @@
 
 namespace Sakura\Helpers;
 
+use Sakura\Lib\BaseClass;
 use Sakura\Controllers\InitStateController;
 
-class ViteHelper
+class ViteHelper extends BaseClass
 {
-  // TODO: use a common .env file
-  // public $development_host = 'http://192.168.28.26:9000';
-  public static $development_host = 'http://127.0.0.1:9000';
+  public static $development_host = SAKURA_DEVEPLOMENT_HOST;
 
   function __construct()
   {
     add_action('wp_enqueue_scripts', [$this, 'enqueue_common_scripts']);
-    // add_action('wp_enqueue_scripts', [$this, 'enqueue_development_scripts']);
-    add_action('wp_enqueue_scripts', [$this, 'enqueue_production_scripts']);
+    if (SAKURA_DEVEPLOMENT) {
+      add_action('wp_enqueue_scripts', [$this, 'enqueue_development_scripts']);
+    } else {
+      add_action('wp_enqueue_scripts', [$this, 'enqueue_production_scripts']);
+    }
     // add tag filters
     add_filter('script_loader_tag', [$this, 'script_tag_filter'], 10, 3);
     add_filter('style_loader_tag', [$this, 'style_tag_filter'], 10, 3);
@@ -32,8 +34,8 @@ class ViteHelper
   public function enqueue_production_scripts()
   {
     $entry_key = 'src/main.ts';
-    $assets_base_path = get_template_directory_uri() . '/assets/dist/';
-    $manifest = $this->get_manifest_file();
+    $assets_base_path = get_template_directory_uri() . '/assets/main/';
+    $manifest = $this->get_manifest_file('main');
 
     // <script type="module" crossorigin src="http://localhost:9000/assets/index.36b06f45.js"></script>
     wp_enqueue_script('[type:module]chunk-entrance.js', $assets_base_path . $manifest[$entry_key]['file'], array(), null, false);
@@ -91,9 +93,9 @@ class ViteHelper
     return $tag;
   }
 
-  public static function get_manifest_file()
+  public static function get_manifest_file(string $namespace)
   {
-    $manifest = file_get_contents(__DIR__ . '/../assets/dist/manifest.json');
+    $manifest = file_get_contents(__DIR__ . "/../assets/{$namespace}/manifest.json");
     return json_decode($manifest, true);
   }
 }

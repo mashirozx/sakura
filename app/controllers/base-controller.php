@@ -2,17 +2,16 @@
 
 namespace  Sakura\Controllers;
 
+use Sakura\Lib\BaseClass;
+
 /**
  * The controller abstract base
  * @since 1.0.0
  * @license GPLv3
  * @author mashirozx <moezhx@outlook.com>
  */
-class BaseController
+class BaseController extends BaseClass
 {
-  public static $version = SAKURA_VERSION;
-  public static $text_domain = SAKURA_TEXT_DOMAIN;
-
   /**
    * The rest API request parameters
    * @since 0.0.1

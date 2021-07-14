@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "yarn bulid:main && yarn build:admin",
+    "bulid:main": "APP_TARGET=main vite build",
+    "build:admin": "APP_TARGET=admin vite build",
     "build:strict": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "test": "jest --coverage",
