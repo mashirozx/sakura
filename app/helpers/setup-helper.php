@@ -2,6 +2,8 @@
 
 namespace Sakura\Helpers;
 
+use Sakura\Controllers\ConfigurationController;
+
 class SetupHelper
 {
   public function __construct()
@@ -19,6 +21,8 @@ class SetupHelper
     add_filter('excerpt_length', [$this, 'changes_post_excerpt_length'], 10);
     // count post views
     add_action('get_header', [$this, 'set_post_views']);
+    // Inite config options
+    add_action('after_switch_theme', [new ConfigurationController(), 'inite_theme'], 1, 2);
   }
 
   public function setup()

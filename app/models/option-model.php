@@ -11,7 +11,7 @@ class OptionModel extends BaseModel
     return self::$namespace . "_{$key}";
   }
 
-  public static function create(string $key,  $value)
+  public static function create(string $key, $value)
   {
     return add_option(self::the_key($key), $value);
   }

@@ -80,4 +80,9 @@ export default defineComponent({
 .tab-bar__container {
   width: 100%;
 }
+.mdc-tab__icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
 </style>

@@ -5,10 +5,24 @@ namespace Sakura\Controllers;
 use WP_REST_Server;
 use WP_REST_Request;
 use WP_Error;
+use Sakura\Lib\Exception;
 use Sakura\Models\OptionModel;
 
 class ConfigurationController extends BaseController
 {
+  public function public_options()
+  {
+    $keys = [
+      // key  => default value
+      'title' => 'Theme Sakura',
+    ];
+    $res = [];
+    foreach ($keys as $key => $default) {
+      $res[$key] = $this->sakura_options($key, $default);
+    }
+    return $res;
+  }
+
   /**
    * Constructor.
    *
@@ -23,7 +37,7 @@ class ConfigurationController extends BaseController
   /**
    * Registers the routes for comments.
    *
-   * @since 4.7.0
+   * @since 5.0.0
    *
    * @see register_rest_route()
    */
@@ -38,12 +52,6 @@ class ConfigurationController extends BaseController
           'callback'            => array($this, 'get_config'),
           'permission_callback' => array($this, 'get_config_permissions_check'),
           // 'args'                => $this->get_collection_params(),
-        ),
-        array(
-          'methods'             => WP_REST_Server::CREATABLE,
-          'callback'            => array($this, 'create_config'),
-          'permission_callback' => array($this, 'create_config_permissions_check'),
-          // 'args'                => $this->get_endpoint_args_for_item_schema(WP_REST_Server::CREATABLE),
         ),
         array(
           'methods'             => WP_REST_Server::EDITABLE,
@@ -75,7 +83,7 @@ class ConfigurationController extends BaseController
     return true;
   }
 
-  public function create_config(WP_REST_Request $request)
+  public function update_config(WP_REST_Request $request)
   {
     $original = (array) $this->get_config($request);
     $json = (array) self::json_validate($request->get_body());
@@ -83,8 +91,7 @@ class ConfigurationController extends BaseController
       return $original;
     }
 
-    $config = OptionModel::create($this->rest_base, $json);
-    $config = $config ? $config : OptionModel::update($this->rest_base, $json);
+    $config = OptionModel::update($this->rest_base, $json);
     if (!$config) {
       return new WP_Error(
         'save_config_failure',
@@ -96,19 +103,14 @@ class ConfigurationController extends BaseController
     }
   }
 
-  public function create_config_permissions_check(WP_REST_Request $request)
-  {
-    return true;
-  }
-
-  public function update_config(WP_REST_Request $request)
-  {
-    return $this->create_config($request);
-  }
-
   public function update_config_permissions_check(WP_REST_Request $request)
   {
     return true;
+  }
+
+  public function inite_theme()
+  {
+    $config = OptionModel::create($this->rest_base, (array)[]);
   }
 
   public static function json_validate(string $string)
@@ -116,5 +118,36 @@ class ConfigurationController extends BaseController
     $json = json_decode($string);
 
     return $json;
+  }
+
+  public function set_key_value(string $key, $value)
+  {
+    $json = (array) OptionModel::get($this->rest_base);
+    if (!$json) {
+      return new WP_Error(
+        'no_such_option',
+        __('Maybe you should save the configuration bufore using it.', self::$text_domain),
+        array('status' => 500)
+      );
+    }
+    $json[$key] = $value;
+    $config = OptionModel::update($this->rest_base, $json);
+    $config = $config ? $config : OptionModel::create($this->rest_base, $json);
+    return $config;
+  }
+
+  public function sakura_options(string $namespace, $default)
+  {
+    $config = (array) OptionModel::get($this->rest_base);
+    if (array_key_exists($namespace, $config)) {
+      return $config[$namespace];
+    } else {
+      $this->set_key_value($namespace, $default);
+      return $default;
+    }
+    // translators: %s: $namespace */
+    // throw new Exception(
+    //   sprintf(__("No existing database saving value or default value for option '%s'.", self::$text_domain), $namespace)
+    // );
   }
 }

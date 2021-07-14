@@ -1,23 +1,27 @@
 <template>
   <div class="app__wrapper">
-    <Layout></Layout>
+    <Core></Core>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Layout from './Layout.vue'
+import Core from './Core.vue'
 
 export default defineComponent({
-  components: { Layout },
+  components: { Core },
 })
 </script>
 
 <style lang="scss">
-@use './styles/index';
+@use './index';
 .sakura-options-page__app {
   width: calc(100% - 20px);
   padding: 20px 20px 20px 0;
+  @media screen and (max-width: 782px) {
+    width: calc(100% - 10px);
+    padding: 10px 10px 10px 0;
+  }
   > .app__wrapper {
     width: 100%;
   }
