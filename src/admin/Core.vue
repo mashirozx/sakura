@@ -16,32 +16,49 @@
         v-for="(tabKey, tabKeyIndex) in tabKeys"
         :key="tabKeyIndex"
       >
-        <div class="tab-page__content mdc-typography">
-          <h1 class="mdc-typography--headline5">{{ options[tabKey].title }}</h1>
+        <div class="tab-page__content">
+          <h1 class="row__wrapper--title">{{ options[tabKey].title }}</h1>
+          <p class="row__wrapper--desc" v-if="options[tabKey].desc"> {{ options[tabKey].desc }} </p>
           <div
             class="row__wrapper--options"
             v-for="(option, optionIndex) in options[tabKey].options"
             :key="optionIndex"
           >
-            {{ option.namespace }}
+            <OptionItem :option="option"></OptionItem>
           </div>
         </div>
       </SwiperSlide>
     </Swiper>
+    <div class="buttons__wrapper">
+      <NormalButton icon="fas fa-save" context="Save" :contained="true"></NormalButton>
+      <NormalButton icon="fas fa-upload" context="Import" :contained="true"></NormalButton>
+      <NormalButton icon="fas fa-download" context="Export" :contained="true"></NormalButton>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, watch, nextTick } from 'vue'
+import {
+  defineComponent,
+  ref,
+  Ref,
+  watch,
+  nextTick,
+  watchEffect,
+  onMounted,
+  onBeforeUnmount,
+} from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Swiper as SwiperInterface } from 'swiper'
 import { useInjector } from '@/hooks'
 import store from './store'
 import options from '@/admin/options'
 import TabBar from '@/components/tabBar/TabBar.vue'
+import OptionItem from './OptionItem.vue'
+import NormalButton from '@/components/buttons/NormalButton.vue'
 
 export default defineComponent({
-  components: { TabBar, Swiper, SwiperSlide },
+  components: { TabBar, Swiper, SwiperSlide, OptionItem, NormalButton },
   setup() {
     // UI controllers
     const currentTabIndex: Ref<number> = ref(0)
@@ -55,7 +72,16 @@ export default defineComponent({
     }
 
     watch(currentTabIndex, (current) => swiperRef.value?.slideTo(current))
-    nextTick(() => swiperRef.value?.updateAutoHeight(100))
+
+    const updateAutoHeight = () => swiperRef.value?.updateAutoHeight(0)
+
+    // nextTick(() => updateAutoHeight())
+    // watchEffect(() => updateAutoHeight())
+
+    onMounted(() => {
+      const timer = setInterval(() => updateAutoHeight(), 100)
+      onBeforeUnmount(() => clearInterval(timer))
+    })
 
     // data controllers
     const { config, setConfig } = useInjector(store)
@@ -86,6 +112,15 @@ export default defineComponent({
         padding: 12px;
       }
     }
+  }
+  > .buttons__wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    width: calc(100% - 24px);
   }
 }
 </style>

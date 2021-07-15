@@ -79,6 +79,8 @@ class AdminPageHelper extends ViteHelper
 
   public function enqueue_common_scripts()
   {
+    wp_enqueue_media();
+
     wp_enqueue_style('style.css', get_template_directory_uri() . '/style.css');
 
     wp_enqueue_style('fontawesome-free', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css');

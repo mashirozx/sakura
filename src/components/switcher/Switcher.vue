@@ -1,0 +1,106 @@
+<template>
+  <div class="switcher__container">
+    <button
+      :id="`switch-${id}`"
+      class="mdc-switch mdc-switch--unselected"
+      role="switch"
+      :aria-checked="checked"
+      :ref="setElRef"
+      @click="handleChange"
+    >
+      <div class="mdc-switch__track"></div>
+      <div class="mdc-switch__handle-track">
+        <div class="mdc-switch__handle">
+          <div class="mdc-switch__shadow">
+            <div class="mdc-elevation-overlay"></div>
+          </div>
+          <div class="mdc-switch__ripple"></div>
+          <div class="mdc-switch__icons">
+            <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+              <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+            </svg>
+            <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+              <path d="M20 13H4v-2h16v2z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </button>
+    <label class="label" :for="`switch-${id}`">
+      {{ checked ? $props.positiveLabel : $props.negativeLabel }}
+    </label>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, watch } from 'vue'
+import uniqueHash from '@/utils/uniqueHash'
+import { useElementRef } from '@/hooks'
+import useMDCSwitch from '@/hooks/mdc/useMDCSwitch'
+
+export default defineComponent({
+  props: {
+    positiveLabel: { type: String, default: 'current on' },
+    negativeLabel: { type: String, default: 'current off' },
+    checked: { type: Boolean, default: true },
+    disabled: { type: Boolean, default: false },
+  },
+  emits: ['update:checked'],
+  setup(props, { emit }) {
+    const id = uniqueHash()
+
+    const [elRef, setElRef] = useElementRef()
+    const MDCSwitchRef = useMDCSwitch(elRef)
+
+    const checked = ref(props.checked)
+
+    const handleChange = () => {
+      if (MDCSwitchRef.value) {
+        checked.value = !MDCSwitchRef.value.selected
+      }
+    }
+
+    watch(
+      () => props.checked,
+      (value) => {
+        checked.value = value
+        if (MDCSwitchRef.value) MDCSwitchRef.value.selected = !value
+      },
+      { immediate: true }
+    )
+
+    watch(
+      () => props.disabled,
+      (value) => {
+        if (MDCSwitchRef.value) {
+          MDCSwitchRef.value.disabled = value
+        }
+      }
+    )
+
+    watch(MDCSwitchRef, (MDCCheckbox) => {
+      if (MDCCheckbox) {
+        MDCCheckbox.selected = checked.value
+        MDCCheckbox.disabled = props.disabled
+      }
+    })
+
+    watch(checked, (value) => emit('update:checked', value))
+
+    return { id, setElRef, handleChange, checked }
+  },
+})
+</script>
+
+<style lang="scss" scoped>
+.switcher__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  .label {
+    user-select: none;
+    padding-left: 10px;
+  }
+}
+</style>

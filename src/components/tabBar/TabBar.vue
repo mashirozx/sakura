@@ -33,7 +33,8 @@
 import { defineComponent, onMounted, watch } from 'vue'
 import { useState } from '@/hooks'
 import { MD5 } from 'crypto-js'
-import { useElementRef, useMDCTabBar } from '@/hooks'
+import { useElementRef } from '@/hooks'
+import useMDCTabBar from '@/hooks/mdc/useMDCTabBar'
 
 export default defineComponent({
   props: {

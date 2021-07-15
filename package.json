@@ -30,12 +30,16 @@
     "@formatjs/intl": "^1.13.2",
     "@material/button": "^12.0.0-canary.068fd5028.0",
     "@material/card": "^12.0.0-canary.068fd5028.0",
+    "@material/checkbox": "^12.0.0-canary.e1703bed9.0",
     "@material/chips": "^12.0.0-canary.068fd5028.0",
     "@material/dialog": "^12.0.0-canary.068fd5028.0",
     "@material/elevation": "^12.0.0-canary.068fd5028.0",
+    "@material/form-field": "^12.0.0-canary.e1703bed9.0",
     "@material/list": "^12.0.0-canary.068fd5028.0",
     "@material/menu": "^12.0.0-canary.068fd5028.0",
+    "@material/radio": "^12.0.0-canary.9f68a932e.0",
     "@material/ripple": "^12.0.0-canary.068fd5028.0",
+    "@material/switch": "^12.0.0-canary.9f68a932e.0",
     "@material/tab-bar": "^12.0.0-canary.22d29cbb4.0",
     "@material/textfield": "^12.0.0-canary.068fd5028.0",
     "@material/theme": "^12.0.0-canary.068fd5028.0",
@@ -95,7 +99,8 @@
     "vite": "^2.4.2",
     "vite-plugin-svgicon": "^1.0.0-alpha.0",
     "vue-jest": "^5.0.0-alpha.10",
-    "vue-tsc": "^0.2.0"
+    "vue-tsc": "^0.2.0",
+    "wp-types": "^2.10.0"
   },
   "engines": {
     "npm": "please-use-yarn",

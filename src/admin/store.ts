@@ -35,5 +35,5 @@ export default function auth(): object {
   //   return data
   // }
 
-  return { config, setConfig }
+  return { config, updateOption }
 }

@@ -7,7 +7,7 @@ import useResizeObserver from './useResizeObserver'
 import useReachElementSide from './useReachElementSide'
 import { useElementRef, useElementRefs } from './useElementRef'
 import useOffsetDistance from './useOffsetDistance'
-import { useMDCRipple, useMDCDialog, useMDCTextField, useMDCTabBar } from './mdc'
+import useMDCRipple from './mdc/useMDCRipple'
 
 export {
   useState,
@@ -22,9 +22,6 @@ export {
   useWindowResize,
   useResizeObserver,
   useMDCRipple,
-  useMDCDialog,
-  useMDCTextField,
-  useMDCTabBar,
   useReachElementSide,
   useElementRef,
   useElementRefs,

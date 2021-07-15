@@ -4,13 +4,14 @@
       'mdc-text-field',
       'mdc-text-field--outlined',
       'mdc-text-field--textarea',
+      { 'mdc-text-field--no-label': !$props.label },
       { 'mdc-text-field--with-internal-counter': showCounter },
     ]"
     :ref="setTextareaRef"
   >
     <span class="mdc-notched-outline">
       <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__notch">
+      <span class="mdc-notched-outline__notch" v-if="$props.label">
         <span class="mdc-floating-label" :id="id">{{ label }}</span>
       </span>
       <span class="mdc-notched-outline__trailing"></span>
@@ -31,8 +32,9 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from 'vue'
-import { MD5 } from 'crypto-js'
-import { useElementRef, useMDCTextField } from '@/hooks'
+import uniqueHash from '@/utils/uniqueHash'
+import { useElementRef } from '@/hooks'
+import useMDCTextField from '@/hooks/mdc/useMDCTextField'
 
 export default defineComponent({
   props: {
@@ -47,7 +49,7 @@ export default defineComponent({
   },
   emits: ['update:content'],
   setup(props, { emit }) {
-    const id = MD5(Math.random().toString()).toString().slice(0, 8)
+    const id = uniqueHash()
 
     const [textareaRef, setTextareaRef] = useElementRef()
     useMDCTextField(textareaRef)
