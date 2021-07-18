@@ -86,7 +86,8 @@ export default defineComponent({
   components: { NavItem },
   setup() {
     const avatar = 'https://view.moezx.cc/images/2021/06/13/d6b010a378d392d4633008b915f98ab1.md.png'
-    const logo = 'https://v3.vuejs.org/logo.png'
+    const logo =
+      window.InitState.config['basic.site.logo'][0]?.url || 'https://v3.vuejs.org/logo.png'
 
     const [navBarItemRefs, setNavBarItemRefs] = useElementRefs()
     const [navBarWrapperRef, setNavBarWrapperRef] = useElementRef()

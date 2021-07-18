@@ -50,4 +50,4 @@ readdirSync(iconDir).forEach((file) => {
 
 const vueContent = template(importContent, dataContent)
 
-writeFileSync(targetDir, vueContent)
+writeFileSync(targetDir, vueContent, { flag: 'w+' })

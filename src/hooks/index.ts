@@ -8,6 +8,7 @@ import useReachElementSide from './useReachElementSide'
 import { useElementRef, useElementRefs } from './useElementRef'
 import useOffsetDistance from './useOffsetDistance'
 import useMDCRipple from './mdc/useMDCRipple'
+import useMessage from './useMessage'
 
 export {
   useState,
@@ -26,4 +27,5 @@ export {
   useElementRef,
   useElementRefs,
   useOffsetDistance,
+  useMessage,
 }

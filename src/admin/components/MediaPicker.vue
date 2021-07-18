@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch, Ref } from 'vue'
 import { cloneDeep, remove } from 'lodash'
+import { useMessage, useIntl } from '@/hooks'
 import uniqueHash from '@/utils/uniqueHash'
 import { isUrl } from '@/utils/urlHelper'
 import NormalButton from '@/components/buttons/NormalButton.vue'
@@ -43,6 +44,9 @@ export default defineComponent({
   },
   emits: ['update:selection'],
   setup(props, { emit }) {
+    const addMessage = useMessage()
+    const intl = useIntl()
+
     const selection: Ref<{ id: number; url: string }[]> = ref(
       props.selection as { id: number; url: string }[]
     )
@@ -103,12 +107,22 @@ export default defineComponent({
           selection.value.push({ id: 0, url })
           userInput.value = ''
         } else {
-          // TODO
-          console.warn('Duplicate URLs')
+          addMessage({
+            title: intl.formatMessage({
+              id: 'messages.admin.uplicateUrls',
+              defaultMessage: 'Duplicate URLs',
+            }),
+            type: 'warning',
+          })
         }
       } else {
-        // TODO
-        console.warn('Invalid URL')
+        addMessage({
+          title: intl.formatMessage({
+            id: 'messages.admin.invalidUrl',
+            defaultMessage: 'Invalid URL',
+          }),
+          type: 'error',
+        })
       }
     }
 
@@ -116,7 +130,18 @@ export default defineComponent({
       remove(selection.value, (item, itemIndex) => index === itemIndex)
     }
 
-    watch(selection, (value) => emit('update:selection', value), { deep: true })
+    watch(
+      selection,
+      (value) => {
+        if (!props.multiple && value.length > 1) {
+          selection.value = selection.value.slice(-1)
+          console.log(selection.value.length)
+        }
+        console.log(selection.value)
+        emit('update:selection', selection.value)
+      },
+      { deep: true }
+    )
 
     return { open, add, del, userInput, selection }
   },
@@ -124,6 +149,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '../variables';
 .picker__container {
   width: 100%;
   display: flex;
@@ -147,6 +173,13 @@ export default defineComponent({
       }
       > .button__wrapper {
         flex: 0 0 auto;
+      }
+      @media screen and (max-width: variables.$small-mobile-max-width) {
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        > .input__wrapper {
+          flex: 0 0 auto;
+        }
       }
     }
     &--preview {
@@ -179,7 +212,7 @@ export default defineComponent({
           justify-content: center;
           align-items: center;
           cursor: pointer;
-          opacity: 0;
+          opacity: 1;
           transition: all 0.3s ease-in-out;
         }
         &:hover {

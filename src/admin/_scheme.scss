@@ -1,0 +1,22 @@
+/**
+ * @deprecated
+ */
+@mixin global-variables {
+  // Default
+  --dark-primary: #1d2327;
+  --dark-secondary: #2c3338;
+  --light-primary: #2271b1;
+  --light-secondary: #72aee6;
+  --icon-base: #a7aaad;
+  --icon-focus: #72aee6;
+  --icon-current: #fff;
+
+  // Light
+  --dark-primary: #e5e5e5; // menu background color
+  --dark-secondary: #999; // menu focus background color
+  --light-primary: #d64e07; // hot dot
+  --light-secondary: #04a4cc; // button, link
+  --icon-base: #999;
+  --icon-focus: #ccc;
+  --icon-current: #ccc;
+}

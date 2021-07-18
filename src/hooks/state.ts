@@ -2,16 +2,24 @@ import { ref, readonly, UnwrapRef, DeepReadonly, Ref } from 'vue'
 import storage from '@/utils/storage'
 
 // TODO: correct return type??
-export const useState = <T>(defaultValue: T): any => {
+export const useState = <T>(
+  defaultValue: T,
+  shouldReadonly = true
+): [Ref<UnwrapRef<T>>, (arg: T) => void] => {
   const state = ref(defaultValue)
   const set = (value: T): void => {
     state.value = value as UnwrapRef<T>
   }
-  const get = readonly(state)
+  const get = (shouldReadonly ? readonly(state) : state) as Ref<UnwrapRef<T>>
   return [get, set]
 }
 
-export const usePersistedState = <K, T>(key: K, defaultValue: T, cachePeriod?: number): any => {
+export const usePersistedState = <K, T>(
+  key: K,
+  defaultValue: T,
+  shouldReadonly = true,
+  cachePeriod?: number
+): [Ref<UnwrapRef<T>>, (arg: T) => void] => {
   cachePeriod = cachePeriod ?? 24 * 60 * 60
   let state = ref(defaultValue)
 
@@ -42,5 +50,7 @@ export const usePersistedState = <K, T>(key: K, defaultValue: T, cachePeriod?: n
       if (pendingSet) set(pendingSet)
     })
 
-  return [readonly(state), set]
+  const get = (shouldReadonly ? readonly(state) : state) as Ref<UnwrapRef<T>>
+
+  return [get, set]
 }

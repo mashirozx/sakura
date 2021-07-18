@@ -1,7 +1,7 @@
 import request from '@/utils/http'
 
 export default {
-  postConfigJson(data: any): Promise<any> {
+  postConfigJson(data: { [key: string]: any }): Promise<any> {
     return request({
       url: '/sakura/v1/config',
       method: 'POST',

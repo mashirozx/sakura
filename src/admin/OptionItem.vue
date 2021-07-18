@@ -80,11 +80,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use './variables';
 .option__container {
   display: flex;
   flex-flow: row nowrap;
   align-items: space-between;
   justify-content: flex-start;
+  @media screen and (max-width: variables.$mobile-max-width) {
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   > .column__wrapper {
     &--label {
       flex: 0 0 auto;
@@ -96,7 +102,7 @@ export default defineComponent({
       flex: 1 1 auto;
       display: flex;
       flex-flow: column nowrap;
-      align-items: space-between;
+      align-items: flex-start;
       justify-content: flex-start;
       padding-top: 12px;
       > .row__wrapper {

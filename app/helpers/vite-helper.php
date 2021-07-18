@@ -67,12 +67,7 @@ class ViteHelper extends BaseClass
 
     wp_enqueue_style('normalize.css', 'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css');
 
-    // TODO: don't use vue.js as handler
-    // wp_enqueue_script('vue.js', 'https://unpkg.com/vue@next', array(), false, false);
-
-    // wp_localize_script('vue.js', 'InitState', (new InitStateController())->get_initial_state());
-
-    wp_enqueue_script('recaptcha', 'https://www.recaptcha.net/recaptcha/api.js?render=6LdKhX8bAAAAAF5HJprXtKvg3nfBJMfgd2o007PN', array(), false, true);
+    wp_enqueue_script('recaptcha', 'https://www.recaptcha.net/recaptcha/api.js', array(), false, true);
   }
 
   public static function script_tag_filter($tag, $handle, $src)

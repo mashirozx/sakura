@@ -1,0 +1,56 @@
+/**
+ * last modify: "@material/switch": "^12.0.0-canary.9f68a932e.0"
+ */
+@use 'sass:color';
+@use '@material/theme/color-palette';
+@use '@material/theme/theme-color';
+@use '@material/theme/theme';
+@use '@material/elevation/elevation-theme';
+
+@mixin variables {
+  $_hairline: color-palette.$grey-300;
+  $_inverse-primary: var(--mdc-theme-primary-lighter-25);
+  // color.scale(theme-color.prop-value(primary), $lightness: 75%);
+
+  $_on-surface: color-palette.$grey-800;
+  $_on-surface-variant: color-palette.$grey-700;
+  $_on-surface-state-content: color-palette.$grey-900;
+  $_primary-state-content: var(--mdc-theme-primary-darker-10);
+  // color.scale(theme-color.prop-value(primary), $blackness: 50%);
+
+  --mdc-switch-disabled-selected-handle-color: #{$_on-surface};
+  --mdc-switch-disabled-selected-icon-color: var(--mdc-theme-on-primary);
+  --mdc-switch-disabled-selected-track-color: #{$_on-surface};
+  --mdc-switch-disabled-unselected-handle-color: #{$_on-surface};
+  --mdc-switch-disabled-unselected-icon-color: var(--mdc-theme-on-primary);
+  --mdc-switch-disabled-unselected-track-color: #{$_on-surface};
+  --mdc-switch-handle-shadow-color: #{elevation-theme.$baseline-color};
+  --mdc-switch-handle-surface-color: var(--mdc-theme-surface);
+  --mdc-switch-selected-focus-handle-color: #{$_primary-state-content};
+  --mdc-switch-selected-focus-state-layer-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-focus-track-color: #{$_inverse-primary};
+  --mdc-switch-selected-handle-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-hover-handle-color: #{$_primary-state-content};
+  --mdc-switch-selected-hover-state-layer-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-hover-track-color: #{$_inverse-primary};
+  --mdc-switch-selected-icon-color: var(--mdc-theme-on-primary);
+  --mdc-switch-selected-pressed-handle-color: #{$_primary-state-content};
+  --mdc-switch-selected-pressed-state-layer-color: var(--mdc-theme-primary);
+  --mdc-switch-selected-pressed-track-color: #{$_inverse-primary};
+  --mdc-switch-selected-track-color: #{$_inverse-primary};
+  --mdc-switch-unselected-focus-handle-color: #{$_on-surface-state-content};
+  --mdc-switch-unselected-focus-state-layer-color: #{$_on-surface};
+  --mdc-switch-unselected-focus-track-color: #{$_hairline};
+  --mdc-switch-unselected-handle-color: #{$_on-surface-variant};
+  --mdc-switch-unselected-hover-handle-color: #{$_on-surface-state-content};
+  --mdc-switch-unselected-hover-state-layer-color: #{$_on-surface};
+  --mdc-switch-unselected-hover-track-color: #{$_hairline};
+  --mdc-switch-unselected-icon-color: var(--mdc-theme-on-primary);
+  --mdc-switch-unselected-pressed-handle-color: #{$_on-surface-state-content};
+  --mdc-switch-unselected-pressed-state-layer-color: #{$_on-surface};
+  --mdc-switch-unselected-pressed-track-color: #{$_hairline};
+  --mdc-switch-unselected-track-color: #{$_hairline};
+
+  // --mdc-switch-disabled-selected-icon-color: GrayText;
+  // --mdc-switch-disabled-unselected-icon-color: GrayText;
+}

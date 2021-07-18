@@ -2,7 +2,7 @@
 
 namespace Sakura\Helpers;
 
-use Sakura\Controllers\ConfigurationController;
+use Sakura\Controllers\OptionController;
 
 class SetupHelper
 {
@@ -22,7 +22,7 @@ class SetupHelper
     // count post views
     add_action('get_header', [$this, 'set_post_views']);
     // Inite config options
-    add_action('after_switch_theme', [new ConfigurationController(), 'inite_theme'], 1, 2);
+    add_action('after_switch_theme', [new OptionController(), 'inite_theme'], 1, 2);
   }
 
   public function setup()

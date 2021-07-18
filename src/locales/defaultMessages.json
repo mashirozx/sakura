@@ -1,4 +1,19 @@
 {
+  "messages.admin.invalidUrl": {
+    "defaultMessage": "Invalid URL"
+  },
+  "messages.admin.uplicateUrls": {
+    "defaultMessage": "Duplicate URLs"
+  },
+  "messages.popup.close": {
+    "defaultMessage": "Close"
+  },
+  "messages.popup.dismiss": {
+    "defaultMessage": "Dismiss"
+  },
+  "messages.popup.showDetails": {
+    "defaultMessage": "Show details"
+  },
   "messages.wordpress.applicationPasswordsEndpointNotAvailable": {
     "defaultMessage": "ApplicationPasswords is not avaliabe in your WordPress installation, please upgrade WordPress to v5.6.0 above, or enable the ApplicationPasswords feature in v5.6.0 above installation."
   },
@@ -7,6 +22,54 @@
   },
   "messages.wordpress.permalink.shouldIncludeFieldsInSingle": {
     "defaultMessage": "WordPress permalink should include at least one of %post_id%, %postname%. You may set them here: {baseUrl}/wp-admin/options-permalink.php"
+  },
+  "options.basic.site.logo.binds.button": {
+    "defaultMessage": "Use this image"
+  },
+  "options.basic.site.logo.binds.title": {
+    "defaultMessage": "Select image for site logo."
+  },
+  "options.basic.site.logo.desc": {
+    "defaultMessage": "The site's Logo image, will display on navigation bar."
+  },
+  "options.basic.site.logo.title": {
+    "defaultMessage": "Site logo"
+  },
+  "options.basic.site.title.desc": {
+    "defaultMessage": "The site title"
+  },
+  "options.basic.site.title.title": {
+    "defaultMessage": "Site title"
+  },
+  "options.thirdParty.reCaptcha.enable.desc": {
+    "defaultMessage": "Use reCAPTCHA for anti-spam check."
+  },
+  "options.thirdParty.reCaptcha.enable.negativeLabel": {
+    "defaultMessage": "Disabled"
+  },
+  "options.thirdParty.reCaptcha.enable.positiveLabel": {
+    "defaultMessage": "Enabled"
+  },
+  "options.thirdParty.reCaptcha.enable.title": {
+    "defaultMessage": "Enable reCAPTCHA"
+  },
+  "options.thirdParty.reCaptcha.secretKey.title": {
+    "defaultMessage": "reCAPTCHA secret key"
+  },
+  "options.thirdParty.reCaptcha.siteKey.title": {
+    "defaultMessage": "reCAPTCHA site key"
+  },
+  "options.thirdParty.reCaptcha.version.desc": {
+    "defaultMessage": "Register your reCAPTCHA app '<a href=\"https://www.google.com/recaptcha/about/\" target=\"_blank\">here</a>', and choose a version."
+  },
+  "options.thirdParty.reCaptcha.version.label.v2": {
+    "defaultMessage": "reCAPTCHA version 2"
+  },
+  "options.thirdParty.reCaptcha.version.label.v3": {
+    "defaultMessage": "reCAPTCHA version 3"
+  },
+  "options.thirdParty.reCaptcha.version.title": {
+    "defaultMessage": "reCAPTCHA version"
   },
   "posts.comment.composer.authorEmail.label": {
     "defaultMessage": "Email *"

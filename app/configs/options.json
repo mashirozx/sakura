@@ -1,0 +1,204 @@
+{
+  "basic.site.title": {
+    "namespace": "basic.site.title",
+    "public": true,
+    "title": "Site title",
+    "desc": "The site title",
+    "type": "string",
+    "default": "Theme Sakura"
+  },
+  "basic.site.logo": {
+    "namespace": "basic.site.logo",
+    "public": true,
+    "title": "Site logo",
+    "desc": "The site's Logo image, will display on navigation bar.",
+    "type": "mediaPicker",
+    "default": [
+      {
+        "id": 0,
+        "url": "https://v3.vuejs.org/logo.png"
+      }
+    ],
+    "binds": {
+      "title": "Select image for site logo.",
+      "button": "Use this image",
+      "type": "image",
+      "multiple": false
+    }
+  },
+  "social.github": {
+    "namespace": "social.github",
+    "public": true,
+    "title": "Github username",
+    "desc": "Your <a href=\"https://github.com\" target=\"_blank\">Github</a> username",
+    "type": "string",
+    "default": ""
+  },
+  "thirdParty.reCaptcha.enable": {
+    "namespace": "thirdParty.reCaptcha.enable",
+    "public": true,
+    "title": "Enable reCAPTCHA",
+    "desc": "Use reCAPTCHA for anti-spam check.",
+    "type": "switcher",
+    "default": false,
+    "binds": {
+      "positiveLabel": "Enabled",
+      "negativeLabel": "Disabled",
+      "disabled": false
+    }
+  },
+  "thirdParty.reCaptcha.version": {
+    "namespace": "thirdParty.reCaptcha.version",
+    "public": true,
+    "title": "reCAPTCHA version",
+    "desc": "Register your reCAPTCHA app '<a href=\"https://www.google.com/recaptcha/about/\" target=\"_blank\">here</a>', and choose a version.",
+    "type": "choose",
+    "default": null,
+    "binds": {
+      "options": [
+        {
+          "label": "reCAPTCHA version 3",
+          "disabled": false
+        },
+        {
+          "label": "reCAPTCHA version 2",
+          "disabled": false
+        }
+      ]
+    }
+  },
+  "thirdParty.reCaptcha.siteKey": {
+    "namespace": "thirdParty.reCaptcha.siteKey",
+    "public": true,
+    "title": "reCAPTCHA site key",
+    "type": "string",
+    "default": ""
+  },
+  "thirdParty.reCaptcha.secretKey": {
+    "namespace": "thirdParty.reCaptcha.secretKey",
+    "public": false,
+    "title": "reCAPTCHA secret key",
+    "type": "string",
+    "default": ""
+  },
+  "other.hello": {
+    "namespace": "other.hello",
+    "public": true,
+    "title": "Hello world",
+    "type": "string",
+    "default": "world"
+  },
+  "demo.string": {
+    "namespace": "demo.string",
+    "public": true,
+    "title": "String",
+    "desc": "One line string input.",
+    "type": "string",
+    "default": "Hello world!"
+  },
+  "demo.longString": {
+    "namespace": "demo.longString",
+    "public": true,
+    "title": "Long string",
+    "desc": "Textarea for long string input.",
+    "type": "longString",
+    "default": "\"It is the unknown we fear when we look upon death and darkness, nothing more.\"\n-- Albus Dumbledore"
+  },
+  "demo.switcher": {
+    "namespace": "demo.switcher",
+    "public": true,
+    "title": "Switcher",
+    "type": "switcher",
+    "desc": "True/False switcher.",
+    "default": true,
+    "binds": {
+      "positiveLabel": "current on",
+      "negativeLabel": "current off",
+      "disabled": false
+    }
+  },
+  "demo.choose": {
+    "namespace": "demo.choose",
+    "public": true,
+    "title": "Choose",
+    "desc": "Choose one from options.",
+    "type": "choose",
+    "default": null,
+    "binds": {
+      "options": [
+        {
+          "label": "op 1",
+          "disabled": false
+        },
+        {
+          "label": "op 2",
+          "disabled": false
+        },
+        {
+          "label": "op 3",
+          "disabled": false
+        },
+        {
+          "label": "op 4",
+          "disabled": true
+        }
+      ]
+    }
+  },
+  "demo.selection": {
+    "namespace": "demo.selection",
+    "public": true,
+    "title": "Selection",
+    "desc": "Selection multiple items from options. max: {0: no limit, >0: limit}",
+    "type": "selection",
+    "default": [
+      true,
+      false,
+      true
+    ],
+    "binds": {
+      "options": [
+        {
+          "label": "op 1",
+          "disabled": false
+        },
+        {
+          "label": "op 2",
+          "disabled": false
+        },
+        {
+          "label": "op 3",
+          "disabled": false
+        },
+        {
+          "label": "op 4",
+          "disabled": true
+        }
+      ],
+      "max": 2
+    }
+  },
+  "demo.mediaPicker": {
+    "namespace": "demo.mediaPicker",
+    "public": true,
+    "title": "Media picker",
+    "desc": "<code>type=\"image\"|\"video\"|\"audio?\"</code>, the object must include id, id=0 for remote media.",
+    "type": "mediaPicker",
+    "default": [
+      {
+        "id": 0,
+        "url": "https://view.moezx.cc/images/2021/07/02/d5ab73174d18652d890e2f4d1b9bef8f.gif"
+      },
+      {
+        "id": 0,
+        "url": "https://view.moezx.cc/images/2021/07/02/a90553bf5b67770e87a89b2ce204eaa7.gif"
+      }
+    ],
+    "binds": {
+      "title": "Select Media",
+      "button": "Use this media",
+      "type": "image",
+      "multiple": true
+    }
+  }
+}

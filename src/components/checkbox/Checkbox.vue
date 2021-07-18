@@ -1,5 +1,5 @@
 <template>
-  <div class="checkbox__container">
+  <div :class="['checkbox__container', { disabled: $props.disabled }]">
     <div class="mdc-checkbox mdc-checkbox--touch" :ref="setElRef" @change="handleChange">
       <input type="checkbox" class="mdc-checkbox__native-control" :id="`checkbox-${id}`" />
       <div class="mdc-checkbox__background">
@@ -86,6 +86,12 @@ export default defineComponent({
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  &.disabled {
+    cursor: not-allowed;
+    .label {
+      cursor: not-allowed;
+    }
+  }
   .label {
     user-select: none;
   }

@@ -24,6 +24,6 @@ new Sakura\Routers\PagesRouter();
 
 function sakura_options(string $namespace, $default)
 {
-  $CF = new Sakura\Controllers\ConfigurationController();
+  $CF = new Sakura\Controllers\OptionController();
   return $CF->sakura_options($namespace, $default);
 }

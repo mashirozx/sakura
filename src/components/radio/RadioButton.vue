@@ -1,11 +1,11 @@
 <template>
-  <div class="radio__container">
+  <div :class="['radio__container', { disabled: $props.disabled }]">
     <div class="mdc-radio" :ref="setElRef">
       <input
         class="mdc-radio__native-control"
         type="checkbox"
-        :id="`radio-${id}`"
-        :name="`radio-${id}`"
+        :id="id"
+        :name="id"
         @change="handleChange"
       />
       <div class="mdc-radio__background">
@@ -14,7 +14,7 @@
       </div>
       <div class="mdc-radio__ripple"></div>
     </div>
-    <label class="label" :for="`radio-${id}`">{{ $props.label }}</label>
+    <label class="label" :for="id">{{ $props.label }}</label>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default defineComponent({
   },
   emits: ['update:checked'],
   setup(props, { emit }) {
-    const id = uniqueHash()
+    const id = `radio-${uniqueHash()}`
 
     const [elRef, setElRef] = useElementRef()
 
@@ -84,6 +84,12 @@ export default defineComponent({
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  &.disabled {
+    cursor: not-allowed;
+    .label {
+      cursor: not-allowed;
+    }
+  }
   .label {
     user-select: none;
   }

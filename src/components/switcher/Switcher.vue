@@ -1,5 +1,5 @@
 <template>
-  <div class="switcher__container">
+  <div :class="['switcher__container', { disabled: $props.disabled }]">
     <button
       :id="`switch-${id}`"
       class="mdc-switch mdc-switch--unselected"
@@ -93,11 +93,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use './theme';
 .switcher__container {
+  @include theme.variables;
+  height: 56px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  &.disabled {
+    cursor: not-allowed;
+    .label {
+      cursor: not-allowed;
+    }
+  }
   .label {
     user-select: none;
     padding-left: 10px;

@@ -31,9 +31,8 @@ class InitStateController extends BaseController
       'menus' => (new MenuController)->get_menus(),
       // 'rewrite_rules' => (new \WP_Rewrite())->rewrite_rules(),
       'index' => (new WP_Rewrite())->index,
-      'config' => (new ConfigurationController)->public_options(),
-      'recaptcha_site_key' => '6LfHEoEbAAAAAI5p_XBlr1WxEvrsOSNQFCQNcT79', // v2 secret key: 6LfHEoEbAAAAAIh0w2I9PCcVoa0j71mO6t7fipsj
-      // 'recaptcha_site_key' => '6LdKhX8bAAAAAF5HJprXtKvg3nfBJMfgd2o007PN' // v3 secret key: 6LdKhX8bAAAAAA010EXlQ32FWoYD1J2sLb8SaYLR
+      'config' => (new OptionController)->get_public_display_options(),
+      // 'recaptcha_site_key' => sakura_options('thirdParty.reCaptcha.siteKey', ''), // use thirdParty.reCaptcha.siteKey
     );
   }
 
