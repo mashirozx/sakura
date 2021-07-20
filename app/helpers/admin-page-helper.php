@@ -97,23 +97,8 @@ class AdminPageHelper extends ViteHelper
 
   public  function get_admin_color_css()
   {
-    // {"name":"Default","url":false,"colors":["#1d2327","#2c3338","#2271b1","#72aee6"],"icon_colors":{"base":"#a7aaad","focus":"#72aee6","current":"#fff"}}
     global $_wp_admin_css_colors;
     $theme = (array) $_wp_admin_css_colors[get_user_option('admin_color')];
-    // $scheme = [
-    //   'dark-primary' => $theme['colors'][0],
-    //   'dark-secondary' => $theme['colors'][1],
-    //   'light-primary' => $theme['colors'][2],
-    //   'light-secondary' => $theme['colors'][3],
-    //   'icon-base' => $theme['icon_colors']['base'],
-    //   'icon-focus' => $theme['icon_colors']['focus'],
-    //   'icon-current' => $theme['icon_colors']['current'],
-    // ];
     return $theme;
-    // $css = '';
-    // foreach ($scheme as $key => $value) {
-    //   $css .= "--{$key}:{$value};";
-    // }
-    // return $css;
   }
 }

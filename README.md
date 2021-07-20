@@ -20,7 +20,8 @@ yarn format # auto format
 yarn i18n # export i18n variables
 yarn rsync # sync backend app with server, see docs/dev.md
 yarn composer # run `composer install` on remote server
-yarn gen:icon # generate svg icon component
+yarn icon # generate svg icon component
 yarn remote-download:geoip2 # download GeoIP db on remote server
 yarn local-download:geoip2 # download GeoIP db locally
+yarn options # export node side admin options.ts to php side options.json
 ```

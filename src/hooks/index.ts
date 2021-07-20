@@ -9,6 +9,7 @@ import { useElementRef, useElementRefs } from './useElementRef'
 import useOffsetDistance from './useOffsetDistance'
 import useMDCRipple from './mdc/useMDCRipple'
 import useMessage from './useMessage'
+import useTypewriterEffect from './useTypewriterEffect'
 
 export {
   useState,
@@ -28,4 +29,5 @@ export {
   useElementRefs,
   useOffsetDistance,
   useMessage,
+  useTypewriterEffect,
 }

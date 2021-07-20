@@ -30,7 +30,47 @@
     "namespace": "social.github",
     "public": true,
     "title": "Github username",
-    "desc": "Your <a href=\"https://github.com\" target=\"_blank\">Github</a> username",
+    "desc": "Your '<a href=\"https://github.com\" target=\"_blank\">Github</a>' username",
+    "type": "string",
+    "default": ""
+  },
+  "social.gitlab": {
+    "namespace": "social.gitlab",
+    "public": true,
+    "title": "Gitlab username",
+    "desc": "Your '<a href=\"https://gitlab.com\" target=\"_blank\">Gitlab</a>' username",
+    "type": "string",
+    "default": ""
+  },
+  "social.twitter": {
+    "namespace": "social.twitter",
+    "public": true,
+    "title": "Twitter username",
+    "desc": "Your '<a href=\"https://twitter.com\" target=\"_blank\">Twitter</a>' username",
+    "type": "string",
+    "default": ""
+  },
+  "social.weibo": {
+    "namespace": "social.weibo",
+    "public": true,
+    "title": "Weibo username",
+    "desc": "Your '<a href=\"https://weibo.com\" target=\"_blank\">Weibo</a>' username",
+    "type": "string",
+    "default": ""
+  },
+  "social.facebook": {
+    "namespace": "social.facebook",
+    "public": true,
+    "title": "Facebook username",
+    "desc": "Your '<a href=\"https://facebook.com\" target=\"_blank\">Facebook</a>' username",
+    "type": "string",
+    "default": ""
+  },
+  "social.stackoverflow": {
+    "namespace": "social.stackoverflow",
+    "public": true,
+    "title": "Stackoverflow username",
+    "desc": "Your '<a href=\"https://stackoverflow.com\" target=\"_blank\">Stackoverflow</a>' username",
     "type": "string",
     "default": ""
   },

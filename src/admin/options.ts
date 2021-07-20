@@ -73,11 +73,98 @@ const options: Options = {
     title: 'Social',
     icon: 'fas fa-users',
     options: [
+      // social.github
       {
         namespace: 'social.github',
         public: true,
-        title: 'Github username',
-        desc: 'Your <a href="https://github.com" target="_blank">Github</a> username',
+        title: intl.formatMessage({
+          id: 'options.social.github.title',
+          defaultMessage: 'Github username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.github.desc',
+          defaultMessage:
+            'Your \'<a href="https://github.com" target="_blank">Github</a>\' username',
+        }),
+        type: 'string',
+        default: '',
+      },
+      // social.gitlab
+      {
+        namespace: 'social.gitlab',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.social.gitlab.title',
+          defaultMessage: 'Gitlab username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.gitlab.desc',
+          defaultMessage:
+            'Your \'<a href="https://gitlab.com" target="_blank">Gitlab</a>\' username',
+        }),
+        type: 'string',
+        default: '',
+      },
+      // social.twitter
+      {
+        namespace: 'social.twitter',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.social.twitter.title',
+          defaultMessage: 'Twitter username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.twitter.desc',
+          defaultMessage:
+            'Your \'<a href="https://twitter.com" target="_blank">Twitter</a>\' username',
+        }),
+        type: 'string',
+        default: '',
+      },
+      // social.weibo
+      {
+        namespace: 'social.weibo',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.social.weibo.title',
+          defaultMessage: 'Weibo username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.weibo.desc',
+          defaultMessage: 'Your \'<a href="https://weibo.com" target="_blank">Weibo</a>\' username',
+        }),
+        type: 'string',
+        default: '',
+      },
+      // social.facebook
+      {
+        namespace: 'social.facebook',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.social.facebook.title',
+          defaultMessage: 'Facebook username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.facebook.desc',
+          defaultMessage:
+            'Your \'<a href="https://facebook.com" target="_blank">Facebook</a>\' username',
+        }),
+        type: 'string',
+        default: '',
+      },
+      // social.stackoverflow
+      {
+        namespace: 'social.stackoverflow',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.social.stackoverflow.title',
+          defaultMessage: 'Stackoverflow username',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.social.stackoverflow.desc',
+          defaultMessage:
+            'Your \'<a href="https://stackoverflow.com" target="_blank">Stackoverflow</a>\' username',
+        }),
         type: 'string',
         default: '',
       },
