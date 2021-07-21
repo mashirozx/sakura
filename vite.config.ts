@@ -32,9 +32,12 @@ export default defineConfig({
     hmr: {
       // TODO: .env
       protocol: 'ws',
-      // host: '192.168.28.26',
       host: 'localhost',
       port: 9000,
+    },
+    fs: {
+      // This maybe MDC's incorrect absolute path
+      allow: ['./', './node_modules/', '/node_modules/'],
     },
   },
   build: {
@@ -54,6 +57,9 @@ export default defineConfig({
         // manualChunks: undefined,
       },
     },
+  },
+  optimizeDeps: {
+    include: ['gsap', 'marked', 'gsap/ScrollTrigger', 'highlight.js', '@vueuse/core'],
   },
   css: {
     preprocessorOptions: {

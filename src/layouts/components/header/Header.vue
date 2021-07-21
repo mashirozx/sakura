@@ -1,8 +1,14 @@
 <template>
-  <header class="header__container mdc-elevation--z4">
+  <div class="header__container mdc-elevation--z4">
     <div class="header__content">
       <div class="logo__wrapper">
-        <img class="logo" :src="logo" alt="logo" @load="computeShouldHideNavItemList" />
+        <img
+          class="logo"
+          :src="logo"
+          alt="logo"
+          draggable="false"
+          @load="computeShouldHideNavItemList"
+        />
       </div>
       <div class="nav__wrapper" :ref="setNavBarWrapperRef" @resize="handleNavBarWrapperResizeEvent">
         <div class="nav__ul nav__ul--parent" :ref="setNavBarItemRefs">
@@ -64,11 +70,12 @@
         <img class="avatar" :src="avatar" alt="avatar" />
       </div>
     </div>
-  </header>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed } from 'vue'
+import { defineComponent, ref, watch, computed, onMounted } from 'vue'
+import { debounce, cloneDeep } from 'lodash'
 import {
   useElementRef,
   useElementRefs,
@@ -77,17 +84,15 @@ import {
   useMDCRipple,
 } from '@/hooks'
 import { init } from '@/store'
+import sakuraOptions from '@/utils/sakuraOptions'
 import camelcaseKeys from 'camelcase-keys'
 import NavItem from '@/layouts/components/header/NavItem.vue'
-import { debounce, cloneDeep } from 'lodash'
 
 export default defineComponent({
-  name: 'Header',
   components: { NavItem },
   setup() {
     const avatar = 'https://view.moezx.cc/images/2021/06/13/d6b010a378d392d4633008b915f98ab1.md.png'
-    const logo =
-      window.InitState.config['basic.site.logo'][0]?.url || 'https://v3.vuejs.org/logo.png'
+    const logo = sakuraOptions['basic.site.logo'][0]?.url || 'https://v3.vuejs.org/logo.png'
 
     const [navBarItemRefs, setNavBarItemRefs] = useElementRefs()
     const [navBarWrapperRef, setNavBarWrapperRef] = useElementRef()
@@ -108,6 +113,8 @@ export default defineComponent({
         return sum >= maxNavItemSumWidth
       })
     }
+
+    onMounted(() => computeShouldHideNavItemList())
 
     const navBarWrapperSize = useResizeObserver(navBarWrapperRef)
 

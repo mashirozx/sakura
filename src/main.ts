@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { VueSvgIconPlugin } from '@yzfe/vue3-svgicon'
 import '@yzfe/svgicon/lib/svgicon.css'
+import 'animate.css/animate.css'
 import App from './App.vue'
 import router from './router'
 import { storeProviderPlugin } from './hooks/store'

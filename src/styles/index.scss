@@ -1,1 +1,4 @@
 @use 'mdc';
+@use './mixins/perfect-scrollbar';
+
+@include perfect-scrollbar.core-styles;

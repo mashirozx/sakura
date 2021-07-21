@@ -21,8 +21,8 @@ export interface Options {
 
 const options: Options = {
   basic: {
-    title: 'Basic',
-    desc: 'The basic options',
+    title: intl.formatMessage({ id: 'options.basicTitle', defaultMessage: 'Basic' }),
+    desc: intl.formatMessage({ id: 'options.basicDesc', defaultMessage: 'The basic options' }),
     icon: 'fas fa-address-card',
     options: [
       // basic.site.title
@@ -65,6 +65,95 @@ const options: Options = {
           }),
           type: 'image',
           multiple: false,
+        },
+      },
+    ],
+  },
+  homepage: {
+    title: intl.formatMessage({ id: 'options.homepageTitle', defaultMessage: 'Homepage' }),
+    desc: intl.formatMessage({ id: 'options.homepageDesc', defaultMessage: 'Homepage options' }),
+    icon: 'fas fa-home',
+    options: [
+      // homepage.slogan
+      {
+        namespace: 'homepage.slogan',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.homepage.slogan.title',
+          defaultMessage: 'Slogan',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.homepage.slogan.desc',
+          defaultMessage: 'The slogan text (with typewriter effect), recommend 10-20 characters.',
+        }),
+        type: 'string',
+        default: 'Hello World!',
+      },
+      // homepage.quote
+      {
+        namespace: 'homepage.quote',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.homepage.quote.title',
+          defaultMessage: 'Quote',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.homepage.signature.desc',
+          defaultMessage: 'The quote text (behinds the slogan).',
+        }),
+        type: 'longString',
+        default:
+          'The most beautiful things in the world cannot be seen or even touched. \nThey must be felt with the heart.',
+      },
+      // homepage.signature
+      {
+        namespace: 'homepage.signature',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.homepage.signature.title',
+          defaultMessage: 'Signature',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.homepage.signature.desc',
+          defaultMessage: 'The signature text (follows the quote).',
+        }),
+        type: 'string',
+        default: '—Helen Keller',
+      },
+      // homepage.cover.image
+      {
+        namespace: 'homepage.cover.image',
+        public: true,
+        title: intl.formatMessage({
+          id: 'options.homepage.cover.image.title',
+          defaultMessage: 'Cover images',
+        }),
+        desc: intl.formatMessage({
+          id: 'options.homepage.cover.image.desc',
+          defaultMessage: 'Homepage cover images. Will enable slide show with multiple selections.',
+        }),
+        type: 'mediaPicker',
+        default: [
+          {
+            id: 0,
+            url: 'https://view.moezx.cc/images/2021/06/19/ca4748651c3c67e7e4c29c34fb13bc33.jpg',
+          },
+          {
+            id: 0,
+            url: 'https://view.moezx.cc/images/2021/07/21/c21fcdbf4cf09674537d928884863ecc.jpg',
+          },
+        ],
+        binds: {
+          title: intl.formatMessage({
+            id: 'options.homepage.cover.image.binds.title',
+            defaultMessage: 'Select image for homepage cover.',
+          }),
+          button: intl.formatMessage({
+            id: 'options.homepage.cover.image.binds.button',
+            defaultMessage: 'Use this image',
+          }),
+          type: 'image',
+          multiple: true,
         },
       },
     ],
@@ -171,7 +260,8 @@ const options: Options = {
     ],
   },
   thirdParty: {
-    title: 'Third party services',
+    title: 'Third party',
+    desc: 'The third party services options',
     icon: 'fas fa-bezier-curve',
     options: [
       // thirdParty.reCaptcha.enable

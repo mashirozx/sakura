@@ -67,7 +67,7 @@ class AdminPageHelper extends ViteHelper
 
     wp_localize_script('[type:module]chunk-entrance.js', 'InitState', (new InitStateController())->get_initial_state());
 
-    wp_localize_script('[type:module]chunk-entrance.js', 'SakuraOptions', (new OptionController())->get_all_options());
+    wp_localize_script('[type:module]chunk-entrance.js', 'SakuraOptions', ['data' => (new OptionController())->get_all_options()]);
 
     // <link rel="modulepreload" href="http://localhost:9000/assets/vendor.b3a324ba.js">
     foreach ($manifest[$entry_key]['imports'] as $index => $import) {

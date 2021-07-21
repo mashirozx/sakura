@@ -1,11 +1,11 @@
 <template>
   <div class="post-thumb-list__container" :ref="setListContainerRef">
     <div class="post-thumb-card__wrapper" v-for="(post, index) in postList" :key="index">
-      <span>{{ index }}: {{ post.id }}</span>
-      <PostThumbCardClassic
+      <!-- <span>{{ index }}: {{ post.id }}</span> -->
+      <PostThumbCardIndex
         :post="post"
         :type="index % 2 ? 'normal' : 'reverse'"
-      ></PostThumbCardClassic>
+      ></PostThumbCardIndex>
     </div>
     <div class="loader__wrapper" v-show="fetchStatus === 'fetching'">
       <BookLoader></BookLoader>
@@ -19,11 +19,11 @@
 import { defineComponent, computed, onMounted, Ref } from 'vue'
 import { useInjector, useState, useElementRef, useReachElementSide } from '@/hooks'
 import { posts } from '@/store'
-import PostThumbCardClassic from '@/components/cards/postThumbCards/PostThumbCardClassic.vue'
+import PostThumbCardIndex from '@/components/cards/postThumbCards/PostThumbCardIndex.vue'
 import BookLoader from '@/components/loader/BookLoader.vue'
 
 export default defineComponent({
-  components: { PostThumbCardClassic, BookLoader },
+  components: { PostThumbCardIndex, BookLoader },
   props: {
     namespace: { type: String, default: 'homepage' },
     page: { type: Number, default: 1 },

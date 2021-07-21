@@ -76,7 +76,7 @@ export default defineComponent({
     const [expandContentRef, setExpandContentRef] = useElementRef()
     const expandContentSize = useResizeObserver(expandContentRef)
     const expandContentHeight = computed(() =>
-      expandContentSize.value.height === NaN
+      isNaN(expandContentSize.value.height)
         ? 0
         : expandContentSize.value.height + expandContentSize.value.paddingTop
     )

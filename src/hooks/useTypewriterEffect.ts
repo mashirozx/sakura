@@ -1,11 +1,23 @@
-/**
- * https://codepen.io/gavra/pen/tEpzn
- */
 import { ref, watch, Ref } from 'vue'
-const useTypewriterEffect = (strings: string[], speed = 100): [Ref<string>, () => void] => {
+/**
+ * @param strings
+ * @param speed
+ * @param callback function to call when done
+ * @returns [textRef, do(), done?]
+ */
+const useTypewriterEffect = (
+  strings: string[],
+  separator = '/n',
+  speed = 100,
+  callback?: () => void
+): [Ref<string>, () => void, () => void, Ref<boolean>] => {
   const textRef = ref('')
+  const done = ref(false)
 
   const typewriterEffect = () => {
+    textRef.value = '' // reset
+    done.value = false
+
     const aText = strings
     const iSpeed = speed // time delay of print out
     let iIndex = 0 // start printing array at this posision
@@ -13,28 +25,39 @@ const useTypewriterEffect = (strings: string[], speed = 100): [Ref<string>, () =
     const iScrollAt = 20 // start scrolling up at this many lines
     let iTextPos = 0 // initialise text position
     let iRow // initialise current row
+    let beforeText = '' // cache last line
+
     const typewriter = () => {
       iRow = Math.max(0, iIndex - iScrollAt)
-      // const destination = element
+
       while (iRow < iIndex) {
-        textRef.value += aText[iRow++] + '<br />'
+        textRef.value += aText[iRow++] + separator
       }
-      textRef.value = aText[iIndex].substring(0, iTextPos) // + '_'
-      if (iTextPos++ == iArrLength) {
+      textRef.value = beforeText + aText[iIndex].substring(0, iTextPos) // + '_'
+      if (iTextPos++ === iArrLength) {
         iTextPos = 0
         iIndex++
-        if (iIndex != aText.length) {
+        if (iIndex !== aText.length) {
           iArrLength = aText[iIndex].length
           window.setTimeout(typewriter, 500)
+          beforeText = textRef.value + separator
         }
       } else {
         window.setTimeout(typewriter, iSpeed)
+      }
+      if (iRow === iIndex - 1 && iIndex === aText.length) {
+        done.value = true
+        if (callback) callback()
       }
     }
     typewriter()
   }
 
-  return [textRef, typewriterEffect]
+  const clearTextRef = () => {
+    textRef.value = ''
+  }
+
+  return [textRef, typewriterEffect, clearTextRef, done]
 }
 
 export default useTypewriterEffect

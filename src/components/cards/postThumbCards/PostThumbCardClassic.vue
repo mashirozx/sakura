@@ -41,6 +41,7 @@
             </div>
           </div>
         </div> -->
+        <!-- // TODO: use tags instead of button, button is useless! -->
         <div class="row__wrapper--button" @click="handleViewPostDetailEvent">
           <div class="button__wrapper">
             <NormalButton icon="fab fa-readme" :context="buttonContext"></NormalButton>
@@ -54,15 +55,13 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useIntl, useRouter, useElementRef, useMDCRipple } from '@/hooks'
-import postFilter from '@/utils/filters/postFilter'
 import linkHandler from '@/utils/linkHandler'
 import NormalButton from '@/components/buttons/NormalButton.vue'
-// import { post as postMock } from '@/mocks/postContentMock' // mock
 
 export default defineComponent({
   components: { NormalButton },
   props: {
-    post: { type: Object /*, default: () => postMock*/ },
+    data: { type: Object },
     type: { type: String, default: 'normal' }, // normal | reverse | mobile
   },
   setup(props) {
@@ -77,7 +76,7 @@ export default defineComponent({
       defaultMessage: 'Read More',
     })
 
-    const data = computed(() => (props.post ? postFilter(props.post as Post, 'thumbList') : null))
+    const data = props.data
 
     const handleViewPostDetailEvent = () => {
       if (data) {
@@ -98,7 +97,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/styles/mixins/text';
 @use '@/styles/mixins/tags';
-@use '@/styles/mixins/skeleton';
+// @use '@/styles/mixins/skeleton';
 
 .card__container {
   // TODO: sizing in parent
@@ -123,7 +122,7 @@ export default defineComponent({
       border-radius: 10px 0 0 10px;
       overflow: hidden;
       cursor: pointer;
-      @include skeleton.skeleton-loading;
+      // @include skeleton.skeleton-loading;
       .image {
         width: 100%;
         height: 100%;

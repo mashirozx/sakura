@@ -2,7 +2,7 @@
   <div class="footer__container">
     <div class="row__wrapper">
       <div class="sakura-icon__wrapper fa-spin">
-        <ui-icon name="sakura"></ui-icon>
+        <ui-icon name="ic.sakura"></ui-icon>
       </div>
     </div>
     <div class="row__wrapper">

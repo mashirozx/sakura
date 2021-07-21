@@ -17,14 +17,19 @@
     <div class="content__wrapper">
       <div class="content__container">
         <div class="slogan__wrapper">
-          <h1 class="typewriter">{{ sloganText }}</h1>
+          <h1 class="typewriter">{{ sloganText }}<span class="cursor">&nbsp;</span></h1>
         </div>
-        <div class="dialog__wrapper">
-          <div class="signature__wrapper">
+        <div :class="['dialog__wrapper', { show: shouldShowSignatureDialog }]">
+          <div class="quote__wrapper" v-if="quote">
             <span>
-              <i class="fas fa-quote-left"></i>
-              You got to put the past behind you before you can move on.
-              <i class="fas fa-quote-right"></i>
+              <i class="icon fas fa-quote-left"></i>
+              {{ quote }}
+              <i class="icon fas fa-quote-right"></i>
+            </span>
+          </div>
+          <div class="signature__wrapper" v-if="signature">
+            <span>
+              {{ signature }}
             </span>
           </div>
           <div class="social-media__wrapper">
@@ -33,25 +38,44 @@
               v-for="(item, index) in socialMedia"
               :key="index"
             >
-              <UiIcon :name="item.name"></UiIcon>
+              <UiIcon :name="`social.${item.name}`"></UiIcon>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="mask__layer"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from 'vue'
+import { defineComponent, watch, onActivated, onDeactivated, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
-import { useTypewriterEffect } from '@/hooks'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useElementRef } from '@/hooks'
+import { useTypewriterEffect, useState, useElementRef } from '@/hooks'
+import sakuraOptions from '@/utils/sakuraOptions'
 
 export default defineComponent({
   setup() {
-    const slogan = 'Hello, world!'
+    // sakura options data
+    const socialMedia = Object.keys(sakuraOptions)
+      .map((key) => {
+        if (/^social\./.test(key)) {
+          const match = key.match(/^social\.(.*)$/)
+          if (!match || !sakuraOptions[key]) return null
+          return {
+            name: match[1],
+            value: sakuraOptions[key],
+          }
+        } else {
+          return null
+        }
+      })
+      .filter((i) => i)
+
+    const slogan = sakuraOptions['homepage.slogan']
+    const quote = sakuraOptions['homepage.quote']
+    const signature = sakuraOptions['homepage.signature']
 
     const [parallaxContainerRef, setParallaxContainerRef] = useElementRef()
 
@@ -63,6 +87,7 @@ export default defineComponent({
           scrollTrigger: {
             trigger: layersEloement[0],
             start: 'top top',
+            end: 'bottom top',
             scrub: true,
           },
           y: '20%',
@@ -70,31 +95,44 @@ export default defineComponent({
       }
     })
 
-    const [sloganText, doSloganEffect] = useTypewriterEffect([slogan])
+    const [shouldShowSignatureDialog, setShouldShowSignatureDialog] = useState(false)
+    const showSignatureDialog = () => {
+      window.setTimeout(() => setShouldShowSignatureDialog(true), 700)
+    }
+
+    const [sloganText, doSloganEffect, clearText] = useTypewriterEffect(
+      slogan.split(' '),
+      ' ',
+      100,
+      showSignatureDialog
+    )
+
+    const [isSloganEffectCalled, setIsSloganEffectCalled] = useState(false)
+
+    const initeSloganEffect = () => {
+      if (!isSloganEffectCalled.value) {
+        doSloganEffect()
+        setIsSloganEffectCalled(true)
+      }
+    }
+
+    const clearSloganEffect = () => {
+      clearText()
+      setShouldShowSignatureDialog(false)
+      setIsSloganEffectCalled(false)
+    }
+
+    onMounted(() => window.setTimeout(() => initeSloganEffect(), 1000))
+    onActivated(() => window.setTimeout(() => initeSloganEffect(), 1000))
+    onUnmounted(() => clearSloganEffect())
+    onDeactivated(() => clearSloganEffect())
 
     const handleImageError = () => {
-      window.setTimeout(() => doSloganEffect(), 1000)
+      // window.setTimeout(() => doSloganEffect(), 1000)
     }
     const handleImageLoad = () => {
-      window.setTimeout(() => doSloganEffect(), 1000)
+      // window.setTimeout(() => doSloganEffect(), 1000)
     }
-
-    const config = (window as any).InitState.config
-    const socialMedia = Object.keys(config)
-      .map((key) => {
-        if (/^social\./.test(key)) {
-          const match = key.match(/^social\.(.*)$/)
-          if (!match || !config[key]) return null
-          return {
-            name: match[1],
-            value: config[key],
-          }
-        } else {
-          return null
-        }
-      })
-      .filter((i) => i)
-    console.log(socialMedia)
 
     const styleController = () => {
       return {}
@@ -103,17 +141,20 @@ export default defineComponent({
     return {
       setParallaxContainerRef,
       styleController,
-      slogan,
+      sloganText,
+      quote,
+      signature,
       handleImageError,
       handleImageLoad,
-      sloganText,
       socialMedia,
+      shouldShowSignatureDialog,
     }
   },
 })
 </script>
 
 <style lang="scss" scoped>
+$mobile-view-max-width: 800px;
 .cover__container {
   width: 100%;
   height: 100%;
@@ -122,6 +163,7 @@ export default defineComponent({
   .background__wrapper {
     width: 100%;
     height: 100%;
+    z-index: -1;
     .image__wrapper {
       width: 100%;
       height: 100%;
@@ -138,25 +180,40 @@ export default defineComponent({
       flex-flow: column nowrap;
       align-items: center;
       .slogan__wrapper {
-        font-size: 36px;
-        text-transform: uppercase;
-        color: #ffffff;
         .typewriter {
-          overflow: hidden;
-          border-right: 0.15em solid orange;
-          white-space: nowrap;
+          // position: relative;
           margin: 0 auto;
           letter-spacing: 0.15em;
-          animation: blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-          from,
-          to {
-            border-color: transparent;
+          max-width: 80vw;
+          align-self: center;
+          font-size: 60px;
+          text-transform: uppercase;
+          color: #ffffff;
+          white-space: nowrap;
+          .cursor {
+            position: relative;
+            &:after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 0.15em;
+              height: 1.2em;
+              background: orange;
+              animation: blink-caret 1s step-end infinite;
+            }
           }
-          50% {
-            border-color: orange;
+          @media screen and (max-width: $mobile-view-max-width) {
+            white-space: normal;
+          }
+          @keyframes blink-caret {
+            from,
+            to {
+              background: transparent;
+            }
+            50% {
+              background: orange;
+            }
           }
         }
       }
@@ -170,7 +227,16 @@ export default defineComponent({
         // letter-spacing: 0.1em;
         font-size: 16px;
         line-height: 30px;
-        // align-self: flex-start;
+        align-self: flex-start;
+        visibility: hidden;
+        // width: 100%;
+        @media screen and (max-width: $mobile-view-max-width) {
+          display: none;
+        }
+        &.show {
+          visibility: visible;
+          animation: fadeIn /* animate.css */ 0.8s;
+        }
         &:before {
           content: '';
           position: absolute;
@@ -181,23 +247,59 @@ export default defineComponent({
           border-style: solid;
           border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent;
         }
+        .quote__wrapper {
+          width: 100%;
+          text-align: left;
+          // text-align-last: right;
+          white-space: pre;
+          .icon {
+            &:first-child {
+              padding-right: 6px;
+            }
+            &:last-child {
+              padding-left: 6px;
+            }
+          }
+        }
         .signature__wrapper {
           width: 100%;
-          text-align: center;
+          text-align: right;
         }
         .social-media__wrapper {
+          margin-top: 6px;
           width: 100%;
           display: flex;
           flex-flow: row wrap;
-          justify-content: center;
+          justify-content: flex-end;
           align-items: center;
-          gap: 12px;
+          gap: 20px;
           .social-media-item__wrapper {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
         }
       }
+    }
+  }
+  .mask__layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    &:before {
+      background-image: url('@/assets/masks/dot.png');
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-attachment: fixed;
     }
   }
 }
