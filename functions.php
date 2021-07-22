@@ -204,7 +204,7 @@ function sakura_scripts()
     // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
-    $gravatar_url = akina_option('gravatar_proxy') ?: 'secure.gravatar.com/avatar';
+    $gravatar_url = akina_option('gravatar_proxy') ?: 'dn-qiniu-avatar.qbox.me/avatar';
     wp_localize_script('app', 'Poi', array(
         'pjax' => akina_option('poi_pjax'),
         'movies' => $movies,
@@ -611,7 +611,7 @@ function get_link_items()
  */
 function gravatar_cn($url)
 {    
-    $gravatar_url = array('0.gravatar.com/avatar','1.gravatar.com/avatar','2.gravatar.com/avatar','secure.gravatar.com/avatar');
+    $gravatar_url = array('dn-qiniu-avatar.qbox.me/avatar','cdn.v2ex.com/gravatar','gravatar.loli.net/avatar','gravatar.zeruns.tech/avatar');
     //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
     //官方服务器近期大陆访问 429，建议使用镜像
     return str_replace( $gravatar_url, akina_option('gravatar_proxy'), $url );
