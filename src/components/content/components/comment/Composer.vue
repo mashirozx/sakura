@@ -138,6 +138,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 .composer__container {
   --mdc-theme-primary: orange;
   width: 100%;
@@ -167,7 +168,7 @@ export default defineComponent({
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      @include polyfills.flex-gap(12px, 'row nowrap');
       .column__wrapper {
         &--avatar {
           flex: 0 0 auto;

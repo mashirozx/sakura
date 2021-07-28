@@ -1,30 +1,30 @@
 <template>
   <div class="card__container">
-    <div class="row__wrapper--thumbnail">
+    <div class="row__wrapper--thumbnail" @click="handleViewPostDetailEvent">
       <Image
         class="image"
-        :src="data.featureImage.thumbnail"
-        :alt="data.title"
+        :src="$props.data.featureImage.thumbnail"
+        :alt="$props.data.title"
         placeholder="https://via.placeholder.com/1024x768"
         :draggable="false"
       />
     </div>
-    <div class="row__wrapper--title">
-      <span>{{ data.title }}</span>
+    <div class="row__wrapper--title" @click="handleViewPostDetailEvent">
+      <span>{{ $props.data.title }}</span>
     </div>
     <div class="row__wrapper--statistics">
       <div class="column__wrapper--read_count">
-        <span><i class="fab fa-hotjar"></i> {{ data.readCount }}</span>
+        <span><i class="fab fa-hotjar"></i> {{ $props.data.readCount }}</span>
       </div>
       <div class="column__wrapper--comment_count">
-        <span> <i class="far fa-comment-dots"></i> {{ data.commentCount }}</span>
+        <span> <i class="far fa-comment-dots"></i> {{ $props.data.commentCount }}</span>
       </div>
       <div class="column__wrapper--word_count">
-        <span><i class="fas fa-pen-nib"></i> {{ data.wordCount }}</span>
+        <span><i class="fas fa-pen-nib"></i> {{ $props.data.wordCount }}</span>
       </div>
     </div>
     <div class="row__wrapper--abstract">
-      <span>{{ data.excerpt }} </span>
+      <span>{{ $props.data.excerpt }} </span>
     </div>
     <div class="row__wrapper--tags">
       <div class="tags__container">
@@ -63,16 +63,11 @@ export default defineComponent({
       defaultMessage: 'Read More',
     })
 
-    const data = props.data
-
     const handleViewPostDetailEvent = () => {
-      if (data) {
-        linkHandler.handleClickLink({ url: data.value?.link ?? '', router, target: '_blank' })
-      }
+      linkHandler.handleClickLink({ url: props.data?.link ?? '', router, target: '_blank' })
     }
 
     return {
-      data,
       buttonContext,
       handleViewPostDetailEvent,
     }
@@ -83,6 +78,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/styles/mixins/text';
 @use '@/styles/mixins/tags';
+@use '@/styles/mixins/polyfills';
 
 .card__container {
   width: 100%;
@@ -90,7 +86,7 @@ export default defineComponent({
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 12px;
+  @include polyfills.flex-gap(12px, 'column nowrap');
   > * {
     width: calc(100% - 24px);
   }
@@ -107,7 +103,7 @@ export default defineComponent({
         flex-flow: row wrap;
         justify-content: flex-start;
         align-items: center;
-        gap: 12px;
+        @include polyfills.flex-gap(12px, 'row wrap');
         .tag__wrapper {
           display: flex;
           flex-flow: row nowrap;

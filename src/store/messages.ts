@@ -16,7 +16,7 @@ export interface Message {
 export interface MessageOptions extends Omit<Message, 'id'> {}
 
 export default function msg(): object {
-  const [messageList, setMessageList]: [Ref<Message[]>, (arg: Message[]) => void] = useState([])
+  const [messageList, setMessageList] = useState([] as Message[])
 
   const addMessage = (state: typeof messageList, options: MessageOptions) => {
     const id = `message_${uniqueHash()}`

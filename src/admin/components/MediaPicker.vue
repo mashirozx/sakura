@@ -1,23 +1,27 @@
 <template>
   <div class="picker__container">
-    <div class="row__wrapper--input">
-      <div class="input__wrapper">
-        <OutlinedInput v-model:content="userInput" label="Input remote URL here"></OutlinedInput>
-      </div>
-      <div class="button__wrapper" @click="add">
-        <NormalButton icon="fas fas fa-link" context="Add" :contained="true"></NormalButton>
-      </div>
-      <div class="button__wrapper" @click="open">
-        <NormalButton icon="fas fa-box-open" context="Pick" :contained="true"></NormalButton>
+    <div class="flex-box">
+      <div class="row__wrapper--input">
+        <div class="input__wrapper">
+          <OutlinedInput v-model:content="userInput" label="Input remote URL here"></OutlinedInput>
+        </div>
+        <div class="button__wrapper" @click="add">
+          <NormalButton icon="fas fas fa-link" context="Add" :contained="true"></NormalButton>
+        </div>
+        <div class="button__wrapper" @click="open">
+          <NormalButton icon="fas fa-box-open" context="Pick" :contained="true"></NormalButton>
+        </div>
       </div>
     </div>
-    <div class="row__wrapper--preview">
-      <div class="image__box" v-for="(item, index) in selection" :key="index">
-        <div class="image__wrapper">
-          <Image :src="item.url" :avatar="false" :draggable="false"></Image>
-        </div>
-        <div class="delete__button" @click="del(index)">
-          <span><i class="fas fa-trash-alt"></i></span>
+    <div class="flex-box">
+      <div class="row__wrapper--preview">
+        <div class="image__box" v-for="(item, index) in selection" :key="index">
+          <div class="image__wrapper">
+            <Image :src="item.url" :avatar="false" :draggable="false"></Image>
+          </div>
+          <div class="delete__button" @click="del(index)">
+            <span><i class="fas fa-trash-alt"></i></span>
+          </div>
         </div>
       </div>
     </div>
@@ -150,23 +154,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '../variables';
+@use '@/styles/mixins/polyfills';
 .picker__container {
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  gap: 12px;
+  @include polyfills.flex-gap(12px, 'column nowrap');
   > * {
     width: 100%;
   }
-  > .row__wrapper {
+  > .flex-box > .row__wrapper {
     &--input {
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      @include polyfills.flex-gap(12px, 'row nowrap');
       > .input__wrapper {
         flex: 1 1 auto;
         width: 100%;
@@ -177,6 +182,7 @@ export default defineComponent({
       @media screen and (max-width: variables.$small-mobile-max-width) {
         flex-flow: row wrap;
         justify-content: flex-start;
+        @include polyfills.flex-gap(12px, 'row wrap');
         > .input__wrapper {
           flex: 0 0 auto;
         }
@@ -187,7 +193,7 @@ export default defineComponent({
       flex-flow: row wrap;
       justify-content: flex-start;
       align-items: center;
-      gap: 12px;
+      @include polyfills.flex-gap(12px, 'row wrap');
       > .image__box {
         position: relative;
         overflow: hidden;

@@ -33,12 +33,14 @@
             </span>
           </div>
           <div class="social-media__wrapper">
-            <div
-              class="social-media-item__wrapper"
-              v-for="(item, index) in socialMedia"
-              :key="index"
-            >
-              <UiIcon :name="`social.${item.name}`"></UiIcon>
+            <div class="social-media__content">
+              <div
+                class="social-media-item__wrapper"
+                v-for="(item, index) in socialMedia"
+                :key="index"
+              >
+                <UiIcon :name="`social.${item.name}`"></UiIcon>
+              </div>
             </div>
           </div>
         </div>
@@ -154,6 +156,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 $mobile-view-max-width: 800px;
 .cover__container {
   width: 100%;
@@ -268,17 +271,20 @@ $mobile-view-max-width: 800px;
         .social-media__wrapper {
           margin-top: 6px;
           width: 100%;
-          display: flex;
-          flex-flow: row wrap;
-          justify-content: flex-end;
-          align-items: center;
-          gap: 20px;
-          .social-media-item__wrapper {
-            width: 24px;
-            height: 24px;
+          .social-media__content {
+            width: 100%;
             display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
             align-items: center;
-            justify-content: center;
+            @include polyfills.flex-gap(20px, 'row wrap');
+            .social-media-item__wrapper {
+              width: 24px;
+              height: 24px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
           }
         }
       }

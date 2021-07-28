@@ -1,4 +1,5 @@
 {
+  "stylelint.enable": false,
   "php-docblocker.returnGap": true,
   "php-docblocker.qualifyClassNames": true,
   "php-docblocker.author": {

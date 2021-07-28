@@ -27,15 +27,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 .loader__container {
   width: 100%;
   height: 200px;
   min-width: 200px;
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  @include polyfills.flex-gap(12px, 'column nowrap');
   .text {
     text-align: center;
     color: #6c7486;

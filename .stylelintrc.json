@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "rule-empty-line-before": "never",
+    "indentation": 2
+  }
+}

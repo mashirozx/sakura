@@ -147,6 +147,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
+
 ::v-deep() {
   @import 'swiper/swiper';
 }
@@ -211,9 +213,9 @@ export default defineComponent({
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 12px;
     padding: 12px;
     width: calc(100% - 24px);
+    @include polyfills.flex-gap(12px, 'row wrap');
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <PostThumbCardMobile v-if="isMobile" :data="data" :type="$props.type"></PostThumbCardMobile>
-  <PostThumbCardClassic v-else :data="data"></PostThumbCardClassic>
+  <PostThumbCardClassic v-else :data="data" :type="$props.type"></PostThumbCardClassic>
 </template>
 
 <script lang="ts">

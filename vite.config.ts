@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 // import legacy from '@vitejs/plugin-legacy'
 import path from 'path'
 import svgicon from 'vite-plugin-svgicon'
+// import viteStylelint from '@amatlash/vite-plugin-stylelint'
 
 const target = process.env.APP_TARGET
 
@@ -23,6 +24,7 @@ export default defineConfig({
     // legacy({
     //   targets: ['defaults', 'not IE 11'],
     // }),
+    // viteStylelint(), // bugly
   ],
   server: {
     host: '0.0.0.0',
@@ -46,6 +48,7 @@ export default defineConfig({
     sourcemap: true,
     outDir: target === 'main' ? 'app/assets/main' : 'app/assets/admin',
     chunkSizeWarningLimit: 2048,
+    // minify: false, // set false if use flex-gap-polyfill
     rollupOptions: {
       // external: ['vue'],
       input: [path.resolve(__dirname, target === 'main' ? 'src/main.ts' : 'src/admin/main.ts')],
@@ -59,7 +62,14 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['gsap', 'marked', 'gsap/ScrollTrigger', 'highlight.js', '@vueuse/core'],
+    include: [
+      'gsap',
+      'marked',
+      'gsap/ScrollTrigger',
+      'highlight.js',
+      '@vueuse/core',
+      'perfect-scrollbar',
+    ],
   },
   css: {
     preprocessorOptions: {

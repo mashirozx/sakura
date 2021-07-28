@@ -13,24 +13,36 @@
         <span>{{ $props.data.title }}</span>
       </div>
       <div class="row__wrapper--info">
-        <div class="column__wrapper--avatar">
-          <Image
-            :src="$props.data.author.avatar['96']"
-            :avatar="true"
-            :alt="$props.data.author.nickname"
-          ></Image>
+        <div class="flex-box">
+          <div class="column__wrapper--avatar">
+            <div class="image__wrapper">
+              <Image
+                :src="$props.data.author.avatar['96']"
+                :avatar="true"
+                :alt="$props.data.author.nickname"
+              ></Image>
+            </div>
+          </div>
         </div>
-        <div class="column__wrapper--author">
-          <span>{{ $props.data.author.nickname }}</span>
+        <div class="flex-box">
+          <div class="column__wrapper--author">
+            <span>{{ $props.data.author.nickname }}</span>
+          </div>
         </div>
-        <div class="column__wrapper--publish">
-          <span>{{ $props.data.publistTime }}</span>
+        <div class="flex-box">
+          <div class="column__wrapper--publish">
+            <span>{{ $props.data.publistTime }}</span>
+          </div>
         </div>
-        <div class="column__wrapper--words">
-          <span>{{ $props.data.wordCount }}</span>
+        <div class="flex-box">
+          <div class="column__wrapper--words">
+            <span>{{ $props.data.wordCount }}</span>
+          </div>
         </div>
-        <div class="column__wrapper--reads">
-          <span>{{ $props.data.readCount }}</span>
+        <div class="flex-box">
+          <div class="column__wrapper--reads">
+            <span>{{ $props.data.readCount }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -62,6 +74,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/styles/mixins/text';
+@use '@/styles/mixins/polyfills';
 .feature-image__container {
   width: 100%;
   height: 400px;
@@ -103,8 +116,8 @@ export default defineComponent({
           line-height: 48px;
           font-size: xx-large;
           color: #ffffff;
-          @include text.line-number-limit(1);
-          @include text.text-shadow-offset;
+          // @include text.line-number-limit(1);
+          // @include text.text-shadow-offset;
         }
       }
       &--info {
@@ -113,50 +126,52 @@ export default defineComponent({
         justify-content: flex-start;
         align-items: center;
         padding-top: 12px;
-        gap: 6px;
-        > * {
-          flex: 1 1 auto;
-          display: flex;
-          flex-flow: row nowrap;
-          justify-content: center;
-          align-items: center;
-          gap: 6px;
-          &:not(:first-child):not(:last-child) {
-            &::after {
-              content: '·';
+        @include polyfills.flex-gap(6px, 'row nowrap');
+        > .flex-box {
+          > * {
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+
+            @include polyfills.flex-gap(6px, 'row nowrap');
+            span {
               line-height: 20px;
               font-size: medium;
               color: #ffffff;
+              text-transform: lowercase;
             }
           }
-          span {
-            line-height: 20px;
-            font-size: medium;
-            color: #ffffff;
-            text-transform: lowercase;
+          &:not(:first-child):not(:last-child) {
+            > * {
+              &::after {
+                content: '·';
+                line-height: 20px;
+                font-size: medium;
+                color: #ffffff;
+              }
+            }
           }
-        }
-        .column__wrapper {
-          &--avatar {
-            flex: 0 0 auto;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 6px;
-            // .avatar {
-            //   width: 100%;
-            //   height: 100%;
-            //   object-fit: cover;
-            // }
-          }
-          &--author {
-          }
-          &--publish {
-          }
-          &--words {
-          }
-          &--reads {
+          .column__wrapper {
+            &--avatar {
+              flex: 0 0 auto;
+              > .image__wrapper {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 6px;
+              }
+            }
+            &--author {
+            }
+            &--publish {
+            }
+            &--words {
+            }
+            &--reads {
+            }
           }
         }
       }

@@ -5,32 +5,32 @@
       <div class="thumbnail__wrapper" @click="handleViewPostDetailEvent">
         <Image
           class="image"
-          :src="data.featureImage.thumbnail"
-          :alt="data.title"
+          :src="$props.data.featureImage.thumbnail"
+          :alt="$props.data.title"
           placeholder="https://via.placeholder.com/1024x768"
           :draggable="false"
         />
       </div>
       <div class="details__wrapper">
         <div class="row__wrapper--date">
-          <span><i class="far fa-clock"></i> {{ data.publistTime }}</span>
+          <span><i class="far fa-clock"></i> {{ $props.data.publistTime }}</span>
         </div>
         <div class="row__wrapper--title" @click="handleViewPostDetailEvent">
-          <span>{{ data.title }}</span>
+          <span>{{ $props.data.title }}</span>
         </div>
         <div class="row__wrapper--info">
           <div class="column__wrapper--read_count">
-            <span><i class="fab fa-hotjar"></i> {{ data.readCount }}</span>
+            <span><i class="fab fa-hotjar"></i> {{ $props.data.readCount }}</span>
           </div>
           <div class="column__wrapper--comment_count">
-            <span> <i class="far fa-comment-dots"></i> {{ data.commentCount }}</span>
+            <span> <i class="far fa-comment-dots"></i> {{ $props.data.commentCount }}</span>
           </div>
           <div class="column__wrapper--word_count">
-            <span><i class="fas fa-pen-nib"></i> {{ data.wordCount }}</span>
+            <span><i class="fas fa-pen-nib"></i> {{ $props.data.wordCount }}</span>
           </div>
         </div>
         <div class="row__wrapper--abstruct">
-          <span>{{ data.excerpt }} </span>
+          <span>{{ $props.data.excerpt }} </span>
         </div>
         <!-- <div class="row__wrapper--tags">
           <div class="tags__container">
@@ -76,16 +76,11 @@ export default defineComponent({
       defaultMessage: 'Read More',
     })
 
-    const data = props.data
-
     const handleViewPostDetailEvent = () => {
-      if (data) {
-        linkHandler.handleClickLink({ url: data.value?.link ?? '', router, target: '_blank' })
-      }
+      linkHandler.handleClickLink({ url: props.data?.link ?? '', router, target: '_blank' })
     }
 
     return {
-      data,
       buttonContext,
       handleViewPostDetailEvent,
       setContentRef,
@@ -98,6 +93,7 @@ export default defineComponent({
 @use '@/styles/mixins/text';
 @use '@/styles/mixins/tags';
 // @use '@/styles/mixins/skeleton';
+@use '@/styles/mixins/polyfills';
 
 .card__container {
   // TODO: sizing in parent
@@ -189,25 +185,25 @@ export default defineComponent({
             @include text.line-number-limit(3);
           }
         }
-        // &--tags {
-        //   max-height: 16px;
-        //   overflow: hidden;
-        //   align-items: flex-start;
-        //   .tags__container {
-        //     display: flex;
-        //     flex-flow: row wrap;
-        //     justify-content: flex-start;
-        //     align-items: center;
-        //     gap: 12px;
-        //     .tag__wrapper {
-        //       display: flex;
-        //       flex-flow: row nowrap;
-        //       justify-content: flex-start;
-        //       align-items: center;
-        //       @include tags.tag-style;
-        //     }
-        //   }
-        // }
+        &--tags {
+          max-height: 16px;
+          overflow: hidden;
+          align-items: flex-start;
+          .tags__container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            align-items: center;
+            @include polyfills.flex-gap(12px, 'row wrap');
+            .tag__wrapper {
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: flex-start;
+              align-items: center;
+              @include tags.tag-style;
+            }
+          }
+        }
         &--button {
           justify-content: flex-end;
           .button__wrapper {

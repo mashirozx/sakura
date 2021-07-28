@@ -51,6 +51,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 @use '@/styles/markdown/github';
 .item__container {
   width: 100%;
@@ -105,7 +106,7 @@ export default defineComponent({
         font-size: small;
         display: flex;
         flex-flow: row wrap;
-        gap: 12px;
+        @include polyfills.flex-gap(12px, 'row wrap');
       }
     }
   }

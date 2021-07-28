@@ -36,7 +36,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-// @use 'sass:math';
+@use '@/styles/mixins/polyfills';
 .nav__container {
   position: relative;
   width: 100%;
@@ -121,7 +121,7 @@ export default defineComponent({
         flex-flow: row-reverse nowrap;
         justify-content: flex-end;
         align-items: center;
-        gap: 12px;
+        @include polyfills.flex-gap(12px, 'row-reverse nowrap');
         > .logo__wrapper {
           flex: 0 0 auto;
           display: flex;

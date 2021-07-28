@@ -2,13 +2,15 @@
   <div class="drawer__container" :ref="setScrollContainerRef">
     <div class="drawer__content">
       <div class="row__wrapper--avatar">
-        <Image
-          src="https://view.moezx.cc/images/2021/06/13/d6b010a378d392d4633008b915f98ab1.md.png"
-          placeholder=""
-          :avatar="true"
-          alt=""
-          :draggable="false"
-        ></Image>
+        <div class="image__wrapper">
+          <Image
+            src="https://view.moezx.cc/images/2021/06/13/d6b010a378d392d4633008b915f98ab1.md.png"
+            placeholder=""
+            :avatar="true"
+            alt=""
+            :draggable="false"
+          ></Image>
+        </div>
       </div>
       <div class="row__wrapper--signature">Hello world...</div>
       <div class="row__wrapper--social"> social</div>
@@ -115,6 +117,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 .drawer__container {
   position: relative;
   width: 100%;
@@ -125,14 +128,17 @@ export default defineComponent({
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 24px;
+    @include polyfills.flex-gap(24px, 'column nowrap');
     > .row__wrapper {
       &--avatar {
-        margin-top: 50px;
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        overflow: hidden;
+        flex: 0 0 auto;
+        .image__wrapper {
+          margin-top: 50px;
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          overflow: hidden;
+        }
       }
       &--signature {
         text-align: center;

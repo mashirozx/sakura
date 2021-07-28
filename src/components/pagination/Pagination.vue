@@ -104,13 +104,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/mixins/polyfills';
 .pagination__container {
   width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  @include polyfills.flex-gap(6px, 'row wrap');
   .items__wrapper {
     .item__wrapper {
       --mdc-typography-button-font-size: 13px;
