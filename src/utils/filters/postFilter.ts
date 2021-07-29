@@ -1,5 +1,4 @@
 import intl from '@/locales'
-import timeFormater from '@/utils/timeFormater'
 import htmlStringInnerText from '@/utils/htmlStringInnerText'
 import camelcaseKeys from 'camelcase-keys'
 import publishTime from './publishTime'
@@ -9,6 +8,7 @@ export default function (post: Post, type: 'single' | 'page' | 'thumbList') {
   const title = post.title.rendered
 
   const publistTime = publishTime(post.date)
+  const publistTimeBrief = publishTime(post.date, true)
 
   const readCount = intl.formatMessage(
     {
@@ -55,9 +55,12 @@ export default function (post: Post, type: 'single' | 'page' | 'thumbList') {
   const content = post.content ?? ''
   const link = post.link
 
+  const tags = post.tagsMeta ? camelcaseKeys(post.tagsMeta) : []
+
   const data = {
     id,
     publistTime,
+    publistTimeBrief,
     title,
     readCount,
     commentCount,
@@ -67,6 +70,7 @@ export default function (post: Post, type: 'single' | 'page' | 'thumbList') {
     author,
     content,
     link,
+    tags,
   }
 
   return data

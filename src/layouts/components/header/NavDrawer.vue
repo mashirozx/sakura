@@ -29,7 +29,7 @@
             <NavItem
               :context="parent.title"
               :prefix="parent.icon"
-              :url="parent.child.length > 0 ? '' : parent.url"
+              :url="parent.child.length > 0 ? null : parent.url"
               :suffix="parent.child.length > 0 ? 'fas fa-chevron-down' : ''"
             ></NavItem>
           </div>
@@ -175,6 +175,18 @@ export default defineComponent({
               height: 36px;
               background: rgba(2, 1, 1, 0);
               transition: all 0.3s;
+              ::v-deep() {
+                .nav-item__content {
+                  .icon--suffix {
+                    transform: scale(0.6);
+                    transform-origin: right;
+                    i {
+                      transform: rotate(0deg);
+                      transition: all 0.2s;
+                    }
+                  }
+                }
+              }
             }
             &--child {
               max-height: 0;
@@ -193,6 +205,15 @@ export default defineComponent({
             .ul__content {
               &--tag {
                 background: rgba(2, 1, 1, 0.05);
+                ::v-deep() {
+                  .nav-item__content {
+                    .icon--suffix {
+                      i {
+                        transform: rotate(-180deg);
+                      }
+                    }
+                  }
+                }
               }
               &--child {
                 max-height: var(--collapse-height);

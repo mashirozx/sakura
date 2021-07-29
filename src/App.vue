@@ -4,15 +4,19 @@
       <component :is="Component" :key="$route.fullPath"></component>
     </keep-alive>
   </router-view>
+  <div class="messages__wrapper">
+    <Messages position-y="bottom" position-x="left"></Messages>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { init } from '@/store'
 import { useInjector } from '@/hooks'
+import Messages from '@/components/messages/Messages.vue'
 
 export default defineComponent({
-  name: 'App',
+  components: { Messages },
   setup() {
     const { fetchWpJson } = useInjector(init)
     fetchWpJson()
@@ -21,5 +25,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@use '@/styles/index';
+@use '@/styles/global';
+
+.messages__wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+}
 </style>

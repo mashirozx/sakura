@@ -141,20 +141,20 @@ export default defineComponent({
 
   $i: 2;
   @while $i < 6 {
-    $delay: $i * 15 - 30;
+    $delay: $i * 15% - 30%;
     @keyframes page-#{$i} {
-      #{0 + $delay}% {
+      #{0% + $delay} {
         transform: rotateY(180deg);
         opacity: 0;
       }
-      #{20 + $delay}% {
+      #{20% + $delay} {
         opacity: 1;
       }
-      #{35 + $delay}%,
+      #{35% + $delay},
       100% {
         opacity: 0;
       }
-      #{50 + $delay}%,
+      #{50% + $delay},
       100% {
         transform: rotateY(0deg);
       }

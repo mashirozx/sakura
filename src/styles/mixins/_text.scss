@@ -11,3 +11,8 @@
   padding: 10px 10px;
   transform: translate(-10px, 10px);
 }
+
+@mixin word-break {
+  overflow: hidden;
+  word-break: break-word;
+}

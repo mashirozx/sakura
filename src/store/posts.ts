@@ -1,5 +1,6 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { usePersistedState, useState } from '@/hooks'
+import type { MessageOptions } from '@/store/messages'
 import camelcaseKeys from 'camelcase-keys'
 import { AxiosResponse } from 'axios' // interface
 import { cloneDeep } from 'lodash'
@@ -7,11 +8,14 @@ import API from '@/api'
 import { GetPostParams, GetPageParams } from '@/api/Wp/v2' // interface
 import { getPagination } from '@/utils/filters/paginationFilter'
 import logger from '@/utils/logger'
+import axiosErrorHandler from '@/utils/axiosErrorHandler'
+import intl from '@/locales'
 
-interface FetchParams {
+export interface FetchParams {
   state: Ref<PostStore>
   namespace: string
   opts: GetPostParams | GetPageParams
+  addMessage: (options: MessageOptions) => void
 }
 
 export default function posts(): object {
@@ -24,7 +28,9 @@ export default function posts(): object {
     data: {},
     list: {},
   }
-  const [postsStore, setPostsStore] = usePersistedState('postsStore', defaultStore)
+  const [postsStore, setPostsStore] = false
+    ? usePersistedState('postsStore', defaultStore)
+    : useState(defaultStore)
 
   /**
    * Common method of handling API response of Array(WP_POST)
@@ -94,11 +100,8 @@ export default function posts(): object {
   /**
    * Fetch posts list from API /wp-json/wp/v2/posts
    * TODO: what's the correct type of readonly (state)?
-   * @param state
-   * @param type
-   * @param axiosOptions
    */
-  const fetchPost = async ({ state, namespace, opts }: FetchParams) => {
+  const fetchPost = async ({ state, namespace, opts, addMessage }: FetchParams) => {
     return new Promise((resolve, reject) => {
       API.Wp.v2
         .getPosts(opts as GetPostParams)
@@ -108,6 +111,12 @@ export default function posts(): object {
         })
         .catch((error) => {
           logger('error', error)
+          const errorMsgTitle = intl.formatMessage({
+            id: 'messages.posts.fetchPostError',
+            defaultMessage: 'Failed to fetch post content.',
+          })
+          const errorMsg = axiosErrorHandler(error).msg
+          addMessage({ type: 'error', title: errorMsgTitle, detail: errorMsg, closeTimeout: 0 })
           reject(error)
         })
     })
@@ -116,11 +125,8 @@ export default function posts(): object {
   /**
    * Fetch posts list from API /wp-json/wp/v2/posts
    * TODO: what's the correct type of readonly (state)?
-   * @param state
-   * @param type
-   * @param axiosOptions
    */
-  const fetchPage = async ({ state, namespace, opts }: FetchParams) => {
+  const fetchPage = async ({ state, namespace, opts, addMessage }: FetchParams) => {
     return new Promise((resolve, reject) => {
       API.Wp.v2
         .getPages(opts as GetPageParams)
@@ -130,6 +136,12 @@ export default function posts(): object {
         })
         .catch((error) => {
           logger('error', error)
+          const errorMsgTitle = intl.formatMessage({
+            id: 'messages.posts.fetchPageError',
+            defaultMessage: 'Failed to fetch page content.',
+          })
+          const errorMsg = axiosErrorHandler(error).msg
+          addMessage({ type: 'error', title: errorMsgTitle, detail: errorMsg, closeTimeout: 0 })
           reject(error)
         })
     })

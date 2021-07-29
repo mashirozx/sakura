@@ -36,7 +36,7 @@ export default defineComponent({
         .map((item, index) => index === props.result)
     )
 
-    // TODO: watcher's bug on deep mode: https://github.com/vuejs/vue/issues/2164
+    // watcher's bug on deep mode: https://github.com/vuejs/vue/issues/2164
     const cacheArrayRef = computed(() => cloneDeep(arrayRef.value))
 
     watch(
@@ -74,6 +74,14 @@ export default defineComponent({
         (arrayRef.value = Array(options.length)
           .fill(false)
           .map((item, index) => index === props.result))
+    )
+
+    watch(
+      () => props.result,
+      (resultProp) => {
+        arrayRef.value = cloneDeep(arrayRef.value).map((item) => false)
+        if (resultProp !== NaN) arrayRef.value[resultProp] = true
+      }
     )
 
     return { arrayRef }

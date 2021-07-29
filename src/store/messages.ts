@@ -1,4 +1,3 @@
-import { Ref } from 'vue'
 import { cloneDeep, remove } from 'lodash'
 import { useState } from '@/hooks'
 import uniqueHash from '@/utils/uniqueHash'
@@ -31,7 +30,7 @@ export default function msg(): object {
       return
     }
 
-    const closeTimeout = options.closeTimeout || 3000
+    const closeTimeout = options.closeTimeout || 6000
 
     setTimeout(() => removeMessage(state, id), closeTimeout)
   }

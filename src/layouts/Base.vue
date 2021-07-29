@@ -36,9 +36,13 @@
 
 <script lang="ts">
 import { defineComponent, computed, onUnmounted, onDeactivated } from 'vue'
-import { throttle, xor } from 'lodash'
-import { useState, useWindowResize } from '@/hooks'
-import getScrollbarWidth from '@/utils/getScrollbarWidth'
+import { throttle } from 'lodash'
+import {
+  useState,
+  useWindowResize,
+  useKeepAliveWindowScrollTop,
+  useWindowScrollLock,
+} from '@/hooks'
 import Header from '@/layouts/components/header/Header.vue'
 import Footer from '@/layouts/components/footer/Footer.vue'
 import HeaderMobile from '@/layouts/components/header/HeaderMobile.vue'
@@ -49,25 +53,13 @@ export default defineComponent({
   components: { Header, Footer, HeaderMobile, NavDrawer },
   props: { headerPlaceholder: { type: Boolean, default: true } },
   setup() {
+    useKeepAliveWindowScrollTop()
     const windowSize = useWindowResize()
     const isMobile = computed(() => windowSize.value.innerWidth <= 600)
     const [shouldDrawerOpen, setShouldDrawerOpen] = useState(false)
 
-    const removeScrollLock = () => {
-      const body = document.querySelector('body')
-      // TODO: add a fake scroll bar element
-      if (body instanceof HTMLElement) {
-        body.style.overflow = 'auto'
-        body.style.width = '100%'
-      }
-    }
-    const addScrollLock = () => {
-      const body = document.querySelector('body')
-      if (body instanceof HTMLElement) {
-        body.style.overflow = 'hidden'
-        body.style.width = `calc(100% - ${String(getScrollbarWidth())}px)`
-      }
-    }
+    const [removeScrollLock, addScrollLock] = useWindowScrollLock()
+
     const toggleDrawer = throttle(
       () => {
         setShouldDrawerOpen(!shouldDrawerOpen.value)
@@ -76,14 +68,6 @@ export default defineComponent({
         } else {
           removeScrollLock()
         }
-        // const body = document.querySelector('body')
-        // if (body instanceof HTMLElement) {
-        //   body.style.overflow = xor(['hidden', 'auto'], [body.style.overflow])[0]
-        //   body.style.width = xor(
-        //     [`calc(100% - ${String(getScrollbarWidth())}px)`, '100%'],
-        //     [body.style.width]
-        //   )[0]
-        // }
       },
       500,
       {
@@ -101,12 +85,10 @@ export default defineComponent({
 
     onUnmounted(() => {
       setShouldDrawerOpen(false)
-      removeScrollLock()
     })
 
     onDeactivated(() => {
       setShouldDrawerOpen(false)
-      removeScrollLock()
     })
 
     return { isMobile, handleMDrawerToggleEvent, shouldDrawerOpen, handleClickFakeAfterEvent }
@@ -115,6 +97,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/app';
+::v-deep() {
+  @include app.global;
+}
+
 $drawer-width: 260px;
 .page {
   position: relative;

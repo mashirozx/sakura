@@ -8,8 +8,11 @@ import useReachElementSide from './useReachElementSide'
 import { useElementRef, useElementRefs } from './useElementRef'
 import useOffsetDistance from './useOffsetDistance'
 import useMDCRipple from './mdc/useMDCRipple'
-import useMessage from './useMessage'
+import useMessage, { useCommonMessages } from './useMessage'
 import useTypewriterEffect from './useTypewriterEffect'
+import useIntervalWatcher from './useIntervalWatcher'
+import useKeepAliveWindowScrollTop from './useKeepAliveWindowScrollTop'
+import useWindowScrollLock from './useWindowScrollLock'
 
 export {
   useState,
@@ -29,5 +32,9 @@ export {
   useElementRefs,
   useOffsetDistance,
   useMessage,
+  useCommonMessages,
   useTypewriterEffect,
+  useIntervalWatcher,
+  useKeepAliveWindowScrollTop,
+  useWindowScrollLock,
 }

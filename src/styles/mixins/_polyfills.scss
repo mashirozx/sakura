@@ -35,3 +35,41 @@
     @error "The second paramater $flex-flow is set to be '#{$flex-flow}', which is illegal.";
   }
 }
+
+@mixin _flex-gap-unset($row: true) {
+  $margin: 0;
+  $transform: 0;
+  @if $row {
+    margin-left: $transform;
+    margin-right: $transform;
+  } @else {
+    margin-top: $transform;
+    margin-bottom: $transform;
+  }
+  > * {
+    @if $row {
+      margin-left: $margin;
+      margin-right: $margin;
+    } @else {
+      margin-top: $margin;
+      margin-bottom: $margin;
+    }
+  }
+}
+
+// unset flex-gap, used in @media screen width rules
+@mixin flex-gap-unset($flex-flow: 'row nowrap') {
+  @if $flex-flow== 'row nowrap' or $flex-flow== 'row-reverse nowrap' {
+    @include _flex-gap-unset(true);
+  } @else if $flex-flow== 'column nowrap' or $flex-flow== 'column-reverse nowrap' {
+    @include _flex-gap-unset(false);
+  } @else if $flex-flow== 'row wrap' or $flex-flow== 'row-reverse wrap' {
+    @include _flex-gap-unset(true);
+    @include _flex-gap-unset(false);
+  } @else if $flex-flow== 'column wrap' or $flex-flow== 'column-reverse wrap' {
+    @include _flex-gap-unset(true);
+    @include _flex-gap-unset(false);
+  } @else {
+    @error "The second paramater $flex-flow is set to be '#{$flex-flow}', which is illegal.";
+  }
+}

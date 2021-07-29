@@ -42,9 +42,13 @@ export default defineComponent({
       }
     })
 
-    // watch(resultRef,result=>{
-    //   if()
-    // })
+    watch(
+      () => props.result,
+      (resultProp) => {
+        resultRef.value = resultProp
+      },
+      { deep: true }
+    )
 
     return { resultRef, isMax }
   },

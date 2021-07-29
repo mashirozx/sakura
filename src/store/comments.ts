@@ -15,8 +15,9 @@ interface FetchParams {
 
 export default function comments(): object {
   const defaultCommentStore: CommentStore = {}
-  const [commentStore, setCommentStore]: [Ref<CommentStore>, (arg: CommentStore) => void] =
-    usePersistedState('commentStore', defaultCommentStore)
+  const [commentStore, setCommentStore] = false
+    ? usePersistedState('commentStore', defaultCommentStore)
+    : useState(defaultCommentStore)
 
   const resHandler = (
     state: FetchParams['state'],

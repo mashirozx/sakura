@@ -20,7 +20,7 @@ export default defineComponent({
   props: {
     positionX: { type: String, default: 'right' }, // left center right
     positionY: { type: String, default: 'top' }, // top bottom
-    width: { type: String, default: '380px' },
+    // width: { type: String, default: '380px' },
   },
   setup(props) {
     const { messageList } = useInjector(messages)
@@ -43,7 +43,7 @@ export default defineComponent({
         '--to-70': props.positionX === 'right' ? '100%' : '-100%',
         '--to-100': props.positionX === 'right' ? '100%' : '-100%',
         '--absolute-fix': props.positionY === 'bottom' ? '-100%' : '0',
-        '--width': props.width,
+        // '--width': props.width,
       }
     })
 
@@ -54,7 +54,17 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .messages__container {
-  width: calc(var(--width) + 12px);
+  --msg-width: var(--message-width, 380px);
+  @media screen and (max-width: 500px) {
+    --msg-width: var(--message-width, 300px);
+  }
+  @media screen and (max-width: 400px) {
+    --msg-width: var(--message-width, 250px);
+  }
+  @media screen and (max-width: 360px) {
+    --msg-width: var(--message-width, 80vw);
+  }
+  width: calc(var(--msg-width) + 12px);
   .message__wrapper {
     padding: 6px;
   }

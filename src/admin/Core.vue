@@ -47,10 +47,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, Ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { defineComponent, ref, Ref, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Swiper as SwiperInterface } from 'swiper'
-import { useInjector, useState, useMessage } from '@/hooks'
+import { useInjector, useState, useMessage, useIntervalWatcher } from '@/hooks'
 import store from './store'
 import options from './options'
 import type { Option } from './options'
@@ -90,11 +90,7 @@ export default defineComponent({
 
     const updateAutoHeight = (timeout = 0) => swiperRef.value?.updateAutoHeight(timeout)
 
-    // auto update height
-    onMounted(() => {
-      const timer = setInterval(() => updateAutoHeight(100), 100)
-      onBeforeUnmount(() => clearInterval(timer))
-    })
+    useIntervalWatcher(() => updateAutoHeight(100), 100)
 
     // messages
     const addMessage = useMessage()
@@ -213,7 +209,7 @@ export default defineComponent({
     flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 12px;
+    padding: 0 12px 12px 12px;
     width: calc(100% - 24px);
     @include polyfills.flex-gap(12px, 'row wrap');
   }

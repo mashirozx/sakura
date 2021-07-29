@@ -24,12 +24,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, computed, toRefs, onMounted, nextTick, ref } from 'vue'
+import { defineComponent, watch, computed, toRefs, onMounted, nextTick, ref, Comment } from 'vue'
 import { cloneDeep } from 'lodash'
 import camelcaseKeys from 'camelcase-keys'
-import { useInjector, useState, useRoute } from '@/hooks'
+import { useInjector, useState, useRoute, useMessage, useIntl } from '@/hooks'
 import { comments } from '@/store'
 import API from '@/api'
+import axiosErrorHandler from '@/utils/axiosErrorHandler'
 import CommentList from './CommentList.vue'
 import Pagination from '@/components/pagination/Pagination.vue'
 import Composer from './Composer.vue'
@@ -40,6 +41,8 @@ export default defineComponent({
     postId: Number,
   },
   setup(props) {
+    const addMessage = useMessage()
+    const intl = useIntl()
     const route = useRoute()
     // const commentPagination = {
     //   hash: route.hash, // TODO: support nested
@@ -51,7 +54,7 @@ export default defineComponent({
     const [page, setPage] = useState(1)
     const [perPage, setPerpage] = useState(10)
     const [totalPage, setTotalPage] = useState(1)
-    const [commentData, setCommentData] = useState([])
+    const [commentData, setCommentData] = useState([] as Comment[])
 
     const namespace = computed(() => `comment-for-post-${postId.value}`)
 
@@ -92,18 +95,27 @@ export default defineComponent({
       API.Sakura.v1
         .createComment({ authorEmail, authorName, authorUrl, content, parent, post })
         .then((res) => {
-          const _commentData = cloneDeep(commentData.value)
+          const _commentData = cloneDeep(commentData.value) as Comment[]
           _commentData.push(camelcaseKeys(res.data))
           setCommentData(_commentData)
-          console.log(res.data, commentData.value)
+          // console.log(res.data, commentData.value)
+          addMessage({
+            type: 'success',
+            title: intl.formatMessage({
+              id: 'messages.comment.submit.success',
+              defaultMessage: 'Comment post successfully.',
+            }),
+          })
           composerRef.value?.clearInputContent()
         })
         .catch((error) => {
-          if (error.response) {
-            console.error(error.response)
-          } else {
-            console.error(error)
-          }
+          const titleMsg = intl.formatMessage({
+            id: 'messages.comment.submit.error',
+            defaultMessage: 'Comment post failure.',
+          })
+          const errorMsg = axiosErrorHandler(error).msg
+          console.log(errorMsg)
+          addMessage({ type: 'error', title: titleMsg, detail: errorMsg, closeTimeout: 0 })
         })
     }
 

@@ -11,14 +11,6 @@
               <div class="title">
                 <span>{{ $props.message.title }}</span>
               </div>
-              <div
-                class="detailed"
-                :style="{ height: shouldShowDetail ? `${expandContentHeight}px` : '0px' }"
-              >
-                <div :class="['content', { show: shouldShowDetail }]" :ref="setExpandContentRef">
-                  <span>{{ $props.message.detail }}</span>
-                </div>
-              </div>
             </div>
             <div
               v-if="$props.message.detail"
@@ -30,6 +22,16 @@
             </div>
             <div class="title__content--close" :title="msg.close" @click="handleCloseMessageEvent">
               <i class="fas fa-times-circle"></i>
+            </div>
+          </div>
+          <div class="row__wrapper--detail">
+            <div
+              class="detailed"
+              :style="{ maxHeight: shouldShowDetail ? `${expandContentHeight}px` : '0px' }"
+            >
+              <div class="content" :ref="setExpandContentRef">
+                <span>{{ $props.message.detail }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -114,6 +116,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use "sass:color";
 @use '@/styles/mixins/polyfills';
+@use '@/styles/mixins/text';
 
 .item__container {
   --text-color: #3c434a;
@@ -131,13 +134,14 @@ export default defineComponent({
   &[type='error'] {
     --highlight-color: #f93154; // danger
   }
-  width: var(--width);
+  width: var(--msg-width);
   background: var(--background-color);
   border-left: 3px solid var(--highlight-color, #757575);
   > .item__content {
     width: calc(100% - 24px);
     padding: 12px;
     > .flex-box {
+      width: 100%;
       display: flex;
       flex-flow: row nowrap;
       align-items: space-between;
@@ -157,16 +161,18 @@ export default defineComponent({
           display: flex;
           flex-flow: column nowrap;
           align-items: flex-start;
+          // overflow-wrap: anywhere;
           > .row__wrapper {
             &--title {
-              width: 100%;
               display: flex;
               flex-flow: row nowrap;
               justify-content: space-between;
               align-items: flex-start;
               @include polyfills.flex-gap(12px, 'row nowrap');
+              width: calc(100% + 12px);
               > * span {
                 line-height: 16px;
+                @include text.word-break;
               }
               > .title__content {
                 &--message {
@@ -177,35 +183,36 @@ export default defineComponent({
                       color: var(--text-color);
                     }
                   }
-                  > .detailed {
-                    transition: height 0.5s cubic-bezier(0, 0, 0.3, 1);
-                    overflow: hidden;
-                    > .content {
-                      padding-top: 6px;
-                      width: 100%;
-                      height: auto;
-                      transform: scaleY(0);
-                      transform-origin: top;
-                      transition: transform 0.5s cubic-bezier(0, 0, 0.3, 1);
-                      &.show {
-                        transform: scaleY(1);
-                      }
-                      span {
-                        color: var(--text-color-lighter-30);
-                      }
-                    }
-                  }
                 }
                 &--collapse {
                   flex: 0 0 auto;
                   transform: scaleY(1);
                   transition: transform 0.5s cubic-bezier(0, 0, 0.3, 1);
+                  cursor: pointer;
                   &.reverse {
                     transform: scaleY(-1);
                   }
                 }
                 &--close {
                   flex: 0 0 auto;
+                  cursor: pointer;
+                  margin-right: 0;
+                }
+              }
+            }
+            &--detail {
+              > .detailed {
+                width: 100%;
+                max-height: 0;
+                transition: max-height 0.3s ease-in-out;
+                overflow: hidden;
+                > .content {
+                  padding-top: 6px;
+                  width: 100%;
+                  span {
+                    color: var(--text-color-lighter-30);
+                    @include text.word-break;
+                  }
                 }
               }
             }

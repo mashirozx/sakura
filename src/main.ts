@@ -9,6 +9,7 @@ import { auth, init, posts, comments, messages } from './store'
 import { intlPlugin } from './locales'
 import UiIcon from '@/components/icon/UiIcon.vue'
 import Image from '@/components/image/Image.vue'
+import Link from '@/components/link/Link.vue'
 
 const theWindow = window as any
 theWindow.router = router
@@ -20,4 +21,5 @@ app.use(intlPlugin)
 app.use(VueSvgIconPlugin, { tagName: 'svg-icon' })
 app.component('UiIcon', UiIcon)
 app.component('Image', Image)
+app.component('Link', Link)
 app.mount('#app')

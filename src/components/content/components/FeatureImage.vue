@@ -31,17 +31,7 @@
         </div>
         <div class="flex-box">
           <div class="column__wrapper--publish">
-            <span>{{ $props.data.publistTime }}</span>
-          </div>
-        </div>
-        <div class="flex-box">
-          <div class="column__wrapper--words">
-            <span>{{ $props.data.wordCount }}</span>
-          </div>
-        </div>
-        <div class="flex-box">
-          <div class="column__wrapper--reads">
-            <span>{{ $props.data.readCount }}</span>
+            <span>{{ $props.data.publistTimeBrief }}</span>
           </div>
         </div>
       </div>
@@ -74,6 +64,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/styles/mixins/text';
+@use '@/styles/mixins/sizes';
 @use '@/styles/mixins/polyfills';
 .feature-image__container {
   width: 100%;
@@ -89,20 +80,21 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     z-index: -1;
-    &--image {
-    }
+    // &--image {
+    // }
     &--pattern {
       background: yellowgreen;
     }
   }
   .post-info__wrapper {
     width: 100%;
-    max-width: 800px;
+    max-width: #{sizes.$post-main-content-max-width}; // 800px
     padding-bottom: 24px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
     align-items: flex-start;
+    margin: 0 12px;
     > * {
       display: flex;
       flex-flow: row nowrap;
@@ -116,8 +108,8 @@ export default defineComponent({
           line-height: 48px;
           font-size: xx-large;
           color: #ffffff;
-          // @include text.line-number-limit(1);
-          // @include text.text-shadow-offset;
+          @include text.line-number-limit(4);
+          @include text.text-shadow-offset;
         }
       }
       &--info {
@@ -164,14 +156,10 @@ export default defineComponent({
                 margin-right: 6px;
               }
             }
-            &--author {
-            }
-            &--publish {
-            }
-            &--words {
-            }
-            &--reads {
-            }
+            // &--author {
+            // }
+            // &--publish {
+            // }
           }
         }
       }

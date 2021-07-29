@@ -1,15 +1,15 @@
 <template>
-  <div class="single-content__wrapper" v-if="postData">
-    <div class="featuer-image__wrapper">
+  <div class="single-content__wrapper">
+    <div class="featuer-image__wrapper" v-if="postData.publistTimeBrief">
       <FeatureImage :data="postData"></FeatureImage>
     </div>
-    <div class="article__wrapper">
+    <div class="article__wrapper" v-if="postData.content">
       <Article :content="postData.content"></Article>
     </div>
-    <div class="content-loader__wrapper" v-show="postFetchStatus === 'fetching'">
+    <div class="content-loader__wrapper" v-show="postFetchStatus === 'pending'">
       <BookLoader></BookLoader>
     </div>
-    <div class="comment__wrapper">
+    <div class="comment__wrapper" v-if="postId">
       <Comment :postId="postId"></Comment>
     </div>
   </div>
@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
+import { isEmpty } from 'lodash'
 import contentHandler from './utils/contentHandler'
 import FeatureImage from './components/FeatureImage.vue'
 import Article from './components/Article.vue'
@@ -32,7 +33,8 @@ export default defineComponent({
   setup(props) {
     const { postData, postFetchStatus } = contentHandler(props)
     const postId = computed(() => {
-      return postData.value?.id
+      if (isEmpty(postData.value)) return false
+      return (postData.value as Post)?.id
     })
     return { postData, postFetchStatus, postId }
   },
@@ -41,6 +43,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/styles/mixins/tags';
+@use '@/styles/mixins/sizes';
 @use '@/styles/mixins/skeleton';
 .single-content__wrapper {
   width: 100%;
@@ -51,15 +54,11 @@ export default defineComponent({
   .featuer-image__wrapper {
     width: 100%;
   }
-  .article__wrapper {
-    width: 100%;
-    max-width: 800px;
-    padding-top: 24px;
-  }
+  .article__wrapper,
   .comment__wrapper {
-    width: 100%;
-    max-width: 800px;
-    padding-top: 24px;
+    width: calc(100% - 12px * 2);
+    max-width: #{sizes.$post-main-content-max-width}; // 800px
+    padding: 24px 12px 0 12px;
   }
 }
 </style>

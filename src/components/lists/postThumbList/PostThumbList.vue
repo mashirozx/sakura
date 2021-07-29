@@ -7,7 +7,7 @@
         :type="index % 2 ? 'normal' : 'reverse'"
       ></PostThumbCardIndex>
     </div>
-    <div class="loader__wrapper" v-show="fetchStatus === 'fetching'">
+    <div class="loader__wrapper" v-show="fetchStatus === 'pending'">
       <BookLoader></BookLoader>
     </div>
     <div class="last-page__wrapper" v-show="isTheLastPage">no more</div>
@@ -17,7 +17,14 @@
 
 <script lang="ts">
 import { defineComponent, computed, onMounted, Ref } from 'vue'
-import { useInjector, useState, useElementRef, useReachElementSide } from '@/hooks'
+import {
+  useInjector,
+  useState,
+  useElementRef,
+  useReachElementSide,
+  useMessage,
+  useIntl,
+} from '@/hooks'
 import { posts } from '@/store'
 import PostThumbCardIndex from '@/components/cards/postThumbCards/PostThumbCardIndex.vue'
 import BookLoader from '@/components/loader/BookLoader.vue'
@@ -37,8 +44,10 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const addMessage = useMessage()
+    const intl = useIntl()
     const [listContainerRef, setListContainerRef] = useElementRef()
-    const [fetchStatus, setFetchStatus] = useState('fetching')
+    const [fetchStatus, setFetchStatus] = useState('inite' as FetchingStatus)
     const [currentPage, setCurrentPage] = useState(props.page)
     const [postList, setPostList]: [Ref<Post[]>, (attr: any) => any] = useState([] as Post[])
     const {
@@ -66,7 +75,9 @@ export default defineComponent({
     }
 
     const fetch = async () => {
-      setFetchStatus('fetching')
+      if (fetchStatus.value !== 'cached') {
+        setFetchStatus('pending')
+      }
       fetchPost({
         state: postsStore,
         namespace: props.namespace,
@@ -76,10 +87,15 @@ export default defineComponent({
           context: 'embed',
           ...props.fetchParameters,
         },
-      }).then(() => {
-        get()
-        setFetchStatus('done')
+        addMessage,
       })
+        .then(() => {
+          get()
+          setFetchStatus('success')
+        })
+        .catch(() => {
+          setFetchStatus('error')
+        })
     }
 
     const next = () => {
@@ -108,11 +124,21 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      // this will only work when set to cache post store
       window.setTimeout(() => {
         get()
-        // setFetchStatus('done')
-        // TODO: use a transparent mask (or just a popup) to show: 'refeshing content', when it fails or timeout, show popup. If the postsStore is empty, show BookLoader. In other words, BookLoader should only be displayed when real fetching API.
-      }, 500) // postsStore injection may not be OK when mounted
+        if (postList.value.length > 0) {
+          setFetchStatus('cached')
+          const msg = intl.formatMessage({
+            id: 'messages.postList.cache.found',
+            defaultMessage: 'Fetching the latest post list...',
+          })
+          addMessage({
+            type: 'info',
+            title: msg,
+          })
+        }
+      }, 0) // postsStore injection may not be OK when mounted
       fetch()
     })
 

@@ -2,21 +2,25 @@
   <div class="card__container mdc-card mdc-elevation--z8" :type="$props.type" v-if="data">
     <div class="card__content mdc-card__primary-action" :ref="setContentRef">
       <div class="ripple__mask mdc-card__ripple"></div>
-      <div class="thumbnail__wrapper" @click="handleViewPostDetailEvent">
-        <Image
-          class="image"
-          :src="$props.data.featureImage.thumbnail"
-          :alt="$props.data.title"
-          placeholder="https://via.placeholder.com/1024x768"
-          :draggable="false"
-        />
+      <div class="thumbnail__wrapper">
+        <Link :url="$props.data.link">
+          <Image
+            class="image"
+            :src="$props.data.featureImage.thumbnail"
+            :alt="$props.data.title"
+            placeholder="https://via.placeholder.com/1024x768"
+            :draggable="false"
+          />
+        </Link>
       </div>
       <div class="details__wrapper">
         <div class="row__wrapper--date">
           <span><i class="far fa-clock"></i> {{ $props.data.publistTime }}</span>
         </div>
-        <div class="row__wrapper--title" @click="handleViewPostDetailEvent">
-          <span>{{ $props.data.title }}</span>
+        <div class="row__wrapper--title">
+          <Link :url="$props.data.link">
+            <span>{{ $props.data.title }}</span>
+          </Link>
         </div>
         <div class="row__wrapper--info">
           <div class="column__wrapper--read_count">
@@ -32,19 +36,20 @@
         <div class="row__wrapper--abstruct">
           <span>{{ $props.data.excerpt }} </span>
         </div>
-        <!-- <div class="row__wrapper--tags">
+        <div class="row__wrapper--tags" v-if="$props.data.tags.length > 0">
           <div class="tags__container">
-            <div class="tag__wrapper" v-for="(tag, index) in tags" :key="index">
-              <div class="tag yolk">
-                <span class="text">{{ tag }}</span>
-              </div>
+            <div class="tag__wrapper" v-for="(tag, index) in $props.data.tags" :key="index">
+              <Link :to="{ name: 'TagArchive', params: { tag: tag.slug } }">
+                <NormalChip :context="tag.name"></NormalChip>
+              </Link>
             </div>
           </div>
-        </div> -->
-        <!-- // TODO: use tags instead of button, button is useless! -->
-        <div class="row__wrapper--button" @click="handleViewPostDetailEvent">
+        </div>
+        <div class="row__wrapper--button">
           <div class="button__wrapper">
-            <NormalButton icon="fab fa-readme" :context="buttonContext"></NormalButton>
+            <Link :url="$props.data.link">
+              <NormalButton icon="fab fa-readme" :context="buttonContext"></NormalButton>
+            </Link>
           </div>
         </div>
       </div>
@@ -55,11 +60,11 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useIntl, useRouter, useElementRef, useMDCRipple } from '@/hooks'
-import linkHandler from '@/utils/linkHandler'
 import NormalButton from '@/components/buttons/NormalButton.vue'
+import NormalChip from '@/components/chips/NormalChip.vue'
 
 export default defineComponent({
-  components: { NormalButton },
+  components: { NormalButton, NormalChip },
   props: {
     data: { type: Object },
     type: { type: String, default: 'normal' }, // normal | reverse | mobile
@@ -76,13 +81,8 @@ export default defineComponent({
       defaultMessage: 'Read More',
     })
 
-    const handleViewPostDetailEvent = () => {
-      linkHandler.handleClickLink({ url: props.data?.link ?? '', router, target: '_blank' })
-    }
-
     return {
       buttonContext,
-      handleViewPostDetailEvent,
       setContentRef,
     }
   },
@@ -96,11 +96,11 @@ export default defineComponent({
 @use '@/styles/mixins/polyfills';
 
 .card__container {
-  // TODO: sizing in parent
   width: 780px;
   height: 300px;
   background: #ffffff;
   border-radius: 10px;
+  user-select: none;
   .card__content {
     width: 100%;
     height: 100%;
@@ -151,7 +151,7 @@ export default defineComponent({
         }
         &--title {
           cursor: pointer;
-          > span {
+          span {
             line-height: 32px;
             font-size: large;
             font-weight: 700;
@@ -186,7 +186,7 @@ export default defineComponent({
           }
         }
         &--tags {
-          max-height: 16px;
+          max-height: 32px;
           overflow: hidden;
           align-items: flex-start;
           .tags__container {
@@ -200,7 +200,9 @@ export default defineComponent({
               flex-flow: row nowrap;
               justify-content: flex-start;
               align-items: center;
-              @include tags.tag-style;
+              .router-link {
+                text-decoration: none;
+              }
             }
           }
         }

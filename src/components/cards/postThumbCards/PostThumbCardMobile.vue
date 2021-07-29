@@ -1,16 +1,20 @@
 <template>
   <div class="card__container">
-    <div class="row__wrapper--thumbnail" @click="handleViewPostDetailEvent">
-      <Image
-        class="image"
-        :src="$props.data.featureImage.thumbnail"
-        :alt="$props.data.title"
-        placeholder="https://via.placeholder.com/1024x768"
-        :draggable="false"
-      />
+    <div class="row__wrapper--thumbnail">
+      <Link :url="$props.data.link">
+        <Image
+          class="image"
+          :src="$props.data.featureImage.thumbnail"
+          :alt="$props.data.title"
+          placeholder="https://via.placeholder.com/1024x768"
+          :draggable="false"
+        />
+      </Link>
     </div>
-    <div class="row__wrapper--title" @click="handleViewPostDetailEvent">
-      <span>{{ $props.data.title }}</span>
+    <div class="row__wrapper--title">
+      <Link :url="$props.data.link">
+        <span>{{ $props.data.title }}</span>
+      </Link>
     </div>
     <div class="row__wrapper--statistics">
       <div class="column__wrapper--read_count">
@@ -26,16 +30,12 @@
     <div class="row__wrapper--abstract">
       <span>{{ $props.data.excerpt }} </span>
     </div>
-    <div class="row__wrapper--tags">
+    <div class="row__wrapper--tags" v-if="$props.data.tags.length > 0">
       <div class="tags__container">
-        <div
-          class="tag__wrapper"
-          v-for="(tag, index) in ['vue', 'javascript', 'php', 'wordpress']"
-          :key="index"
-        >
-          <div class="tag yolk">
-            <span class="text">{{ tag }}</span>
-          </div>
+        <div class="tag__wrapper" v-for="(tag, index) in $props.data.tags" :key="index">
+          <Link :to="{ name: 'TagArchive', params: { tag: tag.slug } }">
+            <NormalChip :context="tag.name"></NormalChip>
+          </Link>
         </div>
       </div>
     </div>
@@ -45,11 +45,10 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useIntl, useRouter } from '@/hooks'
-import linkHandler from '@/utils/linkHandler'
-import NormalButton from '@/components/buttons/NormalButton.vue'
+import NormalChip from '@/components/chips/NormalChip.vue'
 
 export default defineComponent({
-  components: { NormalButton },
+  components: { NormalChip },
   props: {
     data: { type: Object /*, default: () => postMock*/ },
     type: { type: String, default: 'normal' }, // normal | reverse | mobile
@@ -63,13 +62,8 @@ export default defineComponent({
       defaultMessage: 'Read More',
     })
 
-    const handleViewPostDetailEvent = () => {
-      linkHandler.handleClickLink({ url: props.data?.link ?? '', router, target: '_blank' })
-    }
-
     return {
       buttonContext,
-      handleViewPostDetailEvent,
     }
   },
 })
@@ -77,7 +71,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/styles/mixins/text';
-@use '@/styles/mixins/tags';
 @use '@/styles/mixins/polyfills';
 
 .card__container {
@@ -86,6 +79,7 @@ export default defineComponent({
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
+  user-select: none;
   @include polyfills.flex-gap(12px, 'column nowrap');
   > * {
     width: calc(100% - 24px);
@@ -95,7 +89,7 @@ export default defineComponent({
       width: 100%;
     }
     &--tags {
-      max-height: 16px;
+      max-height: 32px;
       overflow: hidden;
       align-items: flex-start;
       .tags__container {
@@ -109,7 +103,6 @@ export default defineComponent({
           flex-flow: row nowrap;
           justify-content: flex-start;
           align-items: center;
-          @include tags.tag-style;
         }
       }
     }

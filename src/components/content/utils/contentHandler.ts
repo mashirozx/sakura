@@ -1,17 +1,22 @@
 import { computed, onMounted, Ref, nextTick } from 'vue'
-import { useInjector, useState, useIntl, useRoute } from '@/hooks'
-import { posts } from '@/store'
+import { isEmpty } from 'lodash'
+import { useInjector, useState, useIntl, useRoute, useMessage, useCommonMessages } from '@/hooks'
+import { posts, messages } from '@/store'
 import { GetPostParams, GetPageParams } from '@/api/Wp/v2' // interfaces
 import postFilter from '@/utils/filters/postFilter'
+
+export type Content = Post | {}
 
 export default function setup(props: {
   readonly singleType?: string | undefined
   readonly pageType?: string | undefined
 }) {
   const intl = useIntl()
+  const addMessage = useMessage()
+  const commonMessages = useCommonMessages()
   const route = useRoute()
-  const [fetchStatus, setFetchStatus] = useState('fetching')
-  const [content, setContent]: [Ref<Post>, (attr: any) => any] = useState(null)
+  const [fetchStatus, setFetchStatus] = useState('inite' as FetchingStatus)
+  const [content, setContent] = useState({} as Content)
   const {
     postsStore,
     fetchPost,
@@ -19,13 +24,22 @@ export default function setup(props: {
     getPostsList,
   }: { postsStore: Ref<PostStore>; [key: string]: any } = useInjector(posts) // TODO: fix useInjector return type
 
+  // TODO: [bug] https://github.com/mashirozx/sakura-next/issues/148
+  // console.log('[DEBUG]', route.params)
+  // addMessage({
+  //   title: '[DEBUG] contentHandler',
+  //   detail: JSON.stringify(route.params),
+  //   type: 'info',
+  //   closeTimeout: 0,
+  // })
+
   const { slug, postId, postname } = route.params
   const isSingle = props.singleType ? true : false
   const namespace = isSingle ? `single-${postId || postname}` : `page-${slug}`
 
   // get parsed post content
   const data = computed(() =>
-    content.value ? postFilter(content.value, isSingle ? 'single' : 'page') : null
+    !isEmpty(content.value) ? postFilter(content.value as Post, isSingle ? 'single' : 'page') : {}
   )
 
   const defaultFetchOpts: GetPostParams | GetPageParams = { page: 1, perPage: 1 }
@@ -33,42 +47,62 @@ export default function setup(props: {
   if (postId) {
     defaultFetchOpts['include'] = Number(postId)
   } else if (postname) {
-    defaultFetchOpts['slug'] = postname
+    defaultFetchOpts['slug'] = postname as string
   } else if (slug) {
-    defaultFetchOpts['slug'] = slug
+    defaultFetchOpts['slug'] = slug as string
   } else if (isSingle) {
-    throw new Error(
-      intl.formatMessage(
-        {
-          id: 'messages.wordpress.permalink.shouldIncludeFieldsInSingle',
-          defaultMessage:
-            'WordPress permalink should include at least one of %post_id%, %postname%.\nYou may set them here: {baseUrl}/wp-admin/options-permalink.php',
-        },
-        {
-          baseUrl: window.location.origin,
-        }
-      )
+    // TODO: should wait router https://github.com/mashirozx/sakura-next/issues/148
+    const errorMsg = intl.formatMessage(
+      {
+        id: 'messages.wordpress.permalink.shouldIncludeFieldsInSingle',
+        defaultMessage:
+          'WordPress permalink should include at least one of %post_id%, %postname%.\nYou may set them here: {baseUrl}/wp-admin/options-permalink.php',
+      },
+      {
+        baseUrl: window.location.origin,
+      }
     )
+    addMessage({
+      title: commonMessages.javascriptErrorTitle,
+      detail: errorMsg,
+      type: 'error',
+      closeTimeout: 0,
+    })
+    console.error(errorMsg)
   } else {
-    throw new Error(
-      intl.formatMessage({
-        id: 'messages.wordpress.permalink.shouldIncludeFieldsInPost',
-        defaultMessage: 'WordPress pages should use %slug% as the permalink.',
-      })
-    )
+    const errorMsg = intl.formatMessage({
+      id: 'messages.wordpress.permalink.shouldIncludeFieldsInPost',
+      defaultMessage: 'WordPress pages should use %slug% as the permalink.',
+    })
+    addMessage({
+      title: commonMessages.javascriptErrorTitle,
+      detail: errorMsg,
+      type: 'error',
+      closeTimeout: 0,
+    })
+    console.error(errorMsg)
   }
 
   const fetchContent = () => {
     const fetchOption = isSingle ? fetchPost : fetchPage
-    setFetchStatus('fetching')
+    if (fetchStatus.value !== 'cached') {
+      setFetchStatus('pending')
+    }
     fetchOption({
       state: postsStore,
       namespace,
       opts: { ...defaultFetchOpts },
-    }).then(() => {
-      getContent()
-      setFetchStatus('done')
+      addMessage,
     })
+      .then(() => {
+        window.setTimeout(() => {
+          getContent()
+          setFetchStatus('success')
+        }, 500)
+      })
+      .catch(() => {
+        setFetchStatus('error')
+      })
   }
 
   const getContent = () => {
@@ -84,8 +118,17 @@ export default function setup(props: {
   onMounted(() => {
     nextTick(() => {
       getContent()
-      // setFetchStatus('refreshing')
-      // TODO: use a transparent mask (or just a popup) to show: 'refeshing content', when it fails or timeout, show popup. If the postsStore is empty, show BookLoader. In other words, BookLoader should only be displayed when real fetching API.
+      if ((content.value as Post)?.content) {
+        setFetchStatus('cached')
+        const msg = intl.formatMessage({
+          id: 'messages.postContent.cache.found',
+          defaultMessage: 'Fetching the latest post content...',
+        })
+        addMessage({
+          type: 'info',
+          title: msg,
+        })
+      }
     })
     fetchContent()
   })

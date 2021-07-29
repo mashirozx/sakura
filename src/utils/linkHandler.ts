@@ -1,4 +1,4 @@
-import { Router } from 'vue-router'
+import type { Router } from 'vue-router'
 import logger from './logger'
 
 export default class linkHandler {
@@ -20,7 +20,8 @@ export default class linkHandler {
 
   public static internalLinkRouterPath(url: string) {
     if (this.isInternal(url)) {
-      const { pathname, search, hash } = this.urlParser(url)
+      const parsed = this.urlParser(url)
+      const { pathname, search, hash } = this.urlParser(parsed.href)
       return pathname + search + hash
     } else {
       throw new Error('Not internal link')
@@ -38,10 +39,9 @@ export default class linkHandler {
   }) {
     logger('log', 'linkHandler: ', url)
     if (this.isInternal(url)) {
-      const parsed = this.urlParser(url)
       // TODO: why not import? cause vue codes cannot pass the jest test...
       // router = router ?? ((window as any).router as Router)
-      router.push(this.internalLinkRouterPath(parsed.href))
+      router.push(this.internalLinkRouterPath(url))
       // window.setTimeout(() => (window.location.hash = parsed.hash))
     } else {
       console.log('open: ', this.urlParser(url).href)

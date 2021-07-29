@@ -1,6 +1,11 @@
 <template>
   <div class="option__container">
-    <h3 class="column__wrapper--label"> {{ title }} </h3>
+    <h3 class="column__wrapper--label">
+      {{ title }}
+      <span class="restore" :title="msg.restoreTitle" @click="handleRestoreEvent"
+        ><i class="fas fa-redo-alt"></i
+      ></span>
+    </h3>
     <div class="column__wrapper--main">
       <div class="row__wrapper--option">
         <OutlinedInput
@@ -43,7 +48,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { useInjector } from '@/hooks'
+import { cloneDeep } from 'lodash'
+import { useInjector, useIntl } from '@/hooks'
 import store from './store'
 import validator from './validator'
 import OutlinedInput from '@/components/inputs/OutlinedInput.vue'
@@ -60,9 +66,16 @@ export default defineComponent({
   },
   emits: [],
   setup(props, { emit }) {
+    const intl = useIntl()
+    const msg = {
+      restoreTitle: intl.formatMessage({
+        id: 'admin.restore.title',
+        defaultMessage: 'Restore this option to default.',
+      }),
+    }
     const { namespace, type, title, desc, binds } = props.option
     const { config, updateOption } = useInjector(store)
-    const optionResultRef = ref(config.value[namespace] ?? props.option.default)
+    const optionResultRef = ref(config.value[namespace] ?? cloneDeep(props.option).default)
 
     watch(
       optionResultRef,
@@ -74,7 +87,11 @@ export default defineComponent({
       { immediate: true, deep: true }
     )
 
-    return { config, optionResultRef, type, title, desc, binds }
+    const handleRestoreEvent = () => {
+      optionResultRef.value = cloneDeep(props.option).default
+    }
+
+    return { msg, config, optionResultRef, type, title, desc, binds, handleRestoreEvent }
   },
 })
 </script>
@@ -96,6 +113,19 @@ export default defineComponent({
       flex: 0 0 auto;
       width: 200px;
       padding-top: 15px;
+      @media screen and (max-width: variables.$mobile-max-width) {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-top: 0;
+      }
+      > .restore {
+        padding-left: 6px;
+        font-size: 0.8em;
+        color: var(--mdc-theme-secondary, #1d2327);
+        :hover {
+          color: var(--mdc-theme-primary, #6200ee);
+        }
+      }
     }
     &--main {
       width: 100%;
@@ -112,6 +142,7 @@ export default defineComponent({
         &--desc {
           font-size: 14px;
           color: #646970;
+          // margin-block-end: 0;
         }
       }
     }

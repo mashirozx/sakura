@@ -11,38 +11,40 @@
       ></OutlinedTextarea>
     </div>
     <div class="row__wrapper--profile">
-      <div class="column__wrapper--avatar">
-        <div class="avatar__wrapper mdc-elevation--z1">
-          <Image :src="avatar" placeholder="" :avatar="false" alt="" :draggable="false"></Image>
+      <div class="flex-box">
+        <div class="column__wrapper--avatar">
+          <div class="avatar__wrapper mdc-elevation--z1">
+            <Image :src="avatar" placeholder="" :avatar="false" alt="" :draggable="false"></Image>
+          </div>
+          <div class="icon__wrapper avatar__wrapper mdc-elevation--z2">
+            <span class="gravatar">
+              <!-- <i class="fab fa-qq"></i> -->
+              <i class="fab fa-google"></i>
+            </span>
+          </div>
         </div>
-        <div class="icon__wrapper avatar__wrapper mdc-elevation--z2">
-          <span class="gravatar">
-            <!-- <i class="fab fa-qq"></i> -->
-            <i class="fab fa-google"></i>
-          </span>
+        <div class="column__wrapper--input username">
+          <OutlinedInput
+            v-model:content="inputAuthorName"
+            leadingIcon="fas fa-user"
+            :label="messages.nickname"
+          ></OutlinedInput>
         </div>
-      </div>
-      <div class="column__wrapper--input">
-        <OutlinedInput
-          v-model:content="inputAuthorName"
-          leadingIcon="fas fa-user"
-          :label="messages.nickname"
-        ></OutlinedInput>
-      </div>
-      <div class="column__wrapper--input">
-        <OutlinedInput
-          v-model:content="inputAuthorEmail"
-          leadingIcon="fas fa-envelope"
-          :label="messages.email"
-          @blur="handleEmailInputBlurEvent"
-        ></OutlinedInput>
-      </div>
-      <div class="column__wrapper--input">
-        <OutlinedInput
-          v-model:content="inputAuthorUrl"
-          leadingIcon="fas fa-home"
-          :label="messages.link"
-        ></OutlinedInput>
+        <div class="column__wrapper--input">
+          <OutlinedInput
+            v-model:content="inputAuthorEmail"
+            leadingIcon="fas fa-envelope"
+            :label="messages.email"
+            @blur="handleEmailInputBlurEvent"
+          ></OutlinedInput>
+        </div>
+        <div class="column__wrapper--input">
+          <OutlinedInput
+            v-model:content="inputAuthorUrl"
+            leadingIcon="fas fa-home"
+            :label="messages.link"
+          ></OutlinedInput>
+        </div>
       </div>
     </div>
     <!-- <div class="row__wrapper--options"></div> -->
@@ -164,47 +166,70 @@ export default defineComponent({
       }
     }
     &--profile {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center;
-      @include polyfills.flex-gap(12px, 'row nowrap');
-      .column__wrapper {
-        &--avatar {
-          flex: 0 0 auto;
-          position: relative;
-          > .avatar__wrapper {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            overflow: hidden;
-          }
-          > .icon__wrapper {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 20px;
-            height: 20px;
-            background: #03a9f4;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            span {
-              width: 12px;
-              height: 12px;
-              color: #fff;
-              line-height: 12px;
-              font-size: small;
-              &.gravatar {
-                transform: rotate(270deg);
+      > .flex-box {
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        @include polyfills.flex-gap(12px, 'row nowrap');
+        @media screen and (max-width: 800px) {
+          flex-flow: column nowrap;
+          @include polyfills.flex-gap-unset('row nowrap');
+          @include polyfills.flex-gap(12px, 'column nowrap');
+        }
+        .column__wrapper {
+          &--avatar {
+            flex: 0 0 auto;
+            position: relative;
+            @media screen and (max-width: 800px) {
+              position: absolute;
+              top: 0;
+              right: 0;
+              transform: scale(0.8);
+            }
+            > .avatar__wrapper {
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              overflow: hidden;
+            }
+            > .icon__wrapper {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+              width: 20px;
+              height: 20px;
+              background: #03a9f4;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              span {
+                width: 12px;
+                height: 12px;
+                color: #fff;
+                line-height: 12px;
+                font-size: small;
+                &.gravatar {
+                  transform: rotate(270deg);
+                }
               }
             }
           }
-        }
-        &--input {
-          flex: 1 1 auto;
-          width: 100%;
+          &--input {
+            flex: 1 1 auto;
+            width: 100%;
+            @media screen and (max-width: 800px) {
+              &.username {
+                ::v-deep() {
+                  .mdc-text-field__input {
+                    width: calc(100% - 80px);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

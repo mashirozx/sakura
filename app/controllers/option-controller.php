@@ -100,7 +100,7 @@ class OptionController extends BaseController
     if ($hasNoDiff) {
       return [
         'code' => 'save_config_succeed',
-        'message' => __('Configurations already up to date.', self::$text_domain),
+        'message' => __('Configuration is already up to date.', self::$text_domain),
       ];
     }
 
@@ -108,13 +108,13 @@ class OptionController extends BaseController
     if (!$config) {
       return new WP_Error(
         'save_config_failure',
-        __('Unable to save configuration.', self::$text_domain),
+        __('Unable to save the configuration.', self::$text_domain),
         array('status' => 500)
       );
     } else {
       return [
         'code' => 'save_config_succeed',
-        'message' => __('Configurations saved successfully.', self::$text_domain),
+        'message' => __('Configuration saved successfully.', self::$text_domain),
       ];
     }
   }

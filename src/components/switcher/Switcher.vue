@@ -6,7 +6,6 @@
       role="switch"
       :aria-checked="checked"
       :ref="setElRef"
-      @click="handleChange"
     >
       <div class="mdc-switch__track"></div>
       <div class="mdc-switch__handle-track">
@@ -35,7 +34,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
 import uniqueHash from '@/utils/uniqueHash'
-import { useElementRef } from '@/hooks'
+import { useElementRef, useIntervalWatcher } from '@/hooks'
 import useMDCSwitch from '@/hooks/mdc/useMDCSwitch'
 
 export default defineComponent({
@@ -54,17 +53,17 @@ export default defineComponent({
 
     const checked = ref(props.checked)
 
-    const handleChange = () => {
-      if (MDCSwitchRef.value) {
-        checked.value = !MDCSwitchRef.value.selected
+    useIntervalWatcher(() => {
+      if (MDCSwitchRef.value && MDCSwitchRef.value.selected !== checked.value) {
+        checked.value = MDCSwitchRef.value.selected
       }
-    }
+    }, 100)
 
     watch(
       () => props.checked,
       (value) => {
         checked.value = value
-        if (MDCSwitchRef.value) MDCSwitchRef.value.selected = !value
+        if (MDCSwitchRef.value) MDCSwitchRef.value.selected = value
       },
       { immediate: true }
     )
@@ -87,7 +86,7 @@ export default defineComponent({
 
     watch(checked, (value) => emit('update:checked', value))
 
-    return { id, setElRef, handleChange, checked }
+    return { id, setElRef, checked }
   },
 })
 </script>

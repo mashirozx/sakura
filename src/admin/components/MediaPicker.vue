@@ -139,12 +139,19 @@ export default defineComponent({
       (value) => {
         if (!props.multiple && value.length > 1) {
           selection.value = selection.value.slice(-1)
-          console.log(selection.value.length)
+          // console.log(selection.value.length)
         }
-        console.log(selection.value)
+        // console.log(selection.value)
         emit('update:selection', selection.value)
       },
       { deep: true }
+    )
+
+    watch(
+      () => props.selection as { id: number; url: string }[],
+      (selectionProp) => {
+        selection.value = selectionProp
+      }
     )
 
     return { open, add, del, userInput, selection }
@@ -183,9 +190,6 @@ export default defineComponent({
         flex-flow: row wrap;
         justify-content: flex-start;
         @include polyfills.flex-gap(12px, 'row wrap');
-        > .input__wrapper {
-          flex: 0 0 auto;
-        }
       }
     }
     &--preview {

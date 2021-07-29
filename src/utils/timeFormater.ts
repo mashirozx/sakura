@@ -15,7 +15,7 @@ export default class timeFormater {
     this.timestampFromNow = this.now - this.timestamp
   }
 
-  public getReadableTimeFromNow() {
+  public getTimeFromNow() {
     const gap = this.timestampFromNow
     let num: number = 0
     let unit: Unit = 'second'
@@ -38,7 +38,18 @@ export default class timeFormater {
       num = gap / (365 * 24 * 60 * 60 * 1000)
       unit = 'year'
     }
+    return { num, unit }
+  }
+
+  public getReadableTimeFromNow() {
+    const { num, unit } = this.getTimeFromNow()
     return intl.formatRelativeTime(Math.floor(num), unit, { style: 'narrow' })
+  }
+
+  public getReadableTimeFromNowBrief() {
+    const { num, unit } = this.getTimeFromNow()
+    const _num = Math.floor(num)
+    return timeFormater.commonUnites(_num)[unit]
   }
 
   public getFormatTime(
@@ -59,5 +70,57 @@ export default class timeFormater {
 
   public getDate() {
     return this.date
+  }
+
+  public static commonUnites = (num: number) => {
+    const year = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 year} other {{num, number, ::compact-short} years}}',
+      },
+      { num }
+    )
+    const month = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 month} other {{num, number, ::compact-short} monthes}}',
+      },
+      { num }
+    )
+    const day = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 day} other {{num, number, ::compact-short} days}}',
+      },
+      { num }
+    )
+    const hour = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 hour} other {{num, number, ::compact-short} hours}}',
+      },
+      { num }
+    )
+    const minute = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 minute} other {{num, number, ::compact-short} minutes}}',
+      },
+      { num }
+    )
+    const second = intl.formatMessage(
+      {
+        id: 'app.common.units.year',
+        defaultMessage:
+          '{num, plural, =0 {just now} =1 {1 second} other {{num, number, ::compact-short} seconds}}',
+      },
+      { num }
+    )
+    return { year, month, day, hour, minute, second }
   }
 }

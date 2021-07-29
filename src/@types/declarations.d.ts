@@ -53,7 +53,20 @@ interface WPPostAbstract {
   categories: [number?]
   categoriesMeta: { [key: string]: any }
   tags: [number?]
-  tagsMeta: { [key: string]: any }
+  tagsMeta: {
+    [key: string]: {
+      count: number
+      description: string
+      filter: string
+      name: string
+      parent: number
+      slug: string
+      taxonomy: string
+      termGroup: number
+      termId: number
+      termTaxonomyId: number
+    }
+  }
   commentCount: number
   viewCount: number
   wordsCount: number
@@ -117,3 +130,5 @@ interface CommentStore {
     pagination: Pagination
   }
 }
+
+declare type FetchingStatus = 'inite' | 'cached' | 'pending' | 'success' | 'error' | 'empty'
