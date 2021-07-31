@@ -131,4 +131,11 @@ interface CommentStore {
   }
 }
 
-declare type FetchingStatus = 'inite' | 'cached' | 'pending' | 'success' | 'error' | 'empty'
+declare type FetchingStatus =
+  | 'inite'
+  | 'cached'
+  | 'pending'
+  | 'success'
+  | 'error'
+  | 'empty'
+  | 'noMore'

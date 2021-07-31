@@ -10,13 +10,21 @@
     <div class="loader__wrapper" v-show="fetchStatus === 'pending'">
       <BookLoader></BookLoader>
     </div>
-    <div class="last-page__wrapper" v-show="isTheLastPage">no more</div>
-    <div class="navigation-bar__wrapper" v-show="!autoLoad">1 2 3 4 5 6 7</div>
+    <div class="last-page__wrapper" v-show="isTheLastPage">{{ lastPageMessage }}</div>
+    <div class="navigation-bar__wrapper" v-show="!$props.autoLoad">
+      <Pagination
+        :current="currentPage"
+        :total="totalPage"
+        @change:current="handlePageChangeEvent"
+        v-if="totalPage > 1"
+      ></Pagination>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, Ref } from 'vue'
+import { defineComponent, computed, onMounted, onBeforeMount } from 'vue'
+import type { Ref } from 'vue'
 import {
   useInjector,
   useState,
@@ -28,9 +36,10 @@ import {
 import { posts } from '@/store'
 import PostThumbCardIndex from '@/components/cards/postThumbCards/PostThumbCardIndex.vue'
 import BookLoader from '@/components/loader/BookLoader.vue'
+import Pagination from '@/components/pagination/Pagination.vue'
 
 export default defineComponent({
-  components: { PostThumbCardIndex, BookLoader },
+  components: { PostThumbCardIndex, BookLoader, Pagination },
   props: {
     namespace: { type: String, default: 'homepage' },
     page: { type: Number, default: 1 },
@@ -49,6 +58,7 @@ export default defineComponent({
     const [listContainerRef, setListContainerRef] = useElementRef()
     const [fetchStatus, setFetchStatus] = useState('inite' as FetchingStatus)
     const [currentPage, setCurrentPage] = useState(props.page)
+    const [currentPageCached, setCurrentPageCached] = useState(props.page) // used to calculate isLastPage
     const [postList, setPostList]: [Ref<Post[]>, (attr: any) => any] = useState([] as Post[])
     const {
       postsStore,
@@ -56,7 +66,7 @@ export default defineComponent({
       getPostsList,
     }: { postsStore: Ref<PostStore>; [key: string]: any } = useInjector(posts) // TODO: fix useInjector return type
 
-    const start = computed(() => (props.autoLoad ? 0 : (currentPage.value - 1) * props.perPage - 1))
+    const start = computed(() => (props.autoLoad ? 0 : (currentPage.value - 1) * props.perPage))
     const end = computed(() => currentPage.value * props.perPage - 1)
     const totalPage = computed(() =>
       postsStore.value.list[props.namespace]
@@ -78,7 +88,7 @@ export default defineComponent({
       if (fetchStatus.value !== 'cached') {
         setFetchStatus('pending')
       }
-      fetchPost({
+      await fetchPost({
         state: postsStore,
         namespace: props.namespace,
         opts: {
@@ -100,27 +110,41 @@ export default defineComponent({
 
     const next = () => {
       if (currentPage.value + 1 <= totalPage.value) {
+        console.log(currentPage.value, totalPage.value)
+
+        setCurrentPageCached(currentPage.value)
         setCurrentPage(currentPage.value + 1)
-        fetch()
+        fetch().then(() => setCurrentPageCached(currentPage.value))
       }
     }
     const prev = () => {
       if (currentPage.value - 1 > 0) {
+        setCurrentPageCached(currentPage.value)
         setCurrentPage(currentPage.value - 1)
-        fetch()
+        fetch().then(() => setCurrentPageCached(currentPage.value))
       }
     }
-    const goto = (page: number) => {
+    const goto = (page: number, reset = true) => {
       if (page <= totalPage.value && page > 0) {
+        if (reset) setPostList([] as Post[])
+        window.scrollTo({
+          top: window.innerHeight * 0.8, // TODO: get cover height
+          behavior: 'smooth',
+        })
+        setCurrentPageCached(currentPage.value)
         setCurrentPage(page)
-        fetch()
+        fetch().then(() => setCurrentPageCached(currentPage.value))
       }
     }
 
-    const isTheLastPage = computed(() => currentPage.value === totalPage.value)
+    const isTheLastPage = computed(() => currentPageCached.value === totalPage.value)
+
+    const handlePageChangeEvent = (page: number) => {
+      goto(page)
+    }
 
     useReachElementSide(listContainerRef, {
-      bottom: () => next(),
+      bottom: () => props.autoLoad && next(),
     })
 
     onMounted(() => {
@@ -142,7 +166,25 @@ export default defineComponent({
       fetch()
     })
 
-    return { setListContainerRef, postList, fetchStatus, isTheLastPage }
+    // TODO: not working
+    // onMounted(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
+
+    const lastPageMessage = intl.formatMessage({
+      id: 'messages.postList.reachLastPage',
+      defaultMessage: 'No more...',
+      // 很高兴你翻到这里，但是真的没有了...
+    })
+
+    return {
+      setListContainerRef,
+      postList,
+      fetchStatus,
+      isTheLastPage,
+      currentPage,
+      totalPage,
+      handlePageChangeEvent,
+      lastPageMessage,
+    }
   },
 })
 </script>
@@ -163,6 +205,14 @@ export default defineComponent({
   }
   > .loader__wrapper {
     padding-top: 24px;
+  }
+  > .last-page__wrapper {
+    color: #989898;
+    font-size: 15px;
+    padding: 50px 0 20px 0;
+  }
+  > .navigation-bar__wrapper {
+    width: 100%;
   }
 }
 </style>

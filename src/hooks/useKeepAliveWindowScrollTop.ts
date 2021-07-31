@@ -17,7 +17,11 @@ export default function () {
   })
 
   onActivated(() => {
-    window.scrollTo(scrollLeft.value ?? 0, scrollTopCache.value)
+    window.scrollTo({
+      top: scrollLeft.value ?? 0,
+      behavior: 'smooth',
+    })
+    // window.scrollTo(scrollLeft.value ?? 0, scrollTopCache.value)
     setIsScrollTopSet(true)
   })
 
