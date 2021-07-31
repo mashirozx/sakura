@@ -80,7 +80,7 @@ export default defineComponent({
       () => props.result,
       (resultProp) => {
         arrayRef.value = cloneDeep(arrayRef.value).map((item) => false)
-        if (resultProp !== NaN) arrayRef.value[resultProp] = true
+        if (!isNaN(resultProp)) arrayRef.value[resultProp] = true
       }
     )
 
