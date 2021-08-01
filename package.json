@@ -28,7 +28,7 @@
     "options": "node scripts/options-export/copy-options.mjs && yarn tsc scripts/options-export/dump-options.ts && node scripts/options-export/dump-options.js && eslint \"src/admin/optionsType.ts\" --fix && prettier \"src/admin/optionsType.ts\" --write"
   },
   "dependencies": {
-    "@formatjs/intl": "^1.13.2",
+    "@formatjs/intl": "^1.13.4",
     "@material/button": "^13.0.0-canary.5981207f7.0",
     "@material/card": "^13.0.0-canary.5981207f7.0",
     "@material/checkbox": "^13.0.0-canary.5981207f7.0",
