@@ -3,7 +3,7 @@
 
 中文 | [Engilsh](README-en.md)
 
-![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
+![Sakura](screenshot.jpg)
 
 ![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square&logo=php)
 ![WP version](https://img.shields.io/badge/WordPress-5.3-0073aa.svg?style=flat-square&logo=wordpress)
