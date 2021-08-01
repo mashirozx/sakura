@@ -1,113 +1,221 @@
 {
-  "messages.admin.invalidUrl": {
-    "defaultMessage": "Invalid URL"
+  'admin.restore.title': {
+    'defaultMessage': 'Restore this option to default.'
   },
-  "messages.admin.uplicateUrls": {
-    "defaultMessage": "Duplicate URLs"
+  'app.common.units.year': {
+    'defaultMessage': '{num, plural, =0 {just now} =1 {1 second} other {{num, number, ::compact-short} seconds}}'
   },
-  "messages.popup.close": {
-    "defaultMessage": "Close"
+  'messages.admin.invalidUrl': {
+    'defaultMessage': 'Invalid URL'
   },
-  "messages.popup.dismiss": {
-    "defaultMessage": "Dismiss"
+  'messages.admin.uplicateUrls': {
+    'defaultMessage': 'Duplicate URLs'
   },
-  "messages.popup.showDetails": {
-    "defaultMessage": "Show details"
+  'messages.comment.submit.error': {
+    'defaultMessage': 'Comment post failure.'
   },
-  "messages.wordpress.applicationPasswordsEndpointNotAvailable": {
-    "defaultMessage": "ApplicationPasswords is not avaliabe in your WordPress installation, please upgrade WordPress to v5.6.0 above, or enable the ApplicationPasswords feature in v5.6.0 above installation."
+  'messages.comment.submit.success': {
+    'defaultMessage': 'Comment post successfully.'
   },
-  "messages.wordpress.permalink.shouldIncludeFieldsInPost": {
-    "defaultMessage": "WordPress pages should use %slug% as the permalink."
+  'messages.commonMessages.javascriptErrorTitle': {
+    'defaultMessage': 'Opps, something when wrong!'
   },
-  "messages.wordpress.permalink.shouldIncludeFieldsInSingle": {
-    "defaultMessage": "WordPress permalink should include at least one of %post_id%, %postname%. You may set them here: {baseUrl}/wp-admin/options-permalink.php"
+  'messages.popup.close': {
+    'defaultMessage': 'Close'
   },
-  "options.basic.site.logo.binds.button": {
-    "defaultMessage": "Use this image"
+  'messages.popup.dismiss': {
+    'defaultMessage': 'Dismiss'
   },
-  "options.basic.site.logo.binds.title": {
-    "defaultMessage": "Select image for site logo."
+  'messages.popup.showDetails': {
+    'defaultMessage': 'Show details'
   },
-  "options.basic.site.logo.desc": {
-    "defaultMessage": "The site's Logo image, will display on navigation bar."
+  'messages.postContent.cache.found': {
+    'defaultMessage': 'Fetching the latest post content...'
   },
-  "options.basic.site.logo.title": {
-    "defaultMessage": "Site logo"
+  'messages.postList.cache.found': {
+    'defaultMessage': 'Fetching the latest post list...'
   },
-  "options.basic.site.title.desc": {
-    "defaultMessage": "The site title"
+  'messages.postList.reachLastPage': {
+    'defaultMessage': 'No more...'
   },
-  "options.basic.site.title.title": {
-    "defaultMessage": "Site title"
+  'messages.posts.fetchPageError': {
+    'defaultMessage': 'Failed to fetch page content.'
   },
-  "options.thirdParty.reCaptcha.enable.desc": {
-    "defaultMessage": "Use reCAPTCHA for anti-spam check."
+  'messages.posts.fetchPostError': {
+    'defaultMessage': 'Failed to fetch post content.'
   },
-  "options.thirdParty.reCaptcha.enable.negativeLabel": {
-    "defaultMessage": "Disabled"
+  'messages.wordpress.applicationPasswordsEndpointNotAvailable': {
+    'defaultMessage': 'ApplicationPasswords is not avaliabe in your WordPress installation, please upgrade WordPress to v5.6.0 above, or enable the ApplicationPasswords feature in v5.6.0 above installation.'
   },
-  "options.thirdParty.reCaptcha.enable.positiveLabel": {
-    "defaultMessage": "Enabled"
+  'messages.wordpress.permalink.shouldIncludeFieldsInPost': {
+    'defaultMessage': 'WordPress pages should use %slug% as the permalink.'
   },
-  "options.thirdParty.reCaptcha.enable.title": {
-    "defaultMessage": "Enable reCAPTCHA"
+  'messages.wordpress.permalink.shouldIncludeFieldsInSingle': {
+    'defaultMessage': 'WordPress permalink should include at least one of %post_id%, %postname%. You may set them here: {baseUrl}/wp-admin/options-permalink.php'
   },
-  "options.thirdParty.reCaptcha.secretKey.title": {
-    "defaultMessage": "reCAPTCHA secret key"
+  'options.basic.site.logo.binds.button': {
+    'defaultMessage': 'Use this image'
   },
-  "options.thirdParty.reCaptcha.siteKey.title": {
-    "defaultMessage": "reCAPTCHA site key"
+  'options.basic.site.logo.binds.title': {
+    'defaultMessage': 'Select image for site logo.'
   },
-  "options.thirdParty.reCaptcha.version.desc": {
-    "defaultMessage": "Register your reCAPTCHA app '<a href=\"https://www.google.com/recaptcha/about/\" target=\"_blank\">here</a>', and choose a version."
+  'options.basic.site.logo.desc': {
+    'defaultMessage': 'The site\'s Logo image, will display on navigation bar.'
   },
-  "options.thirdParty.reCaptcha.version.label.v2": {
-    "defaultMessage": "reCAPTCHA version 2"
+  'options.basic.site.logo.title': {
+    'defaultMessage': 'Site logo'
   },
-  "options.thirdParty.reCaptcha.version.label.v3": {
-    "defaultMessage": "reCAPTCHA version 3"
+  'options.basic.site.title.desc': {
+    'defaultMessage': 'The site title'
   },
-  "options.thirdParty.reCaptcha.version.title": {
-    "defaultMessage": "reCAPTCHA version"
+  'options.basic.site.title.title': {
+    'defaultMessage': 'Site title'
   },
-  "posts.comment.composer.authorEmail.label": {
-    "defaultMessage": "Email *"
+  'options.basicDesc': {
+    'defaultMessage': 'The basic options'
   },
-  "posts.comment.composer.authorName.label": {
-    "defaultMessage": "Nickname *"
+  'options.basicTitle': {
+    'defaultMessage': 'Basic'
   },
-  "posts.comment.composer.authorUrl.label": {
-    "defaultMessage": "Link"
+  'options.homepage.cover.image.binds.button': {
+    'defaultMessage': 'Use this image'
   },
-  "posts.comment.composer.captcha.toggleButton": {
-    "defaultMessage": "Captcha"
+  'options.homepage.cover.image.binds.title': {
+    'defaultMessage': 'Select image for homepage cover.'
   },
-  "posts.comment.composer.content.label": {
-    "defaultMessage": "You are a surprise that I will only meet once in my life"
+  'options.homepage.cover.image.desc': {
+    'defaultMessage': 'Homepage cover images. Will enable slide show with multiple selections.'
   },
-  "posts.comment.composer.submit.button": {
-    "defaultMessage": "Submit"
+  'options.homepage.cover.image.title': {
+    'defaultMessage': 'Cover images'
   },
-  "posts.comment.composer.tips.markdownSupported": {
-    "defaultMessage": "Markdown Supported"
+  'options.homepage.quote.title': {
+    'defaultMessage': 'Quote'
   },
-  "posts.commentCount": {
-    "defaultMessage": "{commentCount, plural, =0 {No comment} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}"
+  'options.homepage.signature.desc': {
+    'defaultMessage': 'The signature text (follows the quote).'
   },
-  "posts.postTimeOn": {
-    "defaultMessage": "Post on {publistTimeDate, date, long}"
+  'options.homepage.signature.title': {
+    'defaultMessage': 'Signature'
   },
-  "posts.postTimeSince": {
-    "defaultMessage": "Post {duration} ago"
+  'options.homepage.slogan.desc': {
+    'defaultMessage': 'The slogan text (with typewriter effect), recommend 10-20 characters.'
   },
-  "posts.readCount": {
-    "defaultMessage": "{readCount, plural, =0 {No one ever read} =1 {One read} other {{readCount, number, ::compact-short} Reads}}"
+  'options.homepage.slogan.title': {
+    'defaultMessage': 'Slogan'
   },
-  "posts.readMore": {
-    "defaultMessage": "Read More"
+  'options.homepageDesc': {
+    'defaultMessage': 'Homepage options'
   },
-  "posts.wordCount": {
-    "defaultMessage": "{wordCount, plural, =0 {No content} =1 {One word} other {{wordCount, number, ::compact-short} Words}}"
+  'options.homepageTitle': {
+    'defaultMessage': 'Homepage'
+  },
+  'options.social.facebook.desc': {
+    'defaultMessage': 'Your \'<a href="https://facebook.com" target="_blank">Facebook</a>\' username'
+  },
+  'options.social.facebook.title': {
+    'defaultMessage': 'Facebook username'
+  },
+  'options.social.github.desc': {
+    'defaultMessage': 'Your \'<a href="https://github.com" target="_blank">Github</a>\' username'
+  },
+  'options.social.github.title': {
+    'defaultMessage': 'Github username'
+  },
+  'options.social.gitlab.desc': {
+    'defaultMessage': 'Your \'<a href="https://gitlab.com" target="_blank">Gitlab</a>\' username'
+  },
+  'options.social.gitlab.title': {
+    'defaultMessage': 'Gitlab username'
+  },
+  'options.social.stackoverflow.desc': {
+    'defaultMessage': 'Your \'<a href="https://stackoverflow.com" target="_blank">Stackoverflow</a>\' username'
+  },
+  'options.social.stackoverflow.title': {
+    'defaultMessage': 'Stackoverflow username'
+  },
+  'options.social.twitter.desc': {
+    'defaultMessage': 'Your \'<a href="https://twitter.com" target="_blank">Twitter</a>\' username'
+  },
+  'options.social.twitter.title': {
+    'defaultMessage': 'Twitter username'
+  },
+  'options.social.weibo.desc': {
+    'defaultMessage': 'Your \'<a href="https://weibo.com" target="_blank">Weibo</a>\' username'
+  },
+  'options.social.weibo.title': {
+    'defaultMessage': 'Weibo username'
+  },
+  'options.thirdParty.reCaptcha.enable.desc': {
+    'defaultMessage': 'Use reCAPTCHA for anti-spam check.'
+  },
+  'options.thirdParty.reCaptcha.enable.negativeLabel': {
+    'defaultMessage': 'Disabled'
+  },
+  'options.thirdParty.reCaptcha.enable.positiveLabel': {
+    'defaultMessage': 'Enabled'
+  },
+  'options.thirdParty.reCaptcha.enable.title': {
+    'defaultMessage': 'Enable reCAPTCHA'
+  },
+  'options.thirdParty.reCaptcha.secretKey.title': {
+    'defaultMessage': 'reCAPTCHA secret key'
+  },
+  'options.thirdParty.reCaptcha.siteKey.title': {
+    'defaultMessage': 'reCAPTCHA site key'
+  },
+  'options.thirdParty.reCaptcha.version.desc': {
+    'defaultMessage': 'Register your reCAPTCHA app \'<a href="https://www.google.com/recaptcha/about/" target="_blank">here</a>\', and choose a version.'
+  },
+  'options.thirdParty.reCaptcha.version.label.v2': {
+    'defaultMessage': 'reCAPTCHA version 2'
+  },
+  'options.thirdParty.reCaptcha.version.label.v3': {
+    'defaultMessage': 'reCAPTCHA version 3'
+  },
+  'options.thirdParty.reCaptcha.version.title': {
+    'defaultMessage': 'reCAPTCHA version'
+  },
+  'posts.comment.composer.authorEmail.label': {
+    'defaultMessage': 'Email *'
+  },
+  'posts.comment.composer.authorName.label': {
+    'defaultMessage': 'Nickname *'
+  },
+  'posts.comment.composer.authorUrl.label': {
+    'defaultMessage': 'Link'
+  },
+  'posts.comment.composer.captcha.toggleButton': {
+    'defaultMessage': 'Captcha'
+  },
+  'posts.comment.composer.content.label': {
+    'defaultMessage': 'You are a surprise that I will only meet once in my life'
+  },
+  'posts.comment.composer.submit.button': {
+    'defaultMessage': 'Submit'
+  },
+  'posts.comment.composer.tips.markdownSupported': {
+    'defaultMessage': 'Markdown Supported'
+  },
+  'posts.commentCount': {
+    'defaultMessage': '{commentCount, plural, =0 {No comment} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}'
+  },
+  'posts.postTimeOn.brief': {
+    'defaultMessage': '{publistTimeDate, date, long}'
+  },
+  'posts.postTimeOn.full': {
+    'defaultMessage': 'Post on {publistTimeDate, date, long}'
+  },
+  'posts.postTimeSince': {
+    'defaultMessage': 'Post {duration} ago'
+  },
+  'posts.readCount': {
+    'defaultMessage': '{readCount, plural, =0 {No one ever read} =1 {One read} other {{readCount, number, ::compact-short} Reads}}'
+  },
+  'posts.readMore': {
+    'defaultMessage': 'Read More'
+  },
+  'posts.wordCount': {
+    'defaultMessage': '{wordCount, plural, =0 {No content} =1 {One word} other {{wordCount, number, ::compact-short} Words}}'
   }
 }

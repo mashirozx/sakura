@@ -389,7 +389,8 @@ const options: Options = {
         title: 'Long string',
         desc: 'Textarea for long string input.',
         type: 'longString',
-        default: `"It is the unknown we fear when we look upon death and darkness, nothing more."\n-- Albus Dumbledore`,
+        default:
+          '"It is the unknown we fear when we look upon death and darkness, nothing more."\n-- Albus Dumbledore',
       },
       {
         namespace: 'demo.switcher',

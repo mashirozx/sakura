@@ -5,12 +5,12 @@
 /**
  * Sakura initState
  */
-declare var InitState: any
+declare let InitState: any
 
 /**
  * reCaptcha
  */
-declare var grecaptcha: any
+declare let grecaptcha: any
 
 interface Pagination {
   page: number

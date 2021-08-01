@@ -68,7 +68,7 @@ export default defineComponent({
       return { context: options[key].title, icon: options[key].icon, key }
     })
 
-    let defaultCurrentTabIndex: number = 0
+    let defaultCurrentTabIndex = 0
     if (window.location.hash) {
       const locationHashMatch = window.location.hash.match(/^#(.*)/)
       if (locationHashMatch && locationHashMatch[1] && tabKeys.indexOf(locationHashMatch[1]) > -1) {

@@ -17,7 +17,7 @@ export default class timeFormater {
 
   public getTimeFromNow() {
     const gap = this.timestampFromNow
-    let num: number = 0
+    let num = 0
     let unit: Unit = 'second'
     if (gap < 60 * 1000) {
       num = gap / 1000

@@ -12,7 +12,7 @@ export interface Message {
   closeTimeout?: number
 }
 
-export interface MessageOptions extends Omit<Message, 'id'> {}
+export type MessageOptions = Omit<Message, 'id'>
 
 export default function msg(): object {
   const [messageList, setMessageList] = useState([] as Message[])

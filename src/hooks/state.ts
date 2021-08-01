@@ -21,7 +21,7 @@ export const usePersistedState = <K, T>(
   cachePeriod?: number
 ): [Ref<UnwrapRef<T>>, (arg: T) => void] => {
   cachePeriod = cachePeriod ?? 24 * 60 * 60
-  let state = ref(defaultValue)
+  const state = ref(defaultValue)
 
   const s = new storage()
   let fetchingStorage = true

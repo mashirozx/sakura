@@ -12,13 +12,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useRoute } from '@/hooks'
 import Base from '@/layouts/Base.vue'
 import Content from '@/components/content/Content.vue'
 
 export default defineComponent({
   components: { Content, Base },
-  setup() {},
 })
 </script>
 
