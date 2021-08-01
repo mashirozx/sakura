@@ -86,7 +86,7 @@
     "camelcase": "^6.2.0",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
-    "eslint": "^7.30.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-file-progress": "^1.1.0",
     "eslint-plugin-formatjs": "^2.17.1",
     "eslint-plugin-prettier": "^3.3.1",

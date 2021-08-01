@@ -3071,10 +3071,10 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.nlark.com/eslint-visitor-keys/download/eslint-visitor-keys-2.1.0.tgz#f65328259305927392c938ed44eb0a5c9b2bd303"
   integrity sha1-9lMoJZMFknOSyTjtROsKXJsr0wM=
 
-eslint@^7.30.0:
-  version "7.31.0"
-  resolved "https://registry.nlark.com/eslint/download/eslint-7.31.0.tgz?cache=0&sync_timestamp=1626559261549&other_urls=https%3A%2F%2Fregistry.nlark.com%2Feslint%2Fdownload%2Feslint-7.31.0.tgz#f972b539424bf2604907a970860732c5d99d3aca"
-  integrity sha1-+XK1OUJL8mBJB6lwhgcyxdmdOso=
+eslint@^7.32.0:
+  version "7.32.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.32.0.tgz#c6d328a14be3fb08c8d1d21e12c02fdb7a2a812d"
+  integrity sha512-VHZ8gX+EDfz+97jGcgyGCyRia/dPOd6Xh9yPv8Bl1+SoaIwD+a/vlrOmGRUyOYu7MwUhc7CxqeaDZU13S4+EpA==
   dependencies:
     "@babel/code-frame" "7.12.11"
     "@eslint/eslintrc" "^0.4.3"
