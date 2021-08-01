@@ -1515,10 +1515,10 @@
     regenerator-runtime "^0.13.7"
     systemjs "^6.10.2"
 
-"@vitejs/plugin-vue@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.nlark.com/@vitejs/plugin-vue/download/@vitejs/plugin-vue-1.2.5.tgz?cache=0&sync_timestamp=1626093026011&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vitejs%2Fplugin-vue%2Fdownload%2F%40vitejs%2Fplugin-vue-1.2.5.tgz#ef7dc4a92e53fe866b54bcc1266788513262ac09"
-  integrity sha1-733EqS5T/oZrVLzBJmeIUTJirAk=
+"@vitejs/plugin-vue@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.3.0.tgz#fc89a6c9b5a5157916afece4edc8fb55bf1bbc42"
+  integrity sha512-wJvuJdTBjvucUX0vK4fuy60t+A9bJSZxc59vp1Y+8kiOd0NU5kFt4lay72gMWPeR+lSUjrTmGUq8Uzb99Jbw3A==
 
 "@volar/code-gen@^0.26.6":
   version "0.26.6"
