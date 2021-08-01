@@ -83,7 +83,7 @@ export default class timeFormater {
     )
     const month = intl.formatMessage(
       {
-        id: 'app.common.units.year',
+        id: 'app.common.units.month',
         defaultMessage:
           '{num, plural, =0 {just now} =1 {1 month} other {{num, number, ::compact-short} monthes}}',
       },
@@ -91,7 +91,7 @@ export default class timeFormater {
     )
     const day = intl.formatMessage(
       {
-        id: 'app.common.units.year',
+        id: 'app.common.units.day',
         defaultMessage:
           '{num, plural, =0 {just now} =1 {1 day} other {{num, number, ::compact-short} days}}',
       },
@@ -99,7 +99,7 @@ export default class timeFormater {
     )
     const hour = intl.formatMessage(
       {
-        id: 'app.common.units.year',
+        id: 'app.common.units.hour',
         defaultMessage:
           '{num, plural, =0 {just now} =1 {1 hour} other {{num, number, ::compact-short} hours}}',
       },
@@ -107,7 +107,7 @@ export default class timeFormater {
     )
     const minute = intl.formatMessage(
       {
-        id: 'app.common.units.year',
+        id: 'app.common.units.minute',
         defaultMessage:
           '{num, plural, =0 {just now} =1 {1 minute} other {{num, number, ::compact-short} minutes}}',
       },
@@ -115,7 +115,7 @@ export default class timeFormater {
     )
     const second = intl.formatMessage(
       {
-        id: 'app.common.units.year',
+        id: 'app.common.units.second',
         defaultMessage:
           '{num, plural, =0 {just now} =1 {1 second} other {{num, number, ::compact-short} seconds}}',
       },

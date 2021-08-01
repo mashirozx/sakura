@@ -98,7 +98,7 @@ const options: Options = {
           defaultMessage: 'Quote',
         }),
         desc: intl.formatMessage({
-          id: 'options.homepage.signature.desc',
+          id: 'options.homepage.quote.desc',
           defaultMessage: 'The quote text (behinds the slogan).',
         }),
         type: 'longString',

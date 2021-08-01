@@ -14,7 +14,7 @@ export default function (publishTime: string, brief = false) {
         )
       : intl.formatMessage(
           {
-            id: 'posts.postTimeSince',
+            id: 'posts.postTimeSince.brief',
             defaultMessage: '{duration} ago',
           },
           { duration: publistTimeDate.getReadableTimeFromNowBrief() }
@@ -30,7 +30,7 @@ export default function (publishTime: string, brief = false) {
         )
       : intl.formatMessage(
           {
-            id: 'posts.postTimeSince',
+            id: 'posts.postTimeSince.full',
             defaultMessage: 'Post {duration} ago',
           },
           { duration: publistTimeDate.getReadableTimeFromNow() }
