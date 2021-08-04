@@ -1,8 +1,10 @@
 <template>
   <div class="comment-list__container">
-    <div class="item__wrapper" v-for="(item, index) in $props.data" :key="index">
-      <CommentListItem :data="item"></CommentListItem>
-    </div>
+    <transition-group name="comment-list" tag="div">
+      <div class="item__wrapper" v-for="(item, index) in $props.data" :key="index + item.id">
+        <CommentListItem :data="item"></CommentListItem>
+      </div>
+    </transition-group>
   </div>
 </template>
 
@@ -17,6 +19,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.comment-list {
+  &-enter-active {
+    animation: lightSpeedInLeft /* animate.css */ 1s ease-in;
+  }
+  // &-leave-active {
+  //   position: absolute;
+  //   transform-origin: center center;
+  //   animation: lightSpeedOutRight /* animate.css */ 1s ease-in;
+  // }
+  &-move {
+    transition: transform 0.3s ease;
+    transition-delay: 0.3s;
+  }
+}
 .item__wrapper {
   &:not(:first-child) {
     padding-top: 12px;

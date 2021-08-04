@@ -134,6 +134,7 @@ interface CommentStore {
 declare type FetchingStatus =
   | 'inite'
   | 'cached'
+  | 'updating'
   | 'pending'
   | 'success'
   | 'error'

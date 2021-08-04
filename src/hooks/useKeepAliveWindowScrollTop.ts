@@ -3,7 +3,7 @@ import { useWindowScroll } from '@vueuse/core'
 import { useState } from '@/hooks'
 
 export default function () {
-  const { scrollTop, scrollLeft } = (function () {
+  const { scrollTop } = (function () {
     const { x, y } = useWindowScroll()
     return { scrollTop: y, scrollLeft: x }
   })()
@@ -18,8 +18,8 @@ export default function () {
 
   onActivated(() => {
     window.scrollTo({
-      top: scrollLeft.value ?? 0,
-      behavior: 'smooth',
+      top: scrollTopCache.value ?? 0,
+      behavior: 'auto',
     })
     // window.scrollTo(scrollLeft.value ?? 0, scrollTopCache.value)
     setIsScrollTopSet(true)

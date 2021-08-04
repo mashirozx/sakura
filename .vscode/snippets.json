@@ -5,7 +5,8 @@
       "view": "div[class=${1}]",
       "text": "span[class=\"text\"]",
       "image": "Image[src=${1} placeholder=${2} :avatar=\"false\" alt=${2} :draggable=\"false\"]",
-      "icon": "UiIcon[name=${1} :width=\"100%\" :height=\"100%\"]"
+      "icon": "UiIcon[name=${1} :width=\"100%\" :height=\"100%\"]",
+      "slot": "slot[name=${1}]"
     }
   }
 }

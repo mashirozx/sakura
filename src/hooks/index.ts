@@ -13,6 +13,7 @@ import useTypewriterEffect from './useTypewriterEffect'
 import useIntervalWatcher from './useIntervalWatcher'
 import useKeepAliveWindowScrollTop from './useKeepAliveWindowScrollTop'
 import useWindowScrollLock from './useWindowScrollLock'
+import useScrollToElement from './useScrollToElement'
 
 export {
   useState,
@@ -37,4 +38,5 @@ export {
   useIntervalWatcher,
   useKeepAliveWindowScrollTop,
   useWindowScrollLock,
+  useScrollToElement,
 }

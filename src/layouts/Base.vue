@@ -13,6 +13,7 @@
         </footer>
       </section>
     </div>
+    <!-- / PC -->
     <!-- Mobile -->
     <div v-else :class="['page', 'mobile', { 'show-drawer': shouldDrawerOpen }]">
       <header class="header__wrapper">
@@ -31,6 +32,10 @@
         <NavDrawer></NavDrawer>
       </aside>
     </div>
+    <!-- / Mobile -->
+    <div class="go-top__wrapper">
+      <GoTop :showDrawer="shouldDrawerOpen"></GoTop>
+    </div>
   </div>
 </template>
 
@@ -47,10 +52,11 @@ import Header from '@/layouts/components/header/Header.vue'
 import Footer from '@/layouts/components/footer/Footer.vue'
 import HeaderMobile from '@/layouts/components/header/HeaderMobile.vue'
 import NavDrawer from '@/layouts/components/header/NavDrawer.vue'
+import GoTop from './components/goTop/GoTop.vue'
 
 export default defineComponent({
   name: 'LayoutBase',
-  components: { Header, Footer, HeaderMobile, NavDrawer },
+  components: { Header, Footer, HeaderMobile, NavDrawer, GoTop },
   props: { headerPlaceholder: { type: Boolean, default: true } },
   setup() {
     useKeepAliveWindowScrollTop()
@@ -189,5 +195,8 @@ $drawer-width: 260px;
       }
     }
   }
+}
+.go-top__wrapper {
+  --drawer-width: #{$drawer-width};
 }
 </style>

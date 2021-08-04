@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, onActivated, onDeactivated } from 'vue'
-export default function useIntervalWatcher(func: () => void, interval = 100): void {
+const useIntervalWatcher = (func: () => void, interval = 100): void => {
   let timer = NaN
   const addWatcher = () => {
     if (timer) return
@@ -16,3 +16,5 @@ export default function useIntervalWatcher(func: () => void, interval = 100): vo
   onUnmounted(() => removeWatcher())
   onDeactivated(() => removeWatcher())
 }
+
+export default useIntervalWatcher

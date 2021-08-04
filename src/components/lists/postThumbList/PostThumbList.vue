@@ -110,8 +110,6 @@ export default defineComponent({
 
     const next = () => {
       if (currentPage.value + 1 <= totalPage.value) {
-        console.log(currentPage.value, totalPage.value)
-
         setCurrentPageCached(currentPage.value)
         setCurrentPage(currentPage.value + 1)
         fetch().then(() => setCurrentPageCached(currentPage.value))
@@ -201,7 +199,7 @@ export default defineComponent({
   }
   > .post-thumb-card__wrapper {
     width: auto;
-    padding-top: 24px;
+    padding-top: 24px; // TODO
   }
   > .loader__wrapper {
     padding-top: 24px;

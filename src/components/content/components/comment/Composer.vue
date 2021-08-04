@@ -1,14 +1,83 @@
 <template>
   <div class="composer__container">
-    <div class="row__wrapper--tips">
-      <span><i class="fab fa-markdown"></i> {{ messages.markdownTips }}</span>
-    </div>
     <div class="row__wrapper--textarea">
+      <img
+        class="background"
+        src="https://view.moezx.cc/images/2018/03/24/comment-bg.png"
+        :data-show="inputContent.trim().length === 0"
+      />
       <OutlinedTextarea
         v-model:content="inputContent"
         :label="messages.textareaLabel"
         :enableResizer="true"
+        :enableCounter="true"
+        :maxlength="99999"
       ></OutlinedTextarea>
+      <div class="toolkits__wrapper">
+        <div class="toolkits__container">
+          <span class="markdown__tip" ref="toolkitMarkdownRef">
+            <i class="fab fa-markdown"></i>
+          </span>
+          <span class="emoji__tool" ref="toolkitEmojiRef">
+            <i class="far fa-laugh-squint"></i>
+          </span>
+          <span class="image__tool" ref="toolkitImageRef">
+            <i class="far fa-image"></i>
+          </span>
+          <span class="preview__tool" ref="toolkitPreviewRef">
+            <i class="fas fa-glasses"></i>
+          </span>
+          <span
+            class="privacy__tool"
+            ref="toolkitPrivacyRef"
+            @click="handleTogglePrivacyOptionsEvent"
+          >
+            <i class="fas fa-user-shield"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row__wrapper--privacy">
+      <Toggler :show="shouldShowPrivacyOptions">
+        <div class="options__wrapper">
+          <div class="option visibility">
+            <span>
+              <i class="fas fa-lock"></i>
+              {{ messages.privacy.visibility.title }}
+            </span>
+            <Switcher
+              v-model:checked="privacyIsPrivate"
+              positiveLabel=""
+              negativeLabel=""
+            ></Switcher>
+          </div>
+          <!-- <i class="fas fa-unlock"></i> -->
+          <!-- <i class="fas fa-globe"></i> -->
+          <div class="option anynomous">
+            <span>
+              <i class="fas fa-user-secret"></i>
+              {{ messages.privacy.anynomous.title }}
+            </span>
+            <Switcher
+              v-model:checked="privacyIsAnynomous"
+              positiveLabel=""
+              negativeLabel=""
+            ></Switcher>
+          </div>
+          <!-- <i class="fas fa-theater-masks"></i> -->
+          <div class="option inform">
+            <span>
+              <i class="fas fa-envelope"></i>
+              {{ messages.privacy.email.title }}
+            </span>
+            <Switcher
+              v-model:checked="privacyShouldInform"
+              positiveLabel=""
+              negativeLabel=""
+            ></Switcher>
+          </div>
+        </div>
+      </Toggler>
     </div>
     <div class="row__wrapper--profile">
       <div class="flex-box">
@@ -47,7 +116,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="row__wrapper--options"></div> -->
     <!-- <div class="captcha-button">
       <Captcha></Captcha>
     </div> -->
@@ -63,49 +131,99 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useTippy } from 'vue-tippy'
 import { useIntl, useState } from '@/hooks'
 import gravatar, { WP_DEFAULT_USER_EMAIL } from '@/utils/gravatar'
 import Captcha from './Captcha.vue'
 import OutlinedInput from '@/components/inputs/OutlinedInput.vue'
 import OutlinedTextarea from '@/components/inputs/OutlinedTextarea.vue'
 import NormalButton from '@/components/buttons/NormalButton.vue'
+import Toggler from '@/components/toggler/Toggler.vue'
+import Switcher from '@/components/switcher/Switcher.vue'
 
 export default defineComponent({
-  components: { Captcha, OutlinedInput, OutlinedTextarea, NormalButton },
+  components: { Captcha, OutlinedInput, OutlinedTextarea, NormalButton, Toggler, Switcher },
   emits: ['submit'],
   setup(props, { emit }) {
-    const Intl = useIntl()
+    const intl = useIntl()
     const messages = {
-      markdownTips: Intl.formatMessage({
+      markdownTips: intl.formatMessage({
         id: 'posts.comment.composer.tips.markdownSupported',
         defaultMessage: 'Markdown Supported',
       }),
-      textareaLabel: Intl.formatMessage({
+      textareaLabel: intl.formatMessage({
         id: 'posts.comment.composer.content.label',
         defaultMessage: 'You are a surprise that I will only meet once in my life',
       }),
-      nickname: Intl.formatMessage({
+      nickname: intl.formatMessage({
         id: 'posts.comment.composer.authorName.label',
         defaultMessage: 'Nickname *',
       }),
-      email: Intl.formatMessage({
+      email: intl.formatMessage({
         id: 'posts.comment.composer.authorEmail.label',
         defaultMessage: 'Email *',
       }),
-      link: Intl.formatMessage({
+      link: intl.formatMessage({
         id: 'posts.comment.composer.authorUrl.label',
         defaultMessage: 'Link',
       }),
-      submit: Intl.formatMessage({
+      submit: intl.formatMessage({
         id: 'posts.comment.composer.submit.button',
         defaultMessage: 'Submit',
       }),
+      toolkits: {
+        previewTooltip: intl.formatMessage({
+          id: 'posts.comment.composer.toolkits.preview.tooltip',
+          defaultMessage: '\'<i class="fab fa-markdown"></i>\' Markdown preview',
+        }),
+        emojiTooltip: intl.formatMessage({
+          id: 'posts.comment.composer.toolkits.emoji.tooltip',
+          defaultMessage: 'Insert emoji',
+        }),
+        imageTooltip: intl.formatMessage({
+          id: 'posts.comment.composer.toolkits.image.tooltip',
+          defaultMessage: 'Attach image',
+        }),
+        privacyTooltip: intl.formatMessage({
+          id: 'posts.comment.composer.toolkits.privacy.tooltip',
+          defaultMessage: 'Privacy settings',
+        }),
+        markdownTooltip: intl.formatMessage({
+          id: 'posts.comment.composer.toolkits.preview.tooltip',
+          defaultMessage:
+            '\'<a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>\' supported',
+        }),
+      },
+      privacy: {
+        anynomous: {
+          title: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.anynomous.title',
+            defaultMessage: 'Comment as anynomous user',
+          }),
+        },
+        visibility: {
+          title: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.visibility.title',
+            defaultMessage: 'Secret comment (only admins and peoples mentioned can see)',
+          }),
+        },
+        email: {
+          title: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.email.title',
+            defaultMessage: 'Inform me with email when receive reply',
+          }),
+        },
+      },
     }
 
     const inputContent = ref('')
     const inputAuthorName = ref('')
     const inputAuthorEmail = ref('')
     const inputAuthorUrl = ref('')
+
+    const privacyIsPrivate = ref(false)
+    const privacyIsAnynomous = ref(false)
+    const privacyShouldInform = ref(true)
 
     // TODO: debounce
     const handleSubmitEvent = () => {
@@ -124,6 +242,44 @@ export default defineComponent({
 
     const clearInputContent = () => (inputContent.value = '')
 
+    const toolkitEmojiRef = ref()
+    const toolkitPreviewRef = ref()
+    const toolkitImageRef = ref()
+    const toolkitPrivacyRef = ref()
+    const toolkitMarkdownRef = ref()
+    const commonTippyOpts = {
+      animation: 'scale',
+      theme: 'material',
+    }
+    const { tippy: tippyToolkitEmoji } = useTippy(toolkitEmojiRef, {
+      content: messages.toolkits.emojiTooltip,
+      ...commonTippyOpts,
+    })
+    const { tippy: tippyToolkitPreview } = useTippy(toolkitPreviewRef, {
+      content: messages.toolkits.previewTooltip,
+      allowHTML: true,
+      ...commonTippyOpts,
+    })
+    const { tippy: tippyToolkitImage } = useTippy(toolkitImageRef, {
+      content: messages.toolkits.imageTooltip,
+      ...commonTippyOpts,
+    })
+    const { tippy: tippyToolkitPrivacy } = useTippy(toolkitPrivacyRef, {
+      content: messages.toolkits.privacyTooltip,
+      ...commonTippyOpts,
+    })
+    const { tippy: tippyToolkitMarkdown } = useTippy(toolkitMarkdownRef, {
+      content: messages.toolkits.markdownTooltip,
+      allowHTML: true,
+      interactive: true,
+      ...commonTippyOpts,
+    })
+
+    const [shouldShowPrivacyOptions, setShouldShowPrivacyOptions] = useState(false)
+
+    const handleTogglePrivacyOptionsEvent = () =>
+      setShouldShowPrivacyOptions(!shouldShowPrivacyOptions.value)
+
     return {
       messages,
       inputContent,
@@ -134,6 +290,16 @@ export default defineComponent({
       handleSubmitEvent,
       handleEmailInputBlurEvent,
       clearInputContent,
+      toolkitEmojiRef,
+      toolkitPreviewRef,
+      toolkitImageRef,
+      toolkitPrivacyRef,
+      toolkitMarkdownRef,
+      shouldShowPrivacyOptions,
+      handleTogglePrivacyOptionsEvent,
+      privacyIsPrivate,
+      privacyIsAnynomous,
+      privacyShouldInform,
     }
   },
 })
@@ -147,22 +313,65 @@ export default defineComponent({
   > * {
     width: 100%;
     padding-top: 12px;
+    &:first-child {
+      padding-top: 0;
+    }
   }
   > .row__wrapper {
-    &--tips {
-      span {
-        line-height: 24px;
-        font-size: medium;
-        color: #404040;
+    &--textarea {
+      position: relative;
+      width: 100%;
+      .background {
+        position: absolute;
+        bottom: 32px;
+        right: 0;
+        z-index: -1;
+        max-height: 200px;
+        max-width: 100%;
+        opacity: 0;
+        transition: opacity 0.5s;
+        &[data-show='true'] {
+          opacity: 1;
+        }
+      }
+      .toolkits__wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 36px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .toolkits__container {
+          padding-left: 12px;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-end;
+          align-items: center;
+          @include polyfills.flex-gap(12px, 'row nowrap');
+          > * {
+            width: 20px;
+            height: 20px;
+          }
+          span {
+            line-height: 24px;
+            font-size: medium;
+            color: #404040;
+          }
+        }
       }
     }
-    &--textarea {
+    &--privacy {
       width: 100%;
-      ::v-deep(.mdc-text-field__resizer) {
-        background-image: url(https://view.moezx.cc/images/2018/03/24/comment-bg.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: right;
+      .options__wrapper {
+        .option {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          @include polyfills.flex-gap(12px, 'row nowrap');
+        }
       }
     }
     &--profile {
