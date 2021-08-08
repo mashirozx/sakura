@@ -12,9 +12,10 @@ const messages = {
 }
 
 export default function auth(): object {
+  // @ts-ignore
   const [initState, setInitState] = useState(window.InitState ?? {})
   const [wpJson, setWpJson] = useState({})
-  const [applicationPasswordsEndpoint, setApplicationPasswordsEndpoint] = useState(null)
+  const [applicationPasswordsEndpoint, setApplicationPasswordsEndpoint] = useState('')
 
   const fetchInitState = async ({ username, password }: { [key: string]: string }) => {
     await new Promise((resolve, reject) => {

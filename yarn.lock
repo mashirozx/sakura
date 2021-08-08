@@ -2997,9 +2997,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.12.8:
-  version "0.12.15"
-  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.15.tgz#9d99cf39aeb2188265c5983e983e236829f08af0"
-  integrity sha1-nZnPOa6yGIJlxZg+mD4jaCnwivA=
+  version "0.12.19"
+  resolved "https://registry.nlark.com/esbuild/download/esbuild-0.12.19.tgz?cache=0&sync_timestamp=1628371854065&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.19.tgz#ab849766705a5093df5acd8ec2f6ba2159a38a6c"
+  integrity sha1-q4SXZnBaUJPfWs2Owva6IVmjimw=
 
 escalade@^3.1.1:
   version "3.1.1"
@@ -3402,7 +3402,7 @@ fsevents@^2.3.2, fsevents@~2.3.2:
 
 function-bind@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.npm.taobao.org/function-bind/download/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
+  resolved "https://registry.nlark.com/function-bind/download/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
 
 functional-red-black-tree@^1.0.1:
@@ -3882,7 +3882,7 @@ is-ci@^3.0.0:
 
 is-core-module@^2.2.0:
   version "2.5.0"
-  resolved "https://registry.nlark.com/is-core-module/download/is-core-module-2.5.0.tgz?cache=0&sync_timestamp=1626158919839&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-core-module%2Fdownload%2Fis-core-module-2.5.0.tgz#f754843617c70bfd29b7bd87327400cda5c18491"
+  resolved "https://registry.nlark.com/is-core-module/download/is-core-module-2.5.0.tgz?cache=0&sync_timestamp=1626158736739&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-core-module%2Fdownload%2Fis-core-module-2.5.0.tgz#f754843617c70bfd29b7bd87327400cda5c18491"
   integrity sha1-91SENhfHC/0pt72HMnQAzaXBhJE=
   dependencies:
     has "^1.0.3"
@@ -5500,7 +5500,7 @@ postcss@^7.0.14, postcss@^7.0.2, postcss@^7.0.21, postcss@^7.0.26, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.10, postcss@^8.3.5:
+postcss@^8.1.10, postcss@^8.3.6:
   version "8.3.6"
   resolved "https://registry.nlark.com/postcss/download/postcss-8.3.6.tgz?cache=0&sync_timestamp=1626882933935&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.6.tgz#2730dd76a97969f37f53b9a6096197be311cc4ea"
   integrity sha1-JzDddql5afN/U7mmCWGXvjEcxOo=
@@ -5929,9 +5929,9 @@ rimraf@^3.0.0, rimraf@^3.0.2:
     glob "^7.1.3"
 
 rollup@^2.38.5:
-  version "2.53.3"
-  resolved "https://registry.nlark.com/rollup/download/rollup-2.53.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Frollup%2Fdownload%2Frollup-2.53.3.tgz#14b0e57f0874d4ad23bdbb13050cf70bcd1eabf7"
-  integrity sha1-FLDlfwh01K0jvbsTBQz3C80eq/c=
+  version "2.56.1"
+  resolved "https://registry.nlark.com/rollup/download/rollup-2.56.1.tgz#f29dbc04a5d532dfa904f76b62395f359506211e"
+  integrity sha1-8p28BKXVMt+pBPdrYjlfNZUGIR4=
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -6837,12 +6837,12 @@ vite-plugin-svgicon@^1.0.0-alpha.0:
     minimatch "^3.0.4"
 
 vite@^2.4.2:
-  version "2.4.3"
-  resolved "https://registry.nlark.com/vite/download/vite-2.4.3.tgz#fe4aa78e9dd7d36bcb12eccbd52313b26cfadf77"
-  integrity sha1-/kqnjp3X02vLEuzL1SMTsmz633c=
+  version "2.4.4"
+  resolved "https://registry.nlark.com/vite/download/vite-2.4.4.tgz#8c402a07ad45f168f6eb5428bead38f3e4363e47"
+  integrity sha1-jEAqB61F8Wj261Qovq048+Q2Pkc=
   dependencies:
     esbuild "^0.12.8"
-    postcss "^8.3.5"
+    postcss "^8.3.6"
     resolve "^1.20.0"
     rollup "^2.38.5"
   optionalDependencies:

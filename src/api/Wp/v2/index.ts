@@ -124,4 +124,15 @@ export default {
       }),
     })
   },
+
+  // postApplicationPasswords({userId,}){
+  //   return request({
+  //     url: '/wp/v2/users/<user_id>)/application-passwords',
+  //     method: 'POST',
+  //     params: snakecaseKeys({
+  //       ...args,
+  //     }),
+  //   })
+  //   //
+  // }
 }
