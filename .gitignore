@@ -12,3 +12,5 @@ composer.phar
 .DS_Store
 # jest
 coverage
+# release
+sakura-next.zip
