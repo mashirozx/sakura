@@ -1,4 +1,4 @@
-const getScrollbarWidth = () => {
+export default function getScrollbarWidth() {
   const div1 = document.createElement('div')
   const div2 = document.createElement('div')
   div1.style.width = div2.style.width = div1.style.height = div2.style.height = '100px'
@@ -11,5 +11,3 @@ const getScrollbarWidth = () => {
   document.body.removeChild(div2)
   return scrollbarWidth
 }
-
-export default getScrollbarWidth

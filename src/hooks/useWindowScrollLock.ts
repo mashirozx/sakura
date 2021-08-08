@@ -1,5 +1,6 @@
 import { onUnmounted, onDeactivated } from 'vue'
 import getScrollbarWidth from '@/utils/getScrollbarWidth'
+
 export default function () {
   const removeScrollLock = () => {
     const body = document.querySelector('body')
