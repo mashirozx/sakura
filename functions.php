@@ -1001,7 +1001,7 @@ function comment_mail_notify($comment_id)
                       margin: 10px auto 0; " target="_blank" href="' . htmlspecialchars(get_comment_link($parent_id)) . '">点击查看回复的完整內容</a>
       </div>
         <p style="font-size: 12px;text-align: center;color: #999;">本邮件为系统自动发出，请勿直接回复<br>
-        &copy; ' . date(Y) . ' ' . get_option("blogname") . '</p>
+        &copy; ' . date("Y") . ' ' . get_option("blogname") . '</p>
       </div>
     </div>
 ';
@@ -1809,7 +1809,7 @@ function markdown_parser($incoming_comment)
     }
     $myCustomer = $wpdb->get_row("SELECT * FROM wp_comments");
     //Add column if not present.
-    if (!isset($myCustomer->comment_markdown)) {
+    if (!property_exists($myCustomer, "comment_markdown")) {
         $wpdb->query("ALTER TABLE wp_comments ADD comment_markdown text");
     }
     $comment_markdown_content = $incoming_comment['comment_content'];
