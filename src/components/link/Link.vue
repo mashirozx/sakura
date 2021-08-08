@@ -5,9 +5,12 @@
   <router-link v-else-if="to" :to="to">
     <slot></slot>
   </router-link>
-  <a v-else href="https://google.com" target="_blank">
+  <a v-else-if="hyperlink" href="hyperlink" target="_blank">
     <slot></slot>
   </a>
+  <span v-else>
+    <slot></slot>
+  </span>
 </template>
 
 <script lang="ts">
@@ -46,7 +49,15 @@ export default defineComponent({
       }
     })
 
-    return { to }
+    const hyperlink = computed(() => {
+      if (props.url === '' || props.url === '#') {
+        return false
+      } else {
+        return props.url
+      }
+    })
+
+    return { to, hyperlink }
   },
 })
 </script>

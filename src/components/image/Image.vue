@@ -1,5 +1,5 @@
 <template>
-  <div :class="['image__container', state]">
+  <div :class="['image__container', state]" :ref="setContainerRef" :style="{ height: imageHeight }">
     <img
       :class="['image', state]"
       :src="$props.src"
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
-import { useState } from '@/hooks'
+import { useState, useResizeObserver, useElementRef } from '@/hooks'
 import gravatar from '@/utils/gravatar'
 
 export default defineComponent({
@@ -31,6 +31,7 @@ export default defineComponent({
     avatar: { type: Boolean, default: false },
     alt: String,
     draggable: { type: Boolean, default: false },
+    ratio: { type: Number, default: NaN },
   },
   setup(props, { emit }) {
     const [state, setState] = useState('loading')
@@ -53,11 +54,24 @@ export default defineComponent({
       emit('load', event)
     }
 
+    const [containerRef, setContainerRef] = useElementRef()
+    const containerSize = useResizeObserver(containerRef)
+
+    const imageHeight = computed(() => {
+      if (!isNaN(props.ratio) && props.ratio >= 0) {
+        return `${containerSize.value.width * props.ratio}px`
+      } else {
+        return '100%'
+      }
+    })
+
     return {
       placeholderImage,
       handleError,
       handleLoad,
       state,
+      setContainerRef,
+      imageHeight,
     }
   },
 })

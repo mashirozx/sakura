@@ -2,13 +2,19 @@
   <div class="header__container mdc-elevation--z4">
     <div class="header__content">
       <div class="logo__wrapper">
-        <img
-          class="logo"
-          :src="logo"
-          alt="logo"
-          draggable="false"
-          @load="computeShouldHideNavItemList"
-        />
+        <Ripple>
+          <Link :to="{ name: 'Home' }">
+            <div class="logo__container">
+              <img
+                class="logo"
+                :src="logo"
+                alt="logo"
+                draggable="false"
+                @load="computeShouldHideNavItemList"
+              />
+            </div>
+          </Link>
+        </Ripple>
       </div>
       <div class="nav__wrapper" :ref="setNavBarWrapperRef" @resize="handleNavBarWrapperResizeEvent">
         <div class="nav__ul nav__ul--parent" :ref="setNavBarItemRefs">
@@ -67,7 +73,32 @@
         </div>
       </div>
       <div class="profile__wrapper">
-        <img class="avatar" :src="avatar" alt="avatar" />
+        <Ripple>
+          <div class="image__wrapper">
+            <img class="avatar" :src="avatar" alt="avatar" />
+          </div>
+        </Ripple>
+        <div class="drop-down__wrapper">
+          <div class="ul mdc-elevation--z8">
+            <div class="content-logined" v-if="logined">logined</div>
+            <div class="content-unsigned" v-else>unsigned</div>
+            <div class="li" v-for="(item, index) in languageOptions" :key="index">
+              <NavItem :context="item.title" :prefix="item.icon" :url="item.url"></NavItem>
+              <div class="child__ul language mdc-elevation--z8" v-if="item.child.length > 0">
+                <div class="child__li" v-for="(child, childIndex) in item.child" :key="childIndex">
+                  <NavItem :context="child.title" :prefix="child.icon" :url="child.url"></NavItem>
+                </div>
+              </div>
+            </div>
+            <div
+              class="li"
+              v-for="(item, index) in logined ? loginedOptions : unsignedOptions"
+              :key="index"
+            >
+              <NavItem :context="item.title" :prefix="item.icon" :url="item.url"></NavItem>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -87,9 +118,10 @@ import { init } from '@/store'
 import sakuraOptions from '@/utils/sakuraOptions'
 import camelcaseKeys from 'camelcase-keys'
 import NavItem from '@/layouts/components/header/NavItem.vue'
+import Ripple from '@/components/ripple/Ripple.vue'
 
 export default defineComponent({
-  components: { NavItem },
+  components: { NavItem, Ripple },
   setup() {
     const avatar = 'https://view.moezx.cc/images/2021/06/13/d6b010a378d392d4633008b915f98ab1.md.png'
     const logo = sakuraOptions['basic.site.logo'][0]?.url || 'https://v3.vuejs.org/logo.png'
@@ -142,6 +174,33 @@ export default defineComponent({
       return items
     })
 
+    const unsignedOptions = [
+      { title: 'Register', icon: 'fas fa-user-plus', url: '' },
+      { title: 'Sign in', icon: 'fas fa-sign-out-alt', url: '' },
+    ]
+    const loginedOptions = [
+      { title: 'User Center', icon: 'fas fa-user', url: '' },
+      { title: 'Sign out', icon: 'fas fa-sign-out-alt', url: '' },
+    ]
+    const languageOptions = [
+      {
+        title: 'Language',
+        icon: 'fas fa-globe',
+        url: '',
+        child: [
+          { title: '简体中文', value: 'zh-CN' },
+          { title: '繁體中文', value: 'zh-HK' },
+          { title: 'English', value: 'en' },
+          { title: 'Español', value: 'es' },
+          { title: 'Deutsch', value: 'de' },
+          { title: 'Français', value: 'fr' },
+          { title: 'Русский', value: 'ru' },
+          { title: '日本語', value: 'ja' },
+        ],
+      },
+    ]
+    const logined = ref(true)
+
     return {
       navItems,
       setNavBarWrapperRef,
@@ -153,6 +212,10 @@ export default defineComponent({
       logo,
       initState,
       useMDCRipple,
+      logined,
+      loginedOptions,
+      unsignedOptions,
+      languageOptions,
     }
   },
 })
@@ -168,17 +231,23 @@ export default defineComponent({
   align-items: center;
   background: #ffffff;
   > .header__content {
-    width: calc(100% - 48px);
+    // width: calc(100% - 48px);
+    width: 100%;
     height: 48px;
     display: flex;
     flex-flow: row nowrap;
     > .logo__wrapper {
       flex: 0 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      > .logo {
-        height: 32px;
+      height: 100%;
+      .logo__container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo {
+          height: 32px;
+          padding: 0 24px;
+        }
       }
     }
     > .nav__wrapper {
@@ -186,7 +255,7 @@ export default defineComponent({
       width: 100%;
       display: flex;
       flex-flow: row nowrap;
-      padding: 0 24px;
+      // padding: 0 24px;
       .nav__ul {
         &.hide {
           position: absolute;
@@ -309,14 +378,85 @@ export default defineComponent({
 
     > .profile__wrapper {
       flex: 0 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      > .avatar {
-        height: 32px;
-        width: 32px;
-        object-fit: cover;
-        border-radius: 50%;
+      height: 100%;
+      position: relative;
+      .image__wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 24px;
+        > .avatar {
+          height: 32px;
+          width: 32px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .drop-down__wrapper {
+        position: absolute;
+        top: 48px;
+        right: 0;
+        width: auto;
+        z-index: -1;
+        pointer-events: none;
+        visibility: hidden;
+        transform: translate(0, -100%);
+        // pointer-events: all;
+        // cursor: pointer;
+        // visibility: visible;
+        // transform: translate(0, 0%);
+        transition: all 0.2s ease-in-out;
+        .ul {
+          position: relative;
+          padding: 16px 0;
+          background: #ffffff;
+          border-radius: 0 0 5px 5px;
+          > .li {
+            height: 48px;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            > .child__ul {
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: -1;
+              padding: 16px 0;
+              transform: translate(-100%, -16px) scale(0, 0);
+              transform-origin: right (16px + math.div(48px, 2));
+              background: #ffffff;
+              border-radius: 5px;
+              width: auto;
+              transition: all 0.2s ease-in-out;
+              > .child__li {
+                height: 48px;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: center;
+              }
+            }
+            &:hover {
+              > .child__ul {
+                transform: translate(-100%, -16px) scale(1, 1);
+              }
+            }
+          }
+        }
+        ::v-deep() {
+          .link__container .nav-item__container .nav-item__content {
+            justify-content: flex-start;
+          }
+        }
+      }
+      &:hover .drop-down__wrapper {
+        pointer-events: all;
+        cursor: pointer;
+        visibility: visible;
+        transform: translate(0, 0%);
       }
     }
   }

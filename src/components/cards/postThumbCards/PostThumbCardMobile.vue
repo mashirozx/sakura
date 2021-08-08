@@ -8,14 +8,18 @@
           :alt="$props.data.title"
           placeholder="https://via.placeholder.com/1024x768"
           :draggable="false"
+          :ratio="9 / 16"
         />
       </Link>
     </div>
-    <div class="row__wrapper--title">
+    <div class="row__wrapper--date">
+      <span><i class="far fa-clock"></i> {{ $props.data.publistTime }}</span>
+    </div>
+    <h3 class="row__wrapper--title">
       <Link :url="$props.data.link">
         <span>{{ $props.data.title }}</span>
       </Link>
-    </div>
+    </h3>
     <div class="row__wrapper--statistics">
       <div class="column__wrapper--read_count">
         <span><i class="fab fa-hotjar"></i> {{ $props.data.readCount }}</span>
@@ -82,11 +86,21 @@ export default defineComponent({
   user-select: none;
   @include polyfills.flex-gap(12px, 'column nowrap');
   > * {
-    width: calc(100% - 24px);
+    width: calc(100% - 48px);
   }
   > .row__wrapper {
     &--thumbnail {
-      width: 100%;
+      width: calc(100% - 24px);
+      border-radius: 10px;
+      overflow: hidden;
+      .image {
+        object-fit: cover;
+        transform: scale(1);
+        transition: transform 0.3s ease-in-out;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
     }
     &--tags {
       max-height: 32px;
@@ -105,6 +119,10 @@ export default defineComponent({
           align-items: center;
         }
       }
+    }
+    &--date {
+      color: #888888;
+      font-size: 12px;
     }
     &--title {
       line-height: 30px;

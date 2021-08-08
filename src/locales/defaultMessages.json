@@ -32,8 +32,26 @@
   "messages.comment.submit.success": {
     "defaultMessage": "Comment post successfully."
   },
+  "messages.commentList.cache.updateError": {
+    "defaultMessage": "Opps! Something went wrong when updating comment list."
+  },
+  "messages.commentList.cache.updateSuccess": {
+    "defaultMessage": "Comment list updated."
+  },
+  "messages.commentList.cache.updating": {
+    "defaultMessage": "Updating the latest comment list..."
+  },
+  "messages.commentList.title.commentCount": {
+    "defaultMessage": "{commentCount, plural, =0 {Be the first one to leave a comment!} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}"
+  },
+  "messages.commentList.title.heading": {
+    "defaultMessage": "Comments"
+  },
   "messages.commonMessages.javascriptErrorTitle": {
     "defaultMessage": "Opps, something when wrong!"
+  },
+  "messages.content.status.errorLoadingComponent": {
+    "defaultMessage": "Something went wrong when loading this component."
   },
   "messages.popup.close": {
     "defaultMessage": "Close"
@@ -209,11 +227,50 @@
   "posts.comment.composer.content.label": {
     "defaultMessage": "You are a surprise that I will only meet once in my life"
   },
+  "posts.comment.composer.privacy.anynomous.negative": {
+    "defaultMessage": "Autonym"
+  },
+  "posts.comment.composer.privacy.anynomous.positive": {
+    "defaultMessage": "Anynomous"
+  },
+  "posts.comment.composer.privacy.anynomous.title": {
+    "defaultMessage": "Whether to comment as an anynomous user?"
+  },
+  "posts.comment.composer.privacy.subscribe.negative": {
+    "defaultMessage": "Unsubscribe"
+  },
+  "posts.comment.composer.privacy.subscribe.positive": {
+    "defaultMessage": "Subscribe"
+  },
+  "posts.comment.composer.privacy.subscribe.title": {
+    "defaultMessage": "Whether to inform you with email when receiving reply?"
+  },
+  "posts.comment.composer.privacy.visibility.negative": {
+    "defaultMessage": "Public"
+  },
+  "posts.comment.composer.privacy.visibility.positive": {
+    "defaultMessage": "Secret"
+  },
+  "posts.comment.composer.privacy.visibility.title": {
+    "defaultMessage": "Whether to create secret comment that only admins and peoples mentioned can see?"
+  },
   "posts.comment.composer.submit.button": {
     "defaultMessage": "Submit"
   },
-  "posts.comment.composer.tips.markdownSupported": {
-    "defaultMessage": "Markdown Supported"
+  "posts.comment.composer.toolkits.emoji.tooltip": {
+    "defaultMessage": "Insert emoji"
+  },
+  "posts.comment.composer.toolkits.image.tooltip": {
+    "defaultMessage": "Attach image"
+  },
+  "posts.comment.composer.toolkits.markdown.tooltip": {
+    "defaultMessage": "'<a href=\"https://guides.github.com/features/mastering-markdown/\" target=\"_blank\">Markdown</a>' supported"
+  },
+  "posts.comment.composer.toolkits.preview.tooltip": {
+    "defaultMessage": "'<i class=\"fab fa-markdown\"></i>' Markdown preview"
+  },
+  "posts.comment.composer.toolkits.privacy.tooltip": {
+    "defaultMessage": "Privacy settings"
   },
   "posts.commentCount": {
     "defaultMessage": "{commentCount, plural, =0 {No comment} =1 {One comment} other {{commentCount, number, ::compact-short} Comments}}"

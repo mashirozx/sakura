@@ -82,9 +82,9 @@
               </template>
             </Switcher>
           </div>
-          <div class="option inform" v-tippy="{ content: messages.privacy.email.title }">
+          <div class="option subscribe" v-tippy="{ content: messages.privacy.subscribe.title }">
             <Switcher
-              v-model:checked="privacyShouldInform"
+              v-model:checked="privacyIsSubscribe"
               positiveLabel=""
               negativeLabel=""
               :disableRipple="true"
@@ -92,13 +92,13 @@
               <template #label-positive>
                 <span>
                   <i class="fas fa-bell"></i>
-                  {{ messages.privacy.email.positive }}
+                  {{ messages.privacy.subscribe.positive }}
                 </span>
               </template>
               <template #label-negative>
                 <span>
                   <i class="fas fa-bell-slash"></i>
-                  {{ messages.privacy.email.negative }}
+                  {{ messages.privacy.subscribe.negative }}
                 </span>
               </template>
             </Switcher>
@@ -174,10 +174,6 @@ export default defineComponent({
   setup(props, { emit }) {
     const intl = useIntl()
     const messages = {
-      markdownTips: intl.formatMessage({
-        id: 'posts.comment.composer.tips.markdownSupported',
-        defaultMessage: 'Markdown Supported',
-      }),
       textareaLabel: intl.formatMessage({
         id: 'posts.comment.composer.content.label',
         defaultMessage: 'You are a surprise that I will only meet once in my life',
@@ -216,7 +212,7 @@ export default defineComponent({
           defaultMessage: 'Privacy settings',
         }),
         markdownTooltip: intl.formatMessage({
-          id: 'posts.comment.composer.toolkits.preview.tooltip',
+          id: 'posts.comment.composer.toolkits.markdown.tooltip',
           defaultMessage:
             '\'<a href="https://guides.github.com/features/mastering-markdown/" target="_blank">Markdown</a>\' supported',
         }),
@@ -243,25 +239,25 @@ export default defineComponent({
               'Whether to create secret comment that only admins and peoples mentioned can see?',
           }),
           positive: intl.formatMessage({
-            id: 'posts.comment.composer.privacy.anynomous.positive',
+            id: 'posts.comment.composer.privacy.visibility.positive',
             defaultMessage: 'Secret',
           }),
           negative: intl.formatMessage({
-            id: 'posts.comment.composer.privacy.anynomous.negative',
+            id: 'posts.comment.composer.privacy.visibility.negative',
             defaultMessage: 'Public',
           }),
         },
-        email: {
+        subscribe: {
           title: intl.formatMessage({
-            id: 'posts.comment.composer.privacy.email.title',
+            id: 'posts.comment.composer.privacy.subscribe.title',
             defaultMessage: 'Whether to inform you with email when receiving reply?',
           }),
           positive: intl.formatMessage({
-            id: 'posts.comment.composer.privacy.email.positive',
+            id: 'posts.comment.composer.privacy.subscribe.positive',
             defaultMessage: 'Subscribe',
           }),
           negative: intl.formatMessage({
-            id: 'posts.comment.composer.privacy.email.negative',
+            id: 'posts.comment.composer.privacy.subscribe.negative',
             defaultMessage: 'Unsubscribe',
           }),
         },
@@ -275,7 +271,7 @@ export default defineComponent({
 
     const privacyIsPrivate = ref(false)
     const privacyIsAnynomous = ref(false)
-    const privacyShouldInform = ref(true)
+    const privacyIsSubscribe = ref(true)
 
     // TODO: debounce
     const handleSubmitEvent = () => {
@@ -365,7 +361,7 @@ export default defineComponent({
       handleTogglePrivacyOptionsEvent,
       privacyIsPrivate,
       privacyIsAnynomous,
-      privacyShouldInform,
+      privacyIsSubscribe,
     }
   },
 })
