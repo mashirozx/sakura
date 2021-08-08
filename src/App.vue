@@ -27,6 +27,8 @@ export default defineComponent({
 <style lang="scss">
 @use '@/styles/global';
 
+@include global.normalize;
+
 .messages__wrapper {
   position: fixed;
   bottom: 0;

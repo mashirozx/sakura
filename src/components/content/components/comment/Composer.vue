@@ -158,7 +158,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useTippy } from 'vue-tippy'
+import { useTippy, useSingleton } from 'vue-tippy'
 import { useIntl, useState } from '@/hooks'
 import gravatar, { WP_DEFAULT_USER_EMAIL } from '@/utils/gravatar'
 import Captcha from './Captcha.vue'
@@ -300,32 +300,46 @@ export default defineComponent({
     const toolkitPrivacyRef = ref()
     const toolkitMarkdownRef = ref()
     const commonTippyOpts = {
+      allowHTML: true,
+      interactive: true,
       animation: 'scale',
       theme: 'material',
     }
     const { tippy: tippyToolkitEmoji } = useTippy(toolkitEmojiRef, {
       content: messages.toolkits.emojiTooltip,
-      ...commonTippyOpts,
+      // ...commonTippyOpts,
     })
     const { tippy: tippyToolkitPreview } = useTippy(toolkitPreviewRef, {
       content: messages.toolkits.previewTooltip,
-      allowHTML: true,
-      ...commonTippyOpts,
+      // ...commonTippyOpts,
     })
     const { tippy: tippyToolkitImage } = useTippy(toolkitImageRef, {
       content: messages.toolkits.imageTooltip,
-      ...commonTippyOpts,
+      // ...commonTippyOpts,
     })
     const { tippy: tippyToolkitPrivacy } = useTippy(toolkitPrivacyRef, {
       content: messages.toolkits.privacyTooltip,
-      ...commonTippyOpts,
+      // ...commonTippyOpts,
     })
     const { tippy: tippyToolkitMarkdown } = useTippy(toolkitMarkdownRef, {
       content: messages.toolkits.markdownTooltip,
-      allowHTML: true,
-      interactive: true,
-      ...commonTippyOpts,
+      // ...commonTippyOpts,
     })
+
+    useSingleton(
+      [
+        tippyToolkitEmoji,
+        tippyToolkitPreview,
+        tippyToolkitImage,
+        tippyToolkitPrivacy,
+        tippyToolkitMarkdown,
+      ],
+      {
+        placement: 'top',
+        moveTransition: 'transform 0.2s ease-out',
+        ...commonTippyOpts,
+      }
+    )
 
     const [shouldShowPrivacyOptions, setShouldShowPrivacyOptions] = useState(false)
 

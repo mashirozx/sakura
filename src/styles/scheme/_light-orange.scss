@@ -1,0 +1,31 @@
+@use 'sass:color';
+
+$primary: #fea500;
+$secondary: #ffc863;
+$background: #f0f0f1;
+$surface: #ffffff;
+$error: #db4437;
+$on-primary: #ffffff;
+$on-secondary: #ffffff;
+$on-background: #404040;
+$on-surface: #757575;
+$on-error: #ffffff;
+// modifier
+$primary-lighter-25: color.scale($primary, $lightness: 75%);
+$primary-darker-10: color.scale($primary, $blackness: 10%);
+
+@mixin variables {
+  --mdc-theme-primary: #{$primary};
+  --mdc-theme-secondary: #{$secondary};
+  --mdc-theme-background: #{$background};
+  --mdc-theme-surface: #{$surface};
+  --mdc-theme-error: #{$error};
+  --mdc-theme-on-primary: #{$on-primary};
+  --mdc-theme-on-secondary: #{$on-secondary};
+  --mdc-theme-on-background: #{$on-background};
+  --mdc-theme-on-surface: #{$on-surface};
+  --mdc-theme-on-error: #{$on-error};
+  // modifier
+  --mdc-theme-primary-lighter-25: #{$primary-lighter-25};
+  --mdc-theme-primary-darker-10: #{$primary-darker-10};
+}

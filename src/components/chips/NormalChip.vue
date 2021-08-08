@@ -26,3 +26,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss" scoped>
+.mdc-chip {
+  --mdc-theme-on-surface: rgba(0, 0, 0, 0.87);
+}
+</style>

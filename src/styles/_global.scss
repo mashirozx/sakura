@@ -1,4 +1,17 @@
-@use 'mdc';
+@use './mdc';
 @use './mixins/perfect-scrollbar';
+@use './scheme/light-orange';
 
 @include perfect-scrollbar.core-styles;
+
+@mixin normalize {
+  :root {
+    @include light-orange.variables;
+  }
+  .tippy-box {
+    a {
+      text-decoration: underline !important;
+      color: wheat !important;
+    }
+  }
+}
