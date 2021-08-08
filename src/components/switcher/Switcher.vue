@@ -13,7 +13,7 @@
           <div class="mdc-switch__shadow">
             <div class="mdc-elevation-overlay"></div>
           </div>
-          <div class="mdc-switch__ripple"></div>
+          <div v-show="!$props.disableRipple" class="mdc-switch__ripple"></div>
           <div class="mdc-switch__icons">
             <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
               <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
@@ -27,6 +27,9 @@
     </button>
     <label class="label" :for="`switch-${id}`">
       {{ checked ? $props.positiveLabel : $props.negativeLabel }}
+      <slot name="label"></slot>
+      <slot name="label-positive" v-if="checked"></slot>
+      <slot name="label-negative" v-else></slot>
     </label>
   </div>
 </template>
@@ -43,6 +46,7 @@ export default defineComponent({
     negativeLabel: { type: String, default: 'current off' },
     checked: { type: Boolean, default: true },
     disabled: { type: Boolean, default: false },
+    disableRipple: { type: Boolean, default: false },
   },
   emits: ['update:checked'],
   setup(props, { emit }) {
@@ -93,13 +97,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use './theme';
+@use '@/styles/mixins/polyfills';
 .switcher__container {
   @include theme.variables;
   height: 56px;
   display: flex;
-  flex-direction: row;
+  flex-flow: var(--flex-flow, row nowrap);
   justify-content: flex-start;
   align-items: center;
+  @include polyfills.flex-gap(6px, 'row nowrap');
   &.disabled {
     cursor: not-allowed;
     .label {
@@ -108,7 +114,7 @@ export default defineComponent({
   }
   .label {
     user-select: none;
-    padding-left: 10px;
+    // padding-left: 10px;
   }
 }
 </style>

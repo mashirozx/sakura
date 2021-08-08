@@ -160,7 +160,9 @@ export default defineComponent({
         .createComment({ authorEmail, authorName, authorUrl, content, parent, post })
         .then((res) => {
           const _commentData = cloneDeep(commentData.value) as Comment[]
-          _commentData.push(camelcaseKeys(res.data))
+          const response = camelcaseKeys(res.data)
+          response['noDisplayDelay'] = true
+          _commentData.push(response)
           setCommentData(_commentData)
           setTotalCount(totalCount.value + 1)
           // console.log(res.data, commentData.value)
@@ -326,17 +328,16 @@ export default defineComponent({
     width: 100%;
   }
   .error__wrapper {
-    padding-top: 12px;
     width: 100%;
   }
   .pagination__wrapper {
-    padding-top: 12px;
     align-self: center;
   }
   .composer__wrapper {
     width: 100%;
   }
   .comment-list__title {
+    padding-top: 0;
     width: 100%;
     margin: 0 auto;
     color: #7d7d7d;
@@ -354,14 +355,14 @@ export default defineComponent({
       // }
     }
   }
-  // .comment-list__wrapper {
-  // }
+  .comment-list__wrapper {
+    padding: 0;
+  }
   .updating-status__wrapper {
     width: 100%;
     padding: 0;
     .content__wrapper {
       width: 100%;
-      padding-bottom: 12px;
       .content {
         width: calc(100% - 24px);
         padding: 12px;

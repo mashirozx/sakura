@@ -101,8 +101,6 @@ export default defineComponent({
             `${collapseContent.scrollHeight}px`
           )
         }
-      } else {
-        console.log('open')
       }
     }
 

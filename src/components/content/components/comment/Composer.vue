@@ -40,41 +40,68 @@
     <div class="row__wrapper--privacy">
       <Toggler :show="shouldShowPrivacyOptions">
         <div class="options__wrapper">
-          <div class="option visibility">
-            <span>
-              <i class="fas fa-lock"></i>
-              {{ messages.privacy.visibility.title }}
-            </span>
+          <div class="option visibility" v-tippy="{ content: messages.privacy.visibility.title }">
             <Switcher
               v-model:checked="privacyIsPrivate"
               positiveLabel=""
               negativeLabel=""
-            ></Switcher>
+              :disableRipple="true"
+            >
+              <template #label-positive>
+                <span>
+                  <i class="fas fa-lock"></i>
+                  {{ messages.privacy.visibility.positive }}
+                </span>
+              </template>
+              <template #label-negative>
+                <span>
+                  <i class="fas fa-unlock"></i>
+                  {{ messages.privacy.visibility.negative }}
+                </span>
+              </template>
+            </Switcher>
           </div>
-          <!-- <i class="fas fa-unlock"></i> -->
-          <!-- <i class="fas fa-globe"></i> -->
-          <div class="option anynomous">
-            <span>
-              <i class="fas fa-user-secret"></i>
-              {{ messages.privacy.anynomous.title }}
-            </span>
+          <div class="option anynomous" v-tippy="{ content: messages.privacy.anynomous.title }">
             <Switcher
               v-model:checked="privacyIsAnynomous"
               positiveLabel=""
               negativeLabel=""
-            ></Switcher>
+              :disableRipple="true"
+            >
+              <template #label-positive>
+                <span>
+                  <i class="fas fa-user-secret"></i>
+                  {{ messages.privacy.anynomous.positive }}
+                </span>
+              </template>
+              <template #label-negative>
+                <span>
+                  <i class="fas fa-user-tie"></i>
+                  {{ messages.privacy.anynomous.negative }}
+                </span>
+              </template>
+            </Switcher>
           </div>
-          <!-- <i class="fas fa-theater-masks"></i> -->
-          <div class="option inform">
-            <span>
-              <i class="fas fa-envelope"></i>
-              {{ messages.privacy.email.title }}
-            </span>
+          <div class="option inform" v-tippy="{ content: messages.privacy.email.title }">
             <Switcher
               v-model:checked="privacyShouldInform"
               positiveLabel=""
               negativeLabel=""
-            ></Switcher>
+              :disableRipple="true"
+            >
+              <template #label-positive>
+                <span>
+                  <i class="fas fa-bell"></i>
+                  {{ messages.privacy.email.positive }}
+                </span>
+              </template>
+              <template #label-negative>
+                <span>
+                  <i class="fas fa-bell-slash"></i>
+                  {{ messages.privacy.email.negative }}
+                </span>
+              </template>
+            </Switcher>
           </div>
         </div>
       </Toggler>
@@ -198,19 +225,44 @@ export default defineComponent({
         anynomous: {
           title: intl.formatMessage({
             id: 'posts.comment.composer.privacy.anynomous.title',
-            defaultMessage: 'Comment as anynomous user',
+            defaultMessage: 'Whether to comment as an anynomous user?',
+          }),
+          positive: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.anynomous.positive',
+            defaultMessage: 'Anynomous',
+          }),
+          negative: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.anynomous.negative',
+            defaultMessage: 'Autonym',
           }),
         },
         visibility: {
           title: intl.formatMessage({
             id: 'posts.comment.composer.privacy.visibility.title',
-            defaultMessage: 'Secret comment (only admins and peoples mentioned can see)',
+            defaultMessage:
+              'Whether to create secret comment that only admins and peoples mentioned can see?',
+          }),
+          positive: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.anynomous.positive',
+            defaultMessage: 'Secret',
+          }),
+          negative: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.anynomous.negative',
+            defaultMessage: 'Public',
           }),
         },
         email: {
           title: intl.formatMessage({
             id: 'posts.comment.composer.privacy.email.title',
-            defaultMessage: 'Inform me with email when receive reply',
+            defaultMessage: 'Whether to inform you with email when receiving reply?',
+          }),
+          positive: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.email.positive',
+            defaultMessage: 'Subscribe',
+          }),
+          negative: intl.formatMessage({
+            id: 'posts.comment.composer.privacy.email.negative',
+            defaultMessage: 'Unsubscribe',
           }),
         },
       },
@@ -363,9 +415,18 @@ export default defineComponent({
       }
     }
     &--privacy {
+      padding-top: 0;
       width: 100%;
       .options__wrapper {
+        width: 100%;
+        padding-top: 12px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
         .option {
+          --flex-flow: row-reverse nowrap;
           display: flex;
           flex-flow: row nowrap;
           justify-content: flex-start;
