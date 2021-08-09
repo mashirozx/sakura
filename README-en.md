@@ -3,10 +3,10 @@ Sakura🌸: A Wonderful WordPress Theme
 
 [中文](README.md) | Engilsh
 
-![Sakura](https://view.moezx.cc/images/2018/05/26/sakura.png)
+![Sakura](screenshot.jpg)
 
-![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square)
-![WP version](https://img.shields.io/badge/WordPress-5.0+-0073aa.svg?style=flat-square)
+![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square&logo=php)
+![WP version](https://img.shields.io/badge/WordPress-5.3-0073aa.svg?style=flat-square&logo=wordpress)
 [![GitHub release](https://img.shields.io/github/release/mashirozx/Sakura.svg?style=flat-square)](https://github.com/mashirozx/Sakura/releases/latest)
 [![Github commits (since latest release)](https://img.shields.io/github/commits-since/mashirozx/Sakura/latest/dev.svg?style=flat-square)](https://github.com/mashirozx/Sakura/commits/dev)
 [![](https://data.jsdelivr.com/v1/package/gh/moezx/cdn/badge)](https://www.jsdelivr.com/package/gh/moezx/cdn)

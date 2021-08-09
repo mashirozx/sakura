@@ -204,7 +204,7 @@ function sakura_scripts()
     // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
-    $gravatar_url = akina_option('gravatar_proxy') ?: 'secure.gravatar.com/avatar';
+    $gravatar_url = akina_option('gravatar_proxy') ?: 'dn-qiniu-avatar.qbox.me/avatar';
     wp_localize_script('app', 'Poi', array(
         'pjax' => akina_option('poi_pjax'),
         'movies' => $movies,
@@ -249,149 +249,160 @@ require get_template_directory() . '/inc/categories-images.php';
 function convertip($ip)
 {
     error_reporting(E_ALL ^ E_NOTICE);
-    $dat_path = dirname(__FILE__) . '/inc/QQWry.Dat';
-    if (!$fd = @fopen($dat_path, 'rb')) {
-        return 'IP date file not exists or access denied';
-    }
-    $ip = explode('.', $ip);
-    $ipNum = intval($ip[0]) * 16777216 + intval($ip[1]) * 65536 + intval($ip[2]) * 256 + intval($ip[3]);
-    $DataBegin = fread($fd, 4);
-    $DataEnd = fread($fd, 4);
-    $ipbegin = implode('', unpack('L', $DataBegin));
-    if ($ipbegin < 0) {
-        $ipbegin += pow(2, 32);
-    }
-
-    $ipend = implode('', unpack('L', $DataEnd));
-    if ($ipend < 0) {
-        $ipend += pow(2, 32);
-    }
-
-    $ipAllNum = ($ipend - $ipbegin) / 7 + 1;
-    $BeginNum = 0;
-    $EndNum = $ipAllNum;
-    while ($ip1num > $ipNum || $ip2num < $ipNum) {
-        $Middle = intval(($EndNum + $BeginNum) / 2);
-        fseek($fd, $ipbegin + 7 * $Middle);
-        $ipData1 = fread($fd, 4);
-        if (strlen($ipData1) < 4) {
-            fclose($fd);
-            return 'System Error';
-        }
-        $ip1num = implode('', unpack('L', $ipData1));
-        if ($ip1num < 0) {
-            $ip1num += pow(2, 32);
-        }
-
-        if ($ip1num > $ipNum) {
-            $EndNum = $Middle;
-            continue;
-        }
-        $DataSeek = fread($fd, 3);
-        if (strlen($DataSeek) < 3) {
-            fclose($fd);
-            return 'System Error';
-        }
-        $DataSeek = implode('', unpack('L', $DataSeek . chr(0)));
-        fseek($fd, $DataSeek);
-        $ipData2 = fread($fd, 4);
-        if (strlen($ipData2) < 4) {
-            fclose($fd);
-            return 'System Error';
-        }
-        $ip2num = implode('', unpack('L', $ipData2));
-        if ($ip2num < 0) {
-            $ip2num += pow(2, 32);
-        }
-
-        if ($ip2num < $ipNum) {
-            if ($Middle == $BeginNum) {
-                fclose($fd);
-                return 'Unknown';
-            }
-            $BeginNum = $Middle;
-        }
-    }
-    $ipFlag = fread($fd, 1);
-    if ($ipFlag == chr(1)) {
-        $ipSeek = fread($fd, 3);
-        if (strlen($ipSeek) < 3) {
-            fclose($fd);
-            return 'System Error';
-        }
-        $ipSeek = implode('', unpack('L', $ipSeek . chr(0)));
-        fseek($fd, $ipSeek);
-        $ipFlag = fread($fd, 1);
-    }
-    if ($ipFlag == chr(2)) {
-        $AddrSeek = fread($fd, 3);
-        if (strlen($AddrSeek) < 3) {
-            fclose($fd);
-            return 'System Error';
-        }
-        $ipFlag = fread($fd, 1);
-        if ($ipFlag == chr(2)) {
-            $AddrSeek2 = fread($fd, 3);
-            if (strlen($AddrSeek2) < 3) {
-                fclose($fd);
-                return 'System Error';
-            }
-            $AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
-            fseek($fd, $AddrSeek2);
+    if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === false) {
+        $file_contents = file_get_contents('http://ip.taobao.com/outGetIpInfo?accessKey=alibaba-inc&ip='.$ip);
+        $result = json_decode($file_contents,true);
+        if ($result['data']['country'] != '中国') {
+            return $result['data']['country'];
         } else {
-            fseek($fd, -1, SEEK_CUR);
+            return $result['data']['region'].'&nbsp;·&nbsp;'.$result['data']['city'].'&nbsp;·&nbsp;'.$result['data']['isp'];
         }
-        while (($char = fread($fd, 1)) != chr(0)) {
-            $ipAddr2 .= $char;
-        }
-
-        $AddrSeek = implode('', unpack('L', $AddrSeek . chr(0)));
-        fseek($fd, $AddrSeek);
-        while (($char = fread($fd, 1)) != chr(0)) {
-            $ipAddr1 .= $char;
-        }
-
     } else {
-        fseek($fd, -1, SEEK_CUR);
-        while (($char = fread($fd, 1)) != chr(0)) {
-            $ipAddr1 .= $char;
+        $dat_path = dirname(__FILE__) . '/inc/QQWry.Dat';
+        if (!$fd = @fopen($dat_path, 'rb')) {
+            return 'IP date file not exists or access denied';
+        }
+        $ip = explode('.', $ip);
+        $ipNum = intval($ip[0]) * 16777216 + intval($ip[1]) * 65536 + intval($ip[2]) * 256 + intval($ip[3]);
+        $DataBegin = fread($fd, 4);
+        $DataEnd = fread($fd, 4);
+        $ipbegin = implode('', unpack('L', $DataBegin));
+        if ($ipbegin < 0) {
+            $ipbegin += pow(2, 32);
         }
 
-        $ipFlag = fread($fd, 1);
-        if ($ipFlag == chr(2)) {
-            $AddrSeek2 = fread($fd, 3);
-            if (strlen($AddrSeek2) < 3) {
+        $ipend = implode('', unpack('L', $DataEnd));
+        if ($ipend < 0) {
+            $ipend += pow(2, 32);
+        }
+
+        $ipAllNum = ($ipend - $ipbegin) / 7 + 1;
+        $BeginNum = 0;
+        $EndNum = $ipAllNum;
+        $ip1num = $ip2num = $ipAddr1 = $ipAddr2 = '';
+        while ($ip1num > $ipNum || $ip2num < $ipNum) {
+            $Middle = intval(($EndNum + $BeginNum) / 2);
+            fseek($fd, $ipbegin + 7 * $Middle);
+            $ipData1 = fread($fd, 4);
+            if (strlen($ipData1) < 4) {
                 fclose($fd);
                 return 'System Error';
             }
-            $AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
-            fseek($fd, $AddrSeek2);
+            $ip1num = implode('', unpack('L', $ipData1));
+            if ($ip1num < 0) {
+                $ip1num += pow(2, 32);
+            }
+
+            if ($ip1num > $ipNum) {
+                $EndNum = $Middle;
+                continue;
+            }
+            $DataSeek = fread($fd, 3);
+            if (strlen($DataSeek) < 3) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $DataSeek = implode('', unpack('L', $DataSeek . chr(0)));
+            fseek($fd, $DataSeek);
+            $ipData2 = fread($fd, 4);
+            if (strlen($ipData2) < 4) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $ip2num = implode('', unpack('L', $ipData2));
+            if ($ip2num < 0) {
+                $ip2num += pow(2, 32);
+            }
+
+            if ($ip2num < $ipNum) {
+                if ($Middle == $BeginNum) {
+                    fclose($fd);
+                    return 'Unknown';
+                }
+                $BeginNum = $Middle;
+            }
+        }
+        $ipFlag = fread($fd, 1);
+        if ($ipFlag == chr(1)) {
+            $ipSeek = fread($fd, 3);
+            if (strlen($ipSeek) < 3) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $ipSeek = implode('', unpack('L', $ipSeek . chr(0)));
+            fseek($fd, $ipSeek);
+            $ipFlag = fread($fd, 1);
+        }
+        if ($ipFlag == chr(2)) {
+            $AddrSeek = fread($fd, 3);
+            if (strlen($AddrSeek) < 3) {
+                fclose($fd);
+                return 'System Error';
+            }
+            $ipFlag = fread($fd, 1);
+            if ($ipFlag == chr(2)) {
+                $AddrSeek2 = fread($fd, 3);
+                if (strlen($AddrSeek2) < 3) {
+                    fclose($fd);
+                    return 'System Error';
+                }
+                $AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
+                fseek($fd, $AddrSeek2);
+            } else {
+                fseek($fd, -1, SEEK_CUR);
+            }
+            while (($char = fread($fd, 1)) != chr(0)) {
+                $ipAddr2 .= $char;
+            }
+
+            $AddrSeek = implode('', unpack('L', $AddrSeek . chr(0)));
+            fseek($fd, $AddrSeek);
+            while (($char = fread($fd, 1)) != chr(0)) {
+                $ipAddr1 .= $char;
+            }
+
         } else {
             fseek($fd, -1, SEEK_CUR);
+            while (($char = fread($fd, 1)) != chr(0)) {
+                $ipAddr1 .= $char;
+            }
+
+            $ipFlag = fread($fd, 1);
+            if ($ipFlag == chr(2)) {
+                $AddrSeek2 = fread($fd, 3);
+                if (strlen($AddrSeek2) < 3) {
+                    fclose($fd);
+                    return 'System Error';
+                }
+                $AddrSeek2 = implode('', unpack('L', $AddrSeek2 . chr(0)));
+                fseek($fd, $AddrSeek2);
+            } else {
+                fseek($fd, -1, SEEK_CUR);
+            }
+            while (($char = fread($fd, 1)) != chr(0)) {
+                $ipAddr2 .= $char;
+            }
         }
-        while (($char = fread($fd, 1)) != chr(0)) {
-            $ipAddr2 .= $char;
+        fclose($fd);
+        if (preg_match('/http/i', $ipAddr2)) {
+            $ipAddr2 = '';
         }
-    }
-    fclose($fd);
-    if (preg_match('/http/i', $ipAddr2)) {
-        $ipAddr2 = '';
-    }
-    $ipaddr = "$ipAddr1 $ipAddr2";
-    $ipaddr = preg_replace('/CZ88.Net/is', '', $ipaddr);
-    $ipaddr = preg_replace('/^s*/is', '', $ipaddr);
-    $ipaddr = preg_replace('/s*$/is', '', $ipaddr);
-    if (preg_match('/http/i', $ipaddr) || $ipaddr == '') {
-        $ipaddr = 'Unknown';
-    }
-    $ipaddr = iconv('gbk', 'utf-8//IGNORE', $ipaddr);
-    if ($ipaddr != '  ') {
+        $ipaddr = "$ipAddr1 $ipAddr2";
+        $ipaddr = preg_replace('/CZ88.Net/is', '', $ipaddr);
+        $ipaddr = preg_replace('/^s*/is', '', $ipaddr);
+        $ipaddr = preg_replace('/s*$/is', '', $ipaddr);
+        if (preg_match('/http/i', $ipaddr) || $ipaddr == '') {
+            $ipaddr = 'Unknown';
+        }
+        $ipaddr = iconv('gbk', 'utf-8//IGNORE', $ipaddr);
+        if ($ipaddr != '  ') {
+            return $ipaddr;
+        } else {
+            $ipaddr = 'Unknown';
+        }
+
         return $ipaddr;
-    } else {
-        $ipaddr = 'Unknown';
     }
-
-    return $ipaddr;
 }
 //Comment Location End
 
@@ -428,6 +439,7 @@ if (!function_exists('akina_comment_format')) {
     									<?php if (current_user_can('manage_options') and (wp_is_mobile() == false)) {
             $comment_ID = $comment->comment_ID;
             $i_private = get_comment_meta($comment_ID, '_private', true);
+            $flag = '';
             $flag .= ' <i class="fa fa-snowflake-o" aria-hidden="true"></i> <a href="javascript:;" data-actionp="set_private" data-idp="' . get_comment_id() . '" id="sp" class="sm" style="color:rgba(0,0,0,.35)">' . __("Private", "sakura") . ': <span class="has_set_private">';
             if (!empty($i_private)) {
                 $flag .= __("Yes", "sakura") . ' <i class="fa fa-lock" aria-hidden="true"></i>';
@@ -611,7 +623,7 @@ function get_link_items()
  */
 function gravatar_cn($url)
 {    
-    $gravatar_url = array('0.gravatar.com/avatar','1.gravatar.com/avatar','2.gravatar.com/avatar','secure.gravatar.com/avatar');
+    $gravatar_url = array('dn-qiniu-avatar.qbox.me/avatar','cdn.v2ex.com/gravatar','gravatar.loli.net/avatar','gravatar.zeruns.tech/avatar');
     //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
     //官方服务器近期大陆访问 429，建议使用镜像
     return str_replace( $gravatar_url, akina_option('gravatar_proxy'), $url );
