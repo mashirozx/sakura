@@ -2544,7 +2544,14 @@ cross-env@^6.0.3:
   dependencies:
     cross-spawn "^7.0.0"
 
-cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-env@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.npm.taobao.org/cross-env/download/cross-env-7.0.3.tgz?cache=0&sync_timestamp=1606856336843&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcross-env%2Fdownload%2Fcross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  integrity sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=
+  dependencies:
+    cross-spawn "^7.0.1"
+
+cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.nlark.com/cross-spawn/download/cross-spawn-7.0.3.tgz?cache=0&sync_timestamp=1624608055915&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcross-spawn%2Fdownload%2Fcross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha1-9zqFudXUHQRVUcF34ogtSshXKKY=

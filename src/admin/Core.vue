@@ -49,7 +49,8 @@
 <script lang="ts">
 import { defineComponent, ref, Ref, watch } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Swiper as SwiperInterface } from 'swiper'
+import type { Swiper as SwiperInterface } from 'swiper'
+import 'swiper/swiper.scss'
 import { useInjector, useState, useMessage, useIntervalWatcher } from '@/hooks'
 import store from './store'
 import options from './options'
@@ -145,9 +146,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/styles/mixins/polyfills';
 
-::v-deep() {
-  @import 'swiper/swiper';
-}
+// ::v-deep() {
+//   @import 'swiper/swiper';
+// }
 
 .layout {
   width: 100%;
