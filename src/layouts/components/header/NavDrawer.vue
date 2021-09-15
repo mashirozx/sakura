@@ -193,7 +193,8 @@ export default defineComponent({
               transition: all 0.3s;
               > .li__wrapper {
                 > .li__content--tag {
-                  width: 100%;
+                  width: calc(100% - 20px);
+                  padding-left: 20px;
                   height: 36px;
                 }
               }

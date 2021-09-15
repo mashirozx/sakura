@@ -15,3 +15,11 @@ location /src/assets {
   rewrite ^/(.*)$ http://localhost:9000/$1 redirect;
 }
 ```
+
+> Error: spawn C:\..\node_modules\esbuild\esbuild.exe ENOENT
+
+```bash
+node ./node_modules/esbuild/install.js
+```
+
+ref: <https://github.com/vitejs/vite/issues/1361>
