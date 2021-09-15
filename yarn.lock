@@ -1792,10 +1792,10 @@
     lodash "^4.17.20"
     svgo "^1.3.2"
 
-"@yzfe/svgicon@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.nlark.com/@yzfe/svgicon/download/@yzfe/svgicon-1.0.1.tgz#c17578471f680dd16d43aa4b1a35d6df40536e1c"
-  integrity sha1-wXV4Rx9oDdFtQ6pLGjXW30BTbhw=
+"@yzfe/svgicon@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@yzfe/svgicon/-/svgicon-1.1.0.tgz#45111302dbf9c171793407996727e2360d86918a"
+  integrity sha512-iBuL24c6zX6wEteGfg1GKFSfybiac9qFmR55Th6N9E0wZjJnidmXTd61tMFnvudPGRh97f8cVerPqm/jnsY6jA==
 
 "@yzfe/vue3-svgicon@^1.0.1":
   version "1.0.1"
