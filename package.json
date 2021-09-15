@@ -48,7 +48,7 @@
     "@yzfe/svgicon": "^1.0.1",
     "@yzfe/vue3-svgicon": "^1.0.1",
     "animate.css": "^4.1.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "camelcase-keys": "^7.0.0",
     "chroma-js": "^2.1.2",
     "cooltipz-css": "^1.6.8",
