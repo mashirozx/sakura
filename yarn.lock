@@ -1224,10 +1224,10 @@
   resolved "https://registry.nlark.com/@tootallnate/once/download/@tootallnate/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha1-zLkURTYBeaBOf+av94wA/8Hur4I=
 
-"@trysound/sax@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.nlark.com/@trysound/sax/download/@trysound/sax-0.1.1.tgz#3348564048e7a2d7398c935d466c0414ebb6a669"
-  integrity sha1-M0hWQEjnotc5jJNdRmwEFOu2pmk=
+"@trysound/sax@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
+  integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.14":
   version "7.1.15"
@@ -2445,10 +2445,10 @@ color-name@^1.1.4, color-name@~1.1.4:
   resolved "https://registry.nlark.com/color-name/download/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha1-wqCah6y95pVD3m9j+jmVyCbFNqI=
 
-colorette@^1.2.1, colorette@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.nlark.com/colorette/download/colorette-1.2.2.tgz?cache=0&sync_timestamp=1618847174680&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcolorette%2Fdownload%2Fcolorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
-  integrity sha1-y8x51emcrqLb8Q6zom/Ys+as+pQ=
+colorette@^1.2.1, colorette@^1.2.2, colorette@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.4.0.tgz#5190fbb87276259a86ad700bff2c6d6faa3fca40"
+  integrity sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==
 
 colors@^1.4.0:
   version "1.4.0"
@@ -2467,10 +2467,10 @@ commander@8:
   resolved "https://registry.nlark.com/commander/download/commander-8.0.0.tgz?cache=0&sync_timestamp=1624609618679&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-8.0.0.tgz#1da2139548caef59bd23e66d18908dfb54b02258"
   integrity sha1-HaITlUjK71m9I+ZtGJCN+1SwIlg=
 
-commander@^7.1.0:
+commander@^7.2.0:
   version "7.2.0"
-  resolved "https://registry.nlark.com/commander/download/commander-7.2.0.tgz?cache=0&sync_timestamp=1624609618679&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
-  integrity sha1-o2y1fQtQHOEI5NIFWaFQo5HZerc=
+  resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
+  integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -2592,7 +2592,7 @@ css-tree@1.0.0-alpha.37:
     mdn-data "2.0.4"
     source-map "^0.6.1"
 
-css-tree@^1.1.2:
+css-tree@^1.1.2, css-tree@^1.1.3:
   version "1.1.3"
   resolved "https://registry.npm.taobao.org/css-tree/download/css-tree-1.1.3.tgz#eb4870fb6fd7707327ec95c2ff2ab09b5e8db91d"
   integrity sha1-60hw+2/XcHMn7JXC/yqwm16NuR0=
@@ -6408,16 +6408,16 @@ svgo@^1.3.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-svgo@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.nlark.com/svgo/download/svgo-2.3.1.tgz#603a69ce50311c0e36791528f549644ec1b3f4bc"
-  integrity sha1-YDppzlAxHA42eRUo9UlkTsGz9Lw=
+svgo@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/svgo/-/svgo-2.6.0.tgz#f7d3064a91b0804ea28a9dbfc3b36ba2ed4dd8d4"
+  integrity sha512-ATpRmynNSjP/5hSM4Ij4Pg3L+BCN6IBES7wRLh1ZtVxJB7Xn8omiGttLW6v6ZbqrV5pCVB3XfdbUoY8IpgIwvw==
   dependencies:
-    "@trysound/sax" "0.1.1"
-    chalk "^4.1.0"
-    commander "^7.1.0"
+    "@trysound/sax" "0.2.0"
+    colorette "^1.3.0"
+    commander "^7.2.0"
     css-select "^4.1.3"
-    css-tree "^1.1.2"
+    css-tree "^1.1.3"
     csso "^4.2.0"
     stable "^0.1.8"
 
