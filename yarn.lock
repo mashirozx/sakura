@@ -7178,10 +7178,10 @@ word-wrap@^1.2.3, word-wrap@~1.2.3:
   resolved "https://registry.npm.taobao.org/word-wrap/download/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
   integrity sha1-YQY29rH3A4kb00dxzLF/uTtHB5w=
 
-wp-types@^2.10.0:
-  version "2.11.0"
-  resolved "https://registry.nlark.com/wp-types/download/wp-types-2.11.0.tgz#205de48dbbd24f551163954a87cbfa0fb8b344ce"
-  integrity sha1-IF3kjbvST1URY5VKh8v6D7izRM4=
+wp-types@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/wp-types/-/wp-types-2.12.0.tgz#b4a7ad142c5a7e0720741e7d3eebf931f3330c70"
+  integrity sha512-PVRp/3NCSksOXEb4DGMVqgkAS+JhmjDro8CXdFVfP05+yCXlqaHDuvoOpCoEKmXEd0sYN9EEf8675+Fz8eL4zQ==
   dependencies:
     typescript ">=3"
 
