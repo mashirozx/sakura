@@ -1358,7 +1358,10 @@ function memory_archives_list()
             if ($mon != $mon_tmp && $mon > 0) {
                 $output .= '</ul></li>';
             }
-
+			if ($mon == $mon_tmp && $year != $year_tmp ) {
+				$mon=$mon_tmp + 12;
+                $output .= '</ul>';
+            }
             if ($year != $year_tmp && $year > 0) {
                 $output .= '</ul>';
             }
