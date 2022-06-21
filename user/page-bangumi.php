@@ -3,9 +3,8 @@
 /**
  Template Name: Bangumi
  */
-get_header(); 
+get_header();
 ?>
-<meta name="referrer" content="same-origin">
 <style>
 #content,.comments,.site-footer{max-width:1200px;}
 .comments{display: none}
@@ -23,7 +22,7 @@ get_header();
                 <div class="row">
             <?php
                 $bgm = new \Sakura\API\Bilibili();
-                echo $bgm->get_bgm_items(); 
+                echo $bgm->get_bgm_items();
             ?>
             <?php else: ?>
                 <div class="row">
