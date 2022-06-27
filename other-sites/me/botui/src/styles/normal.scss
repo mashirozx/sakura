@@ -1,0 +1,34 @@
+/* normalize.css v1.1.3 | MIT License | git.io/normalize */
+
+a.botui-message-content-link:focus {
+  outline: thin dotted;
+
+  &:active,
+  &:hover {
+    outline: 0;
+  }
+}
+
+form.botui-actions-text {
+  margin: 0;
+}
+
+button.botui-actions-buttons-button,
+input.botui-actions-text-input {
+  margin: 0;
+  font-size: 100%;
+  line-height: normal;
+  *vertical-align: middle;
+  vertical-align: baseline;
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+button.botui-actions-buttons-button {
+  cursor: pointer;
+  *overflow: visible;
+  -webkit-appearance: button;
+}

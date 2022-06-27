@@ -1,0 +1,139 @@
+/**highlight.js语法高亮样式 Default**/
+.hljs{display:block;overflow-x:auto;padding:.5em;color:#abb2bf;background:rgba(254, 250, 199,0.5);border-radius:10px;}
+.hljs-comment,.hljs-quote{color:#888f96;font-style:italic}
+.hljs-doctag,.hljs-formula,.hljs-keyword{color:#c678dd}
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#e06c75}
+.hljs-literal{color:#56b6c2}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#98c379}
+.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#d19a66}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#61aeee}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+.hljs-link{text-decoration:underline}
+.hljs-ln{margin: 6px 0 0 0 !important;}
+/* for block of numbers */
+td.hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    color: #888f96;
+    background: #1d1f21;
+    font-family: monospace,miranafont,"Hiragino Sans GB","Microsoft YaHei",STXihei,SimSun,sans-serif;
+    vertical-align: top;
+    position: absolute;
+    left: 0;
+    width: 30px;
+    margin-top: 0.5px;
+    /* your custom style here */
+}
+/* for block of code */
+td.hljs-ln-code {
+    padding-left: 30px !important;
+}
+/*code block full screen*/
+.code-block-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    z-index: 9999999;
+    margin: 0;
+    animation: elastic 1s;
+}
+.code-block-fullscreen code {
+    --widthA: 100%;
+    --widthB: calc(var(--widthA) - 30px);
+    height: var(--widthB);
+    min-height: 99%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: auto;
+}
+.code-block-fullscreen-html-scroll {
+    overflow: hidden;
+}
+
+/*mac*/
+.highlight-wrap:before {
+    content: " ";
+    position: absolute;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #fc625d;
+    width: 12px;
+    height: 12px;
+    left: 20px;
+    margin-top: -20px;
+    -webkit-box-shadow: 20px 0 #fdbc40,40px 0 #35cd4b;
+    box-shadow: 20px 0 #fdbc40,40px 0 #35cd4b;
+    z-index: 2;
+}
+.highlight-wrap {
+    background: #21252b;
+    border-radius: 5px;
+    font: 15px/22px "Microsoft YaHei","Arial",Sans-Serif;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    text-shadow: none;
+    color: #000;
+    padding-top: 30px;
+    box-shadow: 0 10px 30px 0px rgba(0,0,0,0.4);
+}
+.highlight-wrap code::-webkit-scrollbar {
+    height: 10x !important;
+    width: 10x !important;
+    background-color: #1d1f21 !important;
+}
+.highlight-wrap code::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) !important; 
+    border-radius: 10px !important;
+    background-color: #21252b !important;
+}
+.highlight-wrap code::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5) !important; 
+    background-color: #21252b !important;
+}
+
+.highlight-wrap code {
+    background: #1d1f21;
+    color: #fff;
+    word-break: break-word;
+    font-family: 'Source Code Pro',monospace,miranafont,"Hiragino Sans GB","Microsoft YaHei",STXihei,SimSun,sans-serif;
+    padding: 2px;
+    text-shadow: none;
+    border-radius: 0 0 5px 5px;
+}
+.highlight-wrap code[data-rel]:before {
+    color: #fff;
+    content: attr(data-rel);
+    height: 38px;
+    line-height: 38px;
+    background: #21252b;
+    font-size: 16px;
+    position: absolute;
+    margin-top: -35px;
+    left: 0;
+    width: 100%;
+    font-family: 'Ubuntu','Source Sans Pro',sans-serif;
+    font-weight: bold;
+    padding: 0 70px;
+    text-indent: 15px;
+    float: left;
+    z-index: 1;
+    border-radius: 5px 5px 0 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    pointer-events: none;
+}

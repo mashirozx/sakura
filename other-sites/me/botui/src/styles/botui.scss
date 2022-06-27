@@ -1,0 +1,65 @@
+
+/*
+  These are the styles to create an interface of a chat/bot
+*/
+
+.botui-app-container {
+  width: 100%; // mobile-first
+  height: 100%;
+  line-height: 1;
+
+  @media (min-width: 400px) {
+    width: 400px;
+    height: 500px;
+    margin: 0 auto;
+  }
+}
+
+.botui-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.botui-message {
+  margin: 10px 0;
+  min-height: 20px;
+}
+
+.botui-message-content {
+  width: auto;
+  max-width: 85%;
+  display: inline-block;
+
+  &.human {
+    float: right;
+  }
+
+  iframe {
+    width: 100%;
+  }
+}
+
+.botui-message-content-image {
+  margin: 5px 0;
+  display: block;
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.botui-message-content-link {
+  text-decoration: underline;
+}
+
+.botui-actions-buttons-button {
+  & + .botui-actions-buttons-button {
+    margin-left: 10px;
+  }
+}
+
+.botui-actions-text-submit {
+  @media (min-width: 400px) {
+    display: none;
+  }
+}

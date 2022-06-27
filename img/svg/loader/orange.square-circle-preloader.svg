@@ -1,0 +1,12 @@
+<svg width="80px" height="80px" xmlns="http://www.w3.org/2000/svg" viewBox="-80 -80 260 260" preserveAspectRatio="xMidYMid" class="lds-squaricle" style="background: rgb(254, 250, 199) none repeat scroll 0% 0%;">
+    <g transform="translate(50 50)">
+      <g transform="scale(0.794652 0.794652)">
+        <animateTransform attributeName="transform" type="scale" calcMode="spline" values="0.8;0.5;0.8" keyTimes="0;0.5;1" dur="1.5s" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="0s" repeatCount="indefinite"/>
+        <rect x="-45" y="-45" width="90" height="90" fill="#ffffcb" stroke="orange" stroke-width="8" rx="5.55556" transform="rotate(4.81284)">
+          <animate attributeName="rx" calcMode="linear" values="0;50;0" keyTimes="0;0.5;1" dur="1.5" begin="0s" repeatCount="indefinite"/>
+          <animate attributeName="stroke-width" calcMode="linear" values="8;24;8" keyTimes="0;0.5;1" dur="1.5" begin="0s" repeatCount="indefinite"/>
+          <animateTransform attributeName="transform" type="rotate" calcMode="spline" values="0 0 0;270 0 0;540 0 0" keyTimes="0;0.5;1" dur="1.5s" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="0s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+  <script xmlns="" type="text/javascript" id="useragent-switcher">navigator.__defineGetter__("userAgent", function() {return "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0"})</script></svg>

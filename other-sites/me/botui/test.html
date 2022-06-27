@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="build/botui.min.css">
+  <link rel="stylesheet" href="build/botui-theme-default.css">
+</head>
+<body>
+  <div class="botui-app-container" id="hello-world">
+    <bot-ui></bot-ui>
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
+  <script src="build/botui.js"></script>
+  <script>
+    var botui = new BotUI('hello-world');
+
+    botui.message.add({
+      loading: true
+    }).then(function (index) {
+      setTimeout(function () {
+        botui.message.update(index, {
+          content: 'Hello World from bot!',
+          loading: false
+        }).then(function () {
+          botui.message.add({
+            delay: 2000,
+            loading: true,
+            content: 'Delayed Hello World'
+          });
+        });
+      }, 5000);
+    });
+
+    botui.message.add({
+      human: true,
+      content: 'Hello World from human!'
+    }).then(function () {
+      botui.action.text({
+        action: {
+          button: {
+            icon: 'check',
+            label: 'Submit'
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
