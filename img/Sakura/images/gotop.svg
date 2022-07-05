@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1512297044230" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2514" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><defs><style type="text/css">@font-face {
+  font-family: "weel-translate";
+  font-style: normal;
+  font-weight: normal;
+  src: url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.ttf") format("truetype"), url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.woff") format("woff");
+}
+@font-face {
+  font-family: "weel-translate";
+  font-style: normal;
+  font-weight: normal;
+  src: url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.ttf") format("truetype"), url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.woff") format("woff");
+}
+@font-face {
+  font-family: "weel-translate";
+  font-style: normal;
+  font-weight: normal;
+  src: url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.ttf") format("truetype"), url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.woff") format("woff");
+}
+@font-face {
+  font-family: "weel-translate";
+  font-style: normal;
+  font-weight: normal;
+  src: url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.ttf") format("truetype"), url("moz-extension://6df79949-f4b5-4469-9d15-fba558fbc8ad/fonts/weel-translate.woff") format("woff");
+}
+</style></defs><path d="M512 321.6c37.6 0 68.8 30.4 68.8 68s-30.4 68-68 68-68-30.4-68-68c-1.6-37.6 29.6-68 67.2-68z m0-44c-61.6 0-112 50.4-112 112s50.4 112 112 112 112-50.4 112-112c-0.8-61.6-50.4-112-112-112" p-id="2515" fill="#2c2c2c"></path><path d="M663.2 833.6l-88.8-128-29.6 34.4-32.8 6.4-33.6-6.4-29.6-34.4-88 127.2-17.6-18.4c-3.2-4-74.4-88.8-70.4-188.8 1.6-44.8 20-85.6 53.6-120-8.8-22.4-29.6-64-24.8-118.4 6.4-71.2 45.6-176 198.4-277.6l10.4-7.2 11.2 6.4c3.2 1.6 72 40.8 128 109.6 73.6 89.6 84.8 188 46.4 284.8 17.6 18.4 46.4 56 52.8 111.2 6.4 63.2-11.2 129.6-68.8 197.6 0.8 0-16.8 21.6-16.8 21.6zM512 155.2c-245.6 168.8-152.8 336-148.8 343.2l9.6 16-13.6 12c-32 28.8-49.6 63.2-50.4 100.8-2.4 55.2 25.6 115.2 45.6 143.2l89.6-124.8 55.2 60.8 12 2.4 12-2.4 55.2-60.8 89.6 128.8c36.8-50.4 49.6-109.6 44.8-153.6-6.4-59.2-48-92-48-92.8l-13.6-10.4 7.2-16c39.2-86.4 25.6-171.2-41.6-252C578.4 200 532.8 168 512 155.2z" p-id="2516" fill="#2c2c2c"></path><path d="M563.2 788c12.8 18.4 17.6 37.6 12.8 56.8-0.8 3.2-2.4 6.4-3.2 9.6l-7.2-7.2-25.6-24-18.4 29.6-9.6 15.2-9.6-15.2-18.4-28.8-24.8 24-8 7.2c-6.4-15.2-6.4-30.4 0-45.6 3.2-7.2 6.4-13.6 10.4-18.4 16 8 31.2 11.2 48 11.2 21.6-0.8 40-7.2 53.6-14.4z m4.8-38.4s-24 23.2-59.2 23.2c-16 0-34.4-4.8-53.6-20 0 0-79.2 66.4-10.4 145.6l33.6-31.2 34.4 53.6 33.6-53.6 33.6 31.2c-0.8 0.8 68-71.2-12-148.8" p-id="2517" fill="#2c2c2c"></path></svg>
