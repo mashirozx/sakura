@@ -1959,7 +1959,7 @@ msgstr "暂未开放注册。"
 #~ msgstr "透明度0.1"
 
 #~ msgid "Transparency 0.2"
-#~ msgstr "明度0.2"
+#~ msgstr "透明度0.2"
 
 #~ msgid "Transparency 0.3"
 #~ msgstr "透明度0.3"
