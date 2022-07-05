@@ -1234,6 +1234,22 @@ function optionsframework_options()
         'id' => 'mail_user_name',
         'std' => 'bibi',
         'type' => 'text');
+        
+    $options[] = array(
+        'name' => __('Statics Source', 'sakura'), /*资源来源*/
+        'id' => 'statics_source',
+        'std' => "jsd",
+        'type' => "radio",
+        'options' => array(
+            'jsd' => __('JsDelivr', 'sakura'), /*jsd源*/
+            'own' => __('Other', 'sakura'),
+        ));
+        $options[] = array(
+        'name' => __('Self Source', 'sakura'), /*资源来源*/
+        'desc' => __('Set if self other source is selected', 'sakura'),
+        'id' => 'self_source',
+        'type' => "text",
+        );
 
     return $options;
 }

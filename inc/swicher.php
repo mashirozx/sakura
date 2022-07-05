@@ -28,13 +28,13 @@ mashiro_option.skin_bg6 = "<?php echo $bg_arry[6] ?>";
 mashiro_option.skin_bg7 = "<?php echo $bg_arry[7] ?>";
 <?php }else {?>
 mashiro_option.skin_bg0 = "none";
-mashiro_option.skin_bg1 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/cdn/img/sakura.png";
-mashiro_option.skin_bg2 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/cdn/img/plaid2dbf8.jpg";
-mashiro_option.skin_bg3 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/cdn/img/star02.png";
-mashiro_option.skin_bg4 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/cdn/img/kyotoanimation.png";
-mashiro_option.skin_bg5 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/cdn/img/dot_orange.gif";
+mashiro_option.skin_bg1 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/cdn/img/sakura.png";
+mashiro_option.skin_bg2 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/cdn/img/plaid2dbf8.jpg";
+mashiro_option.skin_bg3 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/cdn/img/star02.png";
+mashiro_option.skin_bg4 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/cdn/img/kyotoanimation.png";
+mashiro_option.skin_bg5 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/cdn/img/dot_orange.gif";
 mashiro_option.skin_bg6 = "https://api.mashiro.top/bing/";
-mashiro_option.skin_bg7 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/sakura@static/other-sites/api-index/images/me.png";
+mashiro_option.skin_bg7 = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/MomentQYC/sakura@static/other-sites/api-index/images/me.png";
 <?php } ?>
 
 mashiro_option.darkmode = <?php if ( akina_option('darkmode') ){ echo 'true'; } else { echo 'false'; } ?>;
@@ -67,7 +67,7 @@ mashiro_option.entry_content_theme = "<?php echo akina_option('entry_content_the
 <?php if(akina_option('jsdelivr_cdn_test')){ ?>
 mashiro_option.jsdelivr_css_src = "<?php echo get_template_directory_uri() ?>/cdn/css/lib.css?<?php echo SAKURA_VERSION.akina_option('cookie_version', ''); ?>";
 <?php } else { ?>
-mashiro_option.jsdelivr_css_src = "<?php echo (SAKURA_STATIC_ASSETS_HOST);?>gh/mashirozx/Sakura@<?php echo SAKURA_VERSION; ?>/cdn/css/lib.min.css";
+mashiro_option.jsdelivr_css_src = <?php echo (SAKURA_STATIC_ASSETS_HOST);?>"gh/mashirozx/Sakura@<?php echo SAKURA_VERSION; ?>/cdn/css/lib.min.css";
 <?php } ?>
 <?php if (akina_option('aplayer_server') != 'off'): ?>
 mashiro_option.float_player_on = true;
