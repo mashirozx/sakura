@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sakura\n"
-"POT-Creation-Date: 2020-08-06 17:39+0800\n"
-"PO-Revision-Date: 2020-08-06 17:42+0800\n"
+"POT-Creation-Date: 2022-07-08 23:01+0800\n"
+"PO-Revision-Date: 2022-07-08 23:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
-"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: style.css\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -138,40 +138,40 @@ msgstr "搜索"
 msgid "Widgets"
 msgstr "小工具"
 
-#: functions.php:51
+#: functions.php:53
 msgid "Nav Menus"
 msgstr "导航菜单"
 
-#: functions.php:423 inc/theme_plus.php:186 layouts/authorprofile.php:11
+#: functions.php:455 inc/theme_plus.php:186 layouts/authorprofile.php:11
 #: options.php:121
 msgid "Author"
 msgstr "作者"
 
-#: functions.php:423
+#: functions.php:455
 msgid "Blogger"
 msgstr "博主"
 
-#: functions.php:427
+#: functions.php:459
 msgid "Location"
 msgstr "来自"
 
-#: functions.php:431
+#: functions.php:464
 msgid "Private"
 msgstr "私密"
 
-#: functions.php:433
+#: functions.php:466
 msgid "Yes"
 msgstr "是"
 
-#: functions.php:435
+#: functions.php:468
 msgid "No"
 msgstr "否"
 
-#: functions.php:438
+#: functions.php:471
 msgid "Edit"
 msgstr "编辑"
 
-#: functions.php:527
+#: functions.php:560
 msgid ""
 "Please install pulgin <a href=\"https://wordpress.org/plugins/wp-statistics/"
 "\" target=\"_blank\">WP-Statistics</a>"
@@ -179,39 +179,39 @@ msgstr ""
 "请安装插件 <a href=\"https://wordpress.org/plugins/wp-statistics/\" target="
 "\"_blank\">WP-Statistics</a>"
 
-#: functions.php:577
+#: functions.php:610
 msgid "This guy is so lazy ╮(╯▽╰)╭"
 msgstr "这家伙好懒╮(╯▽╰)╭"
 
-#: functions.php:1335
+#: functions.php:1368
 msgid "All expand/collapse"
 msgstr "全部展开/收缩"
 
-#: functions.php:1356 options.php:980
+#: functions.php:1392 options.php:980
 msgid " "
 msgstr ""
 
-#: functions.php:1360
+#: functions.php:1396
 msgid " post(s)"
 msgstr " 篇文章"
 
-#: functions.php:1383 functions.php:1386 inc/theme_plus.php:478
+#: functions.php:1419 functions.php:1422 inc/theme_plus.php:478
 msgid "Dashboard"
 msgstr "管理中心"
 
-#: functions.php:1612
+#: functions.php:1648
 msgid "<b>ERROR</b>: This email domain (<b>@"
 msgstr ""
 
-#: functions.php:1717
+#: functions.php:1753
 msgid "QQ"
 msgstr ""
 
-#: functions.php:1779
+#: functions.php:1815
 msgid "Sidebar"
 msgstr "侧栏"
 
-#: functions.php:1892
+#: functions.php:1928
 msgid ""
 "<b> For a better experience, please do not set <a href=\"/wp-admin/options-"
 "permalink.php\"> permalink </a> as plain. To do this, you may need to "
@@ -1003,6 +1003,7 @@ msgstr "文章页"
 msgid "Post style"
 msgstr "文章样式"
 
+#. Theme Name of the plugin/theme
 #: options.php:577
 msgid "Sakura"
 msgstr "默认样式"
@@ -1825,6 +1826,26 @@ msgstr ""
 "用于发送系统邮件，在用户的邮箱中显示的发件人地址，不要使用中文，默认系统邮件"
 "地址为 bibi@你的域名"
 
+#: options.php:1239
+msgid "Statics Source"
+msgstr "资源来源"
+
+#: options.php:1244
+msgid "JsDelivr"
+msgstr "JsDelivr"
+
+#: options.php:1245
+msgid "Other"
+msgstr "其他"
+
+#: options.php:1248
+msgid "Self Source"
+msgstr "自设源"
+
+#: options.php:1249
+msgid "Set if self other source is selected"
+msgstr "如果选择了\"其他\"，请设置此项"
+
 #: search.php:19
 #, php-format
 msgid "search result: %s"
@@ -1952,6 +1973,34 @@ msgstr "注册成功！正在跳转......"
 msgid "Registration is not open yet."
 msgstr "暂未开放注册。"
 
+#. Theme URI of the plugin/theme
+msgid "https://github.com/mashirozx/Sakura/"
+msgstr ""
+
+#. Description of the plugin/theme
+#, fuzzy
+#| msgid "A branch of theme Akina"
+msgid "A wonderful branch of theme Akina"
+msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
+
+#. Author of the plugin/theme
+msgid "Mashiro, Spirit, Louie, Fuzzz"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://2heng.xin"
+msgstr ""
+
+#. Template Name of the plugin/theme
+#, fuzzy
+#| msgid "Search"
+msgid "archive"
+msgstr "搜索"
+
+#. Template Name of the plugin/theme
+msgid "links"
+msgstr ""
+
 #~ msgid "Transparent"
 #~ msgstr "全透明"
 
@@ -1991,9 +2040,6 @@ msgstr "暂未开放注册。"
 #~ msgid "Cover CDN"
 #~ msgstr "封面图图片库"
 
-#~ msgid "Jsdelivr CDN"
-#~ msgstr "随机图片"
-
 #~ msgid "Default article feature image"
 #~ msgstr "默认文章特色图"
 
@@ -2021,9 +2067,6 @@ msgstr "暂未开放注册。"
 
 #~ msgid " Previous"
 #~ msgstr " 上一页"
-
-#~ msgid "A branch of theme Akina"
-#~ msgstr "Akina主题分支（原版地址 http://www.akina.pw/themeakina）"
 
 #, php-format
 #~ msgid "第 %s 页"
