@@ -1,7 +1,7 @@
 ﻿Sakura🌸: 樱花庄的白猫博客主题
 ===
 
-中文 | [Engilsh](README-en.md)
+中文 | [English](README-en.md)
 
 ![Sakura](screenshot.jpg)
 
