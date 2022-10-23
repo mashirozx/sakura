@@ -447,7 +447,7 @@ if (!function_exists('akina_comment_format')) {
 				<div class="comment-arrow">
 					<div class="main shadow">
 						<div class="profile">
-							<a href="<?php comment_author_url();?>" target="_blank" rel="nofollow"><?php echo str_replace('src=', 'src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" onerror="imgError(this,1)" data-src=', get_avatar($comment->comment_author_email, '80', '', get_comment_author(), array('class' => array('lazyload')))); ?></a>
+							<a href="<?php comment_author_url();?>" target="_blank" rel="nofollow"><?php echo str_replace('src=', 'src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" onerror="imgError(this,1)" data-src=', get_avatar($comment->comment_author_email, '80', '', get_comment_author(), array('class' => array('lazyload')))); ?></a>
 						</div>
 						<div class="commentinfo">
 							<section class="commeta">
@@ -496,19 +496,19 @@ function get_author_class($comment_author_email, $user_id)
         "SELECT comment_ID as author_count FROM $wpdb->comments WHERE comment_author_email = '$comment_author_email' "));
     if ($author_count >= 1 && $author_count < 5) //数字可自行修改，代表评论次数。
     {
-        echo '<span class="showGrade0" title="Lv0"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade0" title="Lv0"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_0.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 6 && $author_count < 10) {
-        echo '<span class="showGrade1" title="Lv1"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade1" title="Lv1"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_1.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 10 && $author_count < 20) {
-        echo '<span class="showGrade2" title="Lv2"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade2" title="Lv2"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_2.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 20 && $author_count < 40) {
-        echo '<span class="showGrade3" title="Lv3"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade3" title="Lv3"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_3.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 40 && $author_count < 80) {
-        echo '<span class="showGrade4" title="Lv4"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade4" title="Lv4"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_4.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 80 && $author_count < 160) {
-        echo '<span class="showGrade5" title="Lv5"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade5" title="Lv5"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_5.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     } else if ($author_count >= 160) {
-        echo '<span class="showGrade6" title="Lv6"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
+        echo '<span class="showGrade6" title="Lv6"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/level/level_6.svg" style="height: 1.5em; max-height: 1.5em; display: inline-block;"></span>';
     }
 
 }
@@ -614,7 +614,7 @@ function get_the_link_items($id = null)
                 $bookmark->link_image = 'https://view.moezx.cc/images/2017/12/30/Transparent_Akkarin.th.jpg';
             }
 
-            $output .= '<li class="link-item"><a class="link-item-inner effect-apollo" href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" rel="friend"><img class="lazyload" onerror="imgError(this,1)" data-src="' . $bookmark->link_image . '" src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg"><span class="sitename">' . $bookmark->link_name . '</span><div class="linkdes">' . $bookmark->link_description . '</div></a></li>';
+            $output .= '<li class="link-item"><a class="link-item-inner effect-apollo" href="' . $bookmark->link_url . '" title="' . $bookmark->link_description . '" target="_blank" rel="friend"><img class="lazyload" onerror="imgError(this,1)" data-src="' . $bookmark->link_image . '" src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg"><span class="sitename">' . $bookmark->link_name . '</span><div class="linkdes">' . $bookmark->link_description . '</div></a></li>';
         }
         $output .= '</ul>';
     }
@@ -863,7 +863,7 @@ function custom_html()
     }
     echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/login.js"></script>' . "\n";
     echo '<script type="text/javascript">' . "\n";
-    echo 'jQuery("body").prepend("<div class=\"loading\"><img src=\"'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/login_loading.gif\" width=\"58\" height=\"10\"></div><div id=\"bg\"><img /></div>");' . "\n";
+    echo 'jQuery("body").prepend("<div class=\"loading\"><img src=\"'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/login_loading.gif\" width=\"58\" height=\"10\"></div><div id=\"bg\"><img /></div>");' . "\n";
     echo 'jQuery(\'#bg\').children(\'img\').attr(\'src\', \'' . $loginbg . '\').load(function(){' . "\n";
     echo '	resizeImage(\'bg\');' . "\n";
     echo '	jQuery(window).bind("resize", function() { resizeImage(\'bg\'); });' . "\n";
@@ -987,7 +987,7 @@ function comment_mail_notify($comment_id)
       -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.12);
       box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.18);">
         <header style="overflow: hidden;">
-            <img style="width:100%;z-index: 666;" src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/other/head.jpg">
+            <img style="width:100%;z-index: 666;" src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/other/head.jpg">
         </header>
         <div style="padding: 5px 20px;">
         <p style="position: relative;
@@ -1009,7 +1009,7 @@ function comment_mail_notify($comment_id)
         . trim($comment->comment_content) . '</div>
 
       <div style="text-align: center;">
-          <img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/other/hr.png" alt="hr" style="width:100%;
+          <img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/other/hr.png" alt="hr" style="width:100%;
                                                                                                   margin:5px auto 5px auto;
                                                                                                   display: block;">
           <a style="text-transform: uppercase;
@@ -1027,7 +1027,7 @@ function comment_mail_notify($comment_id)
     </div>
 ';
         $message = convert_smilies($message);
-        $message = str_replace("{{", '<img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/bili/hd/ic_emoji_', $message);
+        $message = str_replace("{{", '<img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/bili/hd/ic_emoji_', $message);
         $message = str_replace("}}", '.png" alt="emoji" style="height: 2em; max-height: 2em;">', $message);
 
         $message = str_replace('{UPLOAD}', 'https://i.loli.net/', $message);
@@ -1090,9 +1090,9 @@ function comment_picture_support($content)
     $content = str_replace('http://', 'https://', $content); // 干掉任何可能的 http
     $content = str_replace('{UPLOAD}', 'https://i.loli.net/', $content);
     $content = str_replace('[/img][img]', '[/img^img]', $content);
-    $content = str_replace('[img]', '<br><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content);
+    $content = str_replace('[img]', '<br><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content);
     $content = str_replace('[/img]', '" class="lazyload comment_inline_img" onerror="imgError(this)"><br>', $content);
-    $content = str_replace('[/img^img]', '" class="lazyload comment_inline_img" onerror="imgError(this)"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content);
+    $content = str_replace('[/img^img]', '" class="lazyload comment_inline_img" onerror="imgError(this)"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="', $content);
     return $content;
 }
 add_filter('comment_text', 'comment_picture_support');
@@ -1103,7 +1103,7 @@ add_filter('comment_text', 'comment_picture_support');
 add_filter('smilies_src', 'custom_smilies_src', 1, 10);
 function custom_smilies_src($img_src, $img, $siteurl)
 {
-    return SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/smilies/' . $img;
+    return SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/smilies/' . $img;
 }
 // 简单遍历系统表情库，今后应考虑标识表情包名——使用增加的扩展名，同时保留原有拓展名
 // 还有一个思路是根据表情调用路径来判定<-- 此法最好！
@@ -1114,7 +1114,7 @@ function push_smilies()
     foreach ($wpsmiliestrans as $k => $v) {
         $Sname = str_replace(":", "", $k);
         $Svalue = $v;
-        $return_smiles = $return_smiles . '<span title="' . $Sname . '" onclick="grin(' . "'" . $Sname . "'" . ')"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/Sakura/images/smilies/' . $Svalue . '" /></span>';
+        $return_smiles = $return_smiles . '<span title="' . $Sname . '" onclick="grin(' . "'" . $Sname . "'" . ')"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/Sakura/images/smilies/' . $Svalue . '" /></span>';
     }
     return $return_smiles;
 }
@@ -1245,14 +1245,14 @@ function push_bili_smilies()
         $img_size = getimagesize($smiles_path . $name[$i] . ".png");
         $img_height = $img_size["1"];
         // 选择面版
-        $return_smiles = $return_smiles . '<span class="emotion-secter emotion-item emotion-select-parent" onclick="grin(' . "'" . $name[$i] . "'" . ',type = \'Math\')" style="background-image: url('.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/bili/hd/ic_emoji_' . $name[$i] . '.png);"><div class="img emotion-select-child" style="background-image: url('.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/bili/' . $name[$i] . '.png);
+        $return_smiles = $return_smiles . '<span class="emotion-secter emotion-item emotion-select-parent" onclick="grin(' . "'" . $name[$i] . "'" . ',type = \'Math\')" style="background-image: url('.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/bili/hd/ic_emoji_' . $name[$i] . '.png);"><div class="img emotion-select-child" style="background-image: url('.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/bili/' . $name[$i] . '.png);
         animation-duration: ' . ($img_height / 32 * 40) . 'ms;
         animation-timing-function: steps(' . ($img_height / 32) . ');
         transform: translateY(-' . ($img_height - 32) . 'px);
         height: ' . $img_height . 'px;
         "></div></span>';
         // 正文转换
-        $bilismiliestrans['{{' . $name[$i] . '}}'] = '<span class="emotion-inline emotion-item"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/bili/' . $name[$i] . '.png" class="img" style="/*background-image: url();*/
+        $bilismiliestrans['{{' . $name[$i] . '}}'] = '<span class="emotion-inline emotion-item"><img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/bili/' . $name[$i] . '.png" class="img" style="/*background-image: url();*/
         animation-duration: ' . ($img_height / 32 * 40) . 'ms;
         animation-timing-function: steps(' . ($img_height / 32) . ');
         transform: translateY(-' . ($img_height - 32) . 'px);
@@ -1286,7 +1286,7 @@ add_filter('the_content_feed', 'featuredtoRSS');
 //
 function bili_smile_filter_rss($content)
 {
-    $content = str_replace("{{", '<img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/MomentQYC/sakura@static/img/bili/hd/ic_emoji_', $content);
+    $content = str_replace("{{", '<img src="'.SAKURA_STATIC_ASSETS_HOST.'gh/mashirozx/sakura@static/img/bili/hd/ic_emoji_', $content);
     $content = str_replace("}}", '.png" alt="emoji" style="height: 2em; max-height: 2em;">', $content);
     $content = str_replace('[img]', '<img src="', $content);
     $content = str_replace('[/img]', '" style="display: block;margin-left: auto;margin-right: auto;">', $content);

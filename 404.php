@@ -17,7 +17,7 @@
 bloginfo( 'name' );$site_description = get_bloginfo( 'description', 'display' );
 if ( $site_description && ( is_home() || is_front_page() ) ) echo " - $site_description";if ( $paged >= 2 || $page >= 2 ) echo ' - ' . sprintf( __( 'page %s'), max( $paged, $page ) );/*第 %s 页*/?>
 </title>
-<link type="text/css" media="all" href="<?php echo(SAKURA_STATIC_ASSETS_HOST);?>gh/MomentQYC/sakura@static/css/lib.css" rel="stylesheet" />
+<link type="text/css" media="all" href="<?php echo(SAKURA_STATIC_ASSETS_HOST);?>gh/mashirozx/sakura@static/css/lib.css" rel="stylesheet" />
 <?php wp_head(); ?>
 <script>
 var the_url=window.location.href;
@@ -55,5 +55,5 @@ if (!no_report) httpGet(report_url);
 </form>
 </div>
 </section>
-<script src="<?php echo(SAKURA_STATIC_ASSETS_HOST); ?>gh/MomentQYC/sakura@static/js/other/404.min.js" type="text/javascript"></script>
+<script src="<?php echo(SAKURA_STATIC_ASSETS_HOST); ?>gh/mashirozx/sakura@static/js/other/404.min.js" type="text/javascript"></script>
 </body>

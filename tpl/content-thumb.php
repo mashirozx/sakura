@@ -27,7 +27,7 @@ $the_cat = get_the_category();
 ?>
 	<article class="post post-list-thumb <?php echo $class; ?>" itemscope="" itemtype="http://schema.org/BlogPosting">
 		<div class="post-thumb">
-			<a href="<?php the_permalink(); ?>"><img class="lazyload" src="<?php echo (SAKURA_STATIC_ASSETS_HOST);?>gh/MomentQYC/sakura@static/svg/loader/orange.progress-bar-stripe-loader.svg" data-src="<?php echo $post_img; ?>"></a>
+			<a href="<?php the_permalink(); ?>"><img class="lazyload" src="<?php echo (SAKURA_STATIC_ASSETS_HOST);?>gh/mashirozx/sakura@static/svg/loader/orange.progress-bar-stripe-loader.svg" data-src="<?php echo $post_img; ?>"></a>
 		</div><!-- thumbnail-->
 		<div class="post-content-wrap">
 			<div class="post-content">
