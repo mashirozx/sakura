@@ -1195,10 +1195,10 @@ msgstr "Gravatar头像代理"
 
 #: options.php:763
 msgid ""
-"A front-ed proxy for Gravatar, eg. gravatar.2heng.xin/avatar . Leave it "
+"A front-ed proxy for Gravatar, eg. gravatar.2heng.xin . Leave it "
 "blank if you do not need."
 msgstr ""
-"填写Gravatar头像的代理地址，例如：gravatar.2heng.xin/avatar。留空则不使用代"
+"填写Gravatar头像的代理地址，例如：gravatar.2heng.xin。留空则不使用代"
 "理。"
 
 #: options.php:769
