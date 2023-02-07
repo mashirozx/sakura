@@ -204,7 +204,7 @@ function sakura_scripts()
     // }
     //拦截移动端
     version_compare($GLOBALS['wp_version'], '5.1', '>=') ? $reply_link_version = 'new' : $reply_link_version = 'old';
-    $gravatar_url = akina_option('gravatar_proxy') ?: 'dn-qiniu-avatar.qbox.me/avatar';
+    $gravatar_url = akina_option('gravatar_proxy') ?: 'sdn.geekzu.org/avatar';
     wp_localize_script('app', 'Poi', array(
         'pjax' => akina_option('poi_pjax'),
         'movies' => $movies,
@@ -623,7 +623,8 @@ function get_link_items()
  */
 function gravatar_cn($url)
 {    
-    $gravatar_url = array('dn-qiniu-avatar.qbox.me/avatar','cdn.v2ex.com/gravatar','gravatar.loli.net/avatar','gravatar.zeruns.tech/avatar');
+    $gravatar_url = array('www.gravatar.com','0.gravatar.com','1.gravatar.com','2.gravatar.com','secure.gravatar.com','cn.gravatar.com');
+    //替换含以上根域名的Gravatar链接
     //return str_replace($gravatar_url, 'cn.gravatar.com', $url);
     //官方服务器近期大陆访问 429，建议使用镜像
     return str_replace( $gravatar_url, akina_option('gravatar_proxy'), $url );
@@ -640,7 +641,7 @@ add_filter('avatar_defaults', 'mytheme_default_avatar');
 function mytheme_default_avatar($avatar_defaults)
 {
     //$new_avatar_url = get_template_directory_uri() . '/images/default_avatar.png';
-    $new_avatar_url = 'https://cn.gravatar.com/avatar/b745710ae6b0ce9dfb13f5b7c0956be1';
+    $new_avatar_url = 'https://sdn.geekzu.org/avatar/b745710ae6b0ce9dfb13f5b7c0956be1';
     $avatar_defaults[$new_avatar_url] = 'Default Avatar';
     return $avatar_defaults;
 }
