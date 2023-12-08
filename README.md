@@ -1,7 +1,7 @@
 ﻿Sakura🌸: 樱花庄的白猫博客主题
 ===
 
-中文 | [Engilsh](README-en.md)
+中文 | [English](README-en.md)
 
 ![Sakura](screenshot.jpg)
 
@@ -21,7 +21,7 @@
 
 主题使用说明见：<https://2heng.xin/theme-sakura/>
 
-本仓库国内镜像：<https://gitee.com/mashirozx/Sakura>
+本仓库国内镜像：<https://git.moezx.cc/mirrors/sakura>
 
 主题交流群：860262481
 

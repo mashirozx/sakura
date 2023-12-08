@@ -1,7 +1,7 @@
 Sakura🌸: A Wonderful WordPress Theme
 ===
 
-[中文](README.md) | Engilsh
+[中文](README.md) | English
 
 ![Sakura](screenshot.jpg)
 
