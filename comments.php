@@ -50,7 +50,18 @@
 			<?php
 				$robot_comments = '';
 				if(comments_open()){
-					if(akina_option('norobot')) $robot_comments = '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="no-robot"><span class="siren-no-robot-checkbox siren-checkbox-radioInput"></span>'.__('I\'m not a robot', 'sakura').'</label>';
+					if(akina_option('norobot')) 
+					if (akina_option('verification_type') == 'CF Turnstile') {
+                                        $robot_comments = '<label class="siren-checkbox-label"> <div class="cf-turnstile" data-sitekey="'.akina_option('site_key').'"></div> </label>';
+                                        } elseif (akina_option('verification_type') == 'Google reCAPTCHA') {
+                                        $robot_comments = '<label class="siren-checkbox-label"><div class="g-recaptcha" data-sitekey="'.akina_option('site_key').'"></div></label>';
+                                        } elseif(akina_option('verification_type') == 'Google reCAPTCHA v3'){
+                                        $robot_comments = '<label class="siren-checkbox-label"><script>grecaptcha.ready(function() { grecaptcha.execute("'.akina_option('site_key').'", {action: "submit"}).then(function(token) { var form = document.getElementById("commentform"); var input = document.createElement("input"); input.setAttribute("type", "hidden"); input.setAttribute("name", "g-recaptcha-response"); input.setAttribute("value", token); form.appendChild(input); }); });</script></label>';
+                                        } elseif(akina_option('verification_type') == 'mCAPTCHA'){
+                                        $robot_comments = '<style>.widget__mcaptcha-brand-name { color:83d6ff} #mcaptcha__widget-container {height: 80px; width: 80%; background-color: #F9F9F9; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);} @media (prefers-color-scheme: dark) {#mcaptcha__widget-container {height: 80px; width: 80%; background-color: #505050; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);}} @media (prefers-color-scheme: light) {#mcaptcha__widget-container {height: 80px; width: 80%; background-color: #F9F9F9; border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);}}</style><label class="siren-checkbox-label"><div id="mcaptcha__widget-container"></div><script charset="utf-8">let config = {widgetLink: new URL("'.akina_option('site_key').'"),};new mcaptchaGlue.default(config);</script></label>';
+                                        } else {
+                                        $robot_comments = '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="no-robot"><span class="siren-no-robot-checkbox siren-checkbox-radioInput"></span>'.__('I\'m not a robot', 'sakura').'</label>';
+                                        }	
 					$private_ms = akina_option('open_private_message') ? '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="is-private"><span class="siren-is-private-checkbox siren-checkbox-radioInput"></span>'.__('Comment in private', 'sakura').'</label>' : '';
 					$mail_notify = akina_option('mail_notify') ? '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="mail-notify"><span class="siren-mail-notify-checkbox siren-checkbox-radioInput"></span>'.__('Comment reply notify', 'sakura').'</label>' : '';
 					$args = array(
