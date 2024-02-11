@@ -847,6 +847,45 @@ function optionsframework_options()
         'type' => 'checkbox');
 
     $options[] = array(
+    'name' => __('机器人验证方式', 'sakura'), /* 验证类型 */
+    'desc' => __('reCAPTCHA已更换为reCAPTCHA.net，国内正常使用。', 'sakura'), /* 选择验证码类型 */
+    'id' => 'verification_type',
+    'std' => '0',
+    'type' => 'radio',
+    'options' => array(
+        'CF Turnstile' => __('Cloudflare Turnstile 网络波动可能导致验证失败，需要设置站点密钥与后端秘钥。', 'sakura'),
+        'Google reCAPTCHA' => __('Google reCAPTCHA，需要设置站点密钥与后端秘钥。', 'sakura'),
+        'Google reCAPTCHA v3' => __('Google reCAPTCHA v3，需要设置站点密钥与后端秘钥。', 'sakura'),
+      //'geetest' => __('geetest，需要设置密钥', 'sakura'),
+        'mCAPTCHA' => __('mCAPTCHA，需要自己使用Docker搭建，并配置站点密钥与后端密钥', 'sakura'),
+        'Theme CAPTCHA' => __('主题内建简单验证', 'sakura'),
+    )
+);
+
+$options[] = array(
+    'name' => '站点密钥',
+    'desc' => '设置前端的站点密钥/Site-key，如果使用mCAPTCHA则填写完整小部件链接',
+    'id' => 'site_key',
+    'std' => '',
+    'type' => 'text'
+);
+
+$options[] = array(
+    'name' => '后端密钥',
+    'desc' => '设置与验证服务器请求的密钥/Secret-key',
+    'id' => 'secret_key',
+    'std' => '',
+    'type' => 'text'
+);
+$options[] = array(
+    'name' => 'mCAPTCHA服务器地址',
+    'desc' => '没有选择可以不填',
+    'id' => 'mcaptcha_server',
+    'std' => 'https://demo.mcaptcha.org/api/v1/pow/siteverify',
+    'type' => 'text'
+);
+
+    $options[] = array(
         'name' => __('QQ avatar link encryption', 'sakura'), /*QQ头像链接加密*/
         'desc' => __('Do not display the user\'s qq avatar links directly.', 'sakura'), /*不直接暴露用户qq头像链接*/
         'id' => 'qq_avatar_link',
