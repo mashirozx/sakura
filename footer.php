@@ -159,5 +159,32 @@
         data-theme="orange">
     </div>
 <?php endif; ?>
+<?php if (akina_option('verification_type') == 'Google reCAPTCHA'&& akina_option('rehidden') == '1') {?>
+	<!--拦截表单提交并验证，验证后自动提交-->
+<script>
+$('#commentform').on('submit', function(e) {
+  if (!$(this).data('form-submitted')) { // Check if the form was already submitted
+    e.preventDefault();
+    grecaptcha.execute();
+  }
+});
+
+function onRecaptchaSubmit(token) {
+  // Add the token to the form
+  var form = $('#commentform');
+  var input = $('<input>').attr('type', 'hidden').attr('name', 'g-recaptcha-response').val(token);
+  form.append(input);
+
+  // Now submit the form via AJAX
+  form.data('form-submitted', true); // Mark the form as submitted
+  form.trigger('submit'); // Trigger the form submit event
+}
+
+// Automatically execute reCAPTCHA when the page loads
+$(document).ready(function() {
+  grecaptcha.execute();
+});
+</script>
+<?php }?>
 </body>
 </html>
