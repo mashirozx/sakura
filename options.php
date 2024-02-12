@@ -884,6 +884,20 @@ $options[] = array(
     'std' => 'https://demo.mcaptcha.org/api/v1/pow/siteverify',
     'type' => 'text'
 );
+$options[] = array(
+    'name' => __('reCAPTCHA 隐形模式', 'sakura'), /*机器人验证*/
+    'desc' => __('选择开启隐形模式，需要在reCAPTCHA控制台设置类型：v2 隐形 Enterprise', 'sakura'), /*开启机器人验证*/
+    'id' => 'rehidden',
+    'std' => '0',
+    'type' => 'checkbox'
+    );
+$options[] = array(
+    'name' => '验证分数',
+    'desc' => 'reCAPTCHAv3的验证分数，从0.0-1.0，越高越接近人类。',
+    'id' => 'rescore',
+    'std' => '0.5',
+    'type' => 'text'
+);    
 
     $options[] = array(
         'name' => __('QQ avatar link encryption', 'sakura'), /*QQ头像链接加密*/
