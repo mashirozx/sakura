@@ -46,7 +46,14 @@
 				<?php endif; ?>
 
 			<?php endif; ?>
-
+                        <?php if (akina_option('verification_type') == 'Google reCAPTCHA'&& akina_option('rehidden') == '1') {?>
+			<!--添加隐形验证码-->
+			<div id="recaptcha" class="g-recaptcha"
+                             data-sitekey="<?php  echo akina_option('site_key'); ?>"
+                             data-callback="onRecaptchaSubmit"
+                             data-size="invisible">
+	                </div>
+			<?php }?>
 			<?php
 				$robot_comments = '';
 				if(comments_open()){
