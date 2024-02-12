@@ -192,7 +192,7 @@ function siren_robot_comment(){
       $recaptchaResponse = $_POST['g-recaptcha-response'];
       $response = file_get_contents("https://www.recaptcha.net/recaptcha/api/siteverify?secret=".akina_option('site_key')."&response=".$recaptchaResponse);
       $response = json_decode($response);
-      if ($response->success == false || $response->score < 0.2) {
+      if ($response->success == false || $response->score < akina_option('rescore')) {
         // reCAPTCHA验证失败
         siren_ajax_comment_err('reCAPTCHA验证失败。<br>reCAPTCHA verification failed.');
       }
