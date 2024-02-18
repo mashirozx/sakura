@@ -3,6 +3,8 @@ Sakura🌸: A Wonderful WordPress Theme
 
 [中文](README.md) | English
 
+> This repository is forked from mashirozx/sakura and is in the process of integrating years of modifications made for gymxbl.com into the theme. It is primarily for personal use and compatibility with other sites is not guaranteed.
+
 ![Sakura](screenshot.jpg)
 
 ![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square&logo=php)
