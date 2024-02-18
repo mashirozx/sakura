@@ -1190,6 +1190,13 @@ $options[] = array(
         'id' => 'notice_title',
         'std' => '',
         'type' => 'text');
+    //信息卡
+    $options[] = array(
+        'name' => __('信息卡', 'sakura'),
+        'desc' => __('在右下角弹出一个信息卡，可以用于发布公告通知，移动端为底部居中^_^', 'sakura'), 
+        'id' => 'notice_infocard',
+        'std' => '',
+        'type' => 'text');
     $options[] = array(
         'name' => __('Bilibili UID', 'sakura'), /*bilibiliUID*/
         'desc' => __('Fill in your UID, eg.https://space.bilibili.com/13972644/, only fill in with the number part.', 'sakura'),
