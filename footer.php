@@ -159,6 +159,7 @@
         data-theme="orange">
     </div>
 <?php endif; ?>
+<?php if (!empty(akina_option('notice_infocard'))) { include get_template_directory() . '/user/infocard.php';}?>
 <?php if (akina_option('verification_type') == 'Google reCAPTCHA'&& akina_option('rehidden') == '1') {?>
 	<!--拦截表单提交并验证，验证后自动提交-->
 <script>
