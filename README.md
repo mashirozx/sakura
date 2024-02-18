@@ -3,6 +3,8 @@
 
 中文 | [English](README-en.md)
 
+> 这个仓库是从mashirozx/sakura派生出来的，正在将gymxbl.com多年来的修改整合到了主题中。这个仓库主要用于个人使用，不保证与其他网站的兼容性。
+
 ![Sakura](screenshot.jpg)
 
 ![PHP version](https://img.shields.io/badge/PHP-7.1+-4F5B93.svg?style=flat-square&logo=php)
