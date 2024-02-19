@@ -8816,3 +8816,33 @@ h1[id*=toc-head]::before,h2[id*=toc-head]::before,h3[id*=toc-head]::before,h4[id
 .bangumi-next i {
     color: orange;
 }
+/*
+mCAPTCHA
+*/
+#mcaptcha__widget-container {
+    height: 80px; 
+    width: 80%; 
+    background-color: #F9F9F9; 
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+} 
+
+@media (prefers-color-scheme: dark) {
+    #mcaptcha__widget-container {
+        height: 80px; 
+        width: 80%; 
+        background-color: #505050; 
+        border-radius: 5px; 
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+} 
+
+@media (prefers-color-scheme: light) {
+    #mcaptcha__widget-container {
+        height: 80px; 
+        width: 80%; 
+        background-color: #F9F9F9; 
+        border-radius: 5px; 
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+}
