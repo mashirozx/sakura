@@ -176,7 +176,7 @@ function siren_robot_comment(){
       $response = json_decode($response);
       if ($response->success == false) {
         // reCAPTCHA验证失败
-        siren_ajax_comment_err('reCAPTCHA验证失败。<br>reCAPTCHA verification failed.');
+        siren_ajax_comment_err('reCAPTCHA验证失败,请刷新页面或验证码。<br>reCAPTCHA verification failed.Please refresh the page or CAPTCHA.');
       }
     } else {
       siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
@@ -194,7 +194,7 @@ function siren_robot_comment(){
       $response = json_decode($response);
       if ($response->success == false || $response->score < akina_option('rescore')) {
         // reCAPTCHA验证失败
-        siren_ajax_comment_err('reCAPTCHA验证失败。<br>reCAPTCHA verification failed.');
+        siren_ajax_comment_err('reCAPTCHA验证失败,请刷新页面或验证码。<br>reCAPTCHA verification failed.Please refresh the page or CAPTCHA.');
       }
     } else {
       // 如果没有收到 reCAPTCHA token 或者 token 为空，返回错误消息
