@@ -241,7 +241,7 @@ function clean_upload_images() {
 }
 
 function add_upload_tips() {
-    $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">上传图片</span></div><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button">').insertAfter($(".form-submit #submit"));
+    $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">上传图片</span><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button"></div>').insertAfter($(".form-submit #submit"));
     attach_image();
     $("#upload-img-file").hover(function () {
         $(".insert-image-tips").addClass("insert-image-tips-hover");
