@@ -35,6 +35,11 @@ bloginfo( 'name' );$site_description = get_bloginfo( 'description', 'display' );
 if ( $site_description && ( is_home() || is_front_page() ) ) echo " - $site_description";if ( $paged >= 2 || $page >= 2 ) echo ' - ' . sprintf( __( 'page %s ','sakura'), max( $paged, $page ) );/*第 %s 页*/?>
 </title>
 <?php
+//CAPTCHA
+if (akina_option('verification_type') == 'CF Turnstile') { ?><!--CloudFalre验证码--><script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async></script> <?php }elseif(akina_option('verification_type')=='Google reCAPTCHA'){?><!-- Google验证码--> <!-- Google验证码--><script src="https://www.recaptcha.net/recaptcha/api.js" async defer></script><?php }elseif(akina_option('verification_type')=='Google reCAPTCHA v3'){?><script src="https://www.recaptcha.net/recaptcha/api.js?render=<?php echo akina_option('site_key'); ?>"></script><?php }elseif(akina_option('verification_type')=='mCAPTCHA'){?>
+<!--mCAPTCHA--><script src="https://cdn.jsdelivr.net/npm/@mcaptcha/vanilla-glue@0.1.0-alpha-2/dist/index.js"></script>
+<?php }?>
+<?php
 if (akina_option('akina_meta') == true) {
 	$keywords = '';
 	$description = '';
