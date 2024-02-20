@@ -1910,3 +1910,5 @@ function permalink_tip()
 }
 add_action('admin_notices', 'permalink_tip');
 //code end
+//移除comment-reply.js 防止不兼容
+function clean_header(){ wp_deregister_script( 'comment-reply' ); } add_action('init','clean_header');
