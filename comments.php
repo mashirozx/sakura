@@ -46,11 +46,18 @@
 				<?php endif; ?>
 
 			<?php endif; ?>
-
+                        <?php if (akina_option('verification_type') == 'Google reCAPTCHA'&& akina_option('rehidden') == '1') {?>
+                        <!--添加隐形验证码-->
+			<div id="recaptcha" class="g-recaptcha"
+                             data-sitekey="<?php  echo akina_option('site_key'); ?>"
+                             data-callback="onRecaptchaSubmit"
+                             data-size="invisible">
+	                </div>
+			<?php }?>
 			<?php
 				$robot_comments = '';
 				if(comments_open()){
-					if(akina_option('norobot')) $robot_comments = '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="no-robot"><span class="siren-no-robot-checkbox siren-checkbox-radioInput"></span>'.__('I\'m not a robot', 'sakura').'</label>';
+					if(akina_option('norobot')) require get_template_directory() . '/inc/classes/Captcha.php'; 
 					$private_ms = akina_option('open_private_message') ? '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="is-private"><span class="siren-is-private-checkbox siren-checkbox-radioInput"></span>'.__('Comment in private', 'sakura').'</label>' : '';
 					$mail_notify = akina_option('mail_notify') ? '<label class="siren-checkbox-label"><input class="siren-checkbox-radio" type="checkbox" name="mail-notify"><span class="siren-mail-notify-checkbox siren-checkbox-radioInput"></span>'.__('Comment reply notify', 'sakura').'</label>' : '';
 					$args = array(

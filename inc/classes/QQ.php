@@ -5,7 +5,7 @@ namespace Sakura\API;
 class QQ
 {
     public static function get_qq_info($qq) {
-        $get_info = file_get_contents('http://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?get_nick=1&uins=' . $qq);
+        $get_info = file_get_contents('http://users.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=' . $qq);
         $get_info = mb_convert_encoding($get_info, "UTF-8", "GBK");
         $name = json_decode(substr($get_info, 17, -1), true);
         if ($name) {

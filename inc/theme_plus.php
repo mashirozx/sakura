@@ -137,13 +137,137 @@ if(!function_exists('siren_ajax_comment_err')) {
         exit;
     }
 }
+
+//验证码开始
+if (akina_option('verification_type') == 'CF Turnstile') {
 // 机器评论验证
 function siren_robot_comment(){
-  if ( !$_POST['no-robot'] && !is_user_logged_in()) {
-     siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
-  }
+    $postdata = $_POST['cf-turnstile-response'];
+    // 添加 Secret Key
+    $secret = akina_option('secret_key'); 
+    $headers = array(
+        'body' => [
+            'secret' => $secret,
+            'response' => $postdata
+        ]
+    );
+    $verify = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', $headers);
+    $verify = wp_remote_retrieve_body($verify);
+    $response = json_decode($verify);
+    if ($response->success) {
+        $results['success'] = $response->success;
+    } else {
+        $results['success'] = false;
+    }
+    if (empty($postdata)) {
+        siren_ajax_comment_err('上车请刷卡。<br>Please click the challenge checkbox.');
+    } elseif (!$results['success']) {
+        siren_ajax_comment_err('上车请刷卡。<br>Sorry, spam detected!');
+    }
 }
 if(akina_option('norobot')) add_action('pre_comment_on_post', 'siren_robot_comment');
+}elseif (akina_option('verification_type')=='Google reCAPTCHA') {
+
+function siren_robot_comment(){
+  if (!is_user_logged_in()) {
+    if (isset($_POST['g-recaptcha-response'])) {
+      $recaptchaResponse = $_POST['g-recaptcha-response'];
+      $response = file_get_contents("https://www.recaptcha.net/recaptcha/api/siteverify?secret=".akina_option('secret_key')."&response=".$recaptchaResponse);
+      $response = json_decode($response);
+      if ($response->success == false) {
+        // reCAPTCHA验证失败
+        siren_ajax_comment_err('reCAPTCHA验证失败,请刷新页面或验证码。<br>reCAPTCHA verification failed.Please refresh the page or CAPTCHA.');
+      }
+    } else {
+      siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
+    }
+  }
+}
+    
+}elseif(akina_option('verification_type')=='Google reCAPTCHA v3'){
+    
+function siren_robot_comment(){
+  if (!is_user_logged_in()) {
+    if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+      $recaptchaResponse = $_POST['g-recaptcha-response'];
+      $response = file_get_contents("https://www.recaptcha.net/recaptcha/api/siteverify?secret=".akina_option('secret_key')."&response=".$recaptchaResponse);
+      $response = json_decode($response);
+      if ($response->success == false || $response->score < akina_option('rescore')) {
+        // reCAPTCHA验证失败
+        siren_ajax_comment_err('reCAPTCHA验证失败,请刷新页面或验证码。<br>reCAPTCHA verification failed.Please refresh the page or CAPTCHA.');
+      }
+    } else {
+      // 如果没有收到 reCAPTCHA token 或者 token 为空，返回错误消息
+      siren_ajax_comment_err('reCAPTCHA token为空。<br>reCAPTCHA token is empty.');
+    }
+  }
+}
+   
+    
+    
+}
+elseif(akina_option('verification_type')=='mCAPTCHA'){
+    //start
+function siren_robot_comment(){
+  if (!is_user_logged_in()) {
+    if ( !isset($_POST['mcaptcha__token']) || empty($_POST['mcaptcha__token'])) {
+      siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
+    } else {
+      $mcaptcha_token = $_POST['mcaptcha__token'];
+      $mcaptcha_sitekey = akina_option('site_key'); 
+      $mcaptcha_account_secret = akina_option('secret_key'); 
+      $verify_url = akina_option('mcaptcha_server'); //
+      $payload = array(
+        'token' => $mcaptcha_token,
+        'key' => $mcaptcha_sitekey,
+        'secret' => $mcaptcha_account_secret,
+      );
+      $payload = json_encode($payload);
+   //wp_remote_post 请求被拒绝，换CURL
+      // 初始化cURL会话
+      $ch = curl_init($verify_url);
+
+      // 设置cURL选项
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+      // 发送请求并获取响应
+      $response = curl_exec($ch);
+
+      // 关闭cURL会话
+      curl_close($ch);
+
+      if ($response === false) {
+        siren_ajax_comment_err('CAPTCAH请求失败 <br>A Error by mCAPTCHA');
+      } else {
+        $data = json_decode($response);
+        if ($data->valid==false) {
+          // mCAPTCHA验证失败
+          siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
+        }
+      }
+    }
+  }
+}
+
+
+
+
+//end
+    
+}else{
+    // 机器评论验证
+  function siren_robot_comment(){
+    if ( !$_POST['no-robot'] && !is_user_logged_in()) {
+       siren_ajax_comment_err('上车请刷卡。<br>Please comfirm you are not a robot.');
+    }
+  }  
+  }
+if(akina_option('norobot')) add_action('pre_comment_on_post', 'siren_robot_comment');
+  /*结束*/
+
 // 纯英文评论拦截
 function scp_comment_post( $incoming_comment ) {
   // 为什么要拦自己呢？
